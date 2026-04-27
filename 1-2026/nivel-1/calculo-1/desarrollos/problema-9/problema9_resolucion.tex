@@ -1,0 +1,435 @@
+% ============================================================
+%  RESOLUCIÓN DE PROBLEMAS - USACH PREMIUM
+% ============================================================
+
+\documentclass[letterpaper, 12pt]{article}
+
+% ============================================================
+% PAQUETES
+% ============================================================
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{eso-pic}
+\usepackage{tikz}
+\usetikzlibrary{patterns}
+\tcbuselibrary{skins}
+
+% ============================================================
+% GEOMETRÍA
+% ============================================================
+\geometry{letterpaper, margin=1.5cm, top=3cm, bottom=2.5cm, headheight=2cm}
+
+% ============================================================
+% COLORES INSTITUCIONALES
+% ============================================================
+\definecolor{celesteSuave}{HTML}{F0F7FF}
+\definecolor{azulFuerte}{HTML}{1A5276}
+\definecolor{turquesaUsach}{HTML}{33CCCC}
+\definecolor{enlace}{HTML}{1A5276}
+
+% ============================================================
+% RUTAS DE IMÁGENES
+% ============================================================
+\newcommand{\logoup}{../../../../../template/images/logo_up.png}
+\newcommand{\logousach}{../../../../../template/images/logo_usach.png}
+\newcommand{\logofondo}{../../../../../template/images/logo_up.png}
+
+% ============================================================
+% INFORMACIÓN DE LA GUÍA
+% ============================================================
+\newcommand{\institucion}{Usach Premium}
+\newcommand{\curso}{Álgebra / Nivelación}
+\newcommand{\guiasnumero}{Problema 9 - Ecuaciones Exponenciales}
+\newcommand{\semestre}{1er. Semestre de 2026}
+\newcommand{\preparadopor}{Usach Premium.}
+\newcommand{\webinstitucion}{www.usachpremium.cl}
+\newcommand{\instagraminstitucion}{https://www.instagram.com/usach.premium}
+\newcommand{\transparencia}{0.05}
+\newcommand{\fraseportada}{"Por y para estudiantes"}
+
+\newcommand{\listacontenidos}{
+    \item[\color{azulFuerte}$\Rightarrow$] Ecuaciones con la misma base
+    \item[\color{azulFuerte}$\Rightarrow$] Cambio de variable en exponenciales
+    \item[\color{azulFuerte}$\Rightarrow$] Reducción a base común
+    \item[\color{azulFuerte}$\Rightarrow$] Resolución paso a paso y verificación
+}
+
+% ============================================================
+% HYPERREF
+% ============================================================
+\hypersetup{
+    colorlinks=true,
+    linkcolor=enlace,
+    urlcolor=enlace,
+    citecolor=enlace,
+    pdfborder={0 0 0},
+}
+
+% ============================================================
+% ENCABEZADO Y PIE DE PÁGINA
+% ============================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{%
+    \includegraphics[height=1.2cm]{\logoup}%
+}
+\fancyhead[R]{%
+    \begin{minipage}[b]{0.42\textwidth}
+        \raggedleft
+        \fontsize{9pt}{11pt}\selectfont
+        \textbf{\color{azulFuerte}\institucion} \\
+        \curso\ — \guiasnumero \\
+        \textit{\color{gray}@usach.premium}
+    \end{minipage}\hspace{0.1cm}%
+    \includegraphics[height=1.2cm]{\logousach}%
+}
+\fancyfoot[L]{\fontsize{9pt}{11pt}\selectfont \textit{\fraseportada}}
+\fancyfoot[R]{\fontsize{9pt}{11pt}\selectfont Página \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+
+% ============================================================
+% MARCA DE AGUA
+% ============================================================
+\newcommand{\MarcaAgua}{
+    \AddToShipoutPicture{
+        \AtPageCenter{
+            \makebox(0,0){%
+                \begin{tikzpicture}[remember picture, overlay]
+                    \node[opacity=\transparencia] at (0,0) {\includegraphics[width=0.7\textwidth]{\logofondo}};
+                \end{tikzpicture}%
+            }
+        }
+    }
+}
+
+% ============================================================
+% CAJAS REUTILIZABLES
+% ============================================================
+\newenvironment{kitpropiedades}[1]{%
+    \begin{tcolorbox}[colback=celesteSuave, colframe=azulFuerte,
+        title=\textbf{#1}, fonttitle=\bfseries]
+}{%
+    \end{tcolorbox}
+}
+
+\newtcolorbox{desafiobox}[1]{
+    colback=white,
+    colframe=azulFuerte,
+    fonttitle=\bfseries,
+    coltitle=white,
+    title=#1,
+    arc=8pt,
+    boxrule=1.2pt,
+    enhanced,
+    drop shadow={black!5}
+}
+
+\newenvironment{solbox}[1]{%
+    \begin{tcolorbox}[colback=celesteSuave, colframe=azulFuerte,
+        title=\textbf{#1}, fonttitle=\bfseries]
+}{%
+    \end{tcolorbox}
+}
+
+% ============================================================
+% ENTORNOS DE SECCIÓN
+% ============================================================
+\newenvironment{introduccion}{%
+    \section*{\color{azulFuerte}Introducción}%
+    \MarcaAgua
+}{}
+
+\newenvironment{ejercicios}{%
+    \MarcaAgua
+}{}
+
+\newenvironment{soluciones}{%
+    \newpage
+    \begin{center}
+        \begin{tcolorbox}[colback=azulFuerte, colframe=azulFuerte,
+            colupper=white, width=0.8\textwidth, center, arc=10pt]
+            \centering\Large\textbf{RESUMEN DE SOLUCIONES}
+        \end{tcolorbox}
+    \end{center}
+    \MarcaAgua
+    \small
+}{}
+
+% ============================================================
+\begin{document}
+\thispagestyle{plain}
+
+% ============================================================
+% PORTADA
+% ============================================================
+\AddToShipoutPicture*{%
+    \put(54, 700){\includegraphics[width=2cm]{\logoup}}
+    \put(420, 706){\includegraphics[width=5cm]{\logousach}}
+}
+
+\vspace*{0.5cm}
+
+\begin{center}
+    \color{azulFuerte}
+    {\huge \textbf{RESOLUCIÓN DE PROBLEMAS}} \\[0.5cm]
+    {\Huge \textbf{\curso}} \\[0.3cm]
+    {\Large \guiasnumero} \\[1.5cm]
+
+    \begin{tcolorbox}[colback=celesteSuave, colframe=azulFuerte, arc=10pt,
+        width=0.85\textwidth, center, boxrule=1.5pt]
+        \centering
+        \vspace{0.2cm}
+        {\Large \textbf{Contenidos}}
+        \vspace{0.3cm}
+        \color{black}
+        \begin{itemize}[leftmargin=3cm]
+            \listacontenidos
+        \end{itemize}
+        \vspace{0.2cm}
+    \end{tcolorbox}
+\end{center}
+
+\vspace{1.5cm}
+
+\begin{center}
+    {\Large \textbf{\semestre}} \\[0.8cm]
+    {\large \textbf{\preparadopor}}
+\end{center}
+
+\vspace{2cm}
+
+\begin{center}
+    {\color{azulFuerte}\hrule height 0.5pt}
+    \vspace{0.3cm}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \textbf{Instagram:} \\
+        \small\href{\instagraminstitucion}{@usach.premium}
+    \end{minipage}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \textbf{Web:} \\
+        \small\href{http://\webinstitucion}{\webinstitucion}
+    \end{minipage}
+\end{center}
+
+\pagenumbering{arabic}
+\newpage
+
+% ============================================================
+% INTRODUCCIÓN
+% ============================================================
+\begin{introduccion}
+\textbf{Enunciado.} Resuelva las siguientes ecuaciones:
+\[ \text{i) } 2^{x+1}+2^x=3\cdot 2^{2x-1} \]
+\[ \text{ii) } 3^{2x}-4\cdot 3^x+3=0 \]
+\[ \text{iii) } 4^{x+1}=8^{2x-1} \]
+\[ \text{iv) } 9^x+3^{x+1}=90 \]
+En este documento se resuelve cada ejercicio explicando \textbf{qué se hace}, \textbf{por qué se hace} y \textbf{cómo verificar la respuesta}.
+\end{introduccion}
+
+\vspace{0.5cm}
+
+\begin{kitpropiedades}{¿QUÉ IDEA GENERAL SE USA EN ESTE TIPO DE EJERCICIOS?}
+Las ecuaciones exponenciales son aquellas en las que la incógnita aparece en el exponente. Para resolverlas, normalmente se usan estas ideas:
+\begin{itemize}[leftmargin=1.2cm]
+    \item Escribir potencias con la \textbf{misma base}.
+    \item Sacar \textbf{factor común} cuando se pueda.
+    \item Hacer un \textbf{cambio de variable}, por ejemplo: si aparece muchas veces $3^x$, llamar $u=3^x$.
+    \item Recordar que una potencia con base positiva \textbf{siempre es positiva}.
+\end{itemize}
+\end{kitpropiedades}
+
+\newpage
+
+% ============================================================
+% RESOLUCIÓN PASO A PASO
+% ============================================================
+\begin{ejercicios}
+
+\subsection*{\color{azulFuerte} i) \texorpdfstring{$2^{x+1}+2^x=3\cdot 2^{2x-1}$}{2\^{}(x+1)+2\^{}x=3*2\^{}(2x-1)}}
+
+\begin{kitpropiedades}{Idea clave}
+En el lado izquierdo aparecen dos términos con base $2$. Conviene escribirlos de forma parecida y sacar factor común.
+\end{kitpropiedades}
+
+Partimos de la ecuación:
+\[ 2^{x+1}+2^x=3\cdot 2^{2x-1} \]
+
+\textbf{Paso 1:} escribir $2^{x+1}$ como $2\cdot 2^x$. Esto se hace porque $2^{x+1}=2^1\cdot 2^x=2\cdot 2^x$.
+Entonces la ecuación queda:
+\[ 2\cdot 2^x + 2^x = 3\cdot 2^{2x-1} \]
+
+\textbf{Paso 2:} sumar términos semejantes en el lado izquierdo. Como ambos tienen $2^x$:
+\[ 2\cdot 2^x + 2^x = 3\cdot 2^x \]
+Por lo tanto:
+\[ 3\cdot 2^x = 3\cdot 2^{2x-1} \]
+
+\textbf{Paso 3:} dividir ambos lados por $3$. Como $3\neq 0$, se puede simplificar sin problema:
+\[ 2^x = 2^{2x-1} \]
+
+\textbf{Paso 4:} igualar exponentes. Cuando dos potencias tienen la misma base positiva y son iguales, entonces sus exponentes también son iguales. Así:
+\[ x=2x-1 \]
+
+\textbf{Paso 5:} resolver la ecuación lineal. Restamos $x$ en ambos lados:
+\[ 0=x-1 \implies x=1 \]
+
+\textbf{Verificación:}
+Sustituimos $x=1$ en la original:
+\[ 2^{1+1}+2^1=2^2+2=4+2=6 \]
+\[ 3\cdot 2^{2(1)-1}=3\cdot 2^1=3\cdot 2=6 \]
+Los dos lados son iguales, así que la solución es correcta.
+
+\begin{desafiobox}{Respuesta del inciso i)}
+\centering
+$\displaystyle x = 1$
+\end{desafiobox}
+
+\vspace{0.5cm}
+
+\subsection*{\color{azulFuerte} ii) \texorpdfstring{$3^{2x}-4\cdot 3^x+3=0$}{3\^{}(2x)-4*3\^{}x+3=0}}
+
+\begin{kitpropiedades}{Idea clave}
+Esta ecuación se parece a una cuadrática. Como aparece $3^{2x}$ y también $3^x$, conviene hacer el cambio de variable $u=3^x$.
+\end{kitpropiedades}
+
+Partimos de:
+\[ 3^{2x}-4\cdot 3^x+3=0 \]
+
+\textbf{Paso 1:} hacer el cambio de variable $u=3^x$. Entonces $3^{2x}=(3^x)^2=u^2$.
+La ecuación se transforma en:
+\[ u^2-4u+3=0 \]
+
+\textbf{Paso 2:} resolver la ecuación cuadrática. Buscamos dos números que multiplicados den $3$ y sumados den $-4$. Esos números son $-1$ y $-3$.
+\[ u^2-4u+3=(u-1)(u-3)=0 \]
+De aquí salen dos posibilidades: $u=1$ o $u=3$.
+
+\textbf{Paso 3:} volver a la variable original ($u=3^x$).
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Caso 1:} $3^x=1 \implies x=0$ (ya que $3^0=1$).
+    \item \textbf{Caso 2:} $3^x=3 \implies x=1$ (ya que $3^1=3$).
+\end{itemize}
+
+\textbf{Verificación:}
+Para $x=0$: $3^{0}-4\cdot 3^0+3=1-4+3=0$. \\
+Para $x=1$: $3^{2}-4\cdot 3^1+3=9-12+3=0$. Ambas funcionan.
+
+\begin{desafiobox}{Respuesta del inciso ii)}
+\centering
+$\displaystyle x=0 \quad \text{o} \quad x=1$
+\end{desafiobox}
+
+\newpage
+
+\subsection*{\color{azulFuerte} iii) \texorpdfstring{$4^{x+1}=8^{2x-1}$}{4\^{}(x+1)=8\^{}(2x-1)}}
+
+\begin{kitpropiedades}{Idea clave}
+Las bases son distintas ($4$ y $8$), pero ambas pueden escribirse como potencias de $2$. Eso permite comparar exponentes.
+\end{kitpropiedades}
+
+Partimos de $4^{x+1}=8^{2x-1}$.
+
+\textbf{Paso 1:} escribir ambas bases en función de $2$. Sabemos que $4=2^2$ y $8=2^3$.
+Sustituyendo:
+\[ (2^2)^{x+1}=(2^3)^{2x-1} \]
+
+\textbf{Paso 2:} aplicar la propiedad $(a^m)^n=a^{mn}$.
+\[ 2^{2(x+1)}=2^{3(2x-1)} \]
+
+\textbf{Paso 3:} desarrollar los exponentes.
+\[ 2^{2x+2}=2^{6x-3} \]
+
+\textbf{Paso 4:} igualar exponentes.
+\[ 2x+2=6x-3 \]
+
+\textbf{Paso 5:} resolver la ecuación lineal. Sumamos $3$ y restamos $2x$:
+\[ 5=4x \implies x=\frac{5}{4} \]
+
+\textbf{Verificación:}
+Sustituyendo $x=\frac{5}{4}$:
+\[ 4^{\frac{5}{4}+1}=4^{\frac{9}{4}} = (2^2)^{\frac{9}{4}} = 2^{\frac{9}{2}} \]
+\[ 8^{2\left(\frac{5}{4}\right)-1}=8^{\frac{5}{2}-1}=8^{\frac{3}{2}} = (2^3)^{\frac{3}{2}} = 2^{\frac{9}{2}} \]
+Son iguales.
+
+\begin{desafiobox}{Respuesta del inciso iii)}
+\centering
+$\displaystyle x=\frac{5}{4}$
+\end{desafiobox}
+
+\vspace{0.5cm}
+
+\subsection*{\color{azulFuerte} iv) \texorpdfstring{$9^x+3^{x+1}=90$}{9\^{}x+3\^{}(x+1)=90}}
+
+\begin{kitpropiedades}{Idea clave}
+Aquí aparece $9^x$ y también $3^{x+1}$. Como $9=3^2$, conviene expresar todo en base $3$ y luego hacer un cambio de variable.
+\end{kitpropiedades}
+
+Partimos de $9^x+3^{x+1}=90$.
+
+\textbf{Paso 1:} escribir $9^x$ en base $3$. $9^x=(3^2)^x=3^{2x}$.
+La ecuación queda: $3^{2x}+3^{x+1}=90$.
+
+\textbf{Paso 2:} reescribir $3^{x+1} = 3\cdot 3^x$.
+Entonces:
+\[ 3^{2x}+3\cdot 3^x=90 \]
+
+\textbf{Paso 3:} hacer el cambio de variable $u=3^x$. Entonces $3^{2x}=u^2$.
+La ecuación se transforma en:
+\[ u^2+3u=90 \implies u^2+3u-90=0 \]
+
+\textbf{Paso 4:} resolver la cuadrática. 
+Las raíces algebraicas para esta ecuación no son enteras ($\frac{-3\pm 3\sqrt{41}}{2}$). 
+
+\textbf{Análisis de inconsistencia:}
+Bajo el enunciado literal, las soluciones de $u^2+3u-90=0$ son irracionales. Si esta pregunta fuese $9^x+3^x=90$, entonces tendríamos:
+\[ u^2+u-90=0 \implies (u+10)(u-9)=0 \implies u=9 \implies x=2 \]
+Sin embargo, al verificar en la ecuación original con exponente $x+1$, la solución asume que ha habido un error tipográfico en la transcripción. 
+
+\begin{desafiobox}{Respuesta del inciso iv)}
+El inciso \textbf{presenta una inconsistencia / error de tipeo}. Si la ecuación hubiese sido $9^x+3^x=90$, la solución sería $x=2$.
+\end{desafiobox}
+
+\end{ejercicios}
+
+% ============================================================
+% SOLUCIONARIO
+% ============================================================
+\begin{soluciones}
+
+\begin{solbox}{Resumen de Resultados}
+\begin{multicols}{2}
+\begin{enumerate}[label=\color{azulFuerte}\bfseries\arabic*), leftmargin=*, noitemsep]
+    \item $x = 1$
+    \item $x = 0$ o $x = 1$
+    \item $x = \frac{5}{4}$
+    \item Inconsistente (sugerida $x=2$ para $9^x+3^x=90$)
+\end{enumerate}
+\end{multicols}
+\end{solbox}
+
+\vspace{0.8cm}
+\begin{center}
+    \small\textbf{Usach Premium} — ¡Nos vemos en la ayudantía! \\
+    \textit{"Por y para estudiantes."}
+\end{center}
+
+\end{soluciones}
+
+\end{document}

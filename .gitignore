@@ -1,3 +1,13 @@
+# LaTeX build artifacts
+*.aux
+*.out
+*.synctex.gz
+*.toc
+*.fls
+*.fdb_latexmk
+*-blx.bib
+*.run.xml
+
 # Logs
 logs
 *.log

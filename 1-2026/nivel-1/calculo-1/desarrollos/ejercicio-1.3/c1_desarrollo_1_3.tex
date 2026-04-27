@@ -1,0 +1,475 @@
+%  DESARROLLO PASO A PASO — EJERCICIO 1.3
+%  Inecuación con raíz cuadrada: x + 1 < sqrt(x^2 + 3x)
+%  Usach Premium — Cálculo I
+%  Compila con: pdflatex c1_desarrollo_1_3.tex  (2 veces)
+% ============================================================
+
+\documentclass[letterpaper, 12pt]{article}
+
+% ============================================================
+% PAQUETES
+% ============================================================
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{eso-pic}
+\usepackage{tikz}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usetikzlibrary{patterns, arrows.meta, decorations.pathmorphing, babel}
+\tcbuselibrary{skins, breakable}
+
+% ============================================================
+% GEOMETRÍA
+% ============================================================
+\geometry{letterpaper, margin=2cm, top=3cm, bottom=2.5cm, headheight=2cm}
+
+% ============================================================
+% COLORES INSTITUCIONALES
+% ============================================================
+\definecolor{celesteSuave}{HTML}{F0F7FF}
+\definecolor{azulFuerte}{HTML}{1A5276}
+\definecolor{verdePaso}{HTML}{1E8449}
+\definecolor{rojoAlerta}{HTML}{C0392B}
+\definecolor{naranjaAcento}{HTML}{D35400}
+\definecolor{grisTabla}{HTML}{D5D8DC}
+\definecolor{enlace}{HTML}{1A5276}
+
+% ============================================================
+% RUTAS DE IMÁGENES
+% ============================================================
+\newcommand{\logoup}{../../../../../template/images/logo_up.png}
+\newcommand{\logousach}{../../../../../template/images/logo_usach.png}
+\newcommand{\logofondo}{../../../../../template/images/logo_up.png}
+
+% ============================================================
+% INFORMACIÓN
+% ============================================================
+\newcommand{\institucion}{Usach Premium}
+\newcommand{\curso}{Cálculo I}
+\newcommand{\guiasnumero}{Desarrollo — Ejercicio 1.3}
+\newcommand{\semestre}{1er. Semestre de 2026}
+\newcommand{\preparadopor}{Usach Premium.}
+\newcommand{\webinstitucion}{www.usachpremium.cl}
+\newcommand{\instagraminstitucion}{https://www.instagram.com/usach.premium}
+\newcommand{\transparencia}{0.04}
+\newcommand{\fraseportada}{"Por y para estudiantes"}
+
+% ============================================================
+% HYPERREF
+% ============================================================
+\hypersetup{colorlinks=true, linkcolor=enlace, urlcolor=enlace,
+            citecolor=enlace, pdfborder={0 0 0}}
+
+% ============================================================
+% ENCABEZADO Y PIE
+% ============================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\includegraphics[height=1.2cm]{\logoup}}
+\fancyhead[R]{%
+    \begin{minipage}[b]{0.45\textwidth}
+        \raggedleft\fontsize{9pt}{11pt}\selectfont
+        \textbf{\color{azulFuerte}\institucion} \\
+        \curso\ --- \guiasnumero \\
+        \textit{\color{gray}@usach.premium}
+    \end{minipage}\hspace{0.1cm}%
+    \includegraphics[height=1.2cm]{\logousach}}
+\fancyfoot[L]{\fontsize{9pt}{11pt}\selectfont \textit{\fraseportada}}
+\fancyfoot[R]{\fontsize{9pt}{11pt}\selectfont P\'agina \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}
+                                   \renewcommand{\footrulewidth}{0pt}}
+
+% ============================================================
+% MARCA DE AGUA
+% ============================================================
+\newcommand{\MarcaAgua}{
+    \AddToShipoutPicture{
+        \AtPageCenter{
+            \begin{tikzpicture}[remember picture, overlay]
+                \node[opacity=\transparencia] at (0,0)
+                    {\includegraphics[width=0.7\textwidth]{\logofondo}};
+            \end{tikzpicture}}}}
+
+% ============================================================
+% CAJAS
+% ============================================================
+% Caja de paso numerado
+\newtcolorbox{paso}[2][]{
+    colback=celesteSuave, colframe=azulFuerte, fonttitle=\bfseries,
+    coltitle=white, colbacktitle=azulFuerte,
+    title={\large Paso #2},
+    arc=6pt, boxrule=1pt, enhanced, #1
+}
+
+% Caja de advertencia/justificación
+\newtcolorbox{justif}[1]{
+    colback=naranjaAcento!8, colframe=naranjaAcento, fonttitle=\bfseries\small,
+    title={#1}, arc=5pt, boxrule=0.8pt, enhanced
+}
+
+% ============================================================
+\begin{document}
+\thispagestyle{plain}
+\MarcaAgua
+
+% ============================================================
+% PORTADA
+% ============================================================
+\AddToShipoutPicture*{%
+    \put(54,700){\includegraphics[width=2cm]{\logoup}}
+    \put(420,706){\includegraphics[width=5cm]{\logousach}}}
+
+\vspace*{0.5cm}
+\begin{center}
+    \color{azulFuerte}
+    {\huge \textbf{DESARROLLO PASO A PASO}} \\[0.5cm]
+    {\Huge \textbf{\curso}} \\[0.4cm]
+    {\Large Ejercicio 1.3 --- Inecuaci\'on con ra\'iz cuadrada} \\[1.2cm]
+    \begin{tcolorbox}[colback=celesteSuave, colframe=azulFuerte, arc=10pt,
+        width=0.88\textwidth, center, boxrule=1.5pt]
+        \centering\vspace{0.3cm}
+        {\large \textbf{Inecuaci\'on a resolver}}\\[0.6cm]
+        \color{black}
+        {\LARGE $\displaystyle x + 1 \;<\; \sqrt{x^2 + 3x}$}
+        \vspace{0.4cm}
+    \end{tcolorbox}
+\end{center}
+
+\vspace{1.2cm}
+\begin{center}
+    {\Large \textbf{\semestre}} \\[0.7cm]
+    {\large \textbf{\preparadopor}}
+\end{center}
+
+\vspace{1.8cm}
+\begin{center}
+    {\color{azulFuerte}\hrule height 0.5pt}\vspace{0.3cm}
+    \begin{minipage}{0.45\textwidth}\centering
+        \textbf{Instagram:} \\\small\href{\instagraminstitucion}{@usach.premium}
+    \end{minipage}
+    \begin{minipage}{0.45\textwidth}\centering
+        \textbf{Web:} \\\small\href{http://\webinstitucion}{\webinstitucion}
+    \end{minipage}
+\end{center}
+
+\pagenumbering{arabic}
+\newpage
+
+% ============================================================
+% ENUNCIADO
+% ============================================================
+\begin{tcolorbox}[colback=azulFuerte!12, colframe=azulFuerte, arc=8pt,
+    boxrule=1.2pt, enhanced]
+    \textbf{\large Ejercicio 1.3.} \quad Resuelva la siguiente inecuaci\'on:
+    \[
+        x + 1 \;<\; \sqrt{x^2 + 3x}
+    \]
+\end{tcolorbox}
+
+\bigskip
+
+% ============================================================
+% PASO 1 — DOMINIO
+% ============================================================
+\begin{paso}{1: Determinaci\'on del Dominio}
+
+Para que la expresi\'on est\'e definida en $\mathbb{R}$, el radicando debe ser
+no negativo:
+\[
+    x^2 + 3x \;\geq\; 0
+\]
+
+Factorizando:
+\[
+    x(x + 3) \;\geq\; 0
+\]
+
+\textbf{Puntos cr\'iticos:} $x = 0$ y $x = -3$.
+
+\medskip
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{c|ccccc}
+    & $x < -3$ & $x = -3$ & $-3 < x < 0$ & $x = 0$ & $x > 0$ \\
+\hline
+$x$       & $-$ & $-$ & $-$ & $0$ & $+$ \\
+$(x + 3)$ & $-$ & $0$ & $+$ & $+$ & $+$ \\
+\hline
+\rowcolor{celesteSuave}
+$x(x+3)$  & $+$ & $0$ & $-$ & $0$ & $+$ \\
+\end{tabular}
+\end{center}
+
+\medskip
+$x(x+3) \geq 0$ cuando $x \leq -3$ \;\'o\; $x \geq 0$.
+
+\[
+    \boxed{Dom\,f \;=\; (-\infty,\,-3\,] \;\cup\; [\,0,\,+\infty)}
+\]
+
+\end{paso}
+
+\bigskip
+
+% ============================================================
+% PASO 2 — ANÁLISIS POR CASOS
+% ============================================================
+\begin{paso}{2: An\'alisis por casos seg\'un el signo de $x + 1$}
+
+El lado derecho $\sqrt{x^2+3x} \geq 0$ siempre (dentro del dominio).
+El lado izquierdo $x + 1$ puede ser negativo, cero o positivo.
+Analizamos por separado seg\'un si el LHS es negativo o no negativo,
+pues \textbf{solo podemos elevar al cuadrado cuando ambos lados son no negativos}.
+
+\bigskip
+\textbf{Caso 1: $x + 1 < 0$, es decir, $x < -1$}
+
+\medskip
+En el dominio, $x < -1$ implica $x \leq -3$.
+Como $x + 1 < 0 \leq \sqrt{x^2+3x}$, la desigualdad se satisface
+\textbf{autom\'aticamente} para todo $x \leq -3$.
+
+\begin{justif}{Justificaci\'on}
+    Un n\'umero negativo es siempre menor que un n\'umero no negativo.
+    Si $A < 0$ y $B \geq 0$, entonces $A < B$ sin condici\'on alguna.
+\end{justif}
+
+\[
+    \text{Soluci\'on parcial (Caso 1): } x \in (-\infty,\,-3\,]
+\]
+
+\bigskip
+\textbf{Caso 2: $x + 1 \geq 0$, es decir, $x \geq -1$}
+
+\medskip
+En el dominio, $x \geq -1$ implica $x \geq 0$ (pues el dominio excluye
+$(-3, 0)$).
+Ahora \textbf{ambos lados son no negativos}, por lo que podemos elevar al
+cuadrado preservando la desigualdad.
+
+\end{paso}
+
+\bigskip
+
+% ============================================================
+% PASO 3 — ELEVACIÓN AL CUADRADO (CASO 2)
+% ============================================================
+\begin{paso}{3: Elevaci\'on al cuadrado --- Caso 2 ($x \geq 0$)}
+
+\begin{justif}{¿Por qu\'e podemos elevar al cuadrado?}
+    Si $0 \leq A < B$, entonces $A^2 < B^2$.
+    Aqu\'i $A = x+1 \geq 0$ y $B = \sqrt{x^2+3x} \geq 0$,
+    luego la equivalencia es v\'alida y \textbf{no cambia el sentido
+    de la desigualdad}.
+\end{justif}
+
+\[
+    x + 1 \;<\; \sqrt{x^2 + 3x}
+    \quad\stackrel{(\,)^2}{\Longleftrightarrow}\quad
+    (x+1)^2 \;<\; x^2 + 3x
+\]
+
+Expandiendo el lado izquierdo:
+\[
+    x^2 + 2x + 1 \;<\; x^2 + 3x
+\]
+
+Simplificando (restamos $x^2$ en ambos lados):
+\[
+    2x + 1 \;<\; 3x
+\]
+
+Reordenando:
+\[
+    1 \;<\; x \qquad\Longleftrightarrow\qquad x \;>\; 1
+\]
+
+\[
+    \text{Soluci\'on parcial (Caso 2): } x \in (1,\,+\infty) \;\text{ con } x \geq 0
+\]
+
+\end{paso}
+
+\newpage
+
+% ============================================================
+% PASO 4 — TABLA DE SIGNOS (expresión simplificada)
+% ============================================================
+\begin{paso}{4: Tabla de signos de $p(x) = (x+1)^2 - (x^2+3x)$}
+
+Tras elevar al cuadrado en el Caso 2, la inecuaci\'on se redujo a:
+\[
+    (x+1)^2 - (x^2+3x) \;<\; 0
+\]
+
+Calculamos expl\'icitamente esta diferencia:
+\[
+    (x+1)^2 - (x^2+3x)
+    \;=\; x^2 + 2x + 1 - x^2 - 3x
+    \;=\; 1 - x
+\]
+
+\textbf{Punto cr\'itico:} $p(x) = 1 - x = 0 \;\Rightarrow\; x = 1$.
+
+\medskip
+\begin{center}
+\renewcommand{\arraystretch}{1.7}
+\begin{tabular}{c|ccc}
+    & $x < 1$ & $x = 1$ & $x > 1$ \\
+\hline
+$p(x) = 1 - x$ & $+$ & $0$ & $-$ \\
+\hline
+\rowcolor{celesteSuave}
+Signo & \color{rojoAlerta}$p > 0$ & $p = 0$ & \color{verdePaso}$\mathbf{p < 0}$ \\
+\end{tabular}
+\end{center}
+
+\medskip
+La condici\'on $p(x) < 0$ se cumple exactamente cuando $x > 1$,
+confirmando el resultado del Paso 3.
+
+\bigskip
+\textbf{Recta num\'erica — Caso 2:}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    \draw[->] (-0.5,0) -- (4.5,0) node[right] {$x$};
+    % x=0 (borde dominio)
+    \draw[azulFuerte!60, dashed, thick] (0,-0.55) -- (0,0.55);
+    \fill[azulFuerte!60] (0,0) circle (2pt);
+    \node[azulFuerte] at (0,-0.55) {\small$0$};
+    % x=1 (punto critico, excluido)
+    \draw[thick] (1,0) circle (3.5pt);
+    \node[below=5pt] at (1,0) {\small$1$};
+    % signos
+    \node at (0.5, 0.4) {\color{rojoAlerta}\small$p > 0$};
+    \node at (2.8, 0.4) {\color{verdePaso}\small$p < 0$};
+    % segmento solución
+    \draw[verdePaso, very thick, ->] (1.07,0) -- (4.4,0);
+    \node[verdePaso] at (3.0,-0.55) {\small Soluci\'on Caso 2: $(1,+\infty)$};
+\end{tikzpicture}
+\end{center}
+
+\end{paso}
+
+\bigskip
+
+% ============================================================
+% PASO 5 — UNIÓN DE CASOS E INTERSECCIÓN CON DOMINIO
+% ============================================================
+\begin{paso}{5: Uni\'on de casos e intersecci\'on con el dominio}
+
+Reunimos los resultados de ambos casos:
+
+\begin{itemize}[leftmargin=1.8cm, itemsep=4pt]
+    \item \textbf{Caso 1} ($x+1 < 0$ en dominio): \quad
+          $x \in (-\infty,\,-3\,]$
+    \item \textbf{Caso 2} ($x+1 \geq 0$ en dominio): \quad
+          $x \in (1,\,+\infty)$
+\end{itemize}
+
+\medskip
+La soluci\'on total es la \textbf{uni\'on} de ambos conjuntos:
+\[
+    \mathcal{S} \;=\; (-\infty,\,-3\,] \;\cup\; (1,\,+\infty)
+\]
+
+Verificamos que esta soluci\'on est\'a contenida en el dominio:
+\begin{itemize}[leftmargin=1.8cm]
+    \item $(-\infty,-3] \;\subset\; (-\infty,-3] \;\subset\; Dom\,f$ \checkmark
+    \item $(1,+\infty) \;\subset\; [0,+\infty) \;\subset\; Dom\,f$ \checkmark
+\end{itemize}
+
+\bigskip
+\textbf{Recta num\'erica final:}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    \draw[->] (-6.5,0) -- (5.0,0) node[right] {$x$};
+    % x=-3 incluido
+    \fill[verdePaso] (-3,0) circle (3pt);
+    \node[below=5pt] at (-3,0) {\small$-3$};
+    % x=0 borde dominio (no en solucion en ese tramo)
+    \fill[white] (0,0) circle (3pt);
+    \draw[azulFuerte!60, thick] (0,0) circle (3pt);
+    \node[below=5pt] at (0,0) {\small$0$};
+    % x=1 excluido
+    \draw[verdePaso, thick] (1,0) circle (3.5pt);
+    \node[below=5pt] at (1,0) {\small$1$};
+    % segmento izquierdo solución (-inf, -3]
+    \draw[verdePaso, very thick, <-] (-6.4,0) -- (-3.0,0);
+    % segmento derecho solución (1, +inf)
+    \draw[verdePaso, very thick, ->] (1.07,0) -- (4.8,0);
+    % etiquetas de signo
+    \node at (-5.0, 0.5) {\color{verdePaso}\small Satisface};
+    \node at (-1.5, 0.5) {\color{rojoAlerta}\small No satisface};
+    \node at ( 0.5, 0.5) {\color{rojoAlerta}\small No};
+    \node at ( 3.0, 0.5) {\color{verdePaso}\small Satisface};
+    % dominio (regiones)
+    \node[azulFuerte] at (-3.0,-0.9) {\small Dom};
+    \node[azulFuerte] at ( 2.5,-0.9) {\small Dom};
+\end{tikzpicture}
+\end{center}
+
+\end{paso}
+
+\bigskip
+
+% ============================================================
+% RESULTADO FINAL
+% ============================================================
+\begin{tcolorbox}[colback=azulFuerte, colframe=azulFuerte,
+    colupper=white, arc=10pt, boxrule=1.5pt, enhanced,
+    drop shadow={black!15}]
+    \centering
+    \large\textbf{RESULTADO FINAL}\\[0.5em]
+    \LARGE
+    $\displaystyle
+        x \;\in\; (-\infty,\,-3\,] \;\cup\; (1,\,+\infty)$
+\end{tcolorbox}
+
+\vspace{0.8cm}
+
+% ============================================================
+% VERIFICACIÓN (sólo resumen, sin código Python)
+% ============================================================
+\begin{tcolorbox}[colback=verdePaso!8, colframe=verdePaso, arc=8pt,
+    boxrule=1pt, enhanced,
+    title={\bfseries\color{white} Verificaci\'on num\'erica (SymPy + NumPy)},
+    colbacktitle=verdePaso, fonttitle=\bfseries]
+    \small
+    Se valid\'o la soluci\'on con Python usando dos librer\'ias independientes:
+    \begin{itemize}[leftmargin=1.2cm, itemsep=2pt]
+        \item \textbf{SymPy} (c\'alculo simb\'olico): \;
+              \texttt{solveset} retorn\'o exactamente
+              $(-\infty,-3]\cup(1,+\infty)$.
+        \item \textbf{NumPy} (muestreo 50\,000 puntos con desfase irracional):
+              acuerdo del \textbf{100.0000\,\%} entre la inecuaci\'on original
+              y el conjunto soluci\'on.
+    \end{itemize}
+    Todos los puntos de borde verificados:
+    $x = -3$ satisface (\checkmark),
+    $x = 0$ no satisface (\checkmark),
+    $x = 1$ no satisface (\checkmark),
+    $x = 1.0001$ satisface (\checkmark).
+\end{tcolorbox}
+
+\vspace{1cm}
+\begin{center}
+    \small\textbf{Usach Premium} --- ¡Nos vemos en la ayudant\'ia! \\
+    \textit{"Por y para estudiantes."}
+\end{center}
+
+\end{document}

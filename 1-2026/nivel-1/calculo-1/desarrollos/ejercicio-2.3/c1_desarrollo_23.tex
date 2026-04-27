@@ -1,0 +1,435 @@
+%  DESARROLLO PASO A PASO — EJERCICIO 2.3
+%  Inecuación con raíz anidada: sqrt(x - sqrt(2-x)) < 1
+%  Usach Premium — Cálculo I
+%  Compila con: pdflatex c1_desarrollo_23.tex  (2 veces)
+% ============================================================
+
+\documentclass[letterpaper, 12pt]{article}
+
+% ============================================================
+% PAQUETES
+% ============================================================
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{eso-pic}
+\usepackage{tikz}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usetikzlibrary{patterns, arrows.meta, decorations.pathmorphing, babel}
+\tcbuselibrary{skins, breakable}
+
+% ============================================================
+% GEOMETRÍA
+% ============================================================
+\geometry{letterpaper, margin=2cm, top=3cm, bottom=2.5cm, headheight=2cm}
+
+% ============================================================
+% COLORES INSTITUCIONALES
+% ============================================================
+\definecolor{celesteSuave}{HTML}{F0F7FF}
+\definecolor{azulFuerte}{HTML}{1A5276}
+\definecolor{verdePaso}{HTML}{1E8449}
+\definecolor{rojoAlerta}{HTML}{C0392B}
+\definecolor{naranjaAcento}{HTML}{D35400}
+\definecolor{grisTabla}{HTML}{D5D8DC}
+\definecolor{enlace}{HTML}{1A5276}
+
+% ============================================================
+% RUTAS DE IMÁGENES
+% ============================================================
+\newcommand{\logoup}{../../../../../template/images/logo_up.png}
+\newcommand{\logousach}{../../../../../template/images/logo_usach.png}
+\newcommand{\logofondo}{../../../../../template/images/logo_up.png}
+
+% ============================================================
+% INFORMACIÓN
+% ============================================================
+\newcommand{\institucion}{Usach Premium}
+\newcommand{\curso}{Cálculo I}
+\newcommand{\guiasnumero}{Desarrollo — Ejercicio 2.3}
+\newcommand{\semestre}{1er. Semestre de 2026}
+\newcommand{\preparadopor}{Usach Premium.}
+\newcommand{\webinstitucion}{www.usachpremium.cl}
+\newcommand{\instagraminstitucion}{https://www.instagram.com/usach.premium}
+\newcommand{\transparencia}{0.04}
+\newcommand{\fraseportada}{"Por y para estudiantes"}
+
+% ============================================================
+% HYPERREF
+% ============================================================
+\hypersetup{colorlinks=true, linkcolor=enlace, urlcolor=enlace,
+            citecolor=enlace, pdfborder={0 0 0}}
+
+% ============================================================
+% ENCABEZADO Y PIE
+% ============================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\includegraphics[height=1.2cm]{\logoup}}
+\fancyhead[R]{%
+    \begin{minipage}[b]{0.45\textwidth}
+        \raggedleft\fontsize{9pt}{11pt}\selectfont
+        \textbf{\color{azulFuerte}\institucion} \\
+        \curso\ — \guiasnumero \\
+        \textit{\color{gray}@usach.premium}
+    \end{minipage}\hspace{0.1cm}%
+    \includegraphics[height=1.2cm]{\logousach}}
+\fancyfoot[L]{\fontsize{9pt}{11pt}\selectfont \textit{\fraseportada}}
+\fancyfoot[R]{\fontsize{9pt}{11pt}\selectfont Página \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}
+                                   \renewcommand{\footrulewidth}{0pt}}
+
+% ============================================================
+% MARCA DE AGUA
+% ============================================================
+\newcommand{\MarcaAgua}{
+    \AddToShipoutPicture{
+        \AtPageCenter{
+            \begin{tikzpicture}[remember picture, overlay]
+                \node[opacity=\transparencia] at (0,0)
+                    {\includegraphics[width=0.7\textwidth]{\logofondo}};
+            \end{tikzpicture}}}}
+
+% ============================================================
+% CAJAS
+% ============================================================
+% Caja de paso numerado
+\newtcolorbox{paso}[2][]{
+    colback=celesteSuave, colframe=azulFuerte, fonttitle=\bfseries,
+    coltitle=white, colbacktitle=azulFuerte,
+    title={\large Paso #2},
+    arc=6pt, boxrule=1pt, enhanced, #1
+}
+
+% Caja de resultado/conclusión
+\newtcolorbox{resultado}{
+    colback=azulFuerte!10, colframe=azulFuerte, fonttitle=\bfseries,
+    coltitle=white, colbacktitle=azulFuerte,
+    title={\large\faCheck\ Resultado Final},
+    arc=8pt, boxrule=1.5pt, enhanced,
+    drop shadow={black!10}
+}
+
+% Caja de verificación Python
+\newtcolorbox{verificacion}{
+    colback=verdePaso!8, colframe=verdePaso, fonttitle=\bfseries,
+    coltitle=white, colbacktitle=verdePaso,
+    title={Verificación con Python (SymPy + NumPy)},
+    arc=6pt, boxrule=1pt, enhanced,
+    fontupper=\small\ttfamily
+}
+
+% Caja de advertencia/justificación
+\newtcolorbox{justif}[1]{
+    colback=naranjaAcento!8, colframe=naranjaAcento, fonttitle=\bfseries\small,
+    title={#1}, arc=5pt, boxrule=0.8pt, enhanced
+}
+
+% ============================================================
+\begin{document}
+\thispagestyle{plain}
+\MarcaAgua
+
+% ============================================================
+% PORTADA
+% ============================================================
+\AddToShipoutPicture*{%
+    \put(54,700){\includegraphics[width=2cm]{\logoup}}
+    \put(420,706){\includegraphics[width=5cm]{\logousach}}}
+
+\vspace*{0.5cm}
+\begin{center}
+    \color{azulFuerte}
+    {\huge \textbf{DESARROLLO PASO A PASO}} \\[0.5cm]
+    {\Huge \textbf{\curso}} \\[0.4cm]
+    {\Large Ejercicio 2.3 — Inecuación con raíz anidada} \\[1.2cm]
+    \begin{tcolorbox}[colback=celesteSuave, colframe=azulFuerte, arc=10pt,
+        width=0.88\textwidth, center, boxrule=1.5pt]
+        \centering\vspace{0.3cm}
+        {\large \textbf{Inecuación a resolver}}\\[0.6cm]
+        \color{black}
+        {\LARGE $\displaystyle \sqrt{x - \sqrt{2-x}} \;<\; 1$}
+        \vspace{0.4cm}
+    \end{tcolorbox}
+\end{center}
+
+\vspace{1.2cm}
+\begin{center}
+    {\Large \textbf{\semestre}} \\[0.7cm]
+    {\large \textbf{\preparadopor}}
+\end{center}
+
+\vspace{1.8cm}
+\begin{center}
+    {\color{azulFuerte}\hrule height 0.5pt}\vspace{0.3cm}
+    \begin{minipage}{0.45\textwidth}\centering
+        \textbf{Instagram:} \\\small\href{\instagraminstitucion}{@usach.premium}
+    \end{minipage}
+    \begin{minipage}{0.45\textwidth}\centering
+        \textbf{Web:} \\\small\href{http://\webinstitucion}{\webinstitucion}
+    \end{minipage}
+\end{center}
+
+\pagenumbering{arabic}
+\newpage
+
+% ============================================================
+% ENUNCIADO
+% ============================================================
+\begin{tcolorbox}[colback=azulFuerte!12, colframe=azulFuerte, arc=8pt,
+    boxrule=1.2pt, enhanced]
+    \textbf{\large Ejercicio 2.3.} \quad Resuelva la siguiente inecuación:
+    \[
+        \sqrt{x - \sqrt{2-x}} \;<\; 1
+    \]
+\end{tcolorbox}
+
+\bigskip
+
+% ============================================================
+% PASO 1 — DOMINIO
+% ============================================================
+\begin{paso}{1: Determinación del Dominio}
+
+Para que la expresión esté definida en $\mathbb{R}$ deben cumplirse
+\textbf{simultáneamente} las siguientes condiciones:
+
+\medskip
+\textbf{(i) Raíz interior:} $\;2 - x \geq 0$
+
+\[
+    2 - x \geq 0 \quad\Longrightarrow\quad x \leq 2
+\]
+
+\textbf{(ii) Raíz exterior:} $\;x - \sqrt{2-x} \geq 0$
+
+\[
+    x \geq \sqrt{2-x}
+\]
+
+Como $\sqrt{2-x} \geq 0$, esta condición sólo puede satisfacerse para $x \geq 0$.
+Elevando al cuadrado ambos lados (válido pues ambos son no negativos):
+
+\[
+    x^{2} \geq 2 - x \quad\Longrightarrow\quad
+    x^{2} + x - 2 \geq 0 \quad\Longrightarrow\quad
+    (x+2)(x-1) \geq 0
+\]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{c|ccccc}
+    & $x < -2$ & $x=-2$ & $-2 < x < 1$ & $x=1$ & $x > 1$ \\
+\hline
+$(x+2)$ & $-$ & $0$ & $+$ & $+$ & $+$ \\
+$(x-1)$ & $-$ & $-$ & $-$ & $0$ & $+$ \\
+\hline
+$(x+2)(x-1)$ & $+$ & $0$ & $-$ & $0$ & $+$ \\
+\end{tabular}
+\end{center}
+
+\medskip
+$(x+2)(x-1) \geq 0 \;\Rightarrow\; x \leq -2 \;\cup\; x \geq 1$.
+Combinando con $x \geq 0$: $\quad x \geq 1$.
+
+\bigskip
+\textbf{Intersección de condiciones (i) y (ii):}
+\[
+    \{x \leq 2\} \;\cap\; \{x \geq 1\} \;=\; \boxed{Dom\,f = [\,1,\,2\,]}
+\]
+
+\end{paso}
+
+\bigskip
+
+% ============================================================
+% PASO 2 — PRIMERA ELEVACIÓN AL CUADRADO
+% ============================================================
+\begin{paso}{2: Primera elevación al cuadrado}
+
+Sobre el dominio $[1,2]$, el lado izquierdo $\sqrt{x-\sqrt{2-x}} \geq 0$
+y el lado derecho $1 > 0$, luego la inecuación es equivalente a:
+
+\begin{justif}{¿Por qué podemos elevar al cuadrado?}
+    Si $0 \leq A < B$, entonces $A^2 < B^2$. Aquí $A = \sqrt{x-\sqrt{2-x}}
+    \geq 0$ y $B = 1 > 0$, por lo que la equivalencia es válida y
+    \textbf{no cambia el sentido de la desigualdad}.
+\end{justif}
+
+\[
+    \sqrt{x - \sqrt{2-x}} < 1 \quad\stackrel{(\,)^2}{\Longleftrightarrow}\quad
+    x - \sqrt{2-x} < 1
+\]
+
+Reordenando:
+\[
+    \boxed{x - 1 < \sqrt{2-x}}
+\]
+
+\end{paso}
+
+\bigskip
+
+% ============================================================
+% PASO 3 — SEGUNDA ELEVACIÓN AL CUADRADO
+% ============================================================
+\begin{paso}{3: Segunda elevación al cuadrado}
+
+En el dominio $[1,2]$ se tiene $x - 1 \geq 0$ y $\sqrt{2-x} \geq 0$,
+por lo que podemos elevar al cuadrado nuevamente sin cambiar la desigualdad:
+
+\begin{justif}{Justificación}
+    $x-1 \geq 0$ en $[1,2]$ y $\sqrt{2-x}\geq 0$ siempre, luego
+    $A = x-1 \geq 0$, $B = \sqrt{2-x} \geq 0$, y $A < B
+    \Leftrightarrow A^2 < B^2$.
+\end{justif}
+
+\[
+    x - 1 < \sqrt{2-x} \quad\stackrel{(\,)^2}{\Longleftrightarrow}\quad
+    (x-1)^2 < 2-x
+\]
+
+Expandiendo y simplificando:
+\[
+    x^2 - 2x + 1 < 2 - x
+\]
+\[
+    x^2 - 2x + 1 - 2 + x < 0
+\]
+\[
+    \boxed{x^2 - x - 1 < 0}
+\]
+
+\textbf{Raíces del trinomio} $x^2 - x - 1 = 0$ usando la fórmula cuadrática:
+\[
+    x = \frac{1 \pm \sqrt{1 + 4}}{2} = \frac{1 \pm \sqrt{5}}{2}
+\]
+\[
+    r_1 = \frac{1 - \sqrt{5}}{2} \approx -0.618 \qquad
+    r_2 = \frac{1 + \sqrt{5}}{2} \approx 1.618
+\]
+
+\end{paso}
+
+\newpage
+
+% ============================================================
+% PASO 4 — TABLA DE SIGNOS
+% ============================================================
+\begin{paso}{4: Tabla de signos de $q(x) = x^2 - x - 1$}
+
+Factorizando: $q(x) = \left(x - \dfrac{1-\sqrt{5}}{2}\right)\left(x - \dfrac{1+\sqrt{5}}{2}\right)$
+
+\medskip
+\begin{center}
+\renewcommand{\arraystretch}{1.7}
+\begin{tabular}{c|ccccc}
+    & \small$x < r_1$ & \small$x = r_1$ & \small$r_1 < x < r_2$ & \small$x = r_2$ & \small$x > r_2$ \\
+\hline
+$\left(x - r_1\right)$ & $-$ & $0$ & $+$ & $+$ & $+$ \\
+$\left(x - r_2\right)$ & $-$ & $-$ & $-$ & $0$ & $+$ \\
+\hline
+\rowcolor{celesteSuave}
+$q(x) = x^2 - x - 1$ & $+$ & $0$ & $\mathbf{-}$ & $0$ & $+$ \\
+\end{tabular}
+\end{center}
+
+\medskip
+donde $r_1 = \dfrac{1-\sqrt{5}}{2}$ y $r_2 = \dfrac{1+\sqrt{5}}{2}$.
+
+\bigskip
+\textbf{Recta numérica:}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+    \draw[->] (-2.5,0) -- (4,0) node[right] {$x$};
+    % raices
+    \fill[azulFuerte] (-0.618,0) circle (2.5pt) node[below=4pt] {\small$r_1{\approx}-0.618$};
+    \fill[azulFuerte]  (1.618,0) circle (2.5pt) node[below=4pt] {\small$r_2{\approx}1.618$};
+    % signos
+    \node at (-1.6, 0.35) {\color{rojoAlerta}$q > 0$};
+    \node at ( 0.5, 0.35) {\color{verdePaso}$q < 0$};
+    \node at ( 2.8, 0.35) {\color{rojoAlerta}$q > 0$};
+    % arco negativo
+    \draw[verdePaso, very thick] (-0.618,0) -- (1.618,0);
+    % dominio [1,2]
+    \draw[azulFuerte!60, dashed, thick] (1,-0.55) -- (1,0.55);
+    \draw[azulFuerte!60, dashed, thick] (2,-0.55) -- (2,0.55);
+    \fill[azulFuerte] (1,0) circle (2.5pt);
+    \fill[azulFuerte!60] (2,0) circle (2.5pt);
+    \node[azulFuerte] at (1, -0.55) {\small$1$};
+    \node[azulFuerte] at (2, -0.55) {\small$2$};
+    \node[azulFuerte] at (1.5,-0.9) {\small Dominio $[1,2]$};
+\end{tikzpicture}
+\end{center}
+
+\[
+    q(x) < 0 \quad\Longleftrightarrow\quad
+    x \in \left(\frac{1-\sqrt{5}}{2},\;\frac{1+\sqrt{5}}{2}\right)
+\]
+
+\end{paso}
+
+\bigskip
+
+% ============================================================
+% PASO 5 — INTERSECCIÓN CON EL DOMINIO
+% ============================================================
+\begin{paso}{5: Intersección con el Dominio}
+
+Debemos tomar la intersección entre la solución de $q(x) < 0$ y el dominio $[1,2]$:
+
+\[
+    \underbrace{\left(\frac{1-\sqrt{5}}{2},\;\frac{1+\sqrt{5}}{2}\right)}_{\text{solución } q<0}
+    \;\bigcap\;
+    \underbrace{[\,1,\,2\,]}_{\text{dominio}}
+    \;=\;
+    \left[\,1,\;\frac{1+\sqrt{5}}{2}\right)
+\]
+
+\medskip
+Nótese que:
+\begin{itemize}[leftmargin=1.5cm]
+    \item $x = 1$: pertenece al dominio y satisface $q(1) = 1-1-1 = -1 < 0$. \checkmark
+    \item $x = \dfrac{1+\sqrt{5}}{2} \approx 1.618$: raíz de $q$, por lo tanto $q = 0$,
+          no cumple la desigualdad estricta. \textbf{Se excluye.}
+    \item $x = 2$: $q(2) = 4-2-1 = 1 > 0$. No cumple. \textbf{Se excluye.}
+\end{itemize}
+
+\end{paso}
+
+\bigskip
+
+% ============================================================
+% RESULTADO FINAL
+% ============================================================
+\begin{tcolorbox}[colback=azulFuerte, colframe=azulFuerte,
+    colupper=white, arc=10pt, boxrule=1.5pt, enhanced,
+    drop shadow={black!15}]
+    \centering
+    \large\textbf{RESULTADO FINAL}\\[0.5em]
+    \LARGE
+    $\displaystyle
+        x \;\in\; \left[\,1,\;\frac{1+\sqrt{5}}{2}\right)
+        \;\approx\; [\,1,\;1.618\,)$
+\end{tcolorbox}
+
+\vspace{1cm}
+\begin{center}
+    \small\textbf{Usach Premium} — ¡Nos vemos en la ayudantía! \\
+    \textit{"Por y para estudiantes."}
+\end{center}
+
+\end{document}

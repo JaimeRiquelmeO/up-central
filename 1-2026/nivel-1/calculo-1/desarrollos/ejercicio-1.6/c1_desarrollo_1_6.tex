@@ -1,0 +1,431 @@
+%  DESARROLLO PASO A PASO — EJERCICIO 1.6
+%  Inecuación con raíz: sqrt(x^2 - 1) / (x - 2) > 0
+%  Usach Premium — Cálculo I
+%  Compila con: pdflatex c1_desarrollo_1_6.tex  (2 veces)
+% ============================================================
+
+\documentclass[letterpaper, 12pt]{article}
+
+% ============================================================
+% PAQUETES
+% ============================================================
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{eso-pic}
+\usepackage{tikz}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usetikzlibrary{patterns, arrows.meta, decorations.pathmorphing, babel}
+\tcbuselibrary{skins, breakable}
+
+% ============================================================
+% GEOMETRÍA
+% ============================================================
+\geometry{letterpaper, margin=2cm, top=3cm, bottom=2.5cm, headheight=2cm}
+
+% ============================================================
+% COLORES INSTITUCIONALES
+% ============================================================
+\definecolor{celesteSuave}{HTML}{F0F7FF}
+\definecolor{azulFuerte}{HTML}{1A5276}
+\definecolor{verdePaso}{HTML}{1E8449}
+\definecolor{rojoAlerta}{HTML}{C0392B}
+\definecolor{naranjaAcento}{HTML}{D35400}
+\definecolor{grisTabla}{HTML}{D5D8DC}
+\definecolor{enlace}{HTML}{1A5276}
+
+% ============================================================
+% RUTAS DE IMÁGENES
+% ============================================================
+\newcommand{\logoup}{../../../../../template/images/logo_up.png}
+\newcommand{\logousach}{../../../../../template/images/logo_usach.png}
+\newcommand{\logofondo}{../../../../../template/images/logo_up.png}
+
+% ============================================================
+% INFORMACIÓN
+% ============================================================
+\newcommand{\institucion}{Usach Premium}
+\newcommand{\curso}{Cálculo I}
+\newcommand{\guiasnumero}{Desarrollo — Ejercicio 1.6}
+\newcommand{\semestre}{1er. Semestre de 2026}
+\newcommand{\preparadopor}{Usach Premium.}
+\newcommand{\webinstitucion}{www.usachpremium.cl}
+\newcommand{\instagraminstitucion}{https://www.instagram.com/usach.premium}
+\newcommand{\transparencia}{0.04}
+\newcommand{\fraseportada}{"Por y para estudiantes"}
+
+% ============================================================
+% HYPERREF
+% ============================================================
+\hypersetup{colorlinks=true, linkcolor=enlace, urlcolor=enlace,
+            citecolor=enlace, pdfborder={0 0 0}}
+
+% ============================================================
+% ENCABEZADO Y PIE
+% ============================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\includegraphics[height=1.2cm]{\logoup}}
+\fancyhead[R]{%
+    \begin{minipage}[b]{0.45\textwidth}
+        \raggedleft\fontsize{9pt}{11pt}\selectfont
+        \textbf{\color{azulFuerte}\institucion} \\
+        \curso\ — \guiasnumero \\
+        \textit{\color{gray}@usach.premium}
+    \end{minipage}\hspace{0.1cm}%
+    \includegraphics[height=1.2cm]{\logousach}}
+\fancyfoot[L]{\fontsize{9pt}{11pt}\selectfont \textit{\fraseportada}}
+\fancyfoot[R]{\fontsize{9pt}{11pt}\selectfont Página \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}
+                                   \renewcommand{\footrulewidth}{0pt}}
+
+% ============================================================
+% MARCA DE AGUA
+% ============================================================
+\newcommand{\MarcaAgua}{
+    \AddToShipoutPicture{
+        \AtPageCenter{
+            \begin{tikzpicture}[remember picture, overlay]
+                \node[opacity=\transparencia] at (0,0)
+                    {\includegraphics[width=0.7\textwidth]{\logofondo}};
+            \end{tikzpicture}}}}
+
+% ============================================================
+% CAJAS
+% ============================================================
+% Caja de paso numerado
+\newtcolorbox{paso}[2][]{
+    colback=celesteSuave, colframe=azulFuerte, fonttitle=\bfseries,
+    coltitle=white, colbacktitle=azulFuerte,
+    title={\large Paso #2},
+    arc=6pt, boxrule=1pt, enhanced, #1
+}
+
+% Caja de resultado final
+\newtcolorbox{resultado}{
+    colback=azulFuerte!10, colframe=azulFuerte, fonttitle=\bfseries,
+    coltitle=white, colbacktitle=azulFuerte,
+    title={\large Resultado Final},
+    arc=8pt, boxrule=1.5pt, enhanced,
+    drop shadow={black!10}
+}
+
+% Caja de advertencia/justificación
+\newtcolorbox{justif}[1]{
+    colback=naranjaAcento!8, colframe=naranjaAcento, fonttitle=\bfseries\small,
+    title={#1}, arc=5pt, boxrule=0.8pt, enhanced
+}
+
+% ============================================================
+\begin{document}
+\thispagestyle{plain}
+\MarcaAgua
+
+% ============================================================
+% PORTADA
+% ============================================================
+\AddToShipoutPicture*{%
+    \put(54,700){\includegraphics[width=2cm]{\logoup}}
+    \put(420,706){\includegraphics[width=5cm]{\logousach}}}
+
+\vspace*{0.5cm}
+\begin{center}
+    \color{azulFuerte}
+    {\huge \textbf{DESARROLLO PASO A PASO}} \\[0.5cm]
+    {\Huge \textbf{\curso}} \\[0.4cm]
+    {\Large Ejercicio 1.6 — Inecuación con raíz cuadrada} \\[1.2cm]
+    \begin{tcolorbox}[colback=celesteSuave, colframe=azulFuerte, arc=10pt,
+        width=0.88\textwidth, center, boxrule=1.5pt]
+        \centering\vspace{0.3cm}
+        {\large \textbf{Inecuación a resolver}}\\[0.6cm]
+        \color{black}
+        {\LARGE $\displaystyle \dfrac{\sqrt{x^2 - 1}}{x - 2} \;>\; 0$}
+        \vspace{0.4cm}
+    \end{tcolorbox}
+\end{center}
+
+\vspace{1.2cm}
+\begin{center}
+    {\Large \textbf{\semestre}} \\[0.7cm]
+    {\large \textbf{\preparadopor}}
+\end{center}
+
+\vspace{1.8cm}
+\begin{center}
+    {\color{azulFuerte}\hrule height 0.5pt}\vspace{0.3cm}
+    \begin{minipage}{0.45\textwidth}\centering
+        \textbf{Instagram:} \\\small\href{\instagraminstitucion}{@usach.premium}
+    \end{minipage}
+    \begin{minipage}{0.45\textwidth}\centering
+        \textbf{Web:} \\\small\href{http://\webinstitucion}{\webinstitucion}
+    \end{minipage}
+\end{center}
+
+\pagenumbering{arabic}
+\newpage
+
+% ============================================================
+% ENUNCIADO
+% ============================================================
+\begin{tcolorbox}[colback=azulFuerte!12, colframe=azulFuerte, arc=8pt,
+    boxrule=1.2pt, enhanced]
+    \textbf{\large Ejercicio 1.6.} \quad Encuentre el conjunto solución
+    de la siguiente inecuación:
+    \[
+        \dfrac{\sqrt{x^2 - 1}}{x - 2} \;>\; 0
+    \]
+\end{tcolorbox}
+
+\bigskip
+
+% ============================================================
+% PASO 1 — DOMINIO
+% ============================================================
+\begin{paso}{1: Determinación del Dominio}
+
+Para que la expresión esté definida se deben cumplir
+\textbf{simultáneamente} dos condiciones:
+
+\medskip
+\textbf{(i) Radicando no negativo:} $\;x^2 - 1 \geq 0$
+
+Factorizando la diferencia de cuadrados:
+\[
+    x^2 - 1 \geq 0 \quad\Longrightarrow\quad
+    (x - 1)(x + 1) \geq 0
+\]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{c|ccccc}
+    & $x < -1$ & $x=-1$ & $-1 < x < 1$ & $x=1$ & $x > 1$ \\
+\hline
+$(x + 1)$ & $-$ & $0$ & $+$ & $+$ & $+$ \\
+$(x - 1)$ & $-$ & $-$ & $-$ & $0$ & $+$ \\
+\hline
+\rowcolor{celesteSuave}
+$(x+1)(x-1)$ & $+$ & $0$ & $-$ & $0$ & $+$ \\
+\end{tabular}
+\end{center}
+
+\[
+    (x+1)(x-1) \geq 0 \quad\Longrightarrow\quad
+    x \leq -1 \;\cup\; x \geq 1
+    \quad\Longrightarrow\quad
+    x \in (-\infty,\,-1\,] \cup [\,1,\,+\infty)
+\]
+
+\medskip
+\textbf{(ii) Denominador no nulo:} $\;x - 2 \neq 0 \;\Rightarrow\; x \neq 2$
+
+\medskip
+\textbf{Intersección de condiciones (i) y (ii):}
+\[
+    \boxed{Dom\,f \;=\; (-\infty,\,-1\,] \;\cup\; [\,1,\,2) \;\cup\; (2,\,+\infty)}
+\]
+
+\end{paso}
+
+\bigskip
+
+% ============================================================
+% PASO 2 — NATURALEZA DEL NUMERADOR
+% ============================================================
+\begin{paso}{2: Análisis del numerador}
+
+El numerador de la fracción es $\sqrt{x^2 - 1}$, que por definición de
+raíz cuadrada satisface:
+\[
+    \sqrt{x^2 - 1} \;\geq\; 0 \qquad \forall\, x \in Dom\,f
+\]
+
+Identifiquemos cuándo el numerador es \textbf{cero} y cuándo es
+\textbf{estrictamente positivo}:
+
+\[
+    \sqrt{x^2 - 1} = 0 \;\Longleftrightarrow\; x^2 - 1 = 0
+    \;\Longleftrightarrow\; x = \pm 1
+\]
+
+\begin{justif}{Observación clave}
+    En $x = 1$ y $x = -1$ la fracción vale $\mathbf{0}$, lo cual
+    \textbf{no cumple} la desigualdad estricta $> 0$.
+    Por lo tanto, estos puntos quedan excluidos de la solución.
+\end{justif}
+
+\medskip
+Para todo $x \in Dom\,f$ con $x \neq \pm 1$:
+\[
+    \sqrt{x^2 - 1} \;>\; 0
+\]
+
+\end{paso}
+
+\bigskip
+
+% ============================================================
+% PASO 3 — CONDICIÓN PARA QUE LA FRACCIÓN SEA POSITIVA
+% ============================================================
+\begin{paso}{3: Condición de positividad de la fracción}
+
+Dado que el numerador satisface $\sqrt{x^2-1} \geq 0$ siempre, el signo
+de la fracción depende \textbf{exclusivamente} del denominador cuando el
+numerador no es cero:
+
+\[
+    \dfrac{\sqrt{x^2 - 1}}{x - 2} \;>\; 0
+    \quad\Longleftrightarrow\quad
+    \underbrace{\sqrt{x^2 - 1}}_{> \;0} > 0
+    \;\;\text{y}\;\;
+    \underbrace{(x - 2)}_{> \;0} > 0
+\]
+
+\begin{justif}{¿Por qué solo necesitamos el denominador positivo?}
+    El numerador es siempre $\geq 0$ (cuadrado de raíz real).
+    Para que un cociente de la forma $\tfrac{A}{B} > 0$ con $A \geq 0$,
+    se requiere forzosamente $A > 0$ y $B > 0$.
+    No es posible tener $A < 0$, por lo que la condición se reduce a
+    ambos positivos.
+\end{justif}
+
+\medskip
+Las dos condiciones son:
+
+\[
+    \begin{cases}
+        x^2 - 1 > 0 & \Longrightarrow\; x < -1 \;\text{ ó }\; x > 1 \\[4pt]
+        x - 2 > 0   & \Longrightarrow\; x > 2
+    \end{cases}
+\]
+
+\textbf{Intersección:}
+\[
+    \bigl\{x < -1 \;\cup\; x > 1\bigr\}
+    \;\cap\;
+    \bigl\{x > 2\bigr\}
+    \;=\;
+    \bigl\{x > 2\bigr\}
+    \qquad \text{(pues } x > 2 \subset x > 1 \text{)}
+\]
+
+\end{paso}
+
+\newpage
+
+% ============================================================
+% PASO 4 — TABLA DE SIGNOS
+% ============================================================
+\begin{paso}{4: Tabla de signos}
+
+Organizamos el análisis de signo en los subintervalos del dominio,
+usando los puntos críticos $x = -1$, $x = 1$ y $x = 2$:
+
+\medskip
+\begin{center}
+\renewcommand{\arraystretch}{2.0}
+\begin{tabular}{c|c|c|c|c|c|c|c}
+    & $x<-1$ & $x=-1$ & $-1<x<1$ & $x=1$
+      & $1<x<2$ & $x=2$ & $x>2$ \\
+\hline
+Dom. & \checkmark & \checkmark & \texttimes & \checkmark
+     & \checkmark & \texttimes & \checkmark \\
+\hline
+$\sqrt{x^2-1}$ & $+$ & $0$ & \texttimes & $0$ & $+$ & $+$ & $+$ \\
+$(x - 2)$      & $-$ & $-$ & \texttimes & $-$ & $-$ & $0$ & $+$ \\
+\hline
+\rowcolor{celesteSuave}
+$\dfrac{\sqrt{x^2-1}}{x-2}$ & $-$ & $0$ & \texttimes & $0$ & $-$ & \texttimes
+    & \cellcolor{verdePaso!25}$\mathbf{+}$ \\
+\end{tabular}
+\end{center}
+
+\medskip
+\noindent\small (\texttimes\;= fuera del dominio)
+
+\bigskip
+\textbf{Recta numérica:}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.15]
+    % Eje
+    \draw[->] (-4.5,0) -- (5.5,0) node[right] {$x$};
+
+    % Punto critico x = -1
+    \fill[azulFuerte] (-1,0) circle (2.5pt)
+        node[below=5pt] {\small $-1$};
+    % Punto critico x = 1
+    \fill[azulFuerte] (1,0) circle (2.5pt)
+        node[below=5pt] {\small $1$};
+    % Punto critico x = 2  (excluido del dominio)
+    \draw[rojoAlerta, thick] (2,0) circle (2.5pt);
+    \node[below=5pt] at (2,0) {\small $2$};
+
+    % Intervalo fuera del dominio (-1, 1)  — gris rayado
+    \fill[grisTabla!60] (-1,-0.12) rectangle (1,0.12);
+    \node[gray] at (0, 0.42) {\small $\notin$ Dom.};
+
+    % Signos en cada región del dominio
+    \node at (-2.8, 0.42) {\color{rojoAlerta}\small $f < 0$};
+    \node at ( 1.5, 0.42) {\color{rojoAlerta}\small $f < 0$};
+    \node at ( 3.7, 0.42) {\color{verdePaso}\small $f > 0$};
+
+    % Segmento solución (2, +inf)
+    \draw[verdePaso, very thick, ->] (2.07,0) -- (5.3,0);
+
+    % Segmentos de dominio con signo negativo
+    \draw[rojoAlerta!70, very thick] (-4.3,0) -- (-1,0);
+    \draw[rojoAlerta!70, very thick] (1,0) -- (1.93,0);
+\end{tikzpicture}
+\end{center}
+
+\medskip
+La fracción es estrictamente positiva únicamente para $x > 2$.
+
+\end{paso}
+
+\bigskip
+
+% ============================================================
+% PASO 5 — INTERSECCIÓN CON EL DOMINIO
+% ============================================================
+\begin{paso}{5: Intersección con el Dominio}
+
+La condición $x > 2$ ya está contenida en el dominio
+(recordemos que $x = 2$ está excluido por el denominador nulo):
+
+\[
+    \bigl\{x > 2\bigr\}
+    \;\cap\;
+    \underbrace{\bigl[(-\infty,\,-1]\cup[1,\,2)\cup(2,\,+\infty)\bigr]}_{\text{dominio}}
+    \;=\;
+    (2,\,+\infty)
+\]
+
+\end{paso}
+
+\bigskip
+
+% ============================================================
+% RESULTADO FINAL
+% ============================================================
+\begin{resultado}
+\[
+    \dfrac{\sqrt{x^2 - 1}}{x - 2} \;>\; 0
+    \qquad\Longleftrightarrow\qquad
+    \boxed{\,x \in (2,\,+\infty)\,}
+\]
+\end{resultado}
+
+\end{document}

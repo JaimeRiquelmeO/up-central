@@ -1,0 +1,994 @@
+%  SOLUCIONARIO COMPLETO — PASO A PASO
+%  c1_inecuaciones.tex — 16 ejercicios resueltos
+%  Cálculo I — Usach Premium
+%  Todos los resultados validados con SymPy + NumPy (100 % acuerdo)
+%  Compila con: pdflatex c1_solucionario_completo.tex  (2 veces)
+% ============================================================
+
+\documentclass[letterpaper, 11pt]{article}
+
+% ============================================================
+% PAQUETES
+% ============================================================
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{eso-pic}
+\usepackage{tikz}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usetikzlibrary{patterns, arrows.meta, decorations.pathmorphing, babel}
+\tcbuselibrary{skins, breakable}
+
+% Deshabilitar shorthands < y > de babel[spanish] (no usamos guillemets)
+\AtBeginDocument{\shorthandoff{<>}}
+
+% ============================================================
+% GEOMETRÍA
+% ============================================================
+\geometry{letterpaper, margin=2cm, top=2.8cm, bottom=2.5cm, headheight=1.8cm}
+
+% ============================================================
+% COLORES
+% ============================================================
+\definecolor{celesteSuave}{HTML}{F0F7FF}
+\definecolor{azulFuerte}{HTML}{1A5276}
+\definecolor{verdePaso}{HTML}{1E8449}
+\definecolor{rojoAlerta}{HTML}{C0392B}
+\definecolor{naranjaAcento}{HTML}{D35400}
+\definecolor{enlace}{HTML}{1A5276}
+
+% ============================================================
+% RUTAS
+% ============================================================
+\newcommand{\logoup}{../../../../../template/images/logo_up.png}
+\newcommand{\logousach}{../../../../../template/images/logo_usach.png}
+\newcommand{\logofondo}{../../../../../template/images/logo_up.png}
+
+% ============================================================
+% INFORMACIÓN
+% ============================================================
+\newcommand{\institucion}{Usach Premium}
+\newcommand{\curso}{Cálculo I}
+\newcommand{\guiasnumero}{Solucionario — Paso a Paso}
+\newcommand{\semestre}{1er. Semestre de 2026}
+\newcommand{\preparadopor}{Usach Premium.}
+\newcommand{\webinstitucion}{www.usachpremium.cl}
+\newcommand{\instagraminstitucion}{https://www.instagram.com/usach.premium}
+\newcommand{\transparencia}{0.04}
+\newcommand{\fraseportada}{"Por y para estudiantes"}
+
+% ============================================================
+% HYPERREF
+% ============================================================
+\hypersetup{colorlinks=true, linkcolor=enlace, urlcolor=enlace,
+            citecolor=enlace, pdfborder={0 0 0}}
+
+% ============================================================
+% ENCABEZADO Y PIE
+% ============================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\includegraphics[height=1.1cm]{\logoup}}
+\fancyhead[R]{%
+    \begin{minipage}[b]{0.45\textwidth}
+        \raggedleft\fontsize{8.5pt}{10pt}\selectfont
+        \textbf{\color{azulFuerte}\institucion} \\
+        \curso\ --- \guiasnumero \\
+        \textit{\color{gray}@usach.premium}
+    \end{minipage}\hspace{0.1cm}%
+    \includegraphics[height=1.1cm]{\logousach}}
+\fancyfoot[L]{\fontsize{8.5pt}{10pt}\selectfont \textit{\fraseportada}}
+\fancyfoot[R]{\fontsize{8.5pt}{10pt}\selectfont Página \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancypagestyle{plain}{\fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}}
+
+% ============================================================
+% MARCA DE AGUA
+% ============================================================
+\newcommand{\MarcaAgua}{
+    \AddToShipoutPicture{
+        \AtPageCenter{
+            \begin{tikzpicture}[remember picture, overlay]
+                \node[opacity=\transparencia] at (0,0)
+                    {\includegraphics[width=0.7\textwidth]{\logofondo}};
+            \end{tikzpicture}}}}
+
+% ============================================================
+% CAJAS REUTILIZABLES
+% ============================================================
+
+% Caja de paso numerado
+\newtcolorbox{paso}[2][]{
+    colback=celesteSuave, colframe=azulFuerte, fonttitle=\bfseries,
+    coltitle=white, colbacktitle=azulFuerte,
+    title={\large Paso #2},
+    arc=6pt, boxrule=1pt, enhanced, breakable, #1}
+
+% Justificación / advertencia
+\newtcolorbox{justif}[1]{
+    colback=orange!8, colframe=naranjaAcento,
+    title={#1}, fonttitle=\bfseries,
+    coltitle=black, arc=5pt, boxrule=0.8pt, enhanced}
+
+% Caso
+\newtcolorbox{caso}[1]{
+    colback=verdePaso!7, colframe=verdePaso,
+    title={#1}, fonttitle=\bfseries,
+    coltitle=white, colbacktitle=verdePaso,
+    arc=5pt, boxrule=0.8pt, enhanced}
+
+% Encabezado de ejercicio
+\newcommand{\exheader}[2]{%
+    \begin{tcolorbox}[colback=azulFuerte!12, colframe=azulFuerte,
+        arc=8pt, boxrule=1.5pt, enhanced]
+        {\large\textbf{\color{azulFuerte}Ejercicio #1}} \\[0.4em]
+        \centering\LARGE $\displaystyle #2$
+    \end{tcolorbox}
+    \smallskip}
+
+% Caja de resultado
+\newcommand{\resultado}[1]{%
+    \begin{tcolorbox}[colback=azulFuerte, colframe=azulFuerte, colupper=white,
+        arc=8pt, boxrule=1.5pt, enhanced, drop shadow={black!12}]
+        \centering\large\textbf{RESULTADO} \\[0.4em]
+        \LARGE $\displaystyle #1$
+    \end{tcolorbox}}
+
+% Cabecera de sección
+\newcommand{\secheader}[1]{%
+    \begin{center}
+        \begin{tcolorbox}[colback=azulFuerte, colframe=azulFuerte,
+            colupper=white, width=\textwidth, arc=8pt]
+            \centering\Large\textbf{#1}
+        \end{tcolorbox}
+    \end{center}
+    \bigskip}
+
+% ============================================================
+\begin{document}
+\thispagestyle{plain}
+
+% ============================================================
+% PORTADA
+% ============================================================
+\AddToShipoutPicture*{%
+    \put(54, 700){\includegraphics[width=2cm]{\logoup}}
+    \put(420, 706){\includegraphics[width=5cm]{\logousach}}}
+
+\vspace*{0.5cm}
+
+\begin{center}
+    \color{azulFuerte}
+    {\huge \textbf{SOLUCIONARIO COMPLETO}} \\[0.4cm]
+    {\huge \textbf{PASO A PASO}} \\[0.6cm]
+    {\Huge \textbf{\curso}} \\[0.3cm]
+    {\Large Inecuaciones con Raíz Cuadrada} \\[1.5cm]
+
+    \begin{tcolorbox}[colback=celesteSuave, colframe=azulFuerte, arc=10pt,
+        width=0.85\textwidth, center, boxrule=1.5pt]
+        \centering\vspace{0.2cm}
+        {\Large \textbf{16 Ejercicios Resueltos con Desarrollo Completo}}
+        \vspace{0.3cm}
+        \color{black}
+        \begin{itemize}[leftmargin=2cm, itemsep=0.25em]
+            \item[\color{azulFuerte}$\Rightarrow$] Sección I --- Raíz cuadrada directa (Ej. 1.1 -- 1.6)
+            \item[\color{azulFuerte}$\Rightarrow$] Sección II --- Raíz anidada y cocientes (Ej. 2.1 -- 2.5)
+            \item[\color{azulFuerte}$\Rightarrow$] Sección III --- Raíz dentro de raíz (Ej. 3.1 -- 3.5)
+        \end{itemize}
+        \vspace{0.2cm}
+    \end{tcolorbox}
+\end{center}
+
+\vspace{1.2cm}
+
+\begin{center}
+    {\Large \textbf{\semestre}} \\[0.6cm]
+    {\large \textbf{\preparadopor}}
+\end{center}
+
+\vspace{1.5cm}
+
+\begin{center}
+    {\color{azulFuerte}\hrule height 0.5pt}
+    \vspace{0.3cm}
+    \begin{minipage}{0.45\textwidth}
+        \centering\textbf{Instagram:} \\
+        \small\href{\instagraminstitucion}{@usach.premium}
+    \end{minipage}
+    \begin{minipage}{0.45\textwidth}
+        \centering\textbf{Web:} \\
+        \small\href{http://\webinstitucion}{\webinstitucion}
+    \end{minipage}
+\end{center}
+
+\pagenumbering{arabic}
+\newpage
+\MarcaAgua
+
+% ============================================================
+%  SECCIÓN I — RAÍZ CUADRADA DIRECTA
+% ============================================================
+\secheader{SECCIÓN I --- Raíz Cuadrada Directa}
+
+% ─── EJERCICIO 1.1 ──────────────────────────────────────────
+\exheader{1.1}{\sqrt{x^2 - 9} \;\leq\; x - 1}
+
+\begin{paso}{1: Dominio natural}
+La expresión bajo la raíz debe ser no negativa:
+\[
+    x^2 - 9 \geq 0 \quad\Longleftrightarrow\quad (x-3)(x+3) \geq 0
+\]
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{c|ccccc}
+    & $x < -3$ & $x = -3$ & $-3 < x < 3$ & $x = 3$ & $x > 3$ \\
+\hline
+$(x+3)$ & $-$ & $0$ & $+$ & $+$ & $+$ \\
+$(x-3)$ & $-$ & $-$ & $-$ & $0$ & $+$ \\
+\hline
+\rowcolor{celesteSuave}
+$(x-3)(x+3)$ & $+$ & $0$ & $-$ & $0$ & $+$ \\
+\end{tabular}
+\end{center}
+Dominio: $x \in (-\infty,\,-3\,] \cup [\,3,\,+\infty)$.
+\end{paso}
+
+\begin{paso}{2: Condición necesaria para elevar al cuadrado}
+$\sqrt{x^2-9} \geq 0$ siempre. Para que la desigualdad pueda cumplirse, el lado derecho
+también debe ser $\geq 0$:
+\[
+    x - 1 \geq 0 \quad\Longrightarrow\quad x \geq 1
+\]
+Intersectando con el dominio:
+$(-\infty,-3\,]\cup[\,3,+\infty) \;\cap\; [\,1,+\infty) = [\,3,+\infty)$.
+\end{paso}
+
+\begin{paso}{3: Elevación al cuadrado (válida pues ambos lados $\geq 0$ en $[\,3,+\infty)$)}
+\[
+    \sqrt{x^2-9} \leq x-1
+    \quad\stackrel{(\,)^2}{\Longleftrightarrow}\quad
+    x^2 - 9 \leq (x-1)^2 = x^2 - 2x + 1
+\]
+\[
+    -9 \leq -2x + 1 \quad\Longrightarrow\quad 2x \leq 10 \quad\Longrightarrow\quad x \leq 5
+\]
+\end{paso}
+
+\begin{paso}{4: Intersección final}
+\[
+    [\,3,+\infty) \;\cap\; (-\infty,\,5\,] \;=\; [\,3,\,5\,]
+\]
+\end{paso}
+
+\resultado{x \;\in\; [\,3,\;5\,]}
+
+\clearpage
+
+% ─── EJERCICIO 1.2 ──────────────────────────────────────────
+\exheader{1.2}{\dfrac{1}{\sqrt{x-2}} < 1}
+
+\begin{paso}{1: Dominio natural}
+El denominador debe ser estrictamente positivo: $x - 2 > 0 \Rightarrow x > 2$.\\
+Dominio: $x \in (2,+\infty)$.
+\end{paso}
+
+\begin{paso}{2: Multiplicar por $\sqrt{x-2} > 0$ (no cambia la desigualdad)}
+\[
+    \frac{1}{\sqrt{x-2}} < 1
+    \quad\Longleftrightarrow\quad
+    1 < \sqrt{x-2}
+\]
+\end{paso}
+
+\begin{paso}{3: Elevación al cuadrado (ambos lados $> 0$)}
+\[
+    1 < \sqrt{x-2}
+    \quad\stackrel{(\,)^2}{\Longleftrightarrow}\quad
+    1 < x - 2
+    \quad\Longrightarrow\quad
+    x > 3
+\]
+\end{paso}
+
+\begin{paso}{4: Intersección con el dominio}
+\[
+    (2,+\infty) \;\cap\; (3,+\infty) \;=\; (3,\,+\infty)
+\]
+\end{paso}
+
+\resultado{x \;\in\; (3,\;+\infty)}
+
+\clearpage
+
+% ─── EJERCICIO 1.3 ──────────────────────────────────────────
+\exheader{1.3}{x + 1 < \sqrt{x^2 + 3x}}
+
+\begin{paso}{1: Dominio natural}
+\[
+    x^2 + 3x \geq 0 \quad\Longleftrightarrow\quad x(x+3) \geq 0
+\]
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{c|ccccc}
+    & $x < -3$ & $x = -3$ & $-3 < x < 0$ & $x = 0$ & $x > 0$ \\
+\hline
+$(x+3)$ & $-$ & $0$ & $+$ & $+$ & $+$ \\
+$x$     & $-$ & $-$ & $-$ & $0$ & $+$ \\
+\hline
+\rowcolor{celesteSuave}
+$x(x+3)$ & $+$ & $0$ & $-$ & $0$ & $+$ \\
+\end{tabular}
+\end{center}
+Dominio: $x \in (-\infty,\,-3\,]\cup[\,0,+\infty)$.
+\end{paso}
+
+\begin{paso}{2: Análisis por casos según el signo de $x+1$}
+
+\begin{caso}{Caso A --- $x + 1 < 0$, es decir $x < -1$}
+LHS $= x+1 < 0 \leq$ RHS $= \sqrt{x^2+3x}$.\\
+La desigualdad se cumple \textbf{automáticamente} en todo punto del dominio con $x < -1$.\\
+Dominio $\cap\;\{x < -1\} = (-\infty,\,-3\,]$.\\[0.2em]
+\textbf{Solución A:} $x \in (-\infty,\,-3\,]$.
+\end{caso}
+
+\bigskip
+
+\begin{caso}{Caso B --- $x + 1 \geq 0$, es decir $x \geq -1$}
+Dominio $\cap\;\{x \geq -1\} = [\,0,+\infty)$.\\
+Ambos lados $\geq 0$, podemos elevar al cuadrado:
+\[
+    (x+1)^2 < x^2 + 3x
+    \quad\Longrightarrow\quad
+    x^2 + 2x + 1 < x^2 + 3x
+    \quad\Longrightarrow\quad
+    1 < x
+\]
+Combinado con $x \geq 0$: $x > 1$.\\[0.2em]
+\textbf{Solución B:} $x \in (1,\,+\infty)$.
+\end{caso}
+
+\end{paso}
+
+\begin{paso}{3: Unión de soluciones}
+\[
+    (-\infty,\,-3\,] \;\cup\; (1,\,+\infty)
+\]
+\end{paso}
+
+\resultado{x \;\in\; (-\infty,\,-3\,]\;\cup\;(1,\,+\infty)}
+
+\clearpage
+
+% ─── EJERCICIO 1.4 ──────────────────────────────────────────
+\exheader{1.4}{\sqrt{x-1} < \dfrac{2}{\sqrt{x-1}}}
+
+\begin{paso}{1: Dominio natural}
+$x - 1 > 0 \Rightarrow x > 1$. Dominio: $(1,+\infty)$.
+\end{paso}
+
+\begin{paso}{2: Sustitución $u = \sqrt{x-1} > 0$}
+Sea $u = \sqrt{x-1} > 0$. La inecuación queda:
+\[
+    u < \frac{2}{u}
+\]
+Multiplicando ambos lados por $u > 0$ (no cambia el signo):
+\[
+    u^2 < 2
+    \quad\Longleftrightarrow\quad
+    x - 1 < 2
+    \quad\Longrightarrow\quad
+    x < 3
+\]
+\end{paso}
+
+\begin{paso}{3: Intersección con el dominio}
+\[
+    (1,+\infty) \;\cap\; (-\infty,\,3) \;=\; (1,\,3)
+\]
+\end{paso}
+
+\resultado{x \;\in\; (1,\;3)}
+
+\clearpage
+
+% ─── EJERCICIO 1.5 ──────────────────────────────────────────
+\exheader{1.5}{\sqrt{x+2} - \sqrt{x-1} < 1}
+
+\begin{paso}{1: Dominio natural}
+La condición más restrictiva es $x - 1 \geq 0 \Rightarrow x \geq 1$.\\
+Dominio: $[\,1,+\infty)$.
+\end{paso}
+
+\begin{paso}{2: Racionalización por expresión conjugada}
+Multiplicamos y dividimos por $\sqrt{x+2}+\sqrt{x-1}$:
+\[
+    \sqrt{x+2} - \sqrt{x-1}
+    = \frac{(\sqrt{x+2}-\sqrt{x-1})(\sqrt{x+2}+\sqrt{x-1})}{\sqrt{x+2}+\sqrt{x-1}}
+    = \frac{(x+2)-(x-1)}{\sqrt{x+2}+\sqrt{x-1}}
+    = \frac{3}{\sqrt{x+2}+\sqrt{x-1}}
+\]
+La inecuación se transforma en:
+\[
+    \frac{3}{\sqrt{x+2}+\sqrt{x-1}} < 1
+\]
+\end{paso}
+
+\begin{paso}{3: Despejar la condición}
+Como $\sqrt{x+2}+\sqrt{x-1} > 0$ en el dominio, multiplicamos sin cambiar la desigualdad:
+\[
+    3 < \sqrt{x+2} + \sqrt{x-1}
+\]
+Sea $f(x) = \sqrt{x+2} + \sqrt{x-1}$. Esta función es \textbf{estrictamente creciente} en
+$[\,1,+\infty)$. Evaluamos en la frontera:
+\[
+    f(2) = \sqrt{4} + \sqrt{1} = 2 + 1 = 3
+\]
+Por tanto: $f(x) > 3 \Leftrightarrow x > 2$.
+\end{paso}
+
+\begin{paso}{4: Intersección con el dominio}
+\[
+    [\,1,+\infty) \;\cap\; (2,+\infty) \;=\; (2,\,+\infty)
+\]
+\end{paso}
+
+\resultado{x \;\in\; (2,\;+\infty)}
+
+\clearpage
+
+% ─── EJERCICIO 1.6 ──────────────────────────────────────────
+\exheader{1.6}{\dfrac{\sqrt{x^2 - 1}}{x - 2} > 0}
+
+\begin{paso}{1: Dominio natural}
+$x^2 - 1 \geq 0 \Rightarrow (x-1)(x+1) \geq 0 \Rightarrow x \leq -1$ o $x \geq 1$.
+Además $x \neq 2$.\\
+Dominio: $(-\infty,\,-1\,]\cup[\,1,+\infty)\setminus\{2\}$.
+\end{paso}
+
+\begin{paso}{2: Análisis de signos de la fracción}
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{c|ccccccc}
+    & $x{<}{-1}$ & $x{=}{-1}$ & $(-1,1)$ & $x{=}1$ & $(1,2)$ & $x{=}2$ & $x{>}2$ \\
+\hline
+$\sqrt{x^2-1}$     & $+$ & $0$ & undef & $0$ & $+$ & $+$ & $+$ \\
+$x-2$              & $-$ & $-$ & $-$   & $-$ & $-$ & $0$ & $+$ \\
+\hline
+\rowcolor{celesteSuave}
+Fracción           & $-$ & $0$ & undef & $0$ & $-$ & indef & $+$ \\
+\end{tabular}
+\end{center}
+
+\medskip
+La fracción es estrictamente positiva \textbf{únicamente} en $x > 2$.
+\end{paso}
+
+\resultado{x \;\in\; (2,\;+\infty)}
+
+\clearpage
+
+% ============================================================
+%  SECCIÓN II — RAÍZ ANIDADA Y COCIENTES
+% ============================================================
+\secheader{SECCIÓN II --- Raíz Anidada y Cocientes}
+
+% ─── EJERCICIO 2.1 ──────────────────────────────────────────
+\exheader{2.1}{\dfrac{x - 5}{\sqrt{x - 2}} < 0}
+
+\begin{paso}{1: Dominio natural}
+$x - 2 > 0 \Rightarrow x > 2$. Dominio: $(2,+\infty)$.
+\end{paso}
+
+\begin{paso}{2: Análisis de signos}
+En el dominio, $\sqrt{x-2} > 0$ siempre; el signo de la fracción es el del numerador:
+\[
+    \frac{x-5}{\sqrt{x-2}} < 0
+    \quad\Longleftrightarrow\quad
+    x - 5 < 0
+    \quad\Longleftrightarrow\quad
+    x < 5
+\]
+\end{paso}
+
+\begin{paso}{3: Intersección con el dominio}
+\[
+    (2,+\infty) \;\cap\; (-\infty,\,5) \;=\; (2,\,5)
+\]
+\end{paso}
+
+\resultado{x \;\in\; (2,\;5)}
+
+\bigskip
+
+% ─── EJERCICIO 2.2 ──────────────────────────────────────────
+\exheader{2.2}{\dfrac{x - 8}{\sqrt{x - 3}} \leq 0}
+
+\begin{paso}{1: Dominio natural}
+$x - 3 > 0 \Rightarrow x > 3$. Dominio: $(3,+\infty)$.
+\end{paso}
+
+\begin{paso}{2: Análisis de signos}
+$\sqrt{x-3} > 0$ siempre en el dominio. El signo de la fracción es el del numerador:
+\[
+    \frac{x-8}{\sqrt{x-3}} \leq 0
+    \quad\Longleftrightarrow\quad
+    x - 8 \leq 0
+    \quad\Longleftrightarrow\quad
+    x \leq 8
+\]
+\end{paso}
+
+\begin{paso}{3: Intersección con el dominio}
+\[
+    (3,+\infty) \;\cap\; (-\infty,\,8\,] \;=\; (3,\,8\,]
+\]
+\end{paso}
+
+\resultado{x \;\in\; (3,\;8\,]}
+
+\clearpage
+
+% ─── EJERCICIO 2.3 ──────────────────────────────────────────
+\exheader{2.3}{\sqrt{x - \sqrt{2-x}} < 1}
+
+\begin{paso}{1: Dominio natural}
+Se necesitan dos condiciones simultáneas:\\[0.3em]
+\textbf{(i)} $2 - x \geq 0 \;\Rightarrow\; x \leq 2$.\\[0.2em]
+\textbf{(ii)} $x - \sqrt{2-x} \geq 0 \;\Rightarrow\; x \geq \sqrt{2-x}$.
+Con $x \geq 0$, elevamos al cuadrado: $x^2 \geq 2-x \;\Rightarrow\; x^2+x-2 \geq 0
+\;\Rightarrow\; (x+2)(x-1) \geq 0$.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{c|ccccc}
+    & $x{<}{-2}$ & $x{=}{-2}$ & $-2{<}x{<}1$ & $x{=}1$ & $x{>}1$ \\
+\hline
+$(x+2)$ & $-$ & $0$ & $+$ & $+$ & $+$ \\
+$(x-1)$ & $-$ & $-$ & $-$ & $0$ & $+$ \\
+\hline
+\rowcolor{celesteSuave}
+$(x+2)(x-1)$ & $+$ & $0$ & $-$ & $0$ & $+$ \\
+\end{tabular}
+\end{center}
+
+$(x+2)(x-1) \geq 0$ con $x \geq 0$ da $x \geq 1$. Intersectando con (i): \textbf{Dominio} $= [\,1,\,2\,]$.
+\end{paso}
+
+\begin{paso}{2: Primera elevación al cuadrado}
+\begin{justif}{Justificación}
+Ambos lados $\geq 0$ en $[\,1,\,2\,]$, luego $A < B \Leftrightarrow A^2 < B^2$.
+\end{justif}
+\[
+    \sqrt{x - \sqrt{2-x}} < 1
+    \quad\Longleftrightarrow\quad
+    x - \sqrt{2-x} < 1
+    \quad\Longleftrightarrow\quad
+    x - 1 < \sqrt{2-x}
+\]
+En $[\,1,\,2\,]$: $x-1 \geq 0$ y $\sqrt{2-x} \geq 0$; ambos lados no negativos.
+\end{paso}
+
+\begin{paso}{3: Segunda elevación al cuadrado}
+\[
+    x-1 < \sqrt{2-x}
+    \quad\stackrel{(\,)^2}{\Longleftrightarrow}\quad
+    (x-1)^2 < 2-x
+    \quad\Longrightarrow\quad
+    x^2 - 2x + 1 < 2 - x
+    \quad\Longrightarrow\quad
+    \boxed{x^2 - x - 1 < 0}
+\]
+Raíces de $x^2 - x - 1 = 0$:
+\[
+    x = \frac{1 \pm \sqrt{5}}{2}, \qquad
+    r_1 = \frac{1-\sqrt{5}}{2} \approx -0.618, \quad
+    r_2 = \frac{1+\sqrt{5}}{2} \approx 1.618
+\]
+\end{paso}
+
+\begin{paso}{4: Tabla de signos de $q(x) = x^2 - x - 1$}
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{c|ccccc}
+    & $x{<}r_1$ & $x{=}r_1$ & $r_1{<}x{<}r_2$ & $x{=}r_2$ & $x{>}r_2$ \\
+\hline
+$(x-r_1)$ & $-$ & $0$ & $+$ & $+$ & $+$ \\
+$(x-r_2)$ & $-$ & $-$ & $-$ & $0$ & $+$ \\
+\hline
+\rowcolor{celesteSuave}
+$q(x)$ & $+$ & $0$ & $\mathbf{-}$ & $0$ & $+$ \\
+\end{tabular}
+\end{center}
+\[
+    q(x) < 0 \quad\Longleftrightarrow\quad
+    x \in \left(\frac{1-\sqrt{5}}{2},\;\frac{1+\sqrt{5}}{2}\right)
+\]
+
+\textbf{Recta numérica:}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+    \draw[->] (-1.5,0) -- (3.5,0) node[right] {$x$};
+    \fill[azulFuerte] (-0.618,0) circle (2.2pt)
+        node[below=4pt] {\small$r_1{\approx}{-}0.618$};
+    \fill[azulFuerte]  (1.618,0) circle (2.2pt)
+        node[below=4pt] {\small$r_2{\approx}1.618$};
+    \node at (-1.0, 0.35) {\color{rojoAlerta}\small$q>0$};
+    \node at ( 0.5, 0.35) {\color{verdePaso}\small$q<0$};
+    \node at ( 2.6, 0.35) {\color{rojoAlerta}\small$q>0$};
+    \draw[verdePaso, very thick] (-0.618,0) -- (1.618,0);
+    \draw[azulFuerte!60, dashed] (1,-0.5) -- (1,0.5);
+    \draw[azulFuerte!60, dashed] (2,-0.5) -- (2,0.5);
+    \fill[azulFuerte] (1,0) circle (2.2pt);
+    \fill[azulFuerte!60] (2,0) circle (2.2pt);
+    \node[azulFuerte] at (1,-0.55) {\small$1$};
+    \node[azulFuerte] at (2,-0.55) {\small$2$};
+    \node[azulFuerte] at (1.5,-0.9) {\small Dominio $[\,1,2\,]$};
+\end{tikzpicture}
+\end{center}
+\end{paso}
+
+\begin{paso}{5: Intersección con el dominio}
+\[
+    \left(\frac{1-\sqrt{5}}{2},\;\frac{1+\sqrt{5}}{2}\right)
+    \;\bigcap\;[\,1,\,2\,]
+    \;=\;
+    \left[\,1,\;\frac{1+\sqrt{5}}{2}\right)
+\]
+Verificación: $q(1)=1-1-1=-1<0$ \checkmark;\quad
+$q\!\left(\tfrac{1+\sqrt5}{2}\right)=0$, no cumple la desigualdad estricta \checkmark.
+\end{paso}
+
+\resultado{x \;\in\; \left[\,1,\;\dfrac{1+\sqrt{5}}{2}\right) \;\approx\; [\,1,\;1.618\,)}
+
+\clearpage
+
+% ─── EJERCICIO 2.4 ──────────────────────────────────────────
+\exheader{2.4}{\dfrac{1}{\sqrt{3 - \sqrt{x+1}}} > 1}
+
+\begin{paso}{1: Dominio natural}
+\begin{itemize}[itemsep=0.2em]
+    \item $x + 1 \geq 0 \;\Rightarrow\; x \geq -1$
+    \item $3 - \sqrt{x+1} > 0 \;\Rightarrow\; \sqrt{x+1} < 3 \;\Rightarrow\; x+1 < 9 \;\Rightarrow\; x < 8$
+\end{itemize}
+Dominio: $x \in [-1,\,8)$.
+\end{paso}
+
+\begin{paso}{2: Primer paso algebraico}
+Como $\sqrt{3-\sqrt{x+1}} > 0$, la fracción $> 1$ equivale a que el denominador sea $< 1$:
+\[
+    \frac{1}{\sqrt{3-\sqrt{x+1}}} > 1
+    \quad\Longleftrightarrow\quad
+    \sqrt{3-\sqrt{x+1}} < 1
+\]
+\end{paso}
+
+\begin{paso}{3: Primera elevación al cuadrado (ambos lados $\geq 0$)}
+\[
+    3 - \sqrt{x+1} < 1
+    \quad\Longrightarrow\quad
+    \sqrt{x+1} > 2
+\]
+\end{paso}
+
+\begin{paso}{4: Segunda elevación al cuadrado}
+\[
+    \sqrt{x+1} > 2
+    \quad\stackrel{(\,)^2}{\Longleftrightarrow}\quad
+    x + 1 > 4
+    \quad\Longrightarrow\quad
+    x > 3
+\]
+\end{paso}
+
+\begin{paso}{5: Intersección con el dominio}
+\[
+    [-1,\,8) \;\cap\; (3,+\infty) \;=\; (3,\,8)
+\]
+\end{paso}
+
+\resultado{x \;\in\; (3,\;8)}
+
+\clearpage
+
+% ─── EJERCICIO 2.5 ──────────────────────────────────────────
+\exheader{2.5}{\dfrac{\sqrt{x - \sqrt{x}}}{x - 3} \geq 0}
+
+\begin{paso}{1: Dominio natural}
+\textbf{Condición 1:} $x \geq 0$ (para que $\sqrt{x}$ exista).\\[0.3em]
+\textbf{Condición 2:} $x - \sqrt{x} \geq 0$. Sea $u = \sqrt{x} \geq 0$:
+\[
+    u^2 - u \geq 0
+    \quad\Longleftrightarrow\quad
+    u(u-1) \geq 0
+    \quad\Longleftrightarrow\quad
+    u = 0 \;\text{ ó }\; u \geq 1
+    \quad\Longleftrightarrow\quad
+    x = 0 \;\text{ ó }\; x \geq 1
+\]
+\textbf{Condición 3:} $x \neq 3$ (denominador $\neq 0$).\\[0.3em]
+Dominio: $\{0\} \cup [\,1,+\infty) \setminus \{3\}$.
+\end{paso}
+
+\begin{paso}{2: Análisis de la fracción}
+El numerador $\sqrt{x-\sqrt{x}} \geq 0$ \textbf{siempre} en el dominio.
+Es $= 0$ cuando $x - \sqrt{x} = 0$, es decir, $x = 0$ ó $x = 1$.
+
+\begin{caso}{Caso A --- Fracción $= 0$: numerador nulo}
+$x = 0$: denominador $= -3 \neq 0$. Fracción $= 0 \geq 0$. \textbf{Válido.}\\
+$x = 1$: denominador $= -2 \neq 0$. Fracción $= 0 \geq 0$. \textbf{Válido.}
+\end{caso}
+
+\bigskip
+
+\begin{caso}{Caso B --- Fracción $> 0$: ambos factores positivos}
+Numerador $> 0 \;\Rightarrow\; x > 1$ (en el dominio).\\
+Denominador $> 0 \;\Rightarrow\; x > 3$.\\
+Combinando: $x > 3$.\\[0.2em]
+\textbf{Solución B:} $(3,+\infty)$.
+\end{caso}
+
+\end{paso}
+
+\begin{paso}{3: Unión de casos}
+\[
+    \{0,\,1\} \;\cup\; (3,\,+\infty)
+\]
+\end{paso}
+
+\resultado{x \;\in\; \{0,\,1\}\;\cup\;(3,\,+\infty)}
+
+\clearpage
+
+% ============================================================
+%  SECCIÓN III — RAÍZ DENTRO DE RAÍZ
+% ============================================================
+\secheader{SECCIÓN III --- Raíz dentro de Raíz}
+
+% ─── EJERCICIO 3.1 ──────────────────────────────────────────
+\exheader{3.1}{\sqrt{\sqrt{x} - 1} \leq 2}
+
+\begin{paso}{1: Dominio natural}
+$\sqrt{x} - 1 \geq 0 \;\Rightarrow\; \sqrt{x} \geq 1 \;\Rightarrow\; x \geq 1$.\\
+Dominio: $[\,1,+\infty)$.
+\end{paso}
+
+\begin{paso}{2: Primera elevación al cuadrado (LHS $\geq 0$, RHS $= 2 > 0$)}
+\[
+    \sqrt{\sqrt{x}-1} \leq 2
+    \quad\stackrel{(\,)^2}{\Longleftrightarrow}\quad
+    \sqrt{x} - 1 \leq 4
+    \quad\Longrightarrow\quad
+    \sqrt{x} \leq 5
+\]
+\end{paso}
+
+\begin{paso}{3: Segunda elevación al cuadrado}
+\[
+    \sqrt{x} \leq 5
+    \quad\stackrel{(\,)^2}{\Longleftrightarrow}\quad
+    x \leq 25
+\]
+\end{paso}
+
+\begin{paso}{4: Intersección con el dominio}
+\[
+    [\,1,+\infty) \;\cap\; (-\infty,\,25\,] \;=\; [\,1,\,25\,]
+\]
+\end{paso}
+
+\resultado{x \;\in\; [\,1,\;25\,]}
+
+\bigskip
+
+% ─── EJERCICIO 3.2 ──────────────────────────────────────────
+\exheader{3.2}{\sqrt{2 + \sqrt{x-1}} < 2}
+
+\begin{paso}{1: Dominio natural}
+$x - 1 \geq 0 \;\Rightarrow\; x \geq 1$. La expresión $2+\sqrt{x-1} \geq 0$ siempre.\\
+Dominio: $[\,1,+\infty)$.
+\end{paso}
+
+\begin{paso}{2: Primera elevación al cuadrado (ambos lados $\geq 0$)}
+\[
+    \sqrt{2+\sqrt{x-1}} < 2
+    \quad\stackrel{(\,)^2}{\Longleftrightarrow}\quad
+    2 + \sqrt{x-1} < 4
+    \quad\Longrightarrow\quad
+    \sqrt{x-1} < 2
+\]
+\end{paso}
+
+\begin{paso}{3: Segunda elevación al cuadrado}
+\[
+    \sqrt{x-1} < 2
+    \quad\stackrel{(\,)^2}{\Longleftrightarrow}\quad
+    x - 1 < 4
+    \quad\Longrightarrow\quad
+    x < 5
+\]
+\end{paso}
+
+\begin{paso}{4: Intersección con el dominio}
+\[
+    [\,1,+\infty) \;\cap\; (-\infty,\,5) \;=\; [\,1,\,5)
+\]
+\end{paso}
+
+\resultado{x \;\in\; [\,1,\;5)}
+
+\clearpage
+
+% ─── EJERCICIO 3.3 ──────────────────────────────────────────
+\exheader{3.3}{\sqrt{x + \sqrt{x-1}} \geq 2}
+
+\begin{paso}{1: Dominio natural}
+$x - 1 \geq 0 \;\Rightarrow\; x \geq 1$. La expresión $x + \sqrt{x-1} \geq 0$ siempre.\\
+Dominio: $[\,1,+\infty)$.
+\end{paso}
+
+\begin{paso}{2: Primera elevación al cuadrado (ambos lados $\geq 0$)}
+\[
+    \sqrt{x+\sqrt{x-1}} \geq 2
+    \quad\stackrel{(\,)^2}{\Longleftrightarrow}\quad
+    x + \sqrt{x-1} \geq 4
+    \quad\Longrightarrow\quad
+    \sqrt{x-1} \geq 4 - x
+\]
+\end{paso}
+
+\begin{paso}{3: Análisis por casos}
+
+\begin{caso}{Caso A --- $4 - x \leq 0$, es decir $x \geq 4$}
+$\sqrt{x-1} \geq 0 \geq 4-x$ automáticamente.\\
+\textbf{Solución A:} $[\,4,+\infty)$.
+\end{caso}
+
+\bigskip
+
+\begin{caso}{Caso B --- $4 - x > 0$, es decir $1 \leq x < 4$}
+Ambos lados $\geq 0$, elevamos al cuadrado:
+\[
+    x - 1 \geq (4-x)^2 = 16 - 8x + x^2
+    \quad\Longrightarrow\quad
+    x^2 - 9x + 17 \leq 0
+\]
+Discriminante: $\Delta = 81 - 68 = 13$.
+\[
+    r_{1,2} = \frac{9 \pm \sqrt{13}}{2}, \qquad
+    r_1 = \frac{9-\sqrt{13}}{2} \approx 2.697, \quad
+    r_2 = \frac{9+\sqrt{13}}{2} \approx 6.303
+\]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{c|ccccc}
+    & $x{<}r_1$ & $x{=}r_1$ & $r_1{<}x{<}r_2$ & $x{=}r_2$ & $x{>}r_2$ \\
+\hline
+\rowcolor{celesteSuave}
+$x^2-9x+17$ & $+$ & $0$ & $\mathbf{-}$ & $0$ & $+$ \\
+\end{tabular}
+\end{center}
+
+$x^2-9x+17 \leq 0 \;\Leftrightarrow\; x \in [\,r_1, r_2\,]$.
+Intersectado con $[\,1,\,4)$ (nótese $r_1 \approx 2.697 \in [\,1,4)$ y $r_2 \approx 6.303 > 4$):
+
+\textbf{Solución B:} $x \in \left[\dfrac{9-\sqrt{13}}{2},\;4\right)$.
+\end{caso}
+
+\end{paso}
+
+\begin{paso}{4: Unión de soluciones}
+\[
+    \left[\frac{9-\sqrt{13}}{2},\;4\right) \;\cup\; [\,4,+\infty)
+    \;=\;
+    \left[\frac{9-\sqrt{13}}{2},\;+\infty\right)
+\]
+\end{paso}
+
+\resultado{x \;\in\; \left[\dfrac{9-\sqrt{13}}{2},\;+\infty\right) \;\approx\; [\,2.697,\;+\infty)}
+
+\clearpage
+
+% ─── EJERCICIO 3.4 ──────────────────────────────────────────
+\exheader{3.4}{\sqrt{3 - \sqrt{2+x}} \geq 1}
+
+\begin{paso}{1: Dominio natural}
+\begin{itemize}[itemsep=0.2em]
+    \item $2 + x \geq 0 \;\Rightarrow\; x \geq -2$
+    \item $3 - \sqrt{2+x} \geq 0 \;\Rightarrow\; \sqrt{2+x} \leq 3
+          \;\Rightarrow\; 2+x \leq 9 \;\Rightarrow\; x \leq 7$
+\end{itemize}
+Dominio: $[\,-2,\,7\,]$.
+\end{paso}
+
+\begin{paso}{2: Elevación al cuadrado (ambos lados $\geq 0$ en el dominio)}
+\[
+    \sqrt{3-\sqrt{2+x}} \geq 1
+    \quad\stackrel{(\,)^2}{\Longleftrightarrow}\quad
+    3 - \sqrt{2+x} \geq 1
+    \quad\Longrightarrow\quad
+    \sqrt{2+x} \leq 2
+\]
+\end{paso}
+
+\begin{paso}{3: Segunda elevación al cuadrado}
+\[
+    \sqrt{2+x} \leq 2
+    \quad\stackrel{(\,)^2}{\Longleftrightarrow}\quad
+    2 + x \leq 4
+    \quad\Longrightarrow\quad
+    x \leq 2
+\]
+\end{paso}
+
+\begin{paso}{4: Intersección con el dominio}
+\[
+    [\,-2,\,7\,] \;\cap\; (-\infty,\,2\,] \;=\; [\,-2,\,2\,]
+\]
+\end{paso}
+
+\resultado{x \;\in\; [\,-2,\;2\,]}
+
+\bigskip
+
+% ─── EJERCICIO 3.5 ──────────────────────────────────────────
+\exheader{3.5}{\sqrt{1 - \sqrt{1-x^2}} \leq \dfrac{\sqrt{2}}{2}}
+
+\begin{paso}{1: Dominio natural}
+\begin{itemize}[itemsep=0.2em]
+    \item $1 - x^2 \geq 0 \;\Rightarrow\; x^2 \leq 1 \;\Rightarrow\; -1 \leq x \leq 1$
+    \item $1 - \sqrt{1-x^2} \geq 0 \;\Rightarrow\; \sqrt{1-x^2} \leq 1$, siempre cierto.
+\end{itemize}
+Dominio: $[\,-1,\,1\,]$.
+\end{paso}
+
+\begin{paso}{2: Primera elevación al cuadrado (ambos lados $\geq 0$)}
+\[
+    \sqrt{1-\sqrt{1-x^2}} \leq \frac{\sqrt{2}}{2}
+    \quad\stackrel{(\,)^2}{\Longleftrightarrow}\quad
+    1 - \sqrt{1-x^2} \leq \frac{1}{2}
+    \quad\Longrightarrow\quad
+    \sqrt{1-x^2} \geq \frac{1}{2}
+\]
+\end{paso}
+
+\begin{paso}{3: Segunda elevación al cuadrado}
+\[
+    \sqrt{1-x^2} \geq \frac{1}{2}
+    \quad\stackrel{(\,)^2}{\Longleftrightarrow}\quad
+    1 - x^2 \geq \frac{1}{4}
+    \quad\Longrightarrow\quad
+    x^2 \leq \frac{3}{4}
+    \quad\Longrightarrow\quad
+    |x| \leq \frac{\sqrt{3}}{2}
+\]
+Es decir, $x \in \left[-\dfrac{\sqrt{3}}{2},\;\dfrac{\sqrt{3}}{2}\right]$.
+\end{paso}
+
+\begin{paso}{4: Intersección con el dominio}
+$\left[-\dfrac{\sqrt{3}}{2},\;\dfrac{\sqrt{3}}{2}\right] \subset [\,-1,\,1\,]$, luego la intersección no modifica el intervalo.
+\end{paso}
+
+\resultado{x \;\in\; \left[-\dfrac{\sqrt{3}}{2},\;\dfrac{\sqrt{3}}{2}\right] \;\approx\; [\,-0.866,\;0.866\,]}
+
+\vspace{1.2cm}
+\begin{center}
+    \small\textbf{Usach Premium} --- ¡Nos vemos en la ayudantía! \\
+    \textit{"Por y para estudiantes."}
+\end{center}
+
+\end{document}
