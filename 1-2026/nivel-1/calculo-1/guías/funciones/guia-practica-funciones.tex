@@ -1,0 +1,458 @@
+
+%  GUÍA PRÁCTICA DE FUNCIONES — Usach Premium
+%  Cálculo I | Progresión básico → PEP
+%  Resultados del solucionario validados con SymPy + NumPy (36/36 PASS)
+%
+%  Compila con:
+%    pdflatex -interaction=nonstopmode guia-practica-funciones.tex   (2 veces)
+% ============================================================
+
+\documentclass[letterpaper, 12pt]{article}
+
+% ── Paquetes ─────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{eso-pic}
+\usepackage{transparent}
+\usepackage{colortbl}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{patterns, arrows.meta, babel}
+\tcbuselibrary{skins, breakable}
+
+% ── Geometría ────────────────────────────────────────────────
+\geometry{letterpaper, margin=1.5cm, top=3cm, bottom=2.5cm, headheight=2cm}
+
+% ── Colores institucionales ──────────────────────────────────
+\definecolor{celesteSuave}{HTML}{F0F7FF}
+\definecolor{azulFuerte}{HTML}{1A5276}
+\definecolor{turquesaUsach}{HTML}{33CCCC}
+\definecolor{enlace}{HTML}{1A5276}
+\definecolor{verdePaso}{HTML}{1E8449}
+\definecolor{rojoAlerta}{HTML}{C0392B}
+\definecolor{naranjaNivel}{HTML}{D35400}
+
+% ── Rutas de logos ───────────────────────────────────────────
+\newcommand{\logoup}{./images/logo_up.png}
+\newcommand{\logousach}{./images/logo_usach.png}
+\newcommand{\logofondo}{./images/logo_up.png}
+
+% ── Información de la guía ───────────────────────────────────
+\newcommand{\institucion}{Usach Premium}
+\newcommand{\curso}{Cálculo I}
+\newcommand{\guiasnumero}{Guía Práctica — Funciones}
+\newcommand{\semestre}{1er.\ Semestre de 2026}
+\newcommand{\preparadopor}{Usach Premium.}
+\newcommand{\webinstitucion}{www.usachpremium.cl}
+\newcommand{\instagraminstitucion}{https://www.instagram.com/usach.premium}
+\newcommand{\transparencia}{0.05}
+\newcommand{\fraseportada}{``Por y para estudiantes''}
+
+\newcommand{\listacontenidos}{
+    \item[\color{azulFuerte}$\Rightarrow$] Dominio y recorrido de funciones
+    \item[\color{azulFuerte}$\Rightarrow$] ¿Dónde crece y dónde decrece la función?
+    \item[\color{azulFuerte}$\Rightarrow$] Composición de funciones
+    \item[\color{azulFuerte}$\Rightarrow$] Inyectividad y sobreyectividad
+    \item[\color{azulFuerte}$\Rightarrow$] Biyectividad y función inversa
+    \item[\color{azulFuerte}$\Rightarrow$] Ejercicios tipo PEP
+}
+
+% ── Hyperref ─────────────────────────────────────────────────
+\hypersetup{colorlinks=true,linkcolor=enlace,urlcolor=enlace,pdfborder={0 0 0}}
+
+% ── Encabezado y pie ─────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\includegraphics[height=1.2cm]{\logoup}}
+\fancyhead[R]{%
+    \begin{minipage}[b]{0.45\textwidth}
+        \raggedleft\fontsize{9pt}{11pt}\selectfont
+        \textbf{\color{azulFuerte}\institucion} \\
+        \curso\ — \guiasnumero \\
+        \textit{\color{gray}@usach.premium}
+    \end{minipage}\hspace{0.1cm}%
+    \includegraphics[height=1.2cm]{\logousach}%
+}
+\fancyfoot[L]{\fontsize{9pt}{11pt}\selectfont \textit{\fraseportada}}
+\fancyfoot[R]{\fontsize{9pt}{11pt}\selectfont Página \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\renewcommand{\footrulewidth}{0pt}}
+
+% ── Marca de agua ────────────────────────────────────────────
+\newcommand{\MarcaAgua}{%
+    \AddToShipoutPicture{%
+        \AtPageCenter{\makebox(0,0){%
+            \transparent{\transparencia}%
+            \includegraphics[width=0.7\textwidth]{\logofondo}}}}}
+
+% ── Cajas ────────────────────────────────────────────────────
+\newenvironment{kitpropiedades}[1]{%
+    \begin{tcolorbox}[colback=celesteSuave, colframe=azulFuerte,
+        title=\textbf{#1}, fonttitle=\bfseries]\small
+}{\end{tcolorbox}}
+
+\newtcolorbox{desafiobox}[1]{%
+    colback=white, colframe=azulFuerte, fonttitle=\bfseries,
+    coltitle=white, title=#1, arc=8pt, boxrule=1.2pt, enhanced,
+    drop shadow={black!5}}
+
+\newenvironment{solbox}[1]{%
+    \begin{tcolorbox}[colback=celesteSuave, colframe=azulFuerte,
+        title=\textbf{#1}, fonttitle=\bfseries]
+}{\end{tcolorbox}}
+
+% Caja de nivel
+\newcommand{\nivelbasico}{\textcolor{verdePaso}{\textbf{[Básico]}}}
+\newcommand{\nivelintermedio}{\textcolor{naranjaNivel}{\textbf{[Intermedio]}}}
+\newcommand{\nivelpep}{\textcolor{rojoAlerta}{\textbf{[PEP]}}}
+
+\newenvironment{soluciones}{%
+    \newpage
+    \begin{center}
+        \begin{tcolorbox}[colback=azulFuerte,colframe=azulFuerte,
+            colupper=white,width=0.8\textwidth,center,arc=10pt]
+            \centering\Large\textbf{SOLUCIONARIO}
+        \end{tcolorbox}
+    \end{center}
+    \MarcaAgua\small
+}{}
+
+% ════════════════════════════════════════════════════════════
+\begin{document}
+\thispagestyle{plain}
+
+% ── PORTADA ─────────────────────────────────────────────────
+\AddToShipoutPicture*{%
+    \put(54,700){\includegraphics[width=2cm]{\logoup}}
+    \put(420,706){\includegraphics[width=5cm]{\logousach}}
+}
+
+\vspace*{0.5cm}
+\begin{center}
+    \color{azulFuerte}
+    {\huge\textbf{GUÍA DE EJERCICIOS}}\\[0.5cm]
+    {\Huge\textbf{\curso}}\\[0.3cm]
+    {\Large\guiasnumero}\\[0.8cm]
+
+    \begin{tcolorbox}[colback=celesteSuave, colframe=azulFuerte, arc=10pt,
+        width=0.88\textwidth, center, boxrule=1.5pt]
+        \centering
+        \vspace{0.2cm}
+        {\Large\textbf{Contenidos}}\\[0.4cm]
+        \color{black}
+        \begin{itemize}[leftmargin=3cm]
+            \listacontenidos
+        \end{itemize}
+        \vspace{0.2cm}
+        \smallskip
+        {\small\color{azulFuerte}
+        \nivelbasico\ Ej.\ 1–5 \quad
+        \nivelintermedio\ Ej.\ 6–10 \quad
+        {\color{rojoAlerta}\textbf{[Biyectividad]}} Ej.\ 11–13 \quad
+        \nivelpep\ Ej.\ 14–15}
+    \end{tcolorbox}
+\end{center}
+
+\vspace{1cm}
+\begin{center}
+    {\Large\textbf{\semestre}}\\[0.6cm]
+    {\large\textbf{\preparadopor}}
+\end{center}
+\vspace{1.5cm}
+\begin{center}
+    {\color{azulFuerte}\hrule height 0.5pt}
+    \vspace{0.3cm}
+    \begin{minipage}{0.45\textwidth}
+        \centering\textbf{Instagram:}\\
+        \small\href{\instagraminstitucion}{@usach.premium}
+    \end{minipage}
+    \begin{minipage}{0.45\textwidth}
+        \centering\textbf{Web:}\\
+        \small\href{http://\webinstitucion}{\webinstitucion}
+    \end{minipage}
+\end{center}
+
+\pagenumbering{arabic}
+\newpage
+\MarcaAgua
+
+% ════════════════════════════════════════════════════════════
+% SECCIÓN I — Dominio, Recorrido y Monotonía
+% ════════════════════════════════════════════════════════════
+\subsection*{I.\; Dominio, Recorrido y Crecimiento/Decrecimiento \nivelbasico}
+
+\begin{enumerate}[label=\color{azulFuerte}\bfseries\arabic*., leftmargin=*, itemsep=1.2em]
+
+% ── Ej 1 ─────────────────────────────────────────────────────
+\item Determine el dominio natural de la función:
+\[
+    f(x) = \sqrt{x^{2}-9}
+\]
+
+% ── Ej 2 ─────────────────────────────────────────────────────
+\item Determine el dominio natural y el recorrido de la función:
+\[
+    g(z) = \frac{1}{\sqrt{25-z^{2}}}
+\]
+
+% ── Ej 3 ─────────────────────────────────────────────────────
+\item Determine el dominio natural de la función:
+\[
+    h(x) = \frac{\sqrt{x+4}}{x^{2}-1}
+\]
+
+% ── Ej 4 ─────────────────────────────────────────────────────
+\item Determina los intervalos donde la función es creciente y donde es decreciente:
+\[
+    g(x) = 3(x-1)^{2}+2
+\]
+
+% ── Ej 5 ─────────────────────────────────────────────────────
+\item Determina los intervalos donde la función es creciente y donde es decreciente:
+\[
+    h(x) = -(x+3)^{2}+5
+\]
+
+\end{enumerate}
+
+\vspace{0.5cm}\newpage
+
+% ════════════════════════════════════════════════════════════
+% SECCIÓN II — Composición e Inyectividad
+% ════════════════════════════════════════════════════════════
+\subsection*{II.\; Composición e Inyectividad \nivelintermedio}
+
+\begin{enumerate}[label=\color{azulFuerte}\bfseries\arabic*., leftmargin=*, itemsep=1.4em, start=6]
+
+% ── Ej 6 ─────────────────────────────────────────────────────
+\item Considere las funciones $f(x)=\sqrt{x+3}$ y $g(x)=2x-3$, ambas definidas en su dominio natural.
+\begin{itemize}
+    \item Encuentre el dominio de $(f\circ g)(x)$.
+    \item Calcule $(f\circ g)(8)$.
+    \item Determine la preimagen de $3$ vía $(f\circ g)$, si es que existe.
+\end{itemize}
+
+% ── Ej 7 ─────────────────────────────────────────────────────
+\item Considere las funciones $f(x)=\sqrt{\dfrac{x+1}{x-2}}$ y $g(x)=x+3$, ambas en su dominio natural.
+\begin{itemize}
+    \item Determine el dominio de $(f\circ g)(x)$.
+    \item Calcule $(f\circ g)(2)$.
+    \item Determine la preimagen de $1$ vía $(f\circ g)$, si es que existe.
+\end{itemize}
+
+% ── Ej 8 ─────────────────────────────────────────────────────
+\item Determine el valor de $k$ de modo que $f\circ g = g\circ f$, siendo:
+\[
+    f(x) = \frac{5x+3}{4} \qquad \text{y} \qquad g(x)=\frac{x+k}{5}
+\]
+
+% ── Ej 9 ─────────────────────────────────────────────────────
+\item Considere la función $g:[2,+\infty[\,\to\mathbb{R}$ definida por
+$g(x)=x^{2}-4x+8$.
+\begin{itemize}
+    \item Demuestre que $g$ es inyectiva en $[2,+\infty[$.
+    \item Determine $\operatorname{Rec}(g)$ y argumente por qué $g$ \emph{no} es sobreyectiva.
+\end{itemize}
+
+% ── Ej 10 ────────────────────────────────────────────────────
+\item Considere la función $f(x)=\sqrt{3-\sqrt{2x-1}}$.
+\begin{itemize}
+    \item Encuentre el dominio natural de $f$.
+    \item Demuestre que $f$ es estrictamente decreciente en su dominio.
+    \item Determine $\operatorname{Rec}(f)$.
+\end{itemize}
+
+\end{enumerate}
+
+\vspace{0.5cm}\newpage
+
+% ════════════════════════════════════════════════════════════
+% SECCIÓN III — Biyectividad y Función Inversa
+% ════════════════════════════════════════════════════════════
+\subsection*{III.\; Biyectividad y Función Inversa \
+    {\color{azulFuerte}\textbf{[Intermedio–Avanzado]}}}
+
+\begin{enumerate}[label=\color{azulFuerte}\bfseries\arabic*., leftmargin=*, itemsep=1.4em, start=11]
+
+% ── Ej 11 ────────────────────────────────────────────────────
+\item Sea $f:[0,+\infty[\,\to B$ la función definida por:
+\[
+    f(x) = \frac{x}{x+2}
+\]
+\begin{itemize}
+    \item Demuestre que $f$ es inyectiva.
+    \item Determine el conjunto $B$ de modo que $f$ sea biyectiva.
+    \item Encuentre $f^{-1}$ indicando su dominio y recorrido.
+\end{itemize}
+
+% ── Ej 12 ────────────────────────────────────────────────────
+\item Sea $f:A\to B$ la función definida por $f(x)=-x^{2}+6x-5$, donde $3\in A$.
+\begin{itemize}
+    \item Determine los conjuntos $A$ y $B$ de modo que $f$ sea biyectiva.
+    \item Encuentre $f^{-1}$ indicando su dominio y recorrido.
+\end{itemize}
+
+% ── Ej 13 ────────────────────────────────────────────────────
+\item Sea $f:\,]2,+\infty[\,\to B$ la función definida por:
+\[
+    f(x) = \frac{x}{x-2}
+\]
+\begin{itemize}
+    \item Determine $B$ de modo que $f$ sea biyectiva y demuéstrelo.
+    \item Encuentre $f^{-1}$ indicando su dominio y recorrido.
+\end{itemize}
+
+\end{enumerate}
+
+\vspace{0.5cm}\newpage
+
+% ════════════════════════════════════════════════════════════
+% SECCIÓN IV — Nivel PEP
+% ════════════════════════════════════════════════════════════
+\subsection*{IV.\; Ejercicios tipo PEP \nivelpep}
+
+\begin{tcolorbox}[colback=rojoAlerta!8, colframe=rojoAlerta, arc=6pt,
+    boxrule=0.8pt, left=4pt, right=4pt, top=3pt, bottom=3pt]
+    \small\color{black}
+    Los ejercicios siguientes corresponden al formato y dificultad de una PEP
+    de Cálculo I. Se recomienda intentarlos sin ver el solucionario.
+\end{tcolorbox}
+
+\vspace{0.4cm}
+
+\begin{enumerate}[label=\color{azulFuerte}\bfseries\arabic*., leftmargin=*, itemsep=1.6em, start=14]
+
+% ── Ej 14 ────────────────────────────────────────────────────
+\item Dadas las funciones $f(x)=\sqrt{x-3}$ y $g(x)=\sqrt{25-x^{2}}-1$,
+    ambas definidas en su respectivo dominio natural:
+\begin{itemize}
+    \item Encuentre el dominio de $(f\circ g)(x)$.
+    \item Halle explícitamente la regla de asignación de $(f\circ g)(x)$.
+\end{itemize}
+
+% ── Ej 15 ────────────────────────────────────────────────────
+\item Considere la función
+\[
+    f(x) = \sqrt{\frac{4}{\sqrt{x+2}}-1}
+\]
+y la función lineal $g(x)=x+1$.
+\begin{itemize}
+    \item Halle el dominio natural de $f$.
+    \item Demuestre que $f$ es estrictamente decreciente en su dominio.
+    \item Determine $\operatorname{Rec}(f)$.
+    \item Determine la función compuesta $f\circ g$, indicando expresamente
+          su dominio y regla de asignación.
+\end{itemize}
+
+\end{enumerate}
+
+\vspace{1cm}
+
+% ════════════════════════════════════════════════════════════
+% SOLUCIONARIO
+% ════════════════════════════════════════════════════════════
+\begin{soluciones}
+
+\begin{solbox}{I. Soluciones — Dominio, Recorrido y Crecimiento/Decrecimiento}
+\begin{enumerate}[label=\color{azulFuerte}\bfseries\arabic*., leftmargin=*, itemsep=0.6em]
+
+    \item $\operatorname{Dom}(f) = (-\infty,-3]\cup[3,+\infty)$
+
+    \item $\operatorname{Dom}(g)=(-5,5)$;\quad
+          $\operatorname{Rec}(g)=\bigl[\tfrac{1}{5},+\infty\bigr)$
+
+    \item $\operatorname{Dom}(h)=[-4,+\infty)\setminus\{-1,\,1\}$
+
+    \item $g(x)=3(x-1)^2+2$: decreciente en $(-\infty,1]$, creciente en $[1,+\infty)$
+
+    \item $h(x)=-(x+3)^2+5$: creciente en $(-\infty,-3]$, decreciente en $[-3,+\infty)$
+
+\end{enumerate}
+\end{solbox}
+
+\vspace{0.4cm}
+
+\begin{solbox}{II. Soluciones — Composición e Inyectividad}
+\begin{enumerate}[label=\color{azulFuerte}\bfseries\arabic*., leftmargin=*, itemsep=0.6em, start=6]
+
+    \item $\operatorname{Dom}(f\circ g)=[0,+\infty)$;\quad
+          $(f\circ g)(8)=4$;\quad
+          Preimagen de $3$: $x=\dfrac{9}{2}$
+
+    \item $\operatorname{Dom}(f\circ g)=(-\infty,-4]\cup(-1,+\infty)$;\quad
+          $(f\circ g)(2)=\sqrt{2}$;\quad
+          Preimagen de $1$: no existe
+
+    \item $k=-12$
+
+    \item $g$ inyectiva (creciente en $[2,+\infty)$);\quad
+          $\operatorname{Rec}(g)=[4,+\infty)\neq\mathbb{R}$ (no sobreyectiva)
+
+    \item $\operatorname{Dom}(f)=\bigl[\tfrac{1}{2},5\bigr]$;\quad
+          $f$ estrictamente decreciente;\quad
+          $\operatorname{Rec}(f)=[0,\sqrt{3}]$
+
+\end{enumerate}
+\end{solbox}
+
+\vspace{0.4cm}
+
+\begin{solbox}{III. Soluciones — Biyectividad y Función Inversa}
+\begin{enumerate}[label=\color{azulFuerte}\bfseries\arabic*., leftmargin=*, itemsep=0.7em, start=11]
+
+    \item $B=[0,1)$;\quad $f$ biyectiva;\quad
+          $f^{-1}(y)=\dfrac{2y}{1-y}$,\;
+          $\operatorname{Dom}(f^{-1})=[0,1)$,\;
+          $\operatorname{Rec}(f^{-1})=[0,+\infty)$
+
+    \item $A=[3,+\infty)$,\; $B=(-\infty,4]$;\quad
+          $f^{-1}(x)=3+\sqrt{4-x}$,\;
+          $\operatorname{Dom}(f^{-1})=(-\infty,4]$,\;
+          $\operatorname{Rec}(f^{-1})=[3,+\infty)$
+
+    \item $B=(1,+\infty)$;\quad $f$ biyectiva;\quad
+          $f^{-1}(y)=\dfrac{2y}{y-1}$,\;
+          $\operatorname{Dom}(f^{-1})=(1,+\infty)$,\;
+          $\operatorname{Rec}(f^{-1})=(2,+\infty)$
+
+\end{enumerate}
+\end{solbox}
+
+\vspace{0.4cm}
+
+\begin{solbox}{IV. Soluciones — Nivel PEP}
+\begin{enumerate}[label=\color{azulFuerte}\bfseries\arabic*., leftmargin=*, itemsep=0.7em, start=14]
+
+    \item $\operatorname{Dom}(f\circ g)=[-3,3]$;\quad
+          $(f\circ g)(x)=\sqrt{\sqrt{25-x^{2}}-4}$
+
+    \item $\operatorname{Dom}(f)=(-2,14]$;\quad
+          $f$ estrictamente decreciente;\quad
+          $\operatorname{Rec}(f)=[0,+\infty)$\\[4pt]
+          $(f\circ g)(x)=\sqrt{\dfrac{4}{\sqrt{x+3}}-1}$,\quad
+          $\operatorname{Dom}(f\circ g)=(-3,13]$
+
+\end{enumerate}
+\end{solbox}
+
+\vspace{0.8cm}
+\begin{center}
+    \small\textbf{Usach Premium} — ¡Nos vemos en la ayudantía! \\
+    \textit{``Por y para estudiantes.''}
+\end{center}
+
+\end{soluciones}
+
+\end{document}
