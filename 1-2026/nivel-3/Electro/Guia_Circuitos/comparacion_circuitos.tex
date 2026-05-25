@@ -1,0 +1,33 @@
+\documentclass[letterpaper,10pt]{article}
+\usepackage[margin=1cm]{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\usetikzlibrary{arrows.meta,patterns,calc}
+\definecolor{azulFuerte}{HTML}{1A5276}
+\pagestyle{empty}
+
+\newcommand{\comparar}[3]{%
+    \section*{#1}
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \textbf{Original PNG}\\[0.2cm]
+        \includegraphics[width=\textwidth,height=0.34\textheight,keepaspectratio]{#2}
+    \end{minipage}\hfill
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \textbf{Nuevo CircuitikZ}\\[0.2cm]
+        \resizebox{\textwidth}{!}{\input{#3}}
+    \end{minipage}
+    \newpage
+}
+
+\begin{document}
+\comparar{Ejercicio 2}{Imagenes Ejercicios/Ejercicio_2.png}{circuits/ejercicio_2.tex}
+\comparar{Ejercicio 3}{Imagenes Ejercicios/Ejercicio_3.png}{circuits/ejercicio_3.tex}
+\comparar{Ejercicio 4}{Imagenes Ejercicios/Ejercicio_4.png}{circuits/ejercicio_4.tex}
+\comparar{Ejercicio 5.1}{Imagenes Ejercicios/Ejercicio_5_1.png}{circuits/ejercicio_5_1.tex}
+\comparar{Ejercicio 5.2}{Imagenes Ejercicios/Ejercicio_5_2.png}{circuits/ejercicio_5_2.tex}
+\comparar{Ejercicio 6}{Imagenes Ejercicios/Ejercicio_6.png}{circuits/ejercicio_6.tex}
+\end{document}

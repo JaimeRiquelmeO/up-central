@@ -1,0 +1,411 @@
+% ============================================================
+%   PLANTILLA GUÍAS INSTITUCIONALES — USACH PREMIUM (ADAPTADA)
+%   Estructura simplificada para problemas largos de Circuitos
+% ============================================================
+
+\documentclass[letterpaper, 12pt]{article}
+
+% ============================================================
+% PAQUETES
+% ============================================================
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{eso-pic}
+\providecommand\IfPDFManagementActiveF[1]{#1}
+\usepackage{transparent}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{patterns}
+\usetikzlibrary{calc}
+\tcbuselibrary{skins}
+
+% ============================================================
+% GEOMETRÍA
+% ============================================================
+\geometry{letterpaper, margin=1.5cm, top=3cm, bottom=2.5cm, headheight=2cm}
+
+% ============================================================
+% COLORES INSTITUCIONALES
+% ============================================================
+\definecolor{celesteSuave}{HTML}{F0F7FF}
+\definecolor{azulFuerte}{HTML}{1A5276}
+\definecolor{turquesaUsach}{HTML}{33CCCC}
+\definecolor{enlace}{HTML}{1A5276}
+
+% ============================================================
+% RUTAS DE IMÁGENES
+% ============================================================
+\newcommand{\logoup}{./images/logo_up.png}
+\newcommand{\logousach}{./images/logo_usach.png}
+\newcommand{\logofondo}{./images/logo_up.png}
+
+% ============================================================
+% INFORMACIÓN DE LA GUÍA
+% ============================================================
+\newcommand{\institucion}{Usach Premium}
+\newcommand{\curso}{Electromagnetismo} 
+\newcommand{\guiasnumero}{Guía N°2 - Circuitos Eléctricos}
+\newcommand{\semestre}{1er. Semestre de 2026}
+\newcommand{\preparadopor}{Usach Premium.}
+\newcommand{\webinstitucion}{www.usachpremium.cl}
+\newcommand{\instagraminstitucion}{https://www.instagram.com/usach.premium}
+\newcommand{\transparencia}{0.05}
+\newcommand{\fraseportada}{"Por y para estudiantes"}
+
+% Lista de contenidos de la portada
+\newcommand{\listacontenidos}{
+    \item[\color{azulFuerte}$\Rightarrow$] Leyes de Kirchhoff (Nodos y Mallas)
+    \item[\color{azulFuerte}$\Rightarrow$] Circuitos de Corriente Continua (CC)
+    \item[\color{azulFuerte}$\Rightarrow$] Potencia y Energía en Circuitos Eléctricos
+}
+
+% ============================================================
+% HYPERREF
+% ============================================================
+\hypersetup{
+    colorlinks=true,
+    linkcolor=enlace,
+    urlcolor=enlace,
+    citecolor=enlace,
+    pdfborder={0 0 0},
+}
+
+% ============================================================
+% ENCABEZADO Y PIE DE PÁGINA
+% ============================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\includegraphics[height=1.2cm]{\logoup}}
+\fancyhead[R]{%
+    \begin{minipage}[b]{0.42\textwidth}
+        \raggedleft
+        \fontsize{9pt}{11pt}\selectfont
+        \textbf{\color{azulFuerte}\institucion} \\
+        \curso\ — \guiasnumero \\
+        \textit{\color{gray}@usach.premium}
+    \end{minipage}\hspace{0.1cm}%
+    \includegraphics[height=1.2cm]{\logousach}%
+}
+\fancyfoot[L]{\fontsize{9pt}{11pt}\selectfont \textit{\fraseportada}}
+\fancyfoot[R]{\fontsize{9pt}{11pt}\selectfont Página \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+
+% ============================================================
+% MARCA DE AGUA
+% ============================================================
+\newcommand{\MarcaAgua}{
+    \AddToShipoutPicture{
+        \AtPageCenter{
+            \makebox(0,0){%
+                \transparent{\transparencia}%
+                \includegraphics[width=0.7\textwidth]{\logofondo}%
+            }
+        }
+    }
+}
+
+% Cajas de estilo
+\newenvironment{kitpropiedades}[1]{%
+    \begin{tcolorbox}[colback=celesteSuave, colframe=azulFuerte, title=\textbf{#1}, fonttitle=\bfseries]
+}{%
+    \end{tcolorbox}
+}
+
+\newtcolorbox{desafiobox}[1]{
+    colback=white, colframe=azulFuerte, fonttitle=\bfseries, coltitle=white, title=#1,
+    arc=8pt, boxrule=1.2pt, enhanced, drop shadow={black!5}
+}
+
+% Entornos de contenido
+\newenvironment{introduccion}{%
+    \section*{Introducción}%
+    \MarcaAgua
+}{}
+
+\newenvironment{ejercicios}{%
+    \MarcaAgua
+}{}
+
+% ============================================================
+\begin{document}
+\thispagestyle{plain}
+
+% ============================================================
+% PORTADA
+% ============================================================
+\AddToShipoutPicture*{%
+    \put(54, 700){\includegraphics[width=2cm]{\logoup}}
+    \put(420, 706){\includegraphics[width=5cm]{\logousach}}
+}
+
+\vspace*{0.5cm}
+
+\begin{center}
+    \color{azulFuerte}
+    {\huge \textbf{GUÍA DE EJERCICIOS}} \\[0.5cm]
+    {\Huge \textbf{\curso}} \\[0.3cm]
+    {\Large \guiasnumero} \\[1.5cm]
+
+    \begin{tcolorbox}[colback=celesteSuave, colframe=azulFuerte, arc=10pt, width=0.85\textwidth, center, boxrule=1.5pt]
+        \centering
+        \vspace{0.2cm}
+        {\Large \textbf{Contenidos}}
+        \vspace{0.3cm}
+        \color{black}
+        \begin{itemize}[leftmargin=3cm]
+            \listacontenidos
+        \end{itemize}
+        \vspace{0.2cm}
+    \end{tcolorbox}
+\end{center}
+
+\vspace{1.5cm}
+
+\begin{center}
+    {\Large \textbf{\semestre}} \\[0.8cm]
+    {\large \textbf{\preparadopor}}
+\end{center}
+
+\vspace{2cm}
+
+\begin{center}
+    {\color{azulFuerte}\hrule height 0.5pt}
+    \vspace{0.3cm}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \textbf{Instagram:} \\
+        \small\href{\instagraminstitucion}{@usach.premium}
+    \end{minipage}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \textbf{Web:} \\
+        \small\href{http://\webinstitucion}{\webinstitucion}
+    \end{minipage}
+\end{center}
+
+\pagenumbering{arabic}
+\newpage
+% ============================================================
+% INTRODUCCIÓN Y FORMULARIO
+% ============================================================
+\begin{introduccion}
+    ¡Bienvenido a este nuevo material de estudio de UsachPremium! En esta sección abordaremos los principios fundamentales del análisis de circuitos eléctricos, una herramienta esencial para dominar los contenidos que se evaluarán en la PEP 2.
+
+    Comenzaremos analizando el comportamiento de la corriente y la resistencia de los materiales a través de la Ley de Ohm. Luego, expandiremos estas herramientas utilizando las Leyes de Kirchoff para resolver mallas y nodos complejos. Finalmente, estudiaremos los regímenes transitorios en circuitos RC, analizando cómo la carga y la energía fluyen a través de capacitores en el tiempo. El dominio de estos conceptos te permitirá plantear ecuaciones de conservación de manera estructurada y lógica.
+
+    A continuación, se presenta el formulario oficial con las expresiones matemáticas clave que necesitarás tener a mano para resolver los ejercicios de esta guía.
+\end{introduccion}
+
+\vspace{0.8cm} % Un separador visual elegante en lugar de saltar a otra página
+
+% ============================================================
+% KIT DE PROPIEDADES (Fórmulas verticales)
+% ============================================================
+\begin{kitpropiedades}{FORMULARIO DE CIRCUITOS: CORRIENTE Y RESISTENCIA}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*, itemsep=0.4cm]
+    
+    \item \textbf{Corriente media}:
+    $$I_{\text{med}} = \frac{\Delta Q}{\Delta t}$$
+
+    \item \textbf{Corriente instantánea}:
+    $$I = \frac{dQ}{dt}$$
+
+    \item \textbf{Corriente macroscópica (Densidad de corriente)}:
+    $$I = \iint_{S} \vec{J} \cdot d\vec{A}$$
+
+    \item \textbf{Densidad de corriente microscópica}:
+    $$\vec{J} = n q \vec{v}_d$$
+
+    \item \textbf{Ley de Ohm microscópica}:
+    $$\vec{J} = \sigma \vec{E}$$
+
+    \item \textbf{Resistencia de un conductor uniforme}:
+    $$R = \rho \frac{L}{A}$$
+
+\end{enumerate}
+\end{kitpropiedades}
+
+\vspace{0.4cm}
+
+\begin{kitpropiedades}{FORMULARIO DE CIRCUITOS: LEY DE OHM Y KIRCHHOFF}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*, itemsep=0.4cm]
+    \setcounter{enumi}{6} % Continúa la numeración desde el 7
+
+    \item \textbf{Ley de Ohm macroscópica}:
+    $$\Delta V = I R$$
+
+    \item \textbf{Potencia eléctrica (Efecto Joule)}:
+    $$P = \Delta V I = I^2 R = \frac{\Delta V^2}{R}$$
+
+    \item \textbf{Fuerza Electromotriz (FEM)}:
+    $$\varepsilon = \oint \vec{E} \cdot d\vec{l}$$
+
+    \item \textbf{Ley de Corrientes de Kirchhoff (Nodos)}:
+    $$\sum I_{\text{entrantes}} = \sum I_{\text{salientes}}$$
+
+    \item \textbf{Ley de Voltajes de Kirchhoff (Mallas)}:
+    $$\sum \Delta V = 0$$
+
+\end{enumerate}
+\end{kitpropiedades}
+
+\vspace{0.4cm}
+
+\begin{kitpropiedades}{FORMULARIO DE CIRCUITOS: RÉGIMEN TRANSITORIO RC}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*, itemsep=0.4cm]
+    \setcounter{enumi}{11}
+
+    \item \textbf{Constante de tiempo capacitiva}:
+    $$\tau = R C$$
+
+    \item \textbf{Carga de un condensador}:
+    $$q(t) = C\varepsilon \left(1 - e^{-\frac{t}{RC}}\right)$$
+
+    \item \textbf{Corriente en la carga}:
+    $$I(t) = \frac{\varepsilon}{R} e^{-\frac{t}{RC}}$$
+
+    \item \textbf{Descarga de un condensador}:
+    $$q(t) = Q_0 e^{-\frac{t}{RC}}$$
+
+\end{enumerate}
+\end{kitpropiedades}
+% ============================================================
+% EJERCICIOS
+% ============================================================
+\begin{ejercicios}
+
+\newpage
+\subsection*{Ejercicios: Problemas de Desarrollo}
+
+¡Llegó la hora de practicar! A continuación te dejamos los circuitos propuestos para que sueltes la mano. Apóyate directamente en el formulario que armamos más arriba: úsalo como tu comodín para plantear las ecuaciones y resolver cada esquema paso a paso sin confundirte.
+
+\vspace{0.4cm}
+
+\begin{enumerate}[label=\textbf{Problema \arabic*.}, leftmargin=*, itemsep=1.2cm]
+
+    % --- EJERCICIO PLANTILLA 1 ---
+    \item
+    Un circuito cerrado en serie está compuesto por una fuente de poder ideal, un switch abierto, una resistencia y un capacitor completamente descargado. La resistencia es un cable cilíndrico de plomo de largo 5 cm y radio 1 mm. La conductividad del plomo es $\sigma = 2.86 \times 10^{-4} \, \Omega^{-1}\text{m}^{-1}$. El capacitor tiene una capacitancia de $10 \, \mu\text{F}$. En el instante $t=0$ el switch cambia a la posición de ``cerrado''. Determine:
+    
+    \begin{enumerate}[label=\alph*)]
+        \item La resistividad del plomo $\rho_{plomo}$, la resistencia del cable de plomo $R_{plomo}$, la corriente inicial $I_i$, la carga máxima $Q_{max}$ y la constante de tiempo del circuito $\tau$.
+        \item Determine el porcentaje de carga (2 dígitos decimales) del capacitor en un tiempo $t = 5\tau$.
+        \item ¿Cuánto demora el capacitor en adquirir la mitad de la energía máxima?
+    \end{enumerate}
+
+
+    % --- EJERCICIO PLANTILLA 2 ---
+\item En el circuito resistivo de la figura, las fuentes de valores $\varepsilon_1 = 12\,V$ y $\varepsilon_2 = 24\,V$ son ideales y se tiene que $R_1 = 3600\,\Omega$, $R_2 = 600\,\Omega$, $R_3 = 64\,\Omega$, $R_4 = 660\,\Omega$ y $R_5 = 240\,\Omega$. Si la corriente que circula a través del resistor $R_6$ es $I_6 = 22\,mA$,
+
+\begin{center}
+    \input{circuits/ejercicio_2.tex}
+\end{center}
+
+Con respecto al circuito eléctrico presentado, calcule:
+\begin{enumerate}[label=\alph*)]
+    \item Determine el valor de la resistencia $R_6$.
+    \item Determine la diferencia de potencial existente entre los puntos A y B. 
+    \item Determine la potencia disipada por $R_4$.
+\end{enumerate}
+
+\newpage
+       % --- EJERCICIO PLANTILLA 3 ---
+
+\item El circuito está conformado por $R_1 = 15\,\Omega$, $R_2 = 20\,\Omega$, $R_3 = 10\,\Omega$, $C = 20\,\mu\text{F}$ y $\varepsilon = 10\,\text{V}$. Considere que el switch del circuito ha estado mucho tiempo cerrado.
+
+\begin{center}
+    \input{circuits/ejercicio_3.tex}
+\end{center}
+
+\begin{enumerate}[label=\alph*)]
+    \item Determine el valor de las corrientes que circulan por $R_1$ y $R_2$. ¿Qué ocurre con el valor de la corriente en la resistencia $R_3$? Justifique su respuesta atendiendo a argumentos físicos.
+    \item Determine el valor de la carga que posee el capacitor.
+\end{enumerate}
+
+Ahora, considere que el interruptor del circuito anterior se ha abierto, en un instante $t = 0\,\text{(s)}$.
+
+\begin{enumerate}[label=\alph*), start=3]
+    \item ¿Cuánta es la corriente instantánea en $0,5 \cdot \tau$?
+    \item ¿En cuánto tiempo el capacitor cede el $30\%$ de su energía almacenada?
+\end{enumerate}
+
+\newpage
+        % --- EJERCICIO PLANTILLA 4 ---
+\item En la figura se muestra un circuito con tres resistencias y dos fem, con los valores dados en ella.
+
+La resistencia cilíndrica está hecha de grafito, con resistividad $\rho = 2,5 \times 10^{-6}\,\Omega \cdot \text{m}$. Su largo es $4\,\text{cm}$ y su diámetro $0,2\,\text{mm}$.
+
+\begin{center}
+    \input{circuits/ejercicio_4.tex}
+\end{center}
+
+\begin{enumerate}[label=\alph*)]
+    \item Determine el valor de la resistencia $R$.
+    \item Aplicando las leyes de Kirchhoff, encuentre las corrientes del circuito.
+    \item ¿Es el sentido de las corrientes el mostrado en la figura? Explique.
+    \item Determine la energía disipada durante $3\,\text{segundos}$ en la resistencia de $4\,\Omega$.
+    \item Suponiendo que la densidad de portadores de carga en el grafito es $10^{24}\,\text{m}^{-3}$, determine la velocidad promedio $v_d$ de los portadores de carga en la resistencia $R$.
+\end{enumerate}
+\newpage
+  %Ejercicio numero 4%
+\item Considere un conjunto de condensadores conectados, como se indica en la figura, a un voltaje de $12\,\text{V}$ entre $a$ y $b$. Suponga que los condensadores han estado conectados por largo tiempo.
+
+\begin{center}
+    % Aquí va la imagen superior (solo la de los condensadores)
+    \input{circuits/ejercicio_5_1.tex}
+\end{center}
+
+\begin{enumerate}[label=\alph*)]
+    \item Determina la capacitancia equivalente.
+    \item Determina la carga en cada condensador.
+\end{enumerate}
+
+Supón ahora que este conjunto de condensadores, que en la figura se denota como $C$, se conecta como se indica y sin haber modificado sus propiedades.
+
+\begin{center}
+    % Aquí va la imagen inferior (el circuito con resistencias, fem e interruptor S)
+    \input{circuits/ejercicio_5_2.tex}
+\end{center}
+
+\begin{enumerate}[label=\alph*), start=3]
+    \item Diga si la corriente por la resistencia de $8\,\Omega$ es mayor, igual o menor que la de $6\,\Omega$. Explique.
+    \item ¿Cuál es el valor de la fem?
+    \item Si el interruptor $S$ se abre, ¿en cuánto tiempo podemos decir que el condensador se ha descargado completamente?
+\end{enumerate}
+
+\newpage
+
+%Ejercicio numero 6%
+
+\item En el circuito de la figura, todas las resistencias tienen la misma magnitud $R_1 = R_2 = R_3 = R_4 = R_5 = 1\,\Omega$, mientras que los voltajes son de magnitud $\mathcal{E}_1 = 10\,\text{V}$ y $\mathcal{E}_2 = 6\,\text{V}$.
+
+\begin{center}
+    \input{circuits/ejercicio_6.tex}
+\end{center}
+
+\begin{enumerate}[label=\alph*)]
+    \item Calcule la corriente eléctrica que circula por cada resistencia. Exprese sus resultados en Amperes.
+    \item Determine la diferencia de potencial entre los nodos $d$ y $b$ del circuito.
+\end{enumerate}
+\end{enumerate}
+\end{ejercicios}
+
+\end{document}

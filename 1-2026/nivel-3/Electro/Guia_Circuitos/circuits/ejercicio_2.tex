@@ -1,0 +1,65 @@
+\begin{circuitikz}[
+    american,
+    scale=0.9,
+    transform shape,
+    line cap=round,
+    line join=round,
+    every node/.style={font=\small}
+]
+\ctikzset{bipoles/length=1.0cm}
+\tikzset{
+    terminal/.style={circle, fill=black, inner sep=1.8pt},
+    redterminal/.style={circle, fill=red!80!black, inner sep=2.3pt},
+    currentarrow/.style={-{Latex[length=2.4mm]}, thick, azulFuerte}
+}
+
+\coordinate (A) at (0,4);
+\coordinate (L0) at (0,0.65);
+\coordinate (N1) at (2.75,4);
+\coordinate (TR) at (5.7,4);
+\coordinate (C) at (2.75,2.18);
+\coordinate (N4) at (1.35,0.65);
+\coordinate (N5) at (4.05,0.65);
+\coordinate (B) at (5.7,0.65);
+
+\draw (A) -- (0,2.45);
+\draw (-0.22,2.45) -- (0.22,2.45);
+\draw (-0.42,2.05) -- (0.42,2.05);
+\draw (0,2.05) -- (L0);
+\node[left=7pt] at (0,2.25) {\shortstack{$\varepsilon_1$\\$12\,\mathrm{V}$}};
+\node[right=2pt] at (0,2.45) {$-$};
+\node[right=2pt] at (0,2.05) {$+$};
+
+\draw (TR) -- (5.7,2.45);
+\draw (5.28,2.45) -- (6.12,2.45);
+\draw (5.48,2.05) -- (5.92,2.05);
+\draw (5.7,2.05) -- (B);
+\node[right=7pt] at (5.7,2.25) {\shortstack{$\varepsilon_2$\\$24\,\mathrm{V}$}};
+\node[left=2pt] at (5.7,2.45) {$+$};
+\node[left=2pt] at (5.7,2.05) {$-$};
+
+\draw (A) to[R] node[midway, above=5pt] {$R_1$}
+    node[midway, below=6pt] {\scriptsize $3600\,\Omega$} (N1);
+\draw (N1) to[R] node[midway, above=5pt] {$R_2$}
+    node[midway, below=6pt] {\scriptsize $600\,\Omega$} (TR);
+\draw (N1) to[R] (C);
+\draw (C) to[R] (N4);
+\draw (C) to[R] (N5);
+\draw (N5) to[R] (B);
+\node[right=7pt] at ($(N1)!0.5!(C)$) {\shortstack{$R_3$\\\scriptsize $64\,\Omega$}};
+\node[left=9pt] at ($(C)!0.56!(N4)$) {\shortstack{$R_4$\\\scriptsize $660\,\Omega$}};
+\node[right=9pt] at ($(C)!0.56!(N5)$) {\shortstack{$R_5$\\\scriptsize $240\,\Omega$}};
+\node[above=6pt] at ($(N5)!0.5!(B)$) {$R_6$};
+
+\draw (L0) -- (N4) -- (N5);
+
+\node[redterminal, label={[font=\small]left:$A$}] at (A) {};
+\node[redterminal, label={[font=\small]right:$B$}] at (B) {};
+\foreach \p in {N1,C,N4,N5} {
+    \node[terminal] at (\p) {};
+}
+
+\draw[currentarrow] ($(N5)+(0.18,-0.52)$) --
+    node[midway, below] {$I_6=22\,\mathrm{mA}$}
+    ($(B)+(-0.18,-0.52)$);
+\end{circuitikz}

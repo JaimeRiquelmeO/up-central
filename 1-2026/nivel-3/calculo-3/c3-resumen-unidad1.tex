@@ -1,0 +1,660 @@
+% ============================================================
+%  GUÍA DE ESTUDIO — USACH PREMIUM
+%  Cálculo 3 - Unidad 1: Funciones de Varias Variables
+%  Autor: Trinidad Palma
+% ============================================================
+
+\documentclass[letterpaper, 12pt]{article}
+
+% ============================================================
+% PAQUETES
+% ============================================================
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{eso-pic}
+\usepackage{tikz}
+\usepackage{arydshln}
+\usetikzlibrary{patterns}
+\tcbuselibrary{skins, breakable}
+
+% ============================================================
+% GEOMETRÍA
+% ============================================================
+\geometry{letterpaper, margin=1.5cm, top=3cm, bottom=2.5cm, headheight=2cm}
+
+% ============================================================
+% COLORES INSTITUCIONALES
+% ============================================================
+\definecolor{celesteSuave}{HTML}{F0F7FF}
+\definecolor{azulFuerte}{HTML}{1A5276}
+\definecolor{turquesaUsach}{HTML}{33CCCC}
+\definecolor{rojoAviso}{HTML}{C0392B}
+\definecolor{verdeOk}{HTML}{1E8449}
+\definecolor{enlace}{HTML}{1A5276}
+
+% ============================================================
+% RUTAS DE IMÁGENES
+% ============================================================
+\newcommand{\logoup}{./images/logo_up.png}
+\newcommand{\logousach}{./images/logo_usach.png}
+\newcommand{\logofondo}{./images/logo_up.png}
+
+% ============================================================
+% INFORMACIÓN DE LA GUÍA
+% ============================================================
+\newcommand{\institucion}{Usach Premium}
+\newcommand{\curso}{Cálculo 3}
+\newcommand{\guiasnumero}{Unidad 1 — Funciones de Varias Variables}
+\newcommand{\semestre}{1er. Semestre de 2026}
+\newcommand{\preparadopor}{Trinidad Palma — Usach Premium}
+\newcommand{\webinstitucion}{www.usachpremium.cl}
+\newcommand{\instagraminstitucion}{https://www.instagram.com/usach.premium}
+\newcommand{\transparencia}{0.05}
+
+\newcommand{\listacontenidos}{
+    \item[\color{azulFuerte}$\Rightarrow$] Límites y Continuidad
+    \item[\color{azulFuerte}$\Rightarrow$] Diferenciabilidad y Derivadas Parciales
+    \item[\color{azulFuerte}$\Rightarrow$] Derivada Direccional y Regla de la Cadena
+    \item[\color{azulFuerte}$\Rightarrow$] Plano Tangente
+    \item[\color{azulFuerte}$\Rightarrow$] Teoremas de la Función Inversa e Implícita
+    \item[\color{azulFuerte}$\Rightarrow$] Optimización (Máximos y Mínimos)
+}
+
+% ============================================================
+% HYPERREF
+% ============================================================
+\hypersetup{
+    colorlinks=true,
+    linkcolor=enlace,
+    urlcolor=enlace,
+    citecolor=enlace,
+    pdfborder={0 0 0},
+}
+
+% ============================================================
+% ENCABEZADO Y PIE DE PÁGINA
+% ============================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\includegraphics[height=1.2cm]{\logoup}}
+\fancyhead[R]{%
+    \begin{minipage}[b]{0.42\textwidth}
+        \raggedleft
+        \fontsize{9pt}{11pt}\selectfont
+        \textbf{\color{azulFuerte}\institucion} \\
+        \curso\ — \guiasnumero \\
+        \textit{\color{gray}@usach.premium}
+    \end{minipage}\hspace{0.1cm}%
+    \includegraphics[height=1.2cm]{\logousach}%
+}
+\fancyfoot[L]{\fontsize{9pt}{11pt}\selectfont \textit{``Por y para estudiantes''}}
+\fancyfoot[R]{\fontsize{9pt}{11pt}\selectfont Página \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+
+% ============================================================
+% MARCA DE AGUA (TikZ opacity — más confiable que transparent)
+% ============================================================
+\newcommand{\MarcaAgua}{%
+    \AddToShipoutPicture{%
+        \begin{tikzpicture}[remember picture, overlay]
+            \node[opacity=0.05] at (current page.center) {%
+                \includegraphics[width=0.7\textwidth]{\logofondo}%
+            };
+        \end{tikzpicture}%
+    }%
+}
+
+% ============================================================
+% CAJAS TCOLORBOX
+% ============================================================
+\newenvironment{seccionbox}[1]{%
+    \begin{tcolorbox}[
+        colback=celesteSuave,
+        colframe=azulFuerte,
+        coltitle=white,
+        fonttitle=\bfseries\large,
+        title=#1,
+        arc=6pt,
+        boxrule=1pt,
+        breakable,
+        enhanced,
+        before upper={\parskip=4pt}
+    ]
+}{%
+    \end{tcolorbox}
+}
+
+\newenvironment{notabox}{%
+    \begin{tcolorbox}[
+        colback=white,
+        colframe=turquesaUsach,
+        arc=4pt,
+        boxrule=0.8pt,
+        left=6pt, right=6pt, top=4pt, bottom=4pt
+    ]
+}{%
+    \end{tcolorbox}
+}
+
+% ============================================================
+\begin{document}
+\thispagestyle{plain}
+
+% ============================================================
+% PORTADA
+% ============================================================
+\AddToShipoutPicture*{%
+    \put(54, 700){\includegraphics[width=2cm]{\logoup}}
+    \put(420, 706){\includegraphics[width=5cm]{\logousach}}
+}
+
+\vspace*{0.5cm}
+\begin{center}
+    \color{azulFuerte}
+    {\huge \textbf{GUÍA DE ESTUDIO}} \\[0.5cm]
+    {\Huge \textbf{\curso}} \\[0.3cm]
+    {\Large \guiasnumero} \\[1.5cm]
+
+    \begin{tcolorbox}[colback=celesteSuave, colframe=azulFuerte, arc=10pt,
+        width=0.85\textwidth, center, boxrule=1.5pt]
+        \centering
+        \vspace{0.2cm}
+        {\Large \textbf{Contenidos}}
+        \vspace{0.3cm}
+        \color{black}
+        \begin{itemize}[leftmargin=3cm]
+            \listacontenidos
+        \end{itemize}
+        \vspace{0.2cm}
+    \end{tcolorbox}
+\end{center}
+
+\vspace{1.5cm}
+\begin{center}
+    {\Large \textbf{\semestre}} \\[0.8cm]
+    {\large \textbf{\preparadopor}}
+\end{center}
+
+\vspace{2cm}
+\begin{center}
+    {\color{azulFuerte}\hrule height 0.5pt}
+    \vspace{0.3cm}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \textbf{Instagram:} \\
+        \small\href{\instagraminstitucion}{@usach.premium}
+    \end{minipage}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \textbf{Web:} \\
+        \small\href{http://\webinstitucion}{\webinstitucion}
+    \end{minipage}
+\end{center}
+
+\pagenumbering{arabic}
+\newpage
+\MarcaAgua
+
+% ============================================================
+% 1. LÍMITES Y CONTINUIDAD
+% ============================================================
+\begin{seccionbox}{1. Límites y Continuidad}
+
+\textbf{Estrategia de Trayectorias (No Existencia):} Si $\lim_{(x,y)\to(0,0)} f(x,y)$ da valores distintos por rectas $y=mx$ o parábolas $y=x^2$, el límite \textbf{no existe}.
+
+\medskip
+\textbf{Estrategia del Sándwich (Existencia):}
+$$ 0 \le |f(x,y) - L| \le g(x,y), \quad \text{con } \lim_{(x,y)\to(0,0)} g(x,y) = 0 $$
+\textbf{Desigualdades útiles:}
+$$ |x| \le \sqrt{x^2+y^2}, \qquad |xy| \le \frac{x^2+y^2}{2}, \qquad -1 \le \sin(x) \le 1, \qquad -1 \le \cos(x) \le 1 $$
+
+\medskip
+\textbf{Continuidad:} Para que $f$ sea continua en $(a,b)$:
+\begin{enumerate}[leftmargin=2cm]
+    \item $f(a,b)$ existe.
+    \item $\lim_{(x,y) \to (a,b)} f(x,y)$ existe.
+    \item $\lim_{(x,y) \to (a,b)} f(x,y) = f(a,b)$
+\end{enumerate}
+
+\end{seccionbox}
+
+\newpage
+
+% ============================================================
+% 2. DIFERENCIABILIDAD Y DERIVADAS
+% ============================================================
+\begin{seccionbox}{2. Diferenciabilidad y Derivadas}
+
+\textbf{Jerarquía de Propiedades: \textcolor{turquesaUsach}{¡IMPORTANTE!}}
+$$ \mathcal{C}^1 \implies \text{Diferenciable} \implies \text{Continua} $$
+$$ \text{Diferenciable} \implies \text{Existen Derivadas Parciales} $$
+
+\begin{notabox}
+\textbf{\textcolor{rojoAviso}{OJO:}} Que existan las derivadas parciales \textbf{NO} garantiza continuidad ni diferenciabilidad. \textcolor{verdeOk}{Pero si son $\mathcal{C}^1$} (derivadas parciales continuas), entonces sí garantiza diferenciabilidad en ese punto.
+\end{notabox}
+
+\medskip
+\textbf{Definición de Diferenciabilidad:} $f$ es diferenciable en $(0,0)$ si:
+$$ \lim_{(x,y)\to(0,0)} \frac{f(x,y) - f(0,0) - \bigl[f_x(0,0)\,x + f_y(0,0)\,y\bigr]}{\sqrt{x^2+y^2}} = 0 $$
+$$(f_x(0,0),\; f_y(0,0)) = \nabla f(0,0)$$
+
+\medskip
+\textbf{Derivadas Parciales:}
+\begin{itemize}
+    \item \textbf{En el punto $(a,b)$} — por definición de límite:
+    $$ f_x(a,b) = \lim_{h\to 0} \frac{f(a+h,\,b) - f(a,b)}{h}, \qquad f_y(a,b) = \lim_{h\to 0} \frac{f(a,\,b+h) - f(a,b)}{h} $$
+    \item \textbf{Fuera del punto $(a,b)$} — derivación directa:
+    $$ f_x = \frac{\partial f}{\partial x}, \qquad f_y = \frac{\partial f}{\partial y} $$
+\end{itemize}
+
+\medskip
+\textbf{Derivada Direccional:} Mide cómo cambia $f$ al moverse en dirección $\hat{v}$ (vector unitario):
+$$ \frac{\partial f}{\partial \vec{v}}(a,b) = \nabla \vec{f} \cdot \vec{v} $$
+Si la derivada direccional es nula, $\nabla f$ es normal a la dirección de movimiento.
+
+\medskip
+\begin{itemize}
+    \item \textbf{Dirección de máximo crecimiento:} La dirección del gradiente $\nabla f$.
+    \item \textbf{Tasa máxima de cambio:} Es $\|\nabla f\|$.
+\end{itemize}
+
+\medskip
+\textbf{Derivadas de Orden Superior:}
+\begin{itemize}
+    \item Notación: $f_{xx} = \dfrac{\partial^2 f}{\partial x^2}$, $\quad f_{xy} = \dfrac{\partial^2 f}{\partial y\,\partial x}$ (primero $x$, luego $y$).
+    \item \textbf{Teorema de Schwarz (Clairaut):} Si las derivadas mixtas son continuas:
+    $$ f_{xy}(x,y) = f_{yx}(x,y) $$
+\end{itemize}
+
+\medskip
+\textbf{Regla de la Cadena:} Si $z = f(x,y)$ diferenciable, $x=x(u,v)$, $y=y(u,v)$ diferenciables:
+$$ \frac{\partial z}{\partial u} = \frac{\partial f}{\partial x}\frac{\partial x}{\partial u} + \frac{\partial f}{\partial y}\frac{\partial y}{\partial u} $$
+Para la \textbf{segunda derivada}, se vuelve a derivar respecto a $u$ aplicando Regla del Producto y Cadena (recordar que $f_x$ y $f_y$ también dependen de $u$ y $v$).
+
+\end{seccionbox}
+
+\newpage
+
+% ============================================================
+% 3. PLANO TANGENTE
+% ============================================================
+\begin{seccionbox}{3. Plano Tangente}
+
+\textbf{Plano Tangente a una superficie} $S:\, F(x,y,z)=0$:
+$$\nabla \vec{F}(P_0) = \left(\frac{\partial F}{\partial x},\;\frac{\partial F}{\partial y},\;\frac{\partial F}{\partial z}\right)\Bigg|_{P_0}$$
+$$ \pi_1:\; \nabla \vec{F}(P_0) \cdot (\vec{x} - P_0) = 0 $$
+
+\medskip
+\textbf{Condición de Paralelismo:}
+$$\nabla \vec{F}(P_0) = \lambda \cdot \vec{n}_{\pi_2}$$
+$$\pi_2:\; A_2x + B_2y + C_2z + D = 0 \qquad \Rightarrow \qquad \vec{n}_{\pi_2} = (A_2,\,B_2,\,C_2)$$
+\begin{notabox}
+\textcolor{azulFuerte}{Se usa cuando te pidan: \textit{``encuentre el plano tangente a $F$ paralelo al plano $\pi_2$''.}}
+\end{notabox}
+
+\medskip
+\textbf{Condición de Ortogonalidad:}
+$$\nabla \vec{F}(P_0) = \vec{n}_{\pi_2} \times \vec{n}_{\pi_3}$$
+$$\pi_2:\; A_2x + B_2y + C_2z + D = 0 \quad \Rightarrow \quad \vec{n}_{\pi_2} = (A_2,\,B_2,\,C_2)$$
+$$\pi_3:\; A_3x + B_3y + C_3z + D = 0 \quad \Rightarrow \quad \vec{n}_{\pi_3} = (A_3,\,B_3,\,C_3)$$
+\begin{notabox}
+\textcolor{azulFuerte}{Se usa cuando te pidan: \textit{``encuentre el plano tangente a $F$ ortogonal a $\pi_2$ y $\pi_3$''.} Sirve para hallar el punto de tangencia.}
+\end{notabox}
+
+\end{seccionbox}
+
+\newpage
+
+% ============================================================
+% 4. TEOREMA DE LA FUNCIÓN INVERSA
+% ============================================================
+\begin{seccionbox}{4. Teorema de la Función Inversa}
+
+Sea $F: \mathbb{R}^n \to \mathbb{R}^n$ de clase $\mathcal{C}^1$. Si $J_F(\mathbf{a}) \neq 0$, entonces $F$ es \textbf{localmente invertible} y:
+$$ D(F^{-1})(\mathbf{b}) = \bigl[DF(\mathbf{a})\bigr]^{-1} $$
+
+\textbf{¿Cuándo usarlo?} Para determinar si $F: \mathbb{R}^n \to \mathbb{R}^n$ es localmente invertible (si se puede despejar $x,y$ en función de $u,v$ en una vecindad).
+
+\medskip
+\textbf{Construcción del Jacobiano:} \textcolor{azulFuerte}{Filas $\to$ Funciones}, \textcolor{turquesaUsach}{Columnas $\to$ Variables}
+$$F = \bigl(x(u,v),\; y(u,v)\bigr) \quad \Rightarrow \quad DF = \begin{pmatrix} \textcolor{azulFuerte}{x}_{\textcolor{turquesaUsach}{u}} & \textcolor{azulFuerte}{x}_{\textcolor{turquesaUsach}{v}} \\ \textcolor{azulFuerte}{y}_{\textcolor{turquesaUsach}{u}} & \textcolor{azulFuerte}{y}_{\textcolor{turquesaUsach}{v}} \end{pmatrix}$$
+\textbf{Condición clave:} $J_F(\mathbf{a}) = \det(DF) \neq 0$
+
+\medskip
+\textbf{¿Cómo hallar la inversa?}
+\begin{enumerate}
+    \item \textbf{Por definición (para $2\times2$):}
+    $$\bigl[DF(\mathbf{a})\bigr]^{-1} = \frac{1}{J_F(a)} \begin{pmatrix} y_v & -x_v \\ -y_u & x_u \end{pmatrix}$$
+
+    \item \textbf{Mediante sistema (para $n\times n$):}
+    $$ DF\big|_{(u,v,w)} \cdot DF^{-1}\big|_{(x,y,z)} = I_n $$
+    $$ \begin{pmatrix} x_u & x_v & x_w \\ y_u & y_v & y_w \\ z_u & z_v & z_w \end{pmatrix}\Bigg|_{(u,v,w)} \cdot DF^{-1}\big|_{(x,y,z)} = \begin{pmatrix} 1&0&0\\ 0&1&0\\ 0&0&1 \end{pmatrix} $$
+    Formar la matriz ampliada y reducir hasta obtener $I$ al lado izquierdo; el lado derecho tendrá $DF^{-1}$:
+    $$ \left(\begin{array}{ccc:ccc} x_u & x_v & x_w & 1 & 0 & 0 \\ y_u & y_v & y_w & 0 & 1 & 0 \\ z_u & z_v & z_w & 0 & 0 & 1 \end{array}\right) $$
+\end{enumerate}
+
+\end{seccionbox}
+
+\newpage
+
+% ============================================================
+% 5. TEOREMA DE LA FUNCIÓN IMPLÍCITA
+% ============================================================
+\begin{seccionbox}{5. Teorema de la Función Implícita}
+
+\textbf{Condiciones} para que existan $u=u(x,y)$ y $v=v(x,y)$:
+\begin{enumerate}
+    \item $P_0$ pertenece al conjunto de nivel (satisface las ecuaciones).
+    \item Se define:
+    $$ \vec{H}(x,y,u,v) = \begin{pmatrix} F(x,y,u,v) \\ G(x,y,u,v) \end{pmatrix}, \quad \vec{H} \in \mathcal{C}^1 $$
+    \item El Jacobiano respecto a $(u,v)$ es no nulo:
+    $$ \frac{\partial(F,G)}{\partial(u,v)} = \begin{vmatrix} F_u & F_v \\ G_u & G_v \end{vmatrix} \neq 0 $$
+\end{enumerate}
+
+\medskip\hrule\medskip
+
+\textbf{FORMA LARGA} — para hallar $u_x,\, u_y,\, v_x,\, v_y$:
+
+\begin{enumerate}
+    \item \textbf{Defino el sistema:}
+    $$ \begin{pmatrix}0&0\\0&0\end{pmatrix} = \begin{pmatrix}F_x&F_y&F_u&F_v\\G_x&G_y&G_u&G_v\end{pmatrix}\Bigg|_{h(x,y)} \cdot \begin{pmatrix}1&0\\0&1\\u_x&u_y\\v_x&v_y\end{pmatrix}\Bigg|_{(x,y)} $$
+
+    \item \textbf{Separo la suma:}
+    $$ \begin{pmatrix}0&0\\0&0\end{pmatrix} = \begin{pmatrix}F_x&F_y\\G_x&G_y\end{pmatrix} + \begin{pmatrix}F_u&F_v\\G_u&G_v\end{pmatrix} \cdot \begin{pmatrix}u_x&u_y\\v_x&v_y\end{pmatrix} $$
+
+    \item \textbf{Despejo la matriz desconocida} (multiplico la inversa por la \textbf{IZQUIERDA}):
+    \begin{notabox}
+    \textcolor{rojoAviso}{\textbf{Dividir matrices NO existe.}} Hay que multiplicar por la inversa. Además, la multiplicación de matrices \textcolor{rojoAviso}{NO ES CONMUTATIVA}: cuidado por qué lado se multiplica. Como $A^{-1}\cdot A = I_n$, se multiplica por la izquierda.
+    \end{notabox}
+    $$ -\begin{pmatrix}F_u&F_v\\G_u&G_v\end{pmatrix}^{-1} \cdot \begin{pmatrix}F_x&F_y\\G_x&G_y\end{pmatrix}\Bigg|_{h(x,y)} = \begin{pmatrix}u_x&u_y\\v_x&v_y\end{pmatrix}\Bigg|_{(x,y)} $$
+    Usando $A = \begin{pmatrix}a&b\\c&d\end{pmatrix} \Rightarrow A^{-1} = \dfrac{1}{ad-bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}$:
+    $$ -\frac{1}{F_uG_v - F_vG_u}\begin{pmatrix}G_v&-F_v\\-G_u&F_u\end{pmatrix} \cdot \begin{pmatrix}F_x&F_y\\G_x&G_y\end{pmatrix}\Bigg|_{h(x,y)} = \begin{pmatrix}u_x&u_y\\v_x&v_y\end{pmatrix}\Bigg|_{(x,y)} $$
+
+    \item Reemplazar el punto dado y multiplicar para obtener $u_x,\,u_y,\,v_x,\,v_y$.
+\end{enumerate}
+
+\medskip\hrule\medskip
+
+\textbf{FORMA CORTA} — Regla de Cramer:
+$$u_x = -\frac{\dfrac{\partial(F,G)}{\partial(x,v)}}{\dfrac{\partial(F,G)}{\partial(u,v)}}, \quad
+u_y = -\frac{\dfrac{\partial(F,G)}{\partial(y,v)}}{\dfrac{\partial(F,G)}{\partial(u,v)}}, \quad
+v_x = -\frac{\dfrac{\partial(F,G)}{\partial(x,u)}}{\dfrac{\partial(F,G)}{\partial(u,v)}}, \quad
+v_y = -\frac{\dfrac{\partial(F,G)}{\partial(y,u)}}{\dfrac{\partial(F,G)}{\partial(u,v)}}$$
+
+\textbf{Construcción:} \textcolor{azulFuerte}{Filas $\to$ Funciones}, \textcolor{turquesaUsach}{Columnas $\to$ Variables}
+\begin{itemize}
+    \item El denominador $\dfrac{\partial(F,G)}{\partial(u,v)}$ es el Jacobiano del punto 3.
+    \item Para $u_x$: en el Jacobiano del denominador, reemplaza la columna $u$ por la columna $x$ \textcolor{rojoAviso}{(no olvidar el signo $-$)}:
+    $$\frac{\partial(F,G)}{\partial(\,\cdot\,,v)} \;\xrightarrow{\text{pon }x}\; \frac{\partial(F,G)}{\partial(x,v)}$$
+    Y análogamente para $u_y,\,v_x,\,v_y$.
+\end{itemize}
+
+\end{seccionbox}
+
+\newpage
+
+% ============================================================
+% 6. OPTIMIZACIÓN
+% ============================================================
+\begin{seccionbox}{6. Optimización (Máximos y Mínimos)}
+
+\textbf{Sin Restricciones — Criterio del Hessiano:}
+
+Hallar puntos críticos donde $\nabla f = \mathbf{0}$. Evaluar:
+$$ H = \begin{pmatrix} f_{xx} & f_{xy} \\ f_{yx} & f_{yy} \end{pmatrix}, \qquad D = \det(H) = f_{xx}f_{yy} - (f_{xy})^2 $$
+
+\begin{center}
+\begin{tabular}{c|c|l}
+\hline
+$D$ & $f_{xx}$ & Clasificación \\
+\hline
+$D > 0$ & $f_{xx} > 0$ & \textcolor{verdeOk}{\textbf{Mínimo Local}} \\
+$D > 0$ & $f_{xx} < 0$ & \textcolor{verdeOk}{\textbf{Máximo Local}} \\
+$D < 0$ & — & \textcolor{rojoAviso}{\textbf{Punto de Silla}} \\
+$D = 0$ & — & Indeterminado (se necesita más análisis) \\
+\hline
+\end{tabular}
+\end{center}
+
+\medskip
+\textbf{Con Restricciones — Multiplicadores de Lagrange:}
+
+Optimizar $f(x,y,z)$ sujeto a $g(x,y,z) = k$. Sistema a resolver:
+$$ \nabla f = \lambda\, \nabla g \qquad \text{junto con} \qquad g(x,y,z) = k $$
+
+\end{seccionbox}
+
+\end{document}
+
+\subsection{Límites y Continuidad}
+\begin{itemize}
+    \item \textbf{Estrategia de Trayectorias (No Existencia):} Si $\lim_{(x,y)\to(0,0)} f(x,y)$ da valores distintos por rectas $y=mx$ o parábolas $y=x^2$, el límite no existe.
+    \item \textbf{Estrategia del Sándwich (Existencia):}
+    $$ 0 \le |f(x,y) - L| \le g(x,y), \quad \text{con } \lim_{(x,y)\to(0,0)} g(x,y) = 0 $$
+    Desigualdades útiles: 
+    \text{$|x| \le \sqrt{x^2+y^2}$,$\quad |xy| \le \frac{x^2+y^2}{2}$, $-1 \le \sin{(x)} \le 1 $, $-1 \le \cos{(x)} \le 1 $.}
+    \item \textbf{Continuidad:}
+    \begin{itemize}
+        \item {Para que una función sea continua en un punto $(a,b)$ se debe cumplir que:}
+        \begin{enumerate}
+        \item $f(x,y)$ existe.
+        \item Si $\lim_{(x,y) \to (a,b)} f(x,y)$ existe.
+        \item Si $\lim_{(x,y) \to (a,b)} f(x,y) = f(a,b)$
+        \end{enumerate}
+    \end{itemize}
+\end{itemize}
+
+\subsection{Diferenciabilidad y Derivadas}
+\textbf{Jerarquía de Propiedades: \textcolor{blue}{¡IMPORTANTE!}}
+$$ \mathcal{C}^1 \implies \text{Diferenciable} \implies \text{Continua} $$
+$$ \text{Diferenciable} \implies \text{Existen Derivadas Parciales} $$
+\textbf{OJO:} \textcolor{red}{Que existan las derivadas parciales NO garantiza continuidad ni diferenciabilidad.} \textcolor{green}{Pero si son $C^1$, es decir que las derivadas parciales son continuas, entonces garantiza que sea diferenciable en ese punto.}
+
+\begin{itemize}
+    \item \textbf{Definición de Diferenciabilidad:} $f$ es diferenciable en $(0,0)$ si:
+    $$ \lim_{(x,y)\to(0,0)} \frac{f(x,y) - f(0,0) - [f_x(0,0)x + f_y(0,0)y]}{\sqrt{x^2+y^2}} = 0 $$
+    $$ (f_x(0,0), f_y(0,0)) = \nabla f (0,0)$$
+    \item \textbf{Derivadas Parciales}
+    \begin{itemize}
+        \item {Cuando $(x,y) = (a,b)$ se deben calcular las derivadas parciales por definicion de límite:}
+        $$ f_x(a,b)= \lim_{h\to0} \frac{f(a+h,b) - f(a,b)}{h} = 0 $$
+        $$ f_y(a,b)= \lim_{h\to0} \frac{f(a,b+h) - f(a,b)}{h} = 0 $$
+    
+        \item {Cuando $(x,y) \neq (a,b)$ se pueden calcular las derivadas parciales directamente}
+        $$ f_x(a,b)= \frac{\partial f}{\partial x}(a,b) $$
+        $$ f_y(a,b)= \frac{\partial f}{\partial y}(a,b) $$
+    \item \textbf{Derivada Direccional:} Mide como cambia una funcion cuando te mueves desde un punto en una dirección específica, definida por un vector unitario  $\hat{v}$.
+    $$ \frac{\partial f}{\partial \vec{v}}(a,b) = \nabla \vec{f} \cdot \vec{v} $$    
+    Si la derivada dirccional es nula es porque $\nabla \vec{f} $ es normal a la superficie en la que se mueve.
+    \item \textbf{Dirección de maximo crecimiento:} Ocurre en la dirección del gradiente $\nabla f$. 
+    \item \textbf{Tasa máxima de cambio :} Es la norma o magnitud del gradiente por lo tanto el valor máximo es $\|\nabla f\|$.
+    \item \textbf{Derivadas de Orden Superior}
+\begin{itemize}
+    \item \textbf{Notación:} $f_{xx} = \frac{\partial^2 f}{\partial x^2}$, $f_{xy} = \frac{\partial^2 f}{\partial y \partial x}$ (primero $x$, luego $y$).
+    \item \textbf{Teorema de Schwarz (Clairaut):} Si las derivadas parciales mixtas son continuas en un conjunto abierto, el orden de derivación no importa:
+    $$ f_{xy}(x,y) = f_{yx}(x,y) $$
+\end{itemize}
+
+\item \textbf{Regla de la Cadena}
+Si $z = f(x,y)$ es diferenciable, y $x=x(u,v), y=y(u,v)$ son diferenciables:
+\begin{itemize}
+    \item \textbf{Primera Derivada (Diagrama de Árbol):}
+    $$ \frac{\partial z}{\partial u} = \frac{\partial f}{\partial x}\frac{\partial x}{\partial u} + \frac{\partial f}{\partial y}\frac{\partial y}{\partial u} $$
+    \item \textbf{Segunda Derivada (Cuidado con el Producto):}
+    Para hallar $\frac{\partial^2 y}{\partial u^2}$, derivamos la expresión de $\frac{\partial y}{\partial u}$ respecto a $u$ nuevamente, aplicando Regla del Producto y Cadena a los términos internos ($f_x$ y $f_y$ también dependen de $u$ y $v$).
+\end{itemize}
+
+    \end{itemize}
+\end{itemize}
+\newpage
+\subsection{Plano Tangente}  
+\begin{itemize}
+    \item \textbf{Plano Tangente sobre una superficie:} 
+    $S: F(x,y,z) =0 \to \nabla \vec{F}(P_0)= (\frac{\partial F}{\partial x},\frac{\partial F}{\partial y},\frac{\partial F}{\partial z})$
+    $$ \pi_1 :\nabla \vec{F}(P_0) \cdot (\vec{x} - P_0) = 0$$
+
+    \item \textbf{Condición de paralelismo:} $\nabla \vec{F}(P_0) = \lambda \cdot \vec{n}_{\pi_2}  $
+    %Plano 1
+    $$ \pi_2: A_2x + B_2y + C_2z + D =0 $$ 
+    %Normal 1
+    $$\vec{n}_{\pi_2}= (A_2,B_2,C_2)$$
+    \textcolor{blue}{Esto se usa cuando te digan, encuentre el plano tangente a la superficie F que sea paralelo al plano ...}
+ 
+    \item \textbf{Condición de Ortogonalidad:} $\nabla \vec{F}(P_0) = \vec{n}_{\pi_2} \times \vec{n}_{\pi_3}  $
+     %Plano 1
+    $$ \pi_2: A_2x + B_2y + C_2z + D =0 $$ 
+    %Normal 1
+    $$\vec{n}_{\pi_2}= (A_2,B_2,C_2)$$
+    %Plano 2
+    $$ \pi_3: A_3x + B_3y + C_3z + D= 0 $$ 
+    %nORMAL 2
+    $$\vec{n}_{\pi_3}= (A_3,B_3,C_3)$$ 
+
+    \textcolor{blue}{Esto se usa cuando te digan, encuentre el plano tangente a la superficie F que sea ortogonal a los planos $\pi_2$ y $\pi_3$ y sirve para  hallar el punto de tangencia}
+\end{itemize}
+
+
+\subsection{Teoremas de la Función Inversa e Implícita}
+\begin{itemize}
+    \item \textbf{Teorema de la Función Inversa:} Sea $F: \mathbb{R}^n \to \mathbb{R}^n$ $\mathcal{C}^1$. Si $J_F(\mathbf{a}) \neq 0$, entonces $F$ es localmente invertible y:
+    $$ D(F^{-1})(\mathbf{b}) = [D F(\mathbf{a})]^{-1} $$
+    \textbf{¿Cuándo y cómo usarlo?}
+Se utiliza para determinar si una transformación $F: \mathbb{R}^n \to \mathbb{R}^n$ es \textbf{localmente invertible} (es decir, si se puede despejar $x,y$ en función de $u,v$ en una pequeña vecindad).
+
+\textbf{¿Cómo se construye la matriz Jacobiana?} La Matriz de las derivadas parciales se construye como  \textcolor{blue}{Filas $\to$ Funciones},  \textcolor{green}{Columnas $\to$Variables}
+$$F=(x(u,v), y(u,v))$$
+$$
+\begin{pmatrix} 
+ \textcolor{blue}{x}_\textcolor{green}{u} & \textcolor{blue}{x}_\textcolor{green}{v}
+\\ 
+\textcolor{blue}{y}_\textcolor{green}{u} & \textcolor{blue}{y}_\textcolor{green}{v}
+    
+\end{pmatrix}$$
+\begin{itemize}
+    \item \textbf{Condición Clave:} Calcular el determinante de la Matriz Jacobiana .
+    $$J_F(\mathbf{a}) \neq 0 $$
+    \item \textbf{Consecuencia:} Si es distinto de cero, existe $F^{-1}$ diferenciable cerca del punto y se cumple:
+    $$ D(F^{-1})(\mathbf{b}) = [D F(\mathbf{a})]^{-1} $$
+    \item \textbf{¿Cómo hallar la inversa?}
+
+ \begin{enumerate}
+ \item \textbf{Por definición (Para $\mathbb{M}_{\mathbb{R}}(2 \times 2)$):}
+    $$[D F(\mathbf{a})]^{-1} = \frac{1}{J_F(a)}  
+    \begin{pmatrix}  
+    y_v & -x_v \\
+    -y_u & x_u
+        
+    \end{pmatrix} $$
+    
+    
+    \item \textbf{Mediante sistema de ecuaciones (Para $\mathbb{M}_{\mathbb{R}}(n \times n)$):}
+    $$ DF\bigg|_{{f^{-1}} (x,y,z)} \cdot DF^{-1} \bigg|_{(x,y,z)} = I_n$$
+    $$ DF\bigg|_{(u,v,w)} \cdot DF^{-1} \bigg|_{(x,y,z)} = I_n $$
+    $$ \begin{pmatrix} x_u & x_v & x_w \\ y_u & y_v & y_w  \\ z_u & z_v &z_w   \end{pmatrix}\bigg|_{(u,v,w)} \cdot DF^{-1} \bigg|_{(x,y,z)} = \begin{pmatrix} 1&0&0\\ 0&1&0 \\ 0&0&1 
+    \end{pmatrix} $$
+    $$ \begin{pmatrix} x_u & x_v & x_w & \vdots & 1 & 0 & 0 \\  y_u & y_v & y_w & \vdots & 0 & 1 & 0 \\ z_u & z_v &z_w & \vdots &0 & 0 & 1
+    \end{pmatrix} $$
+    Recordando de Álgebra II, para encontrar la inversa se debe evaluar en el punto que nos dan y luego hacer que aparezca la matriz indentidad en el lado izquierdo de la matriz ampliada, cuando eso ocurra en el lado derecho tendremos las componentes de la matriz inversa.
+
+\end{enumerate} 
+
+\end{itemize}
+ \newpage
+    \item \textbf{Teorema de la Función Implícita :} 
+    %Condiciones%
+    \begin{itemize}
+        \item {Para que una función se pueda definir como $ u=f(x,y)$ y $v=f(x,y)$ se debe cumplir que:}
+        \begin{enumerate}
+          \item El punto $P_0$ debe pertenecer al conjunto de nivel, es decir satisfacer las ecc.
+          \item Definir mis ecuaciones vectoriales $$ \vec{H}(x,y,u,v)= \begin{pmatrix} F(x,y,u,v)\\G(x,y,u,v) \end{pmatrix} $$
+        \textcolor{blue}{$\vec{H}(x,y,u,v)$ debe ser $\mathcal{C}^1$}
+        \item Si el determinante es distinto de 0
+        $$ \left[ \frac{\partial(F,G)}{\partial(u,v)} \right] =\begin{vmatrix} f_u & f_v \\ g_u & g_v\end{vmatrix}  $$
+        \end{enumerate}
+        
+    \item{FORMA LARGA: Aplicando teorema de la función ímplicita para conocer $u_x, u_y, v_x, v_y$}
+        \begin{enumerate}
+        
+         \item {Defino mi sistema}
+        %SISTEMA %
+        $$ \vec{H}(x,y,u,v): \begin{pmatrix} 0&0 \\0&0 \end{pmatrix} =
+        \begin{pmatrix} F_x&F_y&F_u&F_v\\ G_x&G_y&G_u&G_v \end{pmatrix} \bigg|_{h(x,y)} \cdot \begin{pmatrix} 1&0 \\0&1 \\ u_x&u_y \\ v_x&v_y \end{pmatrix} \bigg|_{(x,y)}$$
+        
+        \item {Multiplicamos matrices y separamos la suma}
+         $$ \begin{pmatrix} 0&0 \\0&0 \end{pmatrix} = \begin{pmatrix} F_x&F_y \\ G_x&G_y \end{pmatrix} \bigg|_{h(x,y)} +  \begin{pmatrix} F_u&F_v\\ G_u&G_v \end{pmatrix} \bigg|_{h(x,y)} \cdot \begin{pmatrix} u_x&u_y \\ v_x&v_y \end{pmatrix} \bigg|_{(x,y)}$$
+        
+        \item {Despejamos la matriz de las derivadas parciales que no conocemos $u_x, u_y, v_x, v_y$}
+           $$ - \begin{pmatrix} F_x&F_y \\ G_x&G_y \end{pmatrix} \bigg|_{h(x,y)} = \begin{pmatrix} F_u&F_v\\ G_u&G_v \end{pmatrix} \bigg|_{h(x,y)} \cdot \begin{pmatrix} u_x&u_y \\ v_x&v_y \end{pmatrix} \bigg|_{(x,y)}$$
+           \begin{itemize}
+           \item Recordar de Álgebra II que para despejar una matriz NO se puede solo pasar dividiendo \textcolor{red}{(ESTO NO EXISTE PARA LAS MATRICES)}, para eso se debe multiplicar por la inversa para poder despejar una matriz. 
+           \item \textcolor{blue}{OJO:} Tener cuidado por \textcolor{blue}{donde} multiplican la inversa (derecha o izquierda), ya que la multiplicación de matrices \textcolor{red}{NO ES CONMUTATIVA}
+        
+           \item Sabiendo eso y que ${A}^{-1}\cdot A= I_n$ entonces debemos multiplicar la matriz inversa por la IZQUIERDA
+
+            $$ - {\begin{pmatrix} F_u&F_v\\ G_u&G_v \end{pmatrix} }^{-1} \cdot \begin{pmatrix} F_x&F_y \\ G_x&G_y \end{pmatrix} \bigg|_{h(x,y)} = \begin{pmatrix} u_x&u_y \\ v_x&v_y \end{pmatrix} \bigg|_{(x,y)}$$
+           \item Recordar de Álgebra II que para encontrar la matriz inversa de (2x2), se deben intercambiar las posiciones $a $ y $b$, cambiar el signo a las posiciones $c $ y $d$ y multiplicar por $ \frac{1}{det(A)}$, es decir:
+            $$ A= \begin{pmatrix} a&b\\ c&d \end{pmatrix}$$
+            $$ {A}^{-1} = \frac{1}{(ad - cb)} \cdot \begin{pmatrix} d& -b\\ -c&a \end{pmatrix}$$
+            \item Posteriormente la matriz de las derivadas parciales que no conozco ya despejada queda así:
+            $$ -  \frac{1}{(F_u G_v - F_vG_u)}\begin{pmatrix} G_v&-F_v\\ -G_u&F_u \end{pmatrix}  \cdot \begin{pmatrix} F_x&F_y \\ G_x&G_y \end{pmatrix} \bigg|_{h(x,y)} = \begin{pmatrix} u_x&u_y \\ v_x&v_y \end{pmatrix} \bigg|_{(x,y)}$$
+            $$ {A}^{-1} = \frac{1}{(ad - cb)} \cdot \begin{pmatrix} d& -b\\ -c&a \end{pmatrix}$$
+            \end{itemize} 
+        \item Finalmente solo queda reemplzar el punto que nos entregan y multiplicar las matrices para que asi puedan conocer los valores de $u_x, u_y, v_x, v_y$
+        \end{enumerate}
+    \item{FORMA CORTA: Aplicando teorema de la función ímplicita para conocer $u_x, u_y, v_x, v_y$}
+    Por regla de Cramer
+    \\\\
+      $ u_x(a,b) = - \frac{\frac{\partial (F,G)}{\partial (x,v)}}{\frac{\partial (F,G)}{\partial (u,v)}} $  
+      $u_y(a,b) =   -\frac{\frac{\partial (F,G)}{\partial (y,v)}}{\frac{\partial (F,G)}{\partial (u,v)}} $ 
+      $ v_x(a,b) =  -\frac{\frac{\partial (F,G)}{\partial (x,u)}}{\frac{\partial (F,G)}{\partial (u,v)}} $
+      $ v_y(a,b) =  -\frac{\frac{\partial (F,G)}{\partial (y,u)}}{\frac{\partial (F,G)}{\partial (u,v)}} $ 
+      
+    \textbf{¿Cómo se construyen las derivadas parciales?}
+    
+    \textcolor{blue}{Filas $\to$ Funciones}  \textcolor{green}{Columnas $\to$ Variables}
+    \vspace{1cm}
+        \begin{itemize}
+           \item {Notar que $\frac{\partial (F,G)}{\partial (u,v)}$ es el Jacobiano respecto a u y v, que se calcula en el punto 3 del Teorema}
+           \item{Para el numerador, quita la variable que estás derivando (por ejemplo, si buscas $u_x$, quita la columna $u$ $$\frac{\partial (F,G)}{\partial ( ,v)}$$}
+           \item{En el hueco que quedó, pon la variable de abajo $u_\textbf{x}$ (la $x$ o la $y$ según corresponda) \textcolor{red}{Recordar el signo}
+           $$\frac{\partial (F,G)}{\partial ( x,v)}$$}
+           
+        \end{itemize}
+    \end{itemize}
+\newpage   
+\item \textbf{Optimización (Máximos y Mínimos)}
+\begin{itemize}
+    \item \textbf{Sin Restricciones (Hessiano):}
+    Puntos críticos: $\nabla f = (0,0)$.
+    Matriz Hessiana $H = \begin{pmatrix} f_{xx} & f_{xy} \\ f_{yx} & f_{yy} \end{pmatrix}$. Sea $D = \det(H) = f_{xx}f_{yy} - (f_{xy})^2$.
+    \begin{itemize}
+        \item $D > 0$ y $f_{xx} > 0 \implies$ Mínimo Local.
+        \item $D > 0$ y $f_{xx} < 0 \implies$ Máximo Local.
+        \item $D < 0 \implies$ Punto de Silla.
+    \end{itemize}
+    
+    \item \textbf{Con Restricciones (Lagrange):}
+    Optimizar $f(x,y,z)$ sujeto a $g(x,y,z)=k$.
+    Sistema: $\nabla f = \lambda \nabla g$ junto con $g=k$.
+\end{itemize} 
+\end{itemize}
+
+
+
+\end{document}

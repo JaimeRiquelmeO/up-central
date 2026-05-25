@@ -1,0 +1,39 @@
+\begin{circuitikz}[
+    american,
+    scale=0.78,
+    transform shape,
+    line cap=round,
+    line join=round,
+    every node/.style={font=\small}
+]
+\ctikzset{bipoles/length=1.05cm}
+
+\coordinate (a) at (0,4);
+\coordinate (b) at (5.4,4);
+\coordinate (c) at (5.4,0);
+\coordinate (d) at (0,0);
+\coordinate (e) at (2.7,2.0);
+
+\draw (a) to[R] (b);
+\draw (a) to[R] (d);
+\draw (d) to[R] (c);
+\draw (e) to[R] (b);
+\draw (d) to[R] (e);
+\draw (a) to[battery1] (e);
+\draw (c) to[battery1] (b);
+\draw[-{Latex[length=2.2mm]}, thick] (5.05,1.55) -- node[midway, left] {$\mathcal{E}_1$} (5.05,2.55);
+\draw[-{Latex[length=2.2mm]}, thick] (1.58,2.58) -- (0.88,3.10);
+\node[left=2pt] at (1.55,2.55) {$\mathcal{E}_2$};
+
+\node[above=5pt] at ($(a)!0.5!(b)$) {$R_2$};
+\node[left=6pt] at ($(a)!0.5!(d)$) {$R_1$};
+\node[below=6pt] at ($(d)!0.5!(c)$) {$R_5$};
+\node[right=8pt] at ($(e)!0.5!(b)$) {$R_3$};
+\node[left=8pt] at ($(d)!0.5!(e)$) {$R_4$};
+
+\node[above left=4pt] at (a) {$a$};
+\node[above right=4pt] at (b) {$b$};
+\node[below right=4pt] at (c) {$c$};
+\node[below left=4pt] at (d) {$d$};
+\node[below=4pt] at (e) {$e$};
+\end{circuitikz}

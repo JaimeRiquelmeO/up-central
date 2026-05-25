@@ -1,0 +1,44 @@
+\begin{circuitikz}[
+    american,
+    scale=0.9,
+    transform shape,
+    line cap=round,
+    line join=round,
+    every node/.style={font=\small}
+]
+\ctikzset{bipoles/length=1.05cm}
+\tikzset{
+    contact/.style={circle, draw=red!70!black, fill=white, line width=0.8pt, inner sep=1.7pt}
+}
+
+\coordinate (BL) at (0,0);
+\coordinate (TL) at (0,3.2);
+\coordinate (S1) at (0.75,3.2);
+\coordinate (S2) at (2.15,3.2);
+\coordinate (N) at (2.65,3.2);
+\coordinate (CR) at (4.65,3.2);
+\coordinate (BR) at (4.65,0);
+\coordinate (BC) at (2.65,0);
+
+\draw (BL) -- (0,1.15);
+\draw[green!55!black, line width=1pt] (-0.43,2.15) -- (0.43,2.15);
+\draw[green!55!black, line width=1pt] (-0.25,1.68) -- (0.25,1.68);
+\draw (0,2.15) -- (TL);
+\draw (0,1.68) -- (0,1.15);
+\node[left=2pt] at (0,2.15) {$+$};
+\node[left=2pt] at (0,1.68) {$-$};
+\node[right=7pt] at (0,1.92) {$\mathcal{E}$};
+
+\draw (TL) -- (S1);
+\draw[red!75!black, line width=1pt] (S2) -- ++(-0.95,0.35);
+\draw (S2) -- (N);
+\node[contact] at (S1) {};
+\node[contact] at (S2) {};
+\node[above=8pt] at ($(S1)!0.45!(S2)$) {$S$};
+
+\draw (N) to[C] node[midway, above=8pt] {$C$} (CR);
+\draw (N) to[R] node[midway, left=8pt] {$R_2$} (BC);
+\draw (CR) to[R] node[midway, right=8pt] {$R_3$} (BR);
+\draw (BL) to[R] node[midway, below=8pt] {$R_1$} (BC);
+\draw (BC) -- (BR);
+\end{circuitikz}

@@ -1,0 +1,33 @@
+\begin{circuitikz}[
+    american,
+    scale=0.86,
+    transform shape,
+    line cap=round,
+    line join=round,
+    every node/.style={font=\small}
+]
+\ctikzset{bipoles/length=1.0cm}
+\tikzset{terminal/.style={circle, fill=black, inner sep=2pt}}
+
+\coordinate (a) at (-0.7,1.55);
+\coordinate (L) at (0,1.55);
+\coordinate (LT) at (0,3.0);
+\coordinate (LB) at (0,0.1);
+\coordinate (RT) at (5.2,3.0);
+\coordinate (RB) at (5.2,0.1);
+\coordinate (R) at (5.2,1.55);
+\coordinate (b) at (7.3,1.55);
+
+\draw (a) -- (L) -- (LT);
+\draw (L) -- (LB);
+\draw (RT) -- (R) -- (RB);
+\draw (R) to[C] node[midway, above=8pt] {$20.0\,\mu\mathrm{F}$} (b);
+
+\draw (LT) to[C] node[midway, above=8pt] {$15.0\,\mu\mathrm{F}$} ++(2.1,0)
+    -- ++(0.6,0)
+    to[C] node[midway, above=8pt] {$3.00\,\mu\mathrm{F}$} (RT);
+\draw (LB) to[C] node[midway, below=8pt] {$6.00\,\mu\mathrm{F}$} (RB);
+
+\node[terminal, label={[font=\small]below:$a$}] at (a) {};
+\node[terminal, label={[font=\small]below:$b$}] at (b) {};
+\end{circuitikz}
