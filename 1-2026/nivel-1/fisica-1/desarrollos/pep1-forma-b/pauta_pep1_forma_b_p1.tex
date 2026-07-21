@@ -1,0 +1,230 @@
+% ============================================================
+%  PAUTA PEP 1 — FISICA I (FORMA B) — SOLO PROBLEMA 1
+%  Usach Premium
+%  Compila con: pdflatex pauta_pep1_forma_b_p1.tex  (2 veces)
+% ============================================================
+
+\documentclass[letterpaper, 11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{eso-pic}
+\usepackage{tikz}
+\usetikzlibrary{patterns, arrows.meta, decorations.pathmorphing, calc, babel}
+\tcbuselibrary{skins, breakable}
+
+\geometry{letterpaper, margin=2cm, top=3cm, bottom=2.5cm, headheight=2cm}
+
+\definecolor{celesteSuave}{HTML}{F0F7FF}
+\definecolor{azulFuerte}{HTML}{1A5276}
+\definecolor{verdePaso}{HTML}{1E8449}
+\definecolor{rojoAlerta}{HTML}{C0392B}
+\definecolor{naranjaAcento}{HTML}{D35400}
+\definecolor{enlace}{HTML}{1A5276}
+
+\newcommand{\logoup}{./images/logo_up.png}
+\newcommand{\logousach}{./images/logo_usach.png}
+\newcommand{\logofondo}{./images/logo_up.png}
+
+\newcommand{\institucion}{Usach Premium}
+\newcommand{\curso}{Fisica I para Ingenieria}
+\newcommand{\guiasnumero}{Pauta PEP 1 --- Forma B --- Problema 1}
+\newcommand{\semestre}{1er. Semestre de 2026}
+\newcommand{\preparadopor}{Usach Premium.}
+\newcommand{\webinstitucion}{www.usachpremium.cl}
+\newcommand{\instagraminstitucion}{https://www.instagram.com/usach.premium}
+\newcommand{\transparencia}{0.04}
+\newcommand{\fraseportada}{"Por y para estudiantes"}
+
+\hypersetup{colorlinks=true, linkcolor=enlace, urlcolor=enlace,
+            citecolor=enlace, pdfborder={0 0 0}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\includegraphics[height=1.2cm]{\logoup}}
+\fancyhead[R]{%
+    \begin{minipage}[b]{0.45\textwidth}
+        \raggedleft\fontsize{9pt}{11pt}\selectfont
+        \textbf{\color{azulFuerte}\institucion} \\
+        \curso\ --- \guiasnumero \\
+        \textit{\color{gray}@usach.premium}
+    \end{minipage}\hspace{0.1cm}%
+    \includegraphics[height=1.2cm]{\logousach}}
+\fancyfoot[L]{\fontsize{9pt}{11pt}\selectfont \textit{\fraseportada}}
+\fancyfoot[R]{\fontsize{9pt}{11pt}\selectfont P\'agina \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}
+                                   \renewcommand{\footrulewidth}{0pt}}
+
+\newcommand{\MarcaAgua}{
+    \AddToShipoutPicture{
+        \AtPageCenter{
+            \begin{tikzpicture}[remember picture, overlay]
+                \node[opacity=\transparencia] at (0,0)
+                    {\includegraphics[width=0.7\textwidth]{\logofondo}};
+            \end{tikzpicture}}}}
+
+\newtcolorbox{paso}[2][]{
+    colback=celesteSuave, colframe=azulFuerte, fonttitle=\bfseries,
+    coltitle=white, colbacktitle=azulFuerte,
+    title={\large Paso #2},
+    arc=6pt, boxrule=1pt, enhanced, breakable, #1
+}
+\newtcolorbox{justif}[1]{
+    colback=naranjaAcento!8, colframe=naranjaAcento, fonttitle=\bfseries\small,
+    title={#1}, arc=5pt, boxrule=0.8pt, enhanced, breakable
+}
+\newtcolorbox{enunciadobox}[1]{
+    colback=azulFuerte!10, colframe=azulFuerte, fonttitle=\bfseries,
+    coltitle=white, colbacktitle=azulFuerte, title={#1},
+    arc=7pt, boxrule=1.2pt, enhanced, breakable
+}
+\newtcolorbox{resultado}{
+    colback=azulFuerte, colframe=azulFuerte, colupper=white,
+    arc=10pt, boxrule=1.5pt, enhanced, drop shadow={black!15}
+}
+
+\begin{document}
+\thispagestyle{plain}
+\MarcaAgua
+
+\AddToShipoutPicture*{%
+    \put(54,700){\includegraphics[width=2cm]{\logoup}}
+    \put(420,706){\includegraphics[width=5cm]{\logousach}}}
+
+\vspace*{0.5cm}
+\begin{center}
+    \color{azulFuerte}
+    {\huge \textbf{PAUTA DE CORRECCI\'ON}} \\[0.4cm]
+    {\LARGE \textbf{PEP 1 --- \curso}} \\[0.3cm]
+    {\Large Forma B \quad$\bullet$\quad Problema 1} \\[0.6cm]
+    {\footnotesize\color{gray} Considera $g=9{,}8\ \mathrm{m/s^2}$. Resultados finales aproximados a 2 decimales.}
+\end{center}
+
+\vspace{0.4cm}
+
+\begin{enunciadobox}{Problema 1 --- Cami\'on de reparto aut\'onomo \hfill (20 puntos)}
+Cami\'on de masa $M=1052\,\mathrm{kg}$ que se mueve seg\'un el gr\'afico $v$-$t$
+(tres etapas). Un vehículo de apoyo ($m=2510\,\mathrm{kg}$) parte del mismo
+origen con retraso de $2\,\mathrm{s}$, rapidez inicial $v_0$ desconocida y
+aceleraci\'on $\vec{a}=(3{,}0\,\mathrm{m/s^2})\,\hat{\imath}$. Ambos se encuentran
+en la \textbf{segunda etapa} y en ese instante el apoyo alcanza $v_f=26\,\mathrm{m/s}$.
+\end{enunciadobox}
+
+\medskip
+\begin{center}
+\begin{tikzpicture}[x=0.28cm,y=0.13cm]
+  \draw[-{Latex[length=2mm]},line width=0.6pt] (0,0) -- (30,0) node[below left=1pt]{$t\,(\mathrm{s})$};
+  \draw[-{Latex[length=2mm]},line width=0.6pt] (0,0) -- (0,32) node[right=2pt]{$v\,(\mathrm{m/s})$};
+  \draw[dashed] (0,24) -- (26,24);
+  \draw[dashed] (8,0) -- (8,24);
+  \draw[dashed] (20,0) -- (20,24);
+  \draw[line width=1pt, azulFuerte] (0,0) -- (8,24) -- (20,24) -- (26,0);
+  \node[below] at (8,0) {$8$}; \node[below] at (20,0) {$20$}; \node[below] at (26,0) {$26$};
+  \node[left] at (0,24) {$24$}; \node[below left] at (0,0){$0$};
+  \node[verdePaso] at (4,13) {\scriptsize Etapa 1};
+  \node[verdePaso] at (14,26) {\scriptsize Etapa 2};
+  \node[verdePaso] at (24,13) {\scriptsize Etapa 3};
+\end{tikzpicture}
+\end{center}
+
+% ------------------- P1 (a) -------------------
+\begin{paso}{1.a: Aceleraciones $a_1$ y $a_3$ (pendiente del gr\'afico)}
+La aceleraci\'on es la pendiente de la recta $v$-$t$ en cada tramo.
+
+\textbf{Etapa 1} ($0\le t\le 8$): la velocidad pasa de $0$ a $24\,\mathrm{m/s}$:
+\[
+a_1=\frac{\Delta v}{\Delta t}=\frac{24-0}{8-0}=3\ \mathrm{m/s^2}.
+\]
+\textbf{Etapa 3} ($20\le t\le 26$): la velocidad pasa de $24$ a $0\,\mathrm{m/s}$:
+\[
+a_3=\frac{0-24}{26-20}=\frac{-24}{6}=-4\ \mathrm{m/s^2}.
+\]
+\begin{resultado}\centering
+$\displaystyle a_1 = 3{,}00\ \mathrm{m/s^2}\qquad\text{y}\qquad a_3 = -4{,}00\ \mathrm{m/s^2}$
+\end{resultado}
+\end{paso}
+
+% ------------------- P1 (b) -------------------
+\begin{paso}{1.b: Ecuaciones de posici\'on $x(t)$ (origen en la posici\'on inicial del cami\'on)}
+Se usa $x(t)=x_0+v_0 t+\tfrac12 a t^2$ en cada tramo, encadenando posici\'on y
+velocidad al final de cada etapa (la etapa 2 es MRU con $v=24\,\mathrm{m/s}$).
+
+\textbf{Etapa 1} ($0\le t\le 8$): parte del reposo en el origen, $a_1=3$:
+\[
+x_1(t)=\tfrac12(3)t^2=1{,}5\,t^2,\qquad x_1(8)=96\ \mathrm{m}.
+\]
+\textbf{Etapa 2} ($8\le t\le 20$): parte de $96\,\mathrm{m}$ con $v=24$ constante:
+\[
+x_2(t)=96+24\,(t-8),\qquad x_2(20)=384\ \mathrm{m}.
+\]
+\textbf{Etapa 3} ($20\le t\le 26$): parte de $384\,\mathrm{m}$ con $v=24$ y $a_3=-4$:
+\[
+x_3(t)=384+24\,(t-20)-2\,(t-20)^2,\qquad x_3(26)=456\ \mathrm{m}.
+\]
+\begin{resultado}\centering
+$\displaystyle x_1(t)=1{,}5\,t^2\quad;\quad x_2(t)=96+24(t-8)\quad;\quad x_3(t)=384+24(t-20)-2(t-20)^2$
+\end{resultado}
+\end{paso}
+
+% ------------------- P1 (c) -------------------
+\begin{paso}{1.c: Rapidez inicial $v_0$ del apoyo y posici\'on de encuentro $x^{*}$}
+El apoyo parte en $t=2\,\mathrm{s}$. Con $\tau=t-2$ (su tiempo de movimiento) y $a=3$:
+\[
+v_{\text{apoyo}}(\tau)=v_0+3\tau,\qquad
+x_{\text{apoyo}}(\tau)=v_0\,\tau+\tfrac12(3)\tau^2 .
+\]
+
+\textbf{Condici\'on 1 (rapidez en el encuentro).} El apoyo alcanza $v_f=26\,\mathrm{m/s}$:
+\[
+v_0+3\tau=26 \;\Rightarrow\; v_0=26-3\tau. \tag{i}
+\]
+
+\textbf{Condici\'on 2 (misma posici\'on en la etapa 2).} El encuentro ocurre en la
+etapa 2 del cami\'on, donde $x_{\text{cam}}=96+24\,(t-8)=96+24(\tau-6)$:
+\[
+v_0\tau+1{,}5\,\tau^2 = 96+24(\tau-6). \tag{ii}
+\]
+
+Reemplazando (i) en (ii):
+\[
+(26-3\tau)\tau+1{,}5\tau^2 = 24\tau-48
+\;\Longrightarrow\; 1{,}5\,\tau^2-2\tau-48=0
+\;\Longleftrightarrow\; 3\tau^2-4\tau-96=0.
+\]
+\[
+\tau=\frac{4+\sqrt{16+1152}}{6}=\frac{4+\sqrt{1168}}{6}\approx 6{,}36\ \mathrm{s}
+\;\Rightarrow\; t^{*}=\tau+2\approx 8{,}36\ \mathrm{s}.
+\]
+\begin{justif}{Verificaci\'on de la etapa}
+$t^{*}\approx 8{,}36\,\mathrm{s}\in[8,20]$: el encuentro efectivamente ocurre en la
+\textbf{segunda etapa}, como pide el enunciado.
+\end{justif}
+
+Rapidez inicial y posici\'on de encuentro:
+\[
+v_0=26-3(6{,}36)\approx 6{,}91\ \mathrm{m/s},\qquad
+x^{*}=96+24(8{,}36-8)\approx 104{,}70\ \mathrm{m}.
+\]
+\begin{resultado}\centering
+$\displaystyle v_0 \approx 6{,}91\ \mathrm{m/s}\qquad\text{y}\qquad x^{*}\approx 104{,}70\ \mathrm{m}$
+\end{resultado}
+\end{paso}
+
+\vspace{0.6cm}
+\begin{center}
+    \small\textbf{Usach Premium} --- ¡Nos vemos en la ayudant\'ia! \\
+    \textit{"Por y para estudiantes."}
+\end{center}
+
+\end{document}

@@ -1,0 +1,152 @@
+\documentclass[9pt]{article}
+\usepackage[a4paper,top=8mm,bottom=8mm,left=12mm,right=12mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage[scaled=0.95]{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{sansmath}
+\sansmath
+\usepackage{amsmath,amssymb}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning}
+\usepackage{tabularx,array}
+\usepackage{enumitem}
+\usepackage{ragged2e}
+\usepackage{microtype}
+\usepackage{xcolor}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{2pt}
+\setlist[itemize]{leftmargin=3.4mm,itemsep=0.3mm,topsep=0mm,parsep=0mm,partopsep=0mm,label=\raisebox{0.2ex}{\scriptsize$\blacksquare$}}
+\newcommand{\problem}[1]{\textbf{Problema #1:}}
+\newcommand{\vect}[1]{\vec{#1}}
+\newcommand{\tightline}{\vspace{0.55mm}\hrule height 0.45pt\vspace{0.75mm}}
+\begin{document}
+\fontsize{9.65}{12.45}\selectfont
+
+% Encabezado
+\begin{minipage}[c]{0.18\textwidth}
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \draw[line width=0.45pt] (0,0) circle (0.66);
+  \node[font=\bfseries\fontsize{8.2}{8.3}\selectfont] at (0,0.16) {USACH};
+  \node[font=\bfseries\fontsize{3.25}{3.45}\selectfont,align=center] at (0,-0.12) {DEPARTAMENTO\\DE FÍSICA};
+\end{tikzpicture}
+\end{minipage}%
+\begin{minipage}[c]{0.48\textwidth}
+\centering
+{\bfseries\fontsize{13.2}{13.5}\selectfont PEP 1}\par
+{\fontsize{10.0}{10.4}\selectfont Forma B}\par
+{\fontsize{10.0}{10.4}\selectfont Tiempo: 80 min.}
+\end{minipage}%
+\begin{minipage}[c]{0.34\textwidth}
+\raggedleft
+{\bfseries\fontsize{9.4}{9.8}\selectfont Física I para Ingeniería}\par
+{\bfseries\fontsize{9.2}{9.6}\selectfont Cód: 10103-10140}\par
+{\bfseries\fontsize{9.2}{9.6}\selectfont 1er Semestre, 2026}
+\end{minipage}
+
+\vspace{1.2mm}
+
+% Caja de indicaciones
+\setlength{\fboxsep}{1.4mm}
+\noindent\fbox{%
+\begin{minipage}{0.976\textwidth}
+\begin{tabularx}{\textwidth}{@{}X@{\hspace{5mm}}X@{}}
+\begin{minipage}[t]{\linewidth}
+\textbf{Indicaciones:}
+\begin{itemize}
+  \item Tu procedimiento debe ser \textbf{CLARO Y ORDENADO}. Identifica claramente a qué inciso y problema corresponde cada desarrollo.
+  \item Desarrollos con lápiz grafito no serán re-corregidos.
+  \item Respuestas numéricas deben ser encerradas en un recuadro y presentar unidades de medida en S.I. (de no estar presente no podrá obtener el puntaje completo del problema).
+\end{itemize}
+\end{minipage}
+&
+\begin{minipage}[t]{\linewidth}
+\vspace{2.2mm}
+\begin{itemize}
+  \item Considera $g=9{,}8\,\mathrm{m/s^2}$, en el caso que sea necesario utilizarlo.
+  \item Sólo se permite uso de calculadora personal no programable.
+  \item Solamente aproxima tu \textbf{RESULTADO FINAL} y utiliza 2 decimales para ello.
+\end{itemize}
+\end{minipage}
+\end{tabularx}
+\vspace{0.55mm}\hrule height 0.35pt\vspace{0.7mm}
+\centering\bfseries\fontsize{8.4}{9.3}\selectfont
+Sólo se permiten preguntas relacionadas exclusivamente con la redacción del texto. Las personas a cargo de la sala durante la evaluación NO tienen permitido responder consultas acerca del contenido que se evalúa y la Coordinación no asumirá responsabilidad por cualquier orientación o comentario emitido.
+\end{minipage}}
+
+\vspace{1.15mm}
+
+% Problema 1 y gráfico
+\begin{minipage}[t]{0.59\textwidth}
+\justifying
+\problem{1} Se hacen pruebas para la implementación de un camión de reparto autónomo de masa $M=1052\,\mathrm{kg}$ y su batería tiene una autonomía de 6 horas. Este utiliza cámaras con inteligencia artificial que le indican cuando acelerar o frenar al acercarse a estaciones de entrega o retiro de paquetes. Como primer ensayo, el camión se desplaza en línea recta entre dos estaciones. El GPS del camión presenta siguiente gráfico $v$ vs. $t$, que describe su movimiento completo en tres etapas. Parte del ensayo es simular una situación alta demanda y se manda un segundo vehículo autónomo de apoyo de masa $m=2510\,\mathrm{kg}$ que parte desde el mismo origen con un retraso de 2 segundos, a velocidad inicial $v_0$ desconocida y aceleración constante $\vect{a}=(3{,}0\,\mathrm{m/s^2})\,\hat{\imath}$. Ambos se encuentran una vez en la segunda etapa y el vehículo autónomo de apoyo alcanza una rapidez de $v_f=26\,\mathrm{m/s}$.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.385\textwidth}
+\centering
+\vspace{-0.5mm}
+\begin{tikzpicture}[x=0.235cm,y=0.105cm]
+  \draw[-{Latex[length=2mm]},line width=0.58pt] (0,0) -- (28.4,0);
+  \node[above left=1pt,font=\fontsize{8.2}{8.2}\selectfont] at (28.0,0) {$t\,(\mathrm{s})$};
+  \draw[-{Latex[length=2mm]},line width=0.58pt] (0,0) -- (0,31) node[right=2pt,font=\fontsize{8.2}{8.2}\selectfont] {$v\,(\mathrm{m/s})$};
+  \draw[dashed,line width=0.35pt] (0,24) -- (28,24);
+  \draw[dashed,line width=0.35pt] (8,0) -- (8,30);
+  \draw[dashed,line width=0.35pt] (20,0) -- (20,30);
+  \draw[line width=0.78pt] (0,0) -- (8,24) -- (20,24) -- (26,0);
+  \node[below left=1pt,font=\fontsize{7.5}{7.5}\selectfont] at (0,0) {$0$};
+  \node[below=2pt,font=\fontsize{7.5}{7.5}\selectfont] at (8,0) {$8$};
+  \node[below=2pt,font=\fontsize{7.5}{7.5}\selectfont] at (20,0) {$20$};
+  \node[below=2pt,font=\fontsize{7.5}{7.5}\selectfont] at (26,0) {$26$};
+  \node[left=2pt,font=\fontsize{7.5}{7.5}\selectfont] at (0,24) {$24$};
+\end{tikzpicture}
+\vspace{-0.7mm}
+
+{\fontsize{8.2}{8.7}\selectfont Figura 1: Gráfica velocidad-tiempo.}
+\end{minipage}
+
+\vspace{0.55mm}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X>{\raggedleft\arraybackslash}p{25mm}@{}}
+(a) Determina la aceleración del camión en la primera y en la tercera etapa, $(a_1)$ y $(a_3)$, respectivamente. & (5 puntos)\\[-0.15mm]
+(b) Utilizando los resultados anteriores, expresa las ecuaciones de posición $x(t)$ para cada una de esas etapas, tomando como origen la posición inicial del camión. & (3 puntos)\\[-0.15mm]
+(c) Determina la rapidez inicial $v_0$ del vehículo autónomo de apoyo y la posición $x^{*}$ del encuentro. & (12 puntos)
+\end{tabularx}
+\tightline
+
+% Problema 2
+\justifying
+\problem{2} Un cohete de prueba se dispara verticalmente desde un pozo. El lanzamiento consta de cuatro etapas. En la primera, el cohete comienza su movimiento con una rapidez inicial de $V_{I0}=70\,\mathrm{m/s}$ a nivel del suelo. Una vez alcanzada la altura máxima en esta primera etapa, comienza la segunda etapa; el cohete enciende sus motores y acelera a $a_{II}=5\,\mathrm{m/s^2}$ hasta que alcanza una altitud de $h=1000\,\mathrm{m}$. En este punto se apagan los motores de propulsión y el cohete queda solamente bajo la acción de la gravedad en la tercera etapa. Finalmente, justo antes de volver a encontrarse con el piso, se encienden los motores para frenar uniformemente el movimiento y aterrizar a salvo, frenando de tal manera que justo al momento que hace contacto con el suelo el cohete queda en reposo. La etapa 4 inicia a una altura $H=300\,\mathrm{m}$ sobre el nivel del suelo.
+
+\vspace{0.5mm}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X>{\raggedleft\arraybackslash}p{25mm}@{}}
+(a) Determina la altura máxima $y_{\max}$ que alcanza el cohete. & (10 puntos)\\[-0.15mm]
+(b) Si $y_{\max}=1382{,}65\,\mathrm{m}$, determina la \underline{velocidad} con la que el cohete inicia la etapa final de aceleración, $\vect{v}_{IV}$, en su forma analítica. & (6 puntos)\\[-0.15mm]
+(c) Si la rapidez con la que comienza la etapa IV es $v_{IV}=145{,}67\,\mathrm{m/s}$, determina analíticamente la aceleración ($\vect{a}_{\mathrm{final}}$) del cohete en la última etapa de aterrizaje. & (4 puntos)
+\end{tabularx}
+\tightline
+
+% Problema 3
+\justifying
+\problem{3} Un equipo de ingenieros está delimitando el terreno para una construcción. El desplazamiento total requerido para completar el cierre perimetral no se conoce directamente y debe ser calculado a partir de las etapas previas del recorrido realizado por un dron de reconocimiento. El dron parte desde el punto de origen (estación base) y realiza los siguientes desplazamientos sucesivos. $\vect{A}$: $90\,\mathrm{m}$ en una dirección de $37^{\circ}$ al Norte del Este, $\vect{B}$: $70\,\mathrm{m}$ en una dirección de $53^{\circ}$ al Norte del Oeste y $\vect{C}$ un tercer tramo que no fue registrado por el GPS. Se sabe que, tras realizar estos tres desplazamientos, el dron se encuentra exactamente a $\vect{D}$: $40\,\mathrm{m}$ en dirección Sur respecto a la estación base.
+
+\vspace{0.5mm}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X>{\raggedleft\arraybackslash}p{25mm}@{}}
+(a) Determina, de manera analítica, los desplazamientos $\vect{A}$, $\vect{B}$ y $\vect{D}$. & (6 puntos)\\[-0.15mm]
+(b) Utilizando los resultados del inciso anterior, determina de manera analítica $\vect{C}$. & (8 puntos)\\[-0.15mm]
+(c) Determina la magnitud y la dirección, con respecto al eje $+x$ (Este), del desplazamiento $\vect{C}$. & (6 puntos)
+\end{tabularx}
+
+\vspace{0.55mm}\hrule height 0.45pt\vspace{0.65mm}
+\textbf{Ecuaciones:}
+\vspace{0.15mm}
+\[
+\sin\theta=\frac{\mathrm{cat.\ op.}}{\mathrm{hip.}}\ ;\qquad
+\cos\theta=\frac{\mathrm{cat.\ ady.}}{\mathrm{hip.}}\ ;\qquad
+\tan\theta=\frac{\mathrm{cat.\ op.}}{\mathrm{cat.\ ady.}}\ ;\qquad
+\vect{r}(t)=\vect{r}_0+\vect{v}_0t+\frac{1}{2}\vect{a}t^2\ ;\qquad
+\vect{v}(t)=\vect{v}_0+\vect{a}t\ ;\qquad
+v^2=v_0^2+2a(\Delta r)
+\]
+\end{document}

@@ -1,0 +1,415 @@
+% ============================================================
+% GUÍA 1 - ANÁLISIS ESTADÍSTICO
+% Formato institucional Usach Premium
+% ============================================================
+
+\documentclass[letterpaper,12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{eso-pic}
+\tcbuselibrary{skins,breakable}
+
+\geometry{letterpaper,margin=1.5cm,top=3cm,bottom=2.5cm,headheight=2cm}
+\setlist[enumerate,2]{itemsep=0.3em,topsep=0.4em}
+
+\definecolor{celesteSuave}{HTML}{F0F7FF}
+\definecolor{azulFuerte}{HTML}{1A5276}
+\definecolor{turquesaUsach}{HTML}{33CCCC}
+\definecolor{enlace}{HTML}{1A5276}
+
+\newcommand{\logoup}{./images/logo_up.png}
+\newcommand{\logousach}{./images/logo_usach.png}
+\newcommand{\logofondo}{./images/logo_up.png}
+
+\newcommand{\institucion}{Usach Premium}
+\newcommand{\curso}{Análisis Estadístico}
+\newcommand{\guiasnumero}{Guía 1 - Variables Aleatorias y Distribuciones}
+\newcommand{\semestre}{1er. Semestre de 2026}
+\newcommand{\preparadopor}{Nicolás Gatica}
+\newcommand{\webinstitucion}{www.usachpremium.cl}
+\newcommand{\instagraminstitucion}{https://www.instagram.com/usach.premium}
+\newcommand{\fraseportada}{"Por y para estudiantes"}
+
+\newcommand{\listacontenidos}{
+    \item[\color{azulFuerte}$\Rightarrow$] Distribuciones de probabilidad discretas y continuas
+    \item[\color{azulFuerte}$\Rightarrow$] Variables aleatorias conjuntas y densidades marginales
+    \item[\color{azulFuerte}$\Rightarrow$] Esperanza matemática, varianza y funciones lineales de costo
+    \item[\color{azulFuerte}$\Rightarrow$] Modelos estadísticos aplicados a la ingeniería
+}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=enlace,
+    urlcolor=enlace,
+    citecolor=enlace,
+    pdfborder={0 0 0}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\includegraphics[height=1.2cm]{\logoup}}
+\fancyhead[R]{%
+    \begin{minipage}[b]{0.42\textwidth}
+        \raggedleft
+        \fontsize{9pt}{11pt}\selectfont
+        \textbf{\color{azulFuerte}\institucion} \\
+        \curso\ -- \guiasnumero \\
+        \textit{\color{gray}@usach.premium}
+    \end{minipage}\hspace{0.1cm}%
+    \includegraphics[height=1.2cm]{\logousach}
+}
+\fancyfoot[L]{\fontsize{9pt}{11pt}\selectfont\textit{\fraseportada}}
+\fancyfoot[R]{\fontsize{9pt}{11pt}\selectfont Página \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\fancypagestyle{plain}{%
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+
+% Se activa una sola vez al comenzar las páginas interiores.
+\newcommand{\MarcaAgua}{%
+    \AddToShipoutPictureBG{%
+        \AtPageLowerLeft{%
+            \color{white}\rule{\paperwidth}{\paperheight}%
+        }%
+        \AtPageCenter{%
+            \makebox(0,0){%
+                \includegraphics[decodearray={0.94 1 0.94 1 0.94 1},width=0.7\textwidth]{\logofondo}%
+            }%
+        }%
+    }%
+}
+
+\newtcolorbox{resultbox}[1]{%
+    enhanced,
+    breakable,
+    colback=celesteSuave,
+    colframe=azulFuerte,
+    colbacktitle=azulFuerte,
+    coltitle=white,
+    title=\textbf{#1},
+    fonttitle=\bfseries,
+    boxrule=0.8pt,
+    arc=2mm,
+    before skip=8pt,
+    after skip=8pt
+}
+
+\newenvironment{introduccion}{%
+    \section*{Introducción}
+    \MarcaAgua
+}{}
+
+\newenvironment{ejercicios}{%
+    \section*{Ejercicios}
+}{}
+
+\newenvironment{resultados}{%
+    \newpage
+    \begin{center}
+        \begin{tcolorbox}[
+            colback=azulFuerte,
+            colframe=azulFuerte,
+            colupper=white,
+            width=0.8\textwidth,
+            center,
+            arc=10pt]
+            \centering\Large\textbf{RESULTADOS}
+        \end{tcolorbox}
+    \end{center}
+    \small
+}{}
+
+\begin{document}
+\pagecolor{white}
+\thispagestyle{plain}
+
+\AddToShipoutPicture*{%
+    \put(54,700){\includegraphics[width=2cm]{\logoup}}
+    \put(420,706){\includegraphics[width=5cm]{\logousach}}
+}
+
+\vspace*{0.5cm}
+
+\begin{center}
+    \color{azulFuerte}
+    {\huge\textbf{GUÍA DE EJERCICIOS}} \\[0.5cm]
+    {\Huge\textbf{\curso}} \\[0.3cm]
+    {\Large\guiasnumero} \\[1.5cm]
+
+    \begin{tcolorbox}[
+        colback=celesteSuave,
+        colframe=azulFuerte,
+        arc=10pt,
+        width=0.85\textwidth,
+        center,
+        boxrule=1.5pt]
+        \centering
+        \vspace{0.2cm}
+        {\Large\textbf{Contenidos}}
+        \vspace{0.3cm}
+        \color{black}
+        \begin{itemize}[leftmargin=2.3cm]
+            \listacontenidos
+        \end{itemize}
+        \vspace{0.2cm}
+    \end{tcolorbox}
+\end{center}
+
+\vspace{1.5cm}
+
+\begin{center}
+    {\Large\textbf{\semestre}} \\[0.8cm]
+    {\large\textbf{Preparado por: \preparadopor}}
+\end{center}
+
+\vfill
+
+\begin{center}
+    {\color{azulFuerte}\hrule height 0.5pt}
+    \vspace{0.3cm}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \textbf{Instagram:} \\
+        \small\href{\instagraminstitucion}{@usach.premium}
+    \end{minipage}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \textbf{Web:} \\
+        \small\href{https://\webinstitucion}{\webinstitucion}
+    \end{minipage}
+\end{center}
+
+\pagenumbering{arabic}
+\newpage
+
+\begin{introduccion}
+Estimados estudiantes, esta guía práctica tiene como objetivo fortalecer sus habilidades en el análisis de variables aleatorias y los principales modelos de distribución probabilística aplicados al ámbito de la ingeniería autónoma. Recuerden que todo el material oficial debe seguir el conducto de revisión correspondiente y estar disponible en la plataforma Uvirtual antes de su difusión general.
+\end{introduccion}
+
+\begin{ejercicios}
+
+\begin{enumerate}[leftmargin=*,itemsep=0.8em]
+
+    % --- EJERCICIO 1  ---
+    \item El peso neto de las bolsas de detergente envasadas por una tolva automatizada sigue una distribución Normal con media de 1000 gramos y desviación estándar de 15 gramos. Una bolsa es rechazada por control de calidad si pesa menos de 976 gramos.
+    \begin{enumerate}[label=\alph*)]
+        \item Si se elige una bolsa al azar, determine la probabilidad de que sea rechazada por control de calidad.
+        \item Si un supervisor toma una muestra aleatoria e independiente de 12 bolsas de la línea de empaque, ¿cuál es la probabilidad de que a lo más 2 de ellas sean rechazadas? 
+    \end{enumerate}
+
+    % --- EJERCICIO 2  ---
+    \item Un sistema de monitoreo automatizado detecta anomalías en una línea de producción de chips a razón de 1,5 anomalías por hora. Suponga que se cumplen las condiciones de un proceso de Poisson.
+    \begin{enumerate}[label=\alph*)]
+        \item Calcule la probabilidad de que en un turno de 4 horas se detecten por lo menos 3 anomalías.
+        \item Si en una hora específica se sabe que ocurrió al menos una anomalía, calcule la probabilidad de que se hayan registrado exactamente 2 anomalías en ese mismo intervalo.
+    \end{enumerate}
+
+    \newpage % Salto estratégico para mantener la limpieza estética visual
+
+    % --- EJERCICIO 3  ---
+    \item Sea $X$ una variable aleatoria continua que mide el desgaste (en mm) de una pieza de soporte mecánico, cuya función de distribución acumulada está dada por:
+    $$F(x) = \begin{cases} 0 & \text{si } x < 1 \\ 1 - \frac{1}{x^4} & \text{si } x \geq 1 \end{cases}$$
+    \begin{enumerate}[label=\alph*)]
+        \item Encuentre la función de densidad de probabilidad $f(x)$.
+        \item Determine el desgaste esperado de la pieza ($E[X]$) y su varianza ($V[X]$).
+    \end{enumerate}
+
+    % --- EJERCICIO 4  ---
+    \item Tomando los mismos parámetros de producción de la tolva automatizada del Ejercicio 1 (donde una bolsa es rechazada si su peso es inferior a 976 gramos):
+    \begin{enumerate}[label=\alph*)]
+        \item Calcule la probabilidad de que el operario deba revisar exactamente 5 bolsas hasta encontrar la primera bolsa rechazada.
+        \item Calcule la probabilidad de que el operario tenga que revisar más de 3 bolsas para encontrar la primera bolsa defectuosa.
+    \end{enumerate}
+
+    % --- EJERCICIO 5  ---
+    \item Un centro de datos analiza la cantidad de fallas mensuales en su servidor principal por errores de hardware ($X$) y por ataques de malware ($Y$). La distribución de probabilidad conjunta se presenta en la siguiente tabla:
+    $$\begin{array}{|c|c|c|c|c|}
+    \hline
+    \mathbf{X} \setminus \mathbf{Y} & \mathbf{0} & \mathbf{1} & \mathbf{2} & \mathbf{3} \\ \hline
+    \mathbf{0} & 0,05 & 0,08 & 0,07 & 0,05 \\ \hline
+    \mathbf{1} & 0,08 & 0,12 & 0,10 & 0,05 \\ \hline
+    \mathbf{2} & 0,10 & 0,15 & 0,10 & 0,05 \\ \hline
+    \end{array}$$
+    \begin{enumerate}[label=\alph*)]
+        \item Si en un mes se registra al menos una falla por hardware ($X \geq 1$), determine la probabilidad de que ocurran a lo más 2 ataques de malware ($Y \leq 2$).
+        \item Determine la distribución marginal de $X$ y calcule el valor esperado de fallas por hardware, $E[X]$.
+    \end{enumerate}
+
+    % --- EJERCICIO 6  ---
+    \item Un módulo crítico de control de un avión comercial cuenta con tres sistemas idénticos de respaldo que operan en paralelo de manera independiente. La duración (en años) de cada sistema se distribuye de forma Exponencial con una duración media de 2 años.
+    \begin{enumerate}[label=\alph*)]
+        \item Determine la probabilidad de que un componente individual dure menos de 6 meses (0,5 años).
+        \item Determine la probabilidad de que el módulo crítico falle por completo (todos los componentes fallen) antes de los 6 meses de vuelo.
+    \end{enumerate}
+
+    % --- EJERCICIO 7  ---
+    \item Un engineer realiza pruebas de estrés en un servidor web. La probabilidad de que una solicitud pesada sature el servidor y cause un error es de 0,15, y cada solicitud es independiente de las demás. Las pruebas se detienen inmediatamente cuando el servidor falla por tercera vez.
+    \begin{enumerate}[label=\alph*)]
+        \item Calcule la probabilidad de que el ingeniero deba realizar exactamente 10 solicitudes de prueba para dar por finalizada la sesión de estrés.
+        \item Calcule la probabilidad de que se requieran más de 5 solicitudes in total para alcanzar la detención del proceso.
+    \end{enumerate}
+
+    % --- EJERCICIO 8  ---
+    \item El tiempo de uso diario de la CPU principal ($X$) y de la memoria RAM ($Y$) en una estación de trabajo son variables continuas que se modelan bajo la siguiente función de densidad conjunta:
+    $$f(x, y) = \begin{cases} \frac{6}{5} \cdot (x^2 + y) & \text{si } 0 \leq x \leq 1, \; 0 \leq y \leq 1 \\ 0 & \text{en otro caso} \end{cases}$$
+    \begin{enumerate}[label=\alph*)]
+        \item Determine la función de densidad marginal de $X$, $f_X(x)$.
+        \item Calcule la probabilidad de que el consumo de RAM sea superior a 0,5 dado que la CPU se encuentra fija operando en el punto $X = 0,4$ (es decir, calcule $P(Y > 0,5 \mid X = 0,4)$).
+    \end{enumerate}
+
+    % --- EJERCICIO 9  ---
+    \item Utilizando la tabla de probabilidad conjunta del Ejercicio 5, la administración determina que el costo de reparación mensual asociado al servidor sigue la función lineal: $C = 200X + 350Y + 50$ (en USD), donde los 50 USD corresponden a un cargo fijo de mantenimiento técnico.
+    \begin{enumerate}[label=\alph*)]
+        \item Calcule la esperanza marginal de la variable $Y$, es decir, $E[Y]$.
+        \item Calcule el costo mensual esperado de reparación del centro de datos ($E[C]$).
+    \end{enumerate}
+
+    % --- EJERCICIO 10  ---
+    \item El diámetro exterior de los rodamientos de bolas fabricados por una planta metalúrgica se distribuye según una ley Normal con media $\mu = 20$ mm y una desviación estándar $\sigma = 0,05$ mm. Un rodamiento se considera óptimo si su diámetro se encuentra en el intervalo de tolerancia $[19,91 \text{ mm}; 20,09 \text{ mm}]$.
+    \begin{enumerate}[label=\alph*)]
+        \item Calcule la probabilidad de que un rodamiento elegido al azar cumpla con las especificaciones del intervalo de tolerancia.
+        \item ¿Cuál es el porcentaje de rodamientos de la planta que no cumplen con las especificaciones de calidad requeridas? 
+    \end{enumerate}
+
+    % --- EJERCICIO 11  ---
+    \item El tiempo de renderizado $X$ (en horas) de un software de simulación tridimensional posee la siguiente función de densidad de probabilidad ya normalizada:
+    $$f(x) = \begin{cases} \frac{1}{4}(4x - x^3) & \text{si } 0 \leq x \leq 2 \\ 0 & \text{en otro caso} \end{cases}$$
+    \begin{enumerate}[label=\alph*)]
+        \item Obtenga la Función de Distribución Acumulada ($F(x)$) definida por tramos.
+        \item Si una simulación ya lleva procesándose más de 0,5 horas, determine la probabilidad de que su renderizado finalice antes de 1,5 horas.
+    \end{enumerate}
+
+    % --- EJERCICIO 12  ---
+    \item Un proceso metalúrgico requiere el ensamble secuencial de dos estructuras independientes, cuyas longitudes respectivas son $X \sim N(\mu_X = 120\text{ cm}, \sigma_X^2 = 9\text{ cm}^2)$ e $Y \sim N(\mu_Y = 80\text{ cm}, \sigma_Y^2 = 16\text{ cm}^2)$. Se asume independencia entre los componentes.
+    \begin{enumerate}[label=\alph*)]
+        \item Si se define la longitud final combinada como $W = X + Y$, determine la media y la varianza de la nueva variable aleatoria $W$.
+        \item Calcule la probabilidad de que una estructura terminada al azar mida menos de 195 cm.
+    \end{enumerate}
+
+    % --- EJERCICIO 13  ---
+    \item El tiempo de vida útil (en años) de un sensor optoelectrónico sigue una distribución Exponencial con una duración media de 4 años.
+    \begin{enumerate}[label=\alph*)]
+        \item Calcule la probabilidad de que un sensor seleccionado al azar falle entre los 2 y los 6 años de operación.
+        \item Si se sabe que un sensor ya ha funcionado ininterrumpidamente durante 3 años sin presentar fallas, calcule la probabilidad de que su tiempo total de vida útil termine siendo superior a 7 años.
+    \end{enumerate}
+
+    % --- EJERCICIO 14  ---
+    \item Un contenedor de aduana posee 40 motores industriales de alta precisión, de los cuales 8 están descalibrados. Un equipo de fiscalización selecciona 6 motores al azar y sin reemplazo.
+    \begin{enumerate}[label=\alph*)]
+        \item Calcule la probabilidad de que la muestra contenga exactamente 2 motores descalibrados.
+        \item Calcule la probabilidad de que la muestra contenga al menos 2 motores descalibrados.
+    \end{enumerate}
+
+    % --- EJERCICIO 15  ---
+    \item Un sistema mecánico requiere dos etapas de calibración independientes, $A$ y $B$. El tiempo de calibración de la etapa $A$ se modela como $X \sim N(\mu=40\text{ min}, \sigma^2=4^2)$ y la etapa $B$ como $Y \sim N(\mu=35\text{ min}, \sigma^2=3^2)$.
+    \begin{enumerate}[label=\alph*)]
+        \item Calcule la probabilidad individual de que la etapa $A$ tome más de 44 minutos y la probabilidad de que la etapa $B$ tome menos de 32 minutos.
+        \item Calcule la probabilidad de que la etapa $A$ tome más de 44 minutos O que la etapa $B$ tome menos de 32 minutos.
+    \end{enumerate}
+
+    \newpage
+    % --- EJERCICIO 16 (CONSECUTIVO Y CORRIDO DE FORMA REGULAR)  ---
+    \item Los tiempos de operación (en meses) de dos componentes electrónicos interconectados dentro de una placa madre poseen una función de densidad conjunta dada por:
+    $$f(x, y) = \begin{cases} k \cdot e^{-0,2x - 0,4y} & \text{si } x \geq 0, \; y \geq 0 \\ 0 & \text{en otro caso} \end{cases}$$
+    \begin{enumerate}[label=\alph*)]
+        \item Encuentre mediante integración doble sobre el primer cuadrante el valor numérico de la constante de normalización $k$.
+        \item Obtenga analíticamente las funciones de densidad marginales $f_X(x)$ y $f_Y(y)$ calculando sus respectivas integrales parciales. Demuestre formalmente si se cumple la condición de independencia mediante la verificación de la igualdad de factorización $f(x,y) = f_X(x) \cdot f_Y(y)$.
+    \end{enumerate}
+
+\end{enumerate}
+\end{ejercicios}
+
+\begin{resultados}
+
+\begin{resultbox}{Ejercicios 1 al 4}
+\begin{enumerate}[label=\color{azulFuerte}\bfseries\arabic*.,leftmargin=*,itemsep=0.65em]
+    \item \textbf{a)} $P(\text{rechazo})=0{,}0547993$ ($5{,}47993\%$). \quad
+          \textbf{b)} $P(R\leq 2)=0{,}975073$.
+
+    \item \textbf{a)} $P(N\geq 3)=0{,}938031$. \quad
+          \textbf{b)} $P(N=2\mid N\geq 1)=0{,}323119$.
+
+    \item \textbf{a)} $\displaystyle f(x)=\begin{cases}\frac{4}{x^5},&x\geq 1,\\[1mm]0,&x<1.\end{cases}$ \quad
+          \textbf{b)} $\displaystyle E[X]=\frac{4}{3}$ y $\displaystyle V[X]=\frac{2}{9}$.
+
+    \item \textbf{a)} $P(N=5)=0{,}0437392$. \quad
+          \textbf{b)} $P(N>3)=0{,}844446$.
+\end{enumerate}
+\end{resultbox}
+
+\begin{resultbox}{Ejercicios 5 al 8}
+\begin{enumerate}[label=\color{azulFuerte}\bfseries\arabic*.,start=5,leftmargin=*,itemsep=0.65em]
+    \item \textbf{a)} $\displaystyle P(Y\leq 2\mid X\geq 1)=\frac{13}{15}=0{,}866667$. \\
+          \textbf{b)} $P_X(0)=0{,}25$, $P_X(1)=0{,}35$, $P_X(2)=0{,}40$ y $E[X]=1{,}15$.
+
+    \item \textbf{a)} $P(T<0{,}5)=0{,}221199$. \quad
+          \textbf{b)} $P(\text{falla total antes de }0{,}5)=0{,}0108231$.
+
+    \item \textbf{a)} $P(N=10)=0{,}0389501$. \quad
+          \textbf{b)} $P(N>5)=0{,}973388$.
+
+    \item \textbf{a)} $\displaystyle f_X(x)=\begin{cases}\frac{6}{5}\left(x^2+\frac12\right),&0\leq x\leq 1,\\[1mm]0,&\text{en otro caso.}\end{cases}$ \\
+          \textbf{b)} $\displaystyle P(Y>0{,}5\mid X=0{,}4)=\frac{91}{132}=0{,}689394$.
+\end{enumerate}
+\end{resultbox}
+
+\begin{resultbox}{Ejercicios 9 al 12}
+\begin{enumerate}[label=\color{azulFuerte}\bfseries\arabic*.,start=9,leftmargin=*,itemsep=0.65em]
+    \item \textbf{a)} $E[Y]=1{,}34$. \quad
+          \textbf{b)} $E[C]=749$ USD.
+
+    \item \textbf{a)} $P(19{,}91\leq X\leq 20{,}09)=0{,}928139$ ($92{,}8139\%$). \\
+          \textbf{b)} $P(\text{fuera de especificación})=0{,}0718606$ ($7{,}18606\%$).
+
+    \item \textbf{a)} $\displaystyle F(x)=\begin{cases}
+            0,&x<0,\\[1mm]
+            \frac{x^2}{2}-\frac{x^4}{16},&0\leq x\leq 2,\\[1mm]
+            1,&x>2.
+          \end{cases}$ \quad
+          \textbf{b)} $\displaystyle P(X<1{,}5\mid X>0{,}5)=\frac{176}{225}=0{,}782222$.
+
+    \item \textbf{a)} $\mu_W=200$ cm, $\sigma_W^2=25$ cm$^2$ y $W\sim N(200,25)$. \quad
+          \textbf{b)} $P(W<195)=0{,}158655$.
+\end{enumerate}
+\end{resultbox}
+
+\begin{resultbox}{Ejercicios 13 al 16}
+\begin{enumerate}[label=\color{azulFuerte}\bfseries\arabic*.,start=13,leftmargin=*,itemsep=0.65em]
+    \item \textbf{a)} $P(2<T<6)=0{,}383400$. \quad
+          \textbf{b)} $P(T>7\mid T>3)=e^{-1}=0{,}367879$.
+
+    \item \textbf{a)} $P(X=2)=0{,}262319$. \quad
+          \textbf{b)} $P(X\geq 2)=0{,}344203$.
+
+    \item \textbf{a)} $P(X>44)=0{,}158655$ y $P(Y<32)=0{,}158655$. \\
+          \textbf{b)} $P(X>44\ \text{o}\ Y<32)=0{,}292139$.
+
+    \item \textbf{a)} $k=0{,}08$. \\
+          \textbf{b)} $f_X(x)=0{,}2e^{-0{,}2x}$ para $x\geq0$, $f_Y(y)=0{,}4e^{-0{,}4y}$ para $y\geq0$; $X$ e $Y$ son independientes.
+\end{enumerate}
+\end{resultbox}
+
+\vspace{0.6cm}
+\begin{center}
+    \small\textbf{Usach Premium} -- ¡Nos vemos en la ayudantía! \\
+    \textit{"Por y para estudiantes."}
+\end{center}
+
+\end{resultados}
+
+\end{document}

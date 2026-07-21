@@ -1,0 +1,620 @@
+\documentclass[letterpaper, 12pt]{article}
+\input{solucionario-comun.tex}
+
+\begin{document}
+\portadasolucionario{Gu\'ia de Preparaci\'on PEP 1}{Secci\'on V -- Simulacros tipo PEP}
+
+\section*{Simulacro A}
+
+\begin{solucionbox}{Simulacro A -- Ejercicio 1}
+Considere
+\[
+    f(x)=1+\sqrt{\frac{x-3}{x+2}}.
+\]
+\begin{enumerate}[label=\textbf{\alph*)}]
+    \item Determine $\Dom(f)$.
+    \item Determine $\Dom(f\circ f)$.
+\end{enumerate}
+
+\textbf{Soluci\'on:}
+
+\textbf{a)} Para que $f$ est\'e definida, necesitamos
+\[
+    \frac{x-3}{x+2}\geq0,
+    \qquad x\neq -2.
+\]
+Los puntos cr\'iticos son $x=-2$ y $x=3$.
+
+\[
+\begin{array}{c|ccc}
+    & (-\infty,-2) & (-2,3) & (3,+\infty) \\ \hline
+    x-3 & - & - & + \\
+    x+2 & - & + & + \\ \hline
+    \dfrac{x-3}{x+2} & + & - & +
+\end{array}
+\]
+
+Por lo tanto,
+\[
+    \Dom(f)=(-\infty,-2)\cup[3,+\infty).
+\]
+
+\textbf{b)} Por definici\'on,
+\[
+    \Dom(f\circ f)=\{x\in\Dom(f):f(x)\in\Dom(f)\}.
+\]
+Como
+\[
+    f(x)=1+\sqrt{\frac{x-3}{x+2}},
+\]
+se tiene que
+\[
+    f(x)\geq 1
+\]
+para todo $x\in\Dom(f)$.
+
+Entonces $f(x)$ no puede pertenecer al intervalo $(-\infty,-2)$. Por lo tanto, para que $f(x)\in\Dom(f)$, basta exigir
+\[
+    f(x)\in[3,+\infty).
+\]
+Es decir,
+\[
+    1+\sqrt{\frac{x-3}{x+2}}\geq3.
+\]
+Luego,
+\[
+    \sqrt{\frac{x-3}{x+2}}\geq2.
+\]
+Elevando al cuadrado:
+\[
+    \frac{x-3}{x+2}\geq4.
+\]
+Llevando todo a un lado:
+\[
+    \frac{x-3}{x+2}-4\geq0.
+\]
+Reducimos:
+\[
+    \frac{x-3-4(x+2)}{x+2}\geq0.
+\]
+Entonces
+\[
+    \frac{x-3-4x-8}{x+2}\geq0
+    \quad\Longleftrightarrow\quad
+    \frac{-3x-11}{x+2}\geq0.
+\]
+Multiplicando por $-1$:
+\[
+    \frac{3x+11}{x+2}\leq0.
+\]
+Los puntos cr\'iticos son
+\[
+    x=-\frac{11}{3},\qquad x=-2.
+\]
+La tabla de signos entrega
+\[
+    x\in\left[-\frac{11}{3},-2\right).
+\]
+Este intervalo ya est\'a contenido en $\Dom(f)$, por lo que
+\[
+    \Dom(f\circ f)=\left[-\frac{11}{3},-2\right).
+\]
+
+\respuesta{$\Dom(f)=(-\infty,-2)\cup[3,+\infty)$ y $\Dom(f\circ f)=\left[-\dfrac{11}{3},-2\right)$.}
+\end{solucionbox}
+
+\begin{solucionbox}{Simulacro A -- Ejercicio 2}
+Considere $g:A\to B$ definida por
+\[
+    g(x)=-2+\sqrt{-x^2+8x-12}.
+\]
+\begin{enumerate}[label=\textbf{\alph*)}]
+    \item Determine $A=\Dom(g)$.
+    \item Determine un conjunto $A_1\subseteq A$ para que $g$ sea inyectiva y demu\'estrelo.
+    \item Determine $B$ para que $g:A_1\to B$ sea biyectiva y encuentre $g^{-1}$.
+\end{enumerate}
+
+\textbf{Soluci\'on:}
+
+\textbf{a)} Para que $g$ est\'e definida:
+\[
+    -x^2+8x-12\geq0.
+\]
+Multiplicamos por $-1$ y cambiamos el sentido:
+\[
+    x^2-8x+12\leq0.
+\]
+Factorizamos:
+\[
+    x^2-8x+12=(x-2)(x-6).
+\]
+Entonces
+\[
+    (x-2)(x-6)\leq0.
+\]
+La soluci\'on es
+\[
+    2\leq x\leq6.
+\]
+Por lo tanto,
+\[
+    A=\Dom(g)=[2,6].
+\]
+
+\textbf{b)} La expresi\'on bajo la ra\'iz puede escribirse como
+\[
+    -x^2+8x-12
+    =4-(x-4)^2.
+\]
+Esto muestra que la funci\'on es sim\'etrica respecto de $x=4$. Por eso, para lograr inyectividad, escogemos una rama. Tomemos
+\[
+    A_1=[4,6].
+\]
+
+Probemos que $g$ es inyectiva en $A_1$. Sean $a,b\in[4,6]$ tales que
+\[
+    g(a)=g(b).
+\]
+Entonces
+\[
+    -2+\sqrt{-a^2+8a-12}
+    =
+    -2+\sqrt{-b^2+8b-12}.
+\]
+Sumando $2$:
+\[
+    \sqrt{-a^2+8a-12}
+    =
+    \sqrt{-b^2+8b-12}.
+\]
+Elevando al cuadrado:
+\[
+    -a^2+8a-12=-b^2+8b-12.
+\]
+Reduciendo:
+\[
+    -a^2+8a=-b^2+8b.
+\]
+Llevando todo a un lado:
+\[
+    b^2-a^2+8a-8b=0.
+\]
+Factorizamos:
+\[
+    (b-a)(b+a)-8(b-a)=0.
+\]
+Luego,
+\[
+    (b-a)(a+b-8)=0.
+\]
+Entonces
+\[
+    b-a=0
+    \quad\vee\quad
+    a+b-8=0.
+\]
+La primera opci\'on implica $a=b$. Para la segunda, como $a,b\in[4,6]$, se tiene $a+b\geq8$, y la igualdad $a+b=8$ ocurre solo cuando $a=b=4$. En ambos casos concluimos que
+\[
+    a=b.
+\]
+Por lo tanto, $g$ es inyectiva en $[4,6]$.
+
+\textbf{c)} Para que $g:A_1\to B$ sea biyectiva, tomamos
+\[
+    B=\Rec(g|_{[4,6]}).
+\]
+Calculamos los extremos:
+\[
+    g(4)=-2+\sqrt{-16+32-12}=-2+\sqrt4=0,
+\]
+\[
+    g(6)=-2+\sqrt{-36+48-12}=-2+\sqrt0=-2.
+\]
+Como en $[4,6]$ la funci\'on es decreciente,
+\[
+    \Rec(g|_{[4,6]})=[-2,0].
+\]
+Por lo tanto,
+\[
+    B=[-2,0].
+\]
+
+Ahora hallamos la inversa. Sea
+\[
+    y=-2+\sqrt{-x^2+8x-12}.
+\]
+Sumando $2$:
+\[
+    y+2=\sqrt{-x^2+8x-12}.
+\]
+Como $y\in[-2,0]$, se tiene $y+2\geq0$, y podemos elevar al cuadrado:
+\[
+    (y+2)^2=-x^2+8x-12.
+\]
+Usando la forma completada:
+\[
+    -x^2+8x-12=4-(x-4)^2.
+\]
+Entonces
+\[
+    (y+2)^2=4-(x-4)^2.
+\]
+Por lo tanto,
+\[
+    (x-4)^2=4-(y+2)^2.
+\]
+Como $x\in[4,6]$, se tiene $x-4\geq0$, luego
+\[
+    x-4=\sqrt{4-(y+2)^2}.
+\]
+Finalmente,
+\[
+    x=4+\sqrt{4-(y+2)^2}.
+\]
+
+\respuesta{$A=[2,6]$, una elecci\'on es $A_1=[4,6]$, $B=[-2,0]$ y $g^{-1}(y)=4+\sqrt{4-(y+2)^2}$.}
+\end{solucionbox}
+
+\begin{solucionbox}{Simulacro A -- Ejercicio 3}
+Determine los valores de $k\in\R$ para que la par\'abola
+\[
+    y=(k-1)x^2+2x+k
+\]
+y la recta
+\[
+    y=kx-4
+\]
+se intersecten en dos puntos distintos.
+
+\textbf{Soluci\'on:}
+
+Igualamos la par\'abola con la recta:
+\[
+    (k-1)x^2+2x+k=kx-4.
+\]
+Llevamos todo a un lado:
+\[
+    (k-1)x^2+2x-kx+k+4=0.
+\]
+Reduciendo:
+\[
+    (k-1)x^2+(2-k)x+(k+4)=0.
+\]
+
+Para que haya dos intersecciones distintas, la ecuaci\'on debe ser cuadr\'atica y tener discriminante positivo.
+
+Primero:
+\[
+    k-1\neq0
+    \quad\Longrightarrow\quad
+    k\neq1.
+\]
+Luego:
+\[
+    \Delta>0.
+\]
+Calculamos
+\[
+    \Delta=(2-k)^2-4(k-1)(k+4).
+\]
+Desarrollando:
+\[
+    (2-k)^2=k^2-4k+4,
+\]
+\[
+    (k-1)(k+4)=k^2+3k-4.
+\]
+Entonces
+\[
+    \Delta=k^2-4k+4-4(k^2+3k-4).
+\]
+Luego,
+\[
+    \Delta=k^2-4k+4-4k^2-12k+16
+    =-3k^2-16k+20.
+\]
+La condici\'on $\Delta>0$ queda:
+\[
+    -3k^2-16k+20>0.
+\]
+Multiplicando por $-1$:
+\[
+    3k^2+16k-20<0.
+\]
+Resolvemos la ecuaci\'on asociada:
+\[
+    3k^2+16k-20=0.
+\]
+Por f\'ormula cuadr\'atica:
+\[
+    k=\frac{-16\pm\sqrt{16^2-4(3)(-20)}}{2\cdot3}.
+\]
+Luego,
+\[
+    k=\frac{-16\pm\sqrt{256+240}}{6}
+     =\frac{-16\pm\sqrt{496}}{6}.
+\]
+Como
+\[
+    \sqrt{496}=4\sqrt{31},
+\]
+tenemos
+\[
+    k=\frac{-16\pm4\sqrt{31}}{6}
+     =\frac{-8\pm2\sqrt{31}}{3}.
+\]
+Como la par\'abola $3k^2+16k-20$ abre hacia arriba, la desigualdad
+\[
+    3k^2+16k-20<0
+\]
+se cumple entre sus ra\'ices:
+\[
+    \frac{-8-2\sqrt{31}}{3}<k<\frac{-8+2\sqrt{31}}{3}.
+\]
+Finalmente, excluimos $k=1$:
+\[
+    k\in\left(\frac{-8-2\sqrt{31}}{3},1\right)
+    \cup
+    \left(1,\frac{-8+2\sqrt{31}}{3}\right).
+\]
+
+\respuesta{$k\in\left(\dfrac{-8-2\sqrt{31}}{3},1\right)\cup\left(1,\dfrac{-8+2\sqrt{31}}{3}\right)$.}
+\end{solucionbox}
+
+\newpage
+\section*{Simulacro B}
+
+\begin{solucionbox}{Simulacro B -- Ejercicio 1}
+Resuelva la siguiente inecuaci\'on:
+\[
+    \frac{3-|x+1|}{x^2-4}<0.
+\]
+
+\textbf{Soluci\'on:}
+
+Primero factorizamos el denominador:
+\[
+    x^2-4=(x-2)(x+2).
+\]
+Luego, las restricciones son
+\[
+    x\neq -2,\qquad x\neq 2.
+\]
+
+Ahora encontramos los ceros del numerador:
+\[
+    3-|x+1|=0
+    \quad\Longleftrightarrow\quad
+    |x+1|=3.
+\]
+Entonces
+\[
+    x+1=3 \quad \vee \quad x+1=-3,
+\]
+por lo que
+\[
+    x=2 \quad \vee \quad x=-4.
+\]
+
+Los puntos cr\'iticos son
+\[
+    x=-4,\quad x=-2,\quad x=2.
+\]
+Observemos que $x=2$ anula numerador y denominador, por lo que no pertenece al dominio.
+
+\[
+\begin{array}{c|cccc}
+    & (-\infty,-4) & (-4,-2) & (-2,2) & (2,+\infty) \\ \hline
+    3-|x+1| & - & + & + & - \\
+    x-2 & - & - & - & + \\
+    x+2 & - & - & + & + \\ \hline
+    \dfrac{3-|x+1|}{(x-2)(x+2)} & - & + & - & -
+\end{array}
+\]
+
+Como buscamos que la expresi\'on sea menor que cero, tomamos los intervalos de signo negativo. No incluimos $x=-4$ porque la desigualdad es estricta, ni $x=-2,2$ porque anulan el denominador.
+
+\respuesta{$x\in(-\infty,-4)\cup(-2,2)\cup(2,+\infty)$.}
+\end{solucionbox}
+
+\begin{solucionbox}{Simulacro B -- Ejercicio 2}
+Considere
+\[
+    f(x)=\sqrt{\frac{5}{\sqrt{x+1}}-1},
+    \qquad
+    g(x)=x-4.
+\]
+\begin{enumerate}[label=\textbf{\alph*)}]
+    \item Halle $\Dom(f)$.
+    \item Halle $\Rec(f)$.
+    \item Determine $f\circ g$ indicando expresamente su dominio y regla de asignaci\'on.
+\end{enumerate}
+
+\textbf{Soluci\'on:}
+
+\textbf{a)} Para que $f$ est\'e definida, primero necesitamos que $\sqrt{x+1}$ est\'e en el denominador. Por lo tanto:
+\[
+    x+1>0
+    \quad\Longleftrightarrow\quad
+    x>-1.
+\]
+Adem\'as, el radicando exterior debe ser mayor o igual que cero:
+\[
+    \frac{5}{\sqrt{x+1}}-1\geq0.
+\]
+Entonces
+\[
+    \frac{5}{\sqrt{x+1}}\geq1.
+\]
+Como $\sqrt{x+1}>0$, multiplicamos:
+\[
+    5\geq \sqrt{x+1}.
+\]
+Elevando al cuadrado:
+\[
+    25\geq x+1
+    \quad\Longleftrightarrow\quad
+    x\leq24.
+\]
+Por lo tanto,
+\[
+    \Dom(f)=(-1,24].
+\]
+
+\textbf{b)} Si $x\in(-1,24]$, entonces
+\[
+    0<\sqrt{x+1}\leq5.
+\]
+Por lo tanto,
+\[
+    \frac{5}{\sqrt{x+1}}\geq1.
+\]
+Luego,
+\[
+    \frac{5}{\sqrt{x+1}}-1\geq0.
+\]
+Cuando $x=24$, se obtiene
+\[
+    f(24)=\sqrt{\frac{5}{5}-1}=0.
+\]
+Cuando $x\to -1^+$, se tiene $\sqrt{x+1}\to0^+$, por lo que la expresi\'on crece sin cota superior. Por lo tanto,
+\[
+    \Rec(f)=[0,+\infty).
+\]
+
+\textbf{c)} Por definici\'on:
+\[
+    \Dom(f\circ g)=\{x\in\Dom(g):g(x)\in\Dom(f)\}.
+\]
+Como $g(x)=x-4$ est\'a definida para todo real,
+\[
+    x-4\in(-1,24].
+\]
+Entonces
+\[
+    -1<x-4\leq24.
+\]
+Sumando $4$:
+\[
+    3<x\leq28.
+\]
+Por lo tanto,
+\[
+    \Dom(f\circ g)=(3,28].
+\]
+La regla de asignaci\'on es
+\[
+    (f\circ g)(x)=f(x-4).
+\]
+Luego,
+\[
+    (f\circ g)(x)=
+    \sqrt{\frac{5}{\sqrt{(x-4)+1}}-1}
+    =
+    \sqrt{\frac{5}{\sqrt{x-3}}-1}.
+\]
+
+\respuesta{$\Dom(f)=(-1,24]$, $\Rec(f)=[0,+\infty)$, $\Dom(f\circ g)=(3,28]$ y $(f\circ g)(x)=\sqrt{\dfrac{5}{\sqrt{x-3}}-1}$.}
+\end{solucionbox}
+
+\begin{solucionbox}{Simulacro B -- Ejercicio 3}
+Sea $k\in\R$ tal que
+\[
+    f:[-2,0]\to[k,12],
+    \qquad
+    f(x)=(x-1)^2+3
+\]
+est\'a bien definida.
+\begin{enumerate}[label=\textbf{\alph*)}]
+    \item Demuestre que $f$ es inyectiva.
+    \item Determine $k$ para que $f$ sea sobreyectiva.
+    \item Para ese valor de $k$, determine $f^{-1}$ indicando dominio, codominio y regla.
+\end{enumerate}
+
+\textbf{Soluci\'on:}
+
+\textbf{a)} Sean $a,b\in[-2,0]$ tales que
+\[
+    f(a)=f(b).
+\]
+Entonces
+\[
+    (a-1)^2+3=(b-1)^2+3.
+\]
+Restando $3$:
+\[
+    (a-1)^2=(b-1)^2.
+\]
+Luego,
+\[
+    |a-1|=|b-1|.
+\]
+Como $a,b\in[-2,0]$, se tiene
+\[
+    a-1<0,\qquad b-1<0.
+\]
+Por lo tanto,
+\[
+    |a-1|=-(a-1),
+    \qquad
+    |b-1|=-(b-1).
+\]
+As\'i,
+\[
+    -(a-1)=-(b-1).
+\]
+Luego,
+\[
+    a-1=b-1,
+\]
+y por tanto
+\[
+    a=b.
+\]
+Entonces $f$ es inyectiva.
+
+\textbf{b)} Calculamos el recorrido en $[-2,0]$:
+\[
+    f(-2)=(-2-1)^2+3=9+3=12,
+\]
+\[
+    f(0)=(0-1)^2+3=1+3=4.
+\]
+Como la funci\'on es decreciente en $[-2,0]$,
+\[
+    \Rec(f)=[4,12].
+\]
+Para que $f:[-2,0]\to[k,12]$ sea sobreyectiva, debemos tener
+\[
+    [k,12]=[4,12].
+\]
+Por lo tanto,
+\[
+    k=4.
+\]
+
+\textbf{c)} Para $k=4$, la funci\'on es biyectiva. Hallamos su inversa:
+\[
+    y=(x-1)^2+3.
+\]
+Entonces
+\[
+    y-3=(x-1)^2.
+\]
+Como $x\in[-2,0]$, se tiene $x-1<0$, por lo que
+\[
+    \sqrt{y-3}=|x-1|=-(x-1)=1-x.
+\]
+Luego,
+\[
+    x=1-\sqrt{y-3}.
+\]
+Por lo tanto,
+\[
+    f^{-1}(y)=1-\sqrt{y-3}.
+\]
+
+\respuesta{$k=4$ y $f^{-1}(y)=1-\sqrt{y-3}$, con $f^{-1}:[4,12]\to[-2,0]$.}
+\end{solucionbox}
+
+\end{document}

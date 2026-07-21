@@ -1,0 +1,410 @@
+\documentclass[letterpaper, 12pt]{article}
+\input{solucionario-comun.tex}
+
+\begin{document}
+\portadasolucionario{Gu\'ia de Preparaci\'on PEP 1}{Secci\'on II -- Dominio, recorrido y composici\'on}
+
+\begin{solucionbox}{Ejercicio 2.1}
+Halle el dominio natural de
+\[
+    h(x)=\sqrt{\frac{x+4}{2-x}}.
+\]
+
+\textbf{Soluci\'on:}
+
+Para que $h(x)$ est\'e bien definida en $\R$, el radicando debe ser mayor o igual que cero:
+\[
+    \frac{x+4}{2-x}\geq 0.
+\]
+Adem\'as, el denominador no puede anularse:
+\[
+    2-x\neq 0
+    \quad\Longrightarrow\quad
+    x\neq 2.
+\]
+Los puntos cr\'iticos son $x=-4$ y $x=2$.
+
+\[
+\begin{array}{c|ccc}
+    & (-\infty,-4) & (-4,2) & (2,+\infty) \\ \hline
+    x+4 & - & + & + \\
+    2-x & + & + & - \\ \hline
+    \dfrac{x+4}{2-x} & - & + & -
+\end{array}
+\]
+
+Como necesitamos signo no negativo, se incluye $x=-4$ porque anula el numerador, pero no se incluye $x=2$ porque anula el denominador.
+
+\respuesta{$\Dom(h)=[-4,2)$.}
+\end{solucionbox}
+
+\begin{solucionbox}{Ejercicio 2.2}
+Considere $f(x)=\sqrt{5-x}$ y $g(x)=\sqrt{x^2-1}$. Determine $\Dom(f\circ g)$.
+
+\textbf{Soluci\'on:}
+
+Recordemos que
+\[
+    \Dom(f\circ g)=\{x\in\Dom(g):g(x)\in\Dom(f)\}.
+\]
+
+Primero, determinamos los dominios de $f$ y $g$.
+
+Para $f$:
+\[
+    5-x\geq 0
+    \quad\Longleftrightarrow\quad
+    x\leq 5.
+\]
+Por lo tanto,
+\[
+    \Dom(f)=(-\infty,5].
+\]
+
+Para $g$:
+\[
+    x^2-1\geq 0
+    \quad\Longleftrightarrow\quad
+    (x-1)(x+1)\geq 0.
+\]
+Luego,
+\[
+    \Dom(g)=(-\infty,-1]\cup[1,+\infty).
+\]
+
+Ahora exigimos que $g(x)\in\Dom(f)$:
+\[
+    \sqrt{x^2-1}\leq 5.
+\]
+Como ambos lados son no negativos, elevamos al cuadrado:
+\[
+    x^2-1\leq 25
+    \quad\Longleftrightarrow\quad
+    x^2\leq 26
+    \quad\Longleftrightarrow\quad
+    -\sqrt{26}\leq x\leq \sqrt{26}.
+\]
+
+Finalmente,
+\[
+    \Dom(f\circ g)=
+    \left((-\infty,-1]\cup[1,+\infty)\right)
+    \cap[-\sqrt{26},\sqrt{26}].
+\]
+
+\respuesta{$\Dom(f\circ g)=[-\sqrt{26},-1]\cup[1,\sqrt{26}]$.}
+\end{solucionbox}
+
+\begin{solucionbox}{Ejercicio 2.3}
+Considere
+\[
+    f(x)=\sqrt{\frac{x-1}{x+3}},
+    \qquad
+    g(x)=2x-5.
+\]
+Determine $\Dom(f\circ g)$, halle expl\'icitamente $(f\circ g)(x)$, calcule $(f\circ g)(4)$ y determine si existe una preimagen de $1$.
+
+\textbf{Soluci\'on:}
+
+Primero determinamos $\Dom(f)$. Para que $f$ est\'e definida:
+\[
+    \frac{x-1}{x+3}\geq 0,
+    \qquad x\neq -3.
+\]
+Los puntos cr\'iticos son $x=-3$ y $x=1$, y se obtiene
+\[
+    \Dom(f)=(-\infty,-3)\cup[1,+\infty).
+\]
+Como $g(x)=2x-5$ es lineal,
+\[
+    \Dom(g)=\R.
+\]
+
+Por definici\'on,
+\[
+    \Dom(f\circ g)=\{x\in\R:2x-5\in(-\infty,-3)\cup[1,+\infty)\}.
+\]
+Entonces resolvemos:
+\[
+    2x-5<-3
+    \quad\vee\quad
+    2x-5\geq 1.
+\]
+De aqu\'i,
+\[
+    2x<2 \quad\vee\quad 2x\geq 6,
+\]
+es decir,
+\[
+    x<1 \quad\vee\quad x\geq 3.
+\]
+Por lo tanto,
+\[
+    \Dom(f\circ g)=(-\infty,1)\cup[3,+\infty).
+\]
+
+Ahora calculamos la regla:
+\[
+    (f\circ g)(x)=f(g(x))=f(2x-5).
+\]
+Luego,
+\[
+    (f\circ g)(x)
+    =\sqrt{\frac{(2x-5)-1}{(2x-5)+3}}
+    =\sqrt{\frac{2x-6}{2x-2}}
+    =\sqrt{\frac{x-3}{x-1}}.
+\]
+
+Para la imagen de $4$:
+\[
+    (f\circ g)(4)
+    =\sqrt{\frac{4-3}{4-1}}
+    =\sqrt{\frac13}.
+\]
+
+Para la preimagen de $1$, buscamos $x\in\Dom(f\circ g)$ tal que
+\[
+    \sqrt{\frac{x-3}{x-1}}=1.
+\]
+Elevando al cuadrado:
+\[
+    \frac{x-3}{x-1}=1.
+\]
+Esto implica
+\[
+    x-3=x-1,
+\]
+lo cual es imposible. Por lo tanto, no existe preimagen de $1$.
+
+\respuesta{$\Dom(f\circ g)=(-\infty,1)\cup[3,+\infty)$, $(f\circ g)(x)=\sqrt{\dfrac{x-3}{x-1}}$, $(f\circ g)(4)=\sqrt{\dfrac13}$ y no existe preimagen de $1$.}
+\end{solucionbox}
+
+\begin{solucionbox}{Ejercicio 2.4}
+Sea
+\[
+    f(x)=1+\sqrt{\frac{x+1}{x-2}}.
+\]
+Determine $\Dom(f)$ y la preimagen de $3$, si existe.
+
+\textbf{Soluci\'on:}
+
+Para determinar el dominio, pedimos
+\[
+    \frac{x+1}{x-2}\geq 0,
+    \qquad x\neq 2.
+\]
+Los puntos cr\'iticos son $x=-1$ y $x=2$.
+
+\[
+\begin{array}{c|ccc}
+    & (-\infty,-1) & (-1,2) & (2,+\infty) \\ \hline
+    x+1 & - & + & + \\
+    x-2 & - & - & + \\ \hline
+    \dfrac{x+1}{x-2} & + & - & +
+\end{array}
+\]
+
+Por lo tanto,
+\[
+    \Dom(f)=(-\infty,-1]\cup(2,+\infty).
+\]
+
+Ahora buscamos la preimagen de $3$, es decir, resolvemos
+\[
+    f(x)=3.
+\]
+Entonces
+\[
+    1+\sqrt{\frac{x+1}{x-2}}=3
+    \quad\Longleftrightarrow\quad
+    \sqrt{\frac{x+1}{x-2}}=2.
+\]
+Elevando al cuadrado:
+\[
+    \frac{x+1}{x-2}=4.
+\]
+Luego,
+\[
+    x+1=4(x-2)
+    \quad\Longleftrightarrow\quad
+    x+1=4x-8.
+\]
+Por tanto,
+\[
+    9=3x
+    \quad\Longleftrightarrow\quad
+    x=3.
+\]
+Como $3\in\Dom(f)$, la preimagen existe.
+
+\respuesta{$\Dom(f)=(-\infty,-1]\cup(2,+\infty)$ y la preimagen de $3$ es $x=3$.}
+\end{solucionbox}
+
+\begin{solucionbox}{Ejercicio 2.5}
+Considere
+\[
+    p(x)=\sqrt{6-\sqrt{x+2}}.
+\]
+Determine $\Dom(p)$, indique si $p$ es creciente o decreciente en su dominio, y halle $\Rec(p)$.
+
+\textbf{Soluci\'on:}
+
+Primero, para que la ra\'iz interior est\'e definida:
+\[
+    x+2\geq 0
+    \quad\Longleftrightarrow\quad
+    x\geq -2.
+\]
+Adem\'as, para que la ra\'iz exterior est\'e definida:
+\[
+    6-\sqrt{x+2}\geq 0.
+\]
+Esto equivale a
+\[
+    6\geq \sqrt{x+2}.
+\]
+Como ambos lados son no negativos, elevamos al cuadrado:
+\[
+    36\geq x+2
+    \quad\Longleftrightarrow\quad
+    x\leq 34.
+\]
+Por lo tanto,
+\[
+    \Dom(p)=[-2,34].
+\]
+
+Para estudiar la monoton\'ia, sean $a,b\in[-2,34]$ tales que $a<b$. Entonces:
+\[
+    a<b
+    \quad\Longrightarrow\quad
+    a+2<b+2.
+\]
+Como la ra\'iz cuadrada es creciente:
+\[
+    \sqrt{a+2}<\sqrt{b+2}.
+\]
+Multiplicando por $-1$ y sumando $6$:
+\[
+    6-\sqrt{a+2}>6-\sqrt{b+2}.
+\]
+Aplicando nuevamente la ra\'iz cuadrada, que es creciente en $[0,+\infty)$:
+\[
+    \sqrt{6-\sqrt{a+2}}>
+    \sqrt{6-\sqrt{b+2}}.
+\]
+Es decir,
+\[
+    p(a)>p(b).
+\]
+Por lo tanto, $p$ es decreciente en todo su dominio.
+
+Como $p$ es decreciente,
+\[
+    \Rec(p)=[p(34),p(-2)].
+\]
+Calculamos:
+\[
+    p(-2)=\sqrt{6-\sqrt0}=\sqrt6,
+\]
+\[
+    p(34)=\sqrt{6-\sqrt{36}}=\sqrt{6-6}=0.
+\]
+Por lo tanto,
+\[
+    \Rec(p)=[0,\sqrt6].
+\]
+
+\respuesta{$\Dom(p)=[-2,34]$, $p$ es decreciente y $\Rec(p)=[0,\sqrt6]$.}
+\end{solucionbox}
+
+\begin{solucionbox}{Ejercicio 2.6}
+Sea
+\[
+    f(x)=\sqrt{\frac{4}{\sqrt{x-2}}-1},
+    \qquad
+    g(x)=x+3.
+\]
+Halle $\Dom(f)$, $\Rec(f)$ y $\Dom(f\circ g)$, indicando adem\'as la regla de asignaci\'on de $f\circ g$.
+
+\textbf{Soluci\'on:}
+
+Para que $f$ est\'e definida, primero necesitamos
+\[
+    \sqrt{x-2}
+\]
+en el denominador, por lo que
+\[
+    x-2>0
+    \quad\Longleftrightarrow\quad
+    x>2.
+\]
+Adem\'as, el radicando exterior debe ser mayor o igual que cero:
+\[
+    \frac{4}{\sqrt{x-2}}-1\geq 0.
+\]
+Entonces
+\[
+    \frac{4}{\sqrt{x-2}}\geq 1.
+\]
+Como $\sqrt{x-2}>0$, multiplicamos sin cambiar el sentido:
+\[
+    4\geq \sqrt{x-2}.
+\]
+Elevando al cuadrado:
+\[
+    16\geq x-2
+    \quad\Longleftrightarrow\quad
+    x\leq 18.
+\]
+Por lo tanto,
+\[
+    \Dom(f)=(2,18].
+\]
+
+Para hallar el recorrido, notemos que si $x\in(2,18]$, entonces
+\[
+    0<\sqrt{x-2}\leq 4.
+\]
+Luego,
+\[
+    \frac{4}{\sqrt{x-2}}\geq 1.
+\]
+Por lo tanto,
+\[
+    \frac{4}{\sqrt{x-2}}-1\geq 0.
+\]
+Cuando $x=18$, se obtiene $f(18)=0$. Cuando $x\to 2^+$, el denominador $\sqrt{x-2}\to0^+$ y la expresi\'on crece sin cota superior. De esta forma,
+\[
+    \Rec(f)=[0,+\infty).
+\]
+
+Ahora,
+\[
+    \Dom(f\circ g)=\{x\in\Dom(g):g(x)\in\Dom(f)\}.
+\]
+Como $g(x)=x+3$ tiene dominio $\R$:
+\[
+    x+3\in(2,18].
+\]
+Esto equivale a
+\[
+    2<x+3\leq 18
+    \quad\Longleftrightarrow\quad
+    -1<x\leq 15.
+\]
+Por lo tanto,
+\[
+    \Dom(f\circ g)=(-1,15].
+\]
+Finalmente,
+\[
+    (f\circ g)(x)=f(x+3)
+    =\sqrt{\frac{4}{\sqrt{(x+3)-2}}-1}
+    =\sqrt{\frac{4}{\sqrt{x+1}}-1}.
+\]
+
+\respuesta{$\Dom(f)=(2,18]$, $\Rec(f)=[0,+\infty)$, $\Dom(f\circ g)=(-1,15]$ y $(f\circ g)(x)=\sqrt{\dfrac{4}{\sqrt{x+1}}-1}$.}
+\end{solucionbox}
+
+\end{document}

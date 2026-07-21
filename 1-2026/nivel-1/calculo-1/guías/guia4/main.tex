@@ -21,12 +21,15 @@
 \usepackage{xcolor}
 \usepackage{tcolorbox}
 \usepackage{eso-pic}
+\makeatletter
+\providecommand{\IfPDFManagementActiveF}[1]{#1}
+\makeatother
 \usepackage{transparent}
 \usepackage{tikz}
-\usetikzlibrary{patterns, shadows.blur, fadings, calc, arrows.meta, decorations.pathreplacing}
+\usetikzlibrary{patterns, shadows.blur, fadings, calc, arrows.meta, decorations.pathreplacing, babel}
 \usepackage{array}
 \usepackage{colortbl}
-\tcbuselibrary{skins, shadows.blur}
+\tcbuselibrary{skins, breakable}
 
 % ============================================================
 % GEOMETRÍA
@@ -48,9 +51,9 @@
 % ============================================================
 % RUTAS DE IMÁGENES
 % ============================================================
-\newcommand{\logoup}{./logo_up.png}
-\newcommand{\logousach}{./logo_usach.png}
-\newcommand{\logofondo}{./logo_up.png}
+\newcommand{\logoup}{./images/logo_up.png}
+\newcommand{\logousach}{./images/logo_usach.png}
+\newcommand{\logofondo}{./images/logo_up.png}
 
 % ============================================================
 % INFORMACIÓN DE LA GUÍA
@@ -156,6 +159,24 @@
     fonttitle=\small\sffamily, attach boxed title to top left={xshift=0.3cm, yshift=-3mm},
     boxed title style={sharp corners, boxrule=0.5pt, colframe=azulFuerte}
 }
+
+% Caja de solución (fondo celeste)
+\newenvironment{solbox}[1]{
+    \begin{tcolorbox}[colback=celesteSuave, colframe=azulFuerte,
+        title=\textbf{#1}, fonttitle=\bfseries]
+}{\end{tcolorbox}}
+
+% Entorno del solucionario completo (nueva página, título grande)
+\newenvironment{soluciones}{%
+    \newpage
+    \begin{center}
+        \begin{tcolorbox}[colback=azulFuerte, colframe=azulFuerte,
+            colupper=white, width=0.8\textwidth, center, arc=10pt]
+            \centering\Large\textbf{SOLUCIONARIO}
+        \end{tcolorbox}
+    \end{center}
+    \MarcaAgua\small
+}{}
 
 % ============================================================
 % ENTORNOS DE SECCIÓN
@@ -394,6 +415,21 @@
 \end{ejerciciobox}
 
 \end{ejercicios}
+
+\begin{soluciones}
+
+\begin{solbox}{I. Soluciones — Trigonometría Aplicada}
+\begin{enumerate}[label=\color{azulFuerte}\bfseries\arabic*., leftmargin=*, itemsep=0.6em]
+    \item La altura del árbol es $\frac{10\sqrt{3}}{3}\text{ m} \approx 5{,}77\text{ m}$.
+    \item La altura es $h_c = \sqrt{3} \approx 1{,}73$.
+    \item La altura del cerro es $h = \frac{\sqrt{3} + 1}{4}\text{ km} = 250(\sqrt{3} + 1)\text{ m} \approx 683\text{ m}$.
+    \item La longitud del corte diagonal es $y = 2\sqrt{3}'' \approx 3{,}46''$.
+    \item $\tan(\theta)\cot(\theta) - \cos^2(\theta) = 1 - \cos^2(\theta) = \sen^2(\theta)$. Se cumple para todo $\theta \neq \frac{k\pi}{2}$ con $k \in \mathbb{Z}$.
+    \item $\sen(\theta)(\cot(\theta) + \tan(\theta)) = \sen(\theta)\left(\frac{\cos\theta}{\sen\theta} + \frac{\sen\theta}{\cos\theta}\right) = \frac{\sen^2\theta + \cos^2\theta}{\cos\theta} = \frac{1}{\cos\theta} = \sec(\theta)$. Se cumple para todo $\theta \neq \frac{k\pi}{2}$ con $k \in \mathbb{Z}$.
+\end{enumerate}
+\end{solbox}
+
+\end{soluciones}
 
 \end{document}
 

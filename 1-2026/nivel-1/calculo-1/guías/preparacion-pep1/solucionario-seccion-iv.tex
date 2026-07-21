@@ -1,0 +1,178 @@
+\documentclass[letterpaper, 12pt]{article}
+\input{solucionario-comun.tex}
+
+\begin{document}
+\portadasolucionario{Gu\'ia de Preparaci\'on PEP 1}{Secci\'on IV -- Par\'ametros e intersecciones}
+
+\begin{solucionbox}{Ejercicio 4.1}
+Determine todos los valores de $k\in\R$ para que la par\'abola
+\[
+    y=kx^2+4x+1
+\]
+y la recta
+\[
+    y=(k+2)x-3
+\]
+se intersecten en dos puntos diferentes.
+
+\textbf{Soluci\'on:}
+
+Para encontrar los puntos de intersecci\'on, igualamos ambas expresiones:
+\[
+    kx^2+4x+1=(k+2)x-3.
+\]
+Llevamos todo a un lado:
+\[
+    kx^2+4x-(k+2)x+1+3=0.
+\]
+Reduciendo t\'erminos semejantes:
+\[
+    kx^2+(2-k)x+4=0.
+\]
+
+Las intersecciones entre la par\'abola y la recta corresponden a las soluciones de esta ecuaci\'on. Para que haya dos puntos diferentes, necesitamos que la ecuaci\'on sea cuadr\'atica y tenga dos soluciones reales distintas.
+
+Primero, debe cumplirse
+\[
+    k\neq 0.
+\]
+Luego, su discriminante debe ser positivo:
+\[
+    \Delta>0.
+\]
+Calculamos:
+\[
+    \Delta=(2-k)^2-4(k)(4).
+\]
+Entonces
+\[
+    \Delta=(2-k)^2-16k.
+\]
+Desarrollando:
+\[
+    \Delta=k^2-4k+4-16k
+    =k^2-20k+4.
+\]
+Por lo tanto, debemos resolver
+\[
+    k^2-20k+4>0.
+\]
+Resolvemos la ecuaci\'on asociada:
+\[
+    k^2-20k+4=0.
+\]
+Por f\'ormula cuadr\'atica:
+\[
+    k=\frac{20\pm\sqrt{(-20)^2-4(1)(4)}}{2}
+     =\frac{20\pm\sqrt{400-16}}{2}.
+\]
+Luego,
+\[
+    k=\frac{20\pm\sqrt{384}}{2}
+     =\frac{20\pm 8\sqrt6}{2}
+     =10\pm4\sqrt6.
+\]
+Como la par\'abola en $k$ abre hacia arriba,
+\[
+    k^2-20k+4>0
+\]
+cuando
+\[
+    k<10-4\sqrt6
+    \quad\vee\quad
+    k>10+4\sqrt6.
+\]
+Finalmente, recordando que $k\neq0$, se obtiene
+\[
+    k\in(-\infty,0)\cup(0,10-4\sqrt6)\cup(10+4\sqrt6,+\infty).
+\]
+
+\respuesta{$k\in(-\infty,0)\cup(0,10-4\sqrt6)\cup(10+4\sqrt6,+\infty)$.}
+\end{solucionbox}
+
+\begin{solucionbox}{Ejercicio 4.2}
+Considere las par\'abolas
+\[
+    C_1:\ y=(k+1)x^2-3x+k,
+    \qquad
+    C_2:\ y=2x^2+(k-2)x+1.
+\]
+Determine los valores de $k\in\R$ para que $C_1$ y $C_2$ se intersecten en dos puntos diferentes.
+
+\textbf{Soluci\'on:}
+
+Para hallar las intersecciones, igualamos ambas ecuaciones:
+\[
+    (k+1)x^2-3x+k=2x^2+(k-2)x+1.
+\]
+Llevamos todo a un lado:
+\[
+    (k+1)x^2-2x^2-3x-(k-2)x+k-1=0.
+\]
+Reducimos:
+\[
+    (k-1)x^2+(-3-k+2)x+(k-1)=0.
+\]
+Es decir,
+\[
+    (k-1)x^2-(k+1)x+(k-1)=0.
+\]
+
+Para que las par\'abolas se intersecten en dos puntos diferentes, la ecuaci\'on debe ser cuadr\'atica y tener dos soluciones reales distintas.
+
+Primero:
+\[
+    k-1\neq0
+    \quad\Longrightarrow\quad
+    k\neq1.
+\]
+Luego, exigimos
+\[
+    \Delta>0.
+\]
+Calculamos:
+\[
+    \Delta=(-(k+1))^2-4(k-1)(k-1).
+\]
+Por lo tanto,
+\[
+    \Delta=(k+1)^2-4(k-1)^2.
+\]
+Desarrollando:
+\[
+    \Delta=(k^2+2k+1)-4(k^2-2k+1).
+\]
+Entonces
+\[
+    \Delta=k^2+2k+1-4k^2+8k-4
+    =-3k^2+10k-3.
+\]
+Debemos resolver
+\[
+    -3k^2+10k-3>0.
+\]
+Multiplicando por $-1$ y cambiando el sentido:
+\[
+    3k^2-10k+3<0.
+\]
+Factorizamos:
+\[
+    3k^2-10k+3=(3k-1)(k-3).
+\]
+Luego,
+\[
+    (3k-1)(k-3)<0.
+\]
+La expresi\'on es negativa entre sus ra\'ices:
+\[
+    \frac13<k<3.
+\]
+Finalmente, debemos excluir $k=1$:
+\[
+    k\in\left(\frac13,1\right)\cup(1,3).
+\]
+
+\respuesta{$k\in\left(\dfrac13,1\right)\cup(1,3)$.}
+\end{solucionbox}
+
+\end{document}

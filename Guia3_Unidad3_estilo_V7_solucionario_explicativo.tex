@@ -1,0 +1,1649 @@
+
+\documentclass[12pt,letterpaper]{article}
+
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[most]{tcolorbox}
+\usepackage{hyperref}
+\usepackage{transparent}
+\usepackage{eso-pic}
+\usepackage{array}
+
+\geometry{left=2cm,right=2cm,top=3cm,bottom=2.35cm,headheight=40pt,headsep=0.65cm,footskip=1cm}
+
+% =========================================================
+% INFORMACIÓN DE LA GUÍA
+% =========================================================
+\newcommand{\institucion}{Usach Premium}
+\newcommand{\curso}{Álgebra II}
+\newcommand{\guiasnumero}{Guía 3 - Espacios Vectoriales y Transformaciones Lineales}
+\newcommand{\semestre}{1er. Semestre de 2026}
+\newcommand{\preparadopor}{Francisca Varela}
+\newcommand{\webinstitucion}{www.usachpremium.cl}
+\newcommand{\instagraminstitucion}{@usach.premium}
+\newcommand{\instagramurl}{https://www.instagram.com/usach.premium}
+\newcommand{\logoup}{logo_up.png}
+\newcommand{\logousach}{logo_usach.png}
+\newcommand{\logofondo}{logo_up.png}
+\newcommand{\transparencia}{0.055}
+\newcommand{\fraseportada}{La práctica constante transforma el procedimiento en claridad.}
+\newcommand{\listacontenidos}{
+    \item[\color{azulFuerte}$\Rightarrow$] Espacios vectoriales y subespacios.
+    \item[\color{azulFuerte}$\Rightarrow$] Sistemas de generadores.
+    \item[\color{azulFuerte}$\Rightarrow$] Independencia lineal, bases y dimensión.
+    \item[\color{azulFuerte}$\Rightarrow$] Transformaciones lineales, núcleo e imagen.
+}
+
+% =========================================================
+% COLORES
+% =========================================================
+\definecolor{celesteSuave}{HTML}{F0F7FF}
+\definecolor{azulFuerte}{HTML}{1A5276}
+\definecolor{turquesaUsach}{HTML}{33CCCC}
+\definecolor{enlace}{HTML}{1A5276}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=enlace,
+    urlcolor=enlace
+}
+
+% =========================================================
+% ENCABEZADO Y PIE
+% =========================================================
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\includegraphics[height=1.1cm]{\logoup}}
+\chead{\small \textbf{\institucion}\\ \curso \\ \href{\instagramurl}{\instagraminstitucion}}
+\rhead{\includegraphics[height=1.1cm]{\logousach}}
+\lfoot{\small \fraseportada}
+\rfoot{\small Página \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\newcommand{\MarcaAgua}{
+    \AddToShipoutPicture{
+        \AtPageCenter{
+            \makebox(0,0){%
+                \transparent{\transparencia}%
+                \includegraphics[width=0.7\textwidth]{\logofondo}%
+            }
+        }
+    }
+}
+
+% =========================================================
+% CAJAS
+% =========================================================
+\tcbset{
+    colback=celesteSuave,
+    colframe=azulFuerte,
+    arc=2mm,
+    boxrule=0.7pt
+}
+
+\newtcolorbox{kitpropiedades}[1]{
+    title=\textbf{#1},
+    coltitle=white,
+    colbacktitle=azulFuerte,
+    fonttitle=\bfseries
+}
+
+\newtcolorbox{desafiobox}[1]{
+    title=\textbf{#1},
+    colback=white,
+    colframe=azulFuerte,
+    coltitle=white,
+    colbacktitle=azulFuerte,
+    fonttitle=\bfseries,
+    drop shadow
+}
+
+\newtcolorbox{solbox}[1]{
+    title=\textbf{#1},
+    coltitle=white,
+    colbacktitle=azulFuerte,
+    colback=celesteSuave,
+    colframe=azulFuerte,
+    fonttitle=\bfseries,
+    breakable,
+    enhanced,
+    before skip=7pt,
+    after skip=9pt
+}
+
+\newtcolorbox{conclusionbox}{
+    colback=white,
+    colframe=azulFuerte,
+    boxrule=0.6pt,
+    arc=1.5mm,
+    left=2mm, right=2mm, top=1mm, bottom=1mm,
+    before skip=5pt,
+    after skip=2pt
+}
+
+\newenvironment{introduccion}{
+    \MarcaAgua
+    \section*{Introducción}
+}{}
+
+\newenvironment{ejercicios}{
+    \MarcaAgua
+    \section*{Ejercicios}
+}{}
+
+\newenvironment{soluciones}{
+    \newpage
+    \MarcaAgua
+    \begin{tcolorbox}[colback=azulFuerte,colframe=azulFuerte]
+        \centering \Large \textcolor{white}{\textbf{SOLUCIONARIO}}
+    \end{tcolorbox}
+    \small
+}{}
+
+% =========================================================
+% DOCUMENTO
+% =========================================================
+
+\begin{document}
+\thispagestyle{plain}
+
+\begin{center}
+    \vspace*{0.2cm}
+    \begin{minipage}{0.45\textwidth}
+        \raggedright
+        \includegraphics[height=1.7cm]{\logoup}
+    \end{minipage}
+    \begin{minipage}{0.45\textwidth}
+        \raggedleft
+        \includegraphics[height=1.7cm]{\logousach}
+    \end{minipage}
+
+    \vspace{3.1cm}
+
+    {\Large \textbf{\institucion}}\\[0.3cm]
+    {\Huge \textbf{\curso}}\\[0.35cm]
+    {\Large \textbf{\guiasnumero}}\\[0.6cm]
+    {\large \textit{Unidad III: Espacios Vectoriales y Transformaciones Lineales}}\\[1.2cm]
+
+    \begin{tcolorbox}[width=0.78\textwidth, colback=celesteSuave, colframe=azulFuerte, title=\textbf{Contenidos de la guía}]
+        \begin{itemize}[leftmargin=1.2cm]
+            \listacontenidos
+        \end{itemize}
+    \end{tcolorbox}
+
+    \vfill
+    \begin{minipage}{0.45\textwidth}
+        \raggedright
+        \textbf{\institucion}\\
+        \semestre\\
+        \textbf{Preparado por: \preparadopor}
+    \end{minipage}
+    \begin{minipage}{0.45\textwidth}
+        \raggedleft
+        Web: \href{https://usachpremium.cl/}{\webinstitucion}\\
+        Instagram: \href{\instagramurl}{\instagraminstitucion}
+    \end{minipage}
+\end{center}
+
+\newpage
+
+\begin{introduccion}
+Esta guía está diseñada en modo ascenso: comienza con ejercicios de verificación directa de subespacios, continúa con sistemas de generadores, bases y dimensión, y finaliza con problemas de transformaciones lineales tipo control. Se recomienda justificar cada respuesta indicando la definición o teorema utilizado y, cuando corresponda, resolver el sistema lineal asociado.
+
+\begin{kitpropiedades}{Kit de propiedades útiles}
+\begin{multicols}{2}
+\begin{itemize}[leftmargin=0.7cm]
+    \item Subespacio: \(W\leq V\) si contiene al vector cero, es cerrado para la suma y para la ponderación escalar.
+    \item Generador: \(W=\langle v_1,\ldots,v_k\rangle\) si todo vector de \(W\) se escribe como combinación lineal de ellos.
+    \item Independencia lineal: \(\alpha_1v_1+\cdots+\alpha_kv_k=0\Rightarrow \alpha_1=\cdots=\alpha_k=0\).
+    \item Base: conjunto linealmente independiente que genera el espacio.
+    \item Dimensión: número de vectores de una base.
+    \item Núcleo: \(\ker(T)=\{v\in V:T(v)=0\}\).
+    \item Imagen: \(\operatorname{Im}(T)=\{T(v):v\in V\}\).
+    \item Teorema núcleo-imagen: \(\dim(\ker T)+\dim(\operatorname{Im}T)=\dim(V)\).
+    \item Isomorfismo: una transformación lineal \(T:V\to W\) es isomorfismo si es biyectiva, es decir, inyectiva y sobreyectiva.
+\end{itemize}
+\end{multicols}
+\end{kitpropiedades}
+\end{introduccion}
+
+\begin{ejercicios}
+
+\begin{enumerate}[leftmargin=0.65cm,label=\textbf{\arabic*.}]
+
+\item Determine si
+\[
+W=\{(x,y,z)\in\mathbb{R}^3:x-2y+z=0\}
+\]
+es un subespacio de \(\mathbb{R}^3\).
+
+\item Determine si
+\[
+W=\{(x,y,z)\in\mathbb{R}^3:x+y=1\}
+\]
+es un subespacio de \(\mathbb{R}^3\).
+
+\item Determine si
+\[
+W=\left\{
+\begin{pmatrix}
+a & b\\
+c & d
+\end{pmatrix}\in M_{\mathbb{R}}(2):a+d=0
+\right\}
+\]
+es un subespacio de \(M_{\mathbb{R}}(2)\).
+
+\item Determine si
+\[
+W=\{a_0+a_1x+a_2x^2\in\mathbb{R}_2[x]:a_0-a_1+a_2=0\}
+\]
+es un subespacio de \(\mathbb{R}_2[x]\).
+
+\item Sea
+\[
+W=\{(x,y,z)\in\mathbb{R}^3:x+y-z=0\}.
+\]
+Determine un sistema generador para \(W\).
+
+\item Sea
+\[
+W=\{(x,y,z,t)\in\mathbb{R}^4:x-y+t=0\}.
+\]
+Determine un sistema generador para \(W\).
+
+\item Sea
+\[
+W=\left\{
+\begin{pmatrix}
+a & b\\
+c & d
+\end{pmatrix}\in M_{\mathbb{R}}(2):a=d
+\right\}.
+\]
+Determine un sistema generador para \(W\).
+
+\item Sea
+\[
+W=\{p(x)\in\mathbb{R}_2[x]:p(1)=0\}.
+\]
+Determine un sistema generador para \(W\).
+
+\item Determine si el conjunto
+\[
+\{(1,2),(2,4)\}
+\]
+es linealmente independiente o linealmente dependiente.
+
+\item Determine si el conjunto
+\[
+\{(1,0,1),(0,1,2),(2,1,4)\}
+\]
+es linealmente independiente o linealmente dependiente.
+
+\item Determine los valores de \(\lambda\in\mathbb{R}\) para los cuales
+\[
+\{(1,0,\lambda),(2,1,1),(0,\lambda,1)\}
+\]
+es una base de \(\mathbb{R}^3\).
+
+\item Determine una base y la dimensión del subespacio
+\[
+W=\{(x,y,z,t)\in\mathbb{R}^4:x+y-z+t=0,\; 2x-y+z=0\}.
+\]
+
+\item Sea
+\[
+V=\left\langle
+(1,0,1,0),(2,1,0,1),(3,1,1,1)
+\right\rangle.
+\]
+Determine una base para \(V\) y calcule \(\dim(V)\).
+
+\item Determine si \(T:\mathbb{R}^2\to\mathbb{R}^3\), definida por
+\[
+T(x,y)=(x+y,2x-y,x),
+\]
+es una transformación lineal.
+
+\item Sea \(T:\mathbb{R}^2\to\mathbb{R}^3\), dada por
+\[
+T(x,y)=(x-y,2x+y,3y).
+\]
+Determine:
+\begin{enumerate}[label=\alph*)]
+    \item \(T(1,2)\).
+    \item \(T(2,-1)\).
+    \item \(T(a,b)\).
+\end{enumerate}
+
+\item Sea \(T:\mathbb{R}^3\to\mathbb{R}^2\), definida por
+\[
+T(x,y,z)=(x+y-z,2x-y+z).
+\]
+Determine \(\ker(T)\), una base para \(\ker(T)\) y su dimensión.
+
+\item Sea \(T:\mathbb{R}^3\to\mathbb{R}^3\), definida por
+\[
+T(x,y,z)=(x+y,y+z,x+z).
+\]
+Determine:
+\begin{enumerate}[label=\alph*)]
+    \item \(\ker(T)\).
+    \item \(\operatorname{Im}(T)\).
+    \item \(\dim(\operatorname{Im}(T))\).
+\end{enumerate}
+
+\item Sea \(T:\mathbb{R}^3\to\mathbb{R}^3\), definida por
+\[
+T(x,y,z)=(x+2y-z,2x+y+z,x-y+2z).
+\]
+Determine si \(T\) es inyectiva, sobreyectiva, biyectiva y si corresponde a un isomorfismo.
+Justifique usando el Teorema Núcleo--Imagen.
+
+\end{enumerate}
+
+\end{ejercicios}
+
+\begin{soluciones}
+
+\begin{solbox}{Solución ejercicio 1}
+Se quiere verificar si:
+\[
+W=\{(x,y,z)\in\mathbb{R}^3:x-2y+z=0\}
+\]
+es un subespacio de \(\mathbb{R}^3\).
+
+Para esto usamos el criterio de subespacio: debe contener al vector cero, ser cerrado para la suma y ser cerrado para la ponderación escalar.
+
+Primero, verificamos si el vector cero pertenece a \(W\):
+\[
+0-2\cdot 0+0=0.
+\]
+Por lo tanto:
+\[
+(0,0,0)\in W.
+\]
+
+Ahora tomemos dos vectores cualesquiera de \(W\):
+\[
+u=(x_1,y_1,z_1),\qquad v=(x_2,y_2,z_2).
+\]
+Como ambos pertenecen a \(W\), cumplen:
+\[
+x_1-2y_1+z_1=0,
+\]
+\[
+x_2-2y_2+z_2=0.
+\]
+
+Estudiamos la suma:
+\[
+u+v=(x_1+x_2,y_1+y_2,z_1+z_2).
+\]
+Evaluamos la condición del conjunto:
+\[
+(x_1+x_2)-2(y_1+y_2)+(z_1+z_2).
+\]
+Ordenando:
+\[
+(x_1-2y_1+z_1)+(x_2-2y_2+z_2)=0+0=0.
+\]
+Entonces:
+\[
+u+v\in W.
+\]
+
+Finalmente, sea \(\alpha\in\mathbb{R}\). Si \(u\in W\), entonces:
+\[
+\alpha u=(\alpha x_1,\alpha y_1,\alpha z_1).
+\]
+Evaluamos:
+\[
+\alpha x_1-2\alpha y_1+\alpha z_1
+=\alpha(x_1-2y_1+z_1)=\alpha\cdot 0=0.
+\]
+Por lo tanto:
+\[
+\alpha u\in W.
+\]
+
+\begin{conclusionbox}
+En conclusión, \(W\) es un subespacio de \(\mathbb{R}^3\).
+\end{conclusionbox}
+\end{solbox}
+
+\begin{solbox}{Solución ejercicio 2}
+Se quiere determinar si:
+\[
+W=\{(x,y,z)\in\mathbb{R}^3:x+y=1\}
+\]
+es un subespacio de \(\mathbb{R}^3\).
+
+Para que un conjunto sea subespacio, una condición necesaria es que contenga al vector cero:
+\[
+(0,0,0).
+\]
+Evaluamos la condición \(x+y=1\) en el vector cero:
+\[
+0+0=0.
+\]
+Pero:
+\[
+0\neq 1.
+\]
+Por lo tanto:
+\[
+(0,0,0)\notin W.
+\]
+
+Como falla esta condición básica, no es necesario seguir revisando cerradura por suma o por ponderación escalar.
+
+\begin{conclusionbox}
+En conclusión, \(W\) no es un subespacio de \(\mathbb{R}^3\), ya que no contiene al vector cero.
+\end{conclusionbox}
+\end{solbox}
+
+\begin{solbox}{Solución ejercicio 3}
+Se quiere verificar si:
+\[
+W=\left\{
+\begin{pmatrix}
+a&b\\
+c&d
+\end{pmatrix}\in M_{\mathbb{R}}(2):a+d=0
+\right\}
+\]
+es un subespacio de \(M_{\mathbb{R}}(2)\).
+
+La condición \(a+d=0\) indica que la suma de los elementos de la diagonal principal debe ser cero.
+
+Primero verificamos si la matriz cero pertenece a \(W\):
+\[
+\begin{pmatrix}
+0&0\\
+0&0
+\end{pmatrix}.
+\]
+En este caso:
+\[
+0+0=0.
+\]
+Por lo tanto, la matriz cero pertenece a \(W\).
+
+Ahora tomemos:
+\[
+A=
+\begin{pmatrix}
+a&b\\
+c&d
+\end{pmatrix}\in W,
+\qquad
+B=
+\begin{pmatrix}
+e&f\\
+g&h
+\end{pmatrix}\in W.
+\]
+Entonces:
+\[
+a+d=0,
+\qquad
+e+h=0.
+\]
+
+Estudiamos la suma:
+\[
+A+B=
+\begin{pmatrix}
+a+e&b+f\\
+c+g&d+h
+\end{pmatrix}.
+\]
+La suma de su diagonal principal es:
+\[
+(a+e)+(d+h).
+\]
+Reordenando:
+\[
+(a+d)+(e+h)=0+0=0.
+\]
+Luego:
+\[
+A+B\in W.
+\]
+
+Finalmente, sea \(\alpha\in\mathbb{R}\). Entonces:
+\[
+\alpha A=
+\begin{pmatrix}
+\alpha a&\alpha b\\
+\alpha c&\alpha d
+\end{pmatrix}.
+\]
+La suma de su diagonal principal es:
+\[
+\alpha a+\alpha d=\alpha(a+d)=\alpha\cdot 0=0.
+\]
+Así:
+\[
+\alpha A\in W.
+\]
+
+\begin{conclusionbox}
+En conclusión, \(W\) es un subespacio de \(M_{\mathbb{R}}(2)\).
+\end{conclusionbox}
+\end{solbox}
+
+\begin{solbox}{Solución ejercicio 4}
+Se quiere verificar si:
+\[
+W=\{a_0+a_1x+a_2x^2\in\mathbb{R}_2[x]:a_0-a_1+a_2=0\}
+\]
+es un subespacio de \(\mathbb{R}_2[x]\).
+
+Primero verificamos si el polinomio cero pertenece a \(W\):
+\[
+0+0x+0x^2.
+\]
+Sus coeficientes son:
+\[
+a_0=0,\qquad a_1=0,\qquad a_2=0.
+\]
+Entonces:
+\[
+a_0-a_1+a_2=0-0+0=0.
+\]
+Por lo tanto, el polinomio cero pertenece a \(W\).
+
+Ahora tomemos:
+\[
+p(x)=a_0+a_1x+a_2x^2\in W,
+\]
+\[
+q(x)=b_0+b_1x+b_2x^2\in W.
+\]
+Entonces:
+\[
+a_0-a_1+a_2=0,
+\]
+\[
+b_0-b_1+b_2=0.
+\]
+
+Estudiamos la suma:
+\[
+p(x)+q(x)=(a_0+b_0)+(a_1+b_1)x+(a_2+b_2)x^2.
+\]
+Evaluamos la condición:
+\[
+(a_0+b_0)-(a_1+b_1)+(a_2+b_2).
+\]
+Agrupando:
+\[
+(a_0-a_1+a_2)+(b_0-b_1+b_2)=0+0=0.
+\]
+Luego:
+\[
+p(x)+q(x)\in W.
+\]
+
+Sea \(\alpha\in\mathbb{R}\). Entonces:
+\[
+\alpha p(x)=\alpha a_0+\alpha a_1x+\alpha a_2x^2.
+\]
+Evaluamos:
+\[
+\alpha a_0-\alpha a_1+\alpha a_2
+=\alpha(a_0-a_1+a_2)=0.
+\]
+Por lo tanto:
+\[
+\alpha p(x)\in W.
+\]
+
+\begin{conclusionbox}
+En conclusión, \(W\) es un subespacio de \(\mathbb{R}_2[x]\).
+\end{conclusionbox}
+\end{solbox}
+
+\begin{solbox}{Solución ejercicio 5}
+Se tiene:
+\[
+W=\{(x,y,z)\in\mathbb{R}^3:x+y-z=0\}.
+\]
+Para encontrar un sistema generador, debemos escribir cualquier vector de \(W\) como combinación lineal de algunos vectores.
+
+Partimos desde la ecuación:
+\[
+x+y-z=0.
+\]
+Despejamos una variable en función de las otras. En este caso:
+\[
+x=-y+z.
+\]
+Como \(y\) y \(z\) quedan libres, tomamos:
+\[
+y=s,\qquad z=t.
+\]
+Entonces:
+\[
+x=-s+t.
+\]
+Por lo tanto:
+\[
+(x,y,z)=(-s+t,s,t).
+\]
+
+Ahora separamos según cada parámetro:
+\[
+(-s+t,s,t)=(-s,s,0)+(t,0,t).
+\]
+Factorizando:
+\[
+(-s,s,0)=s(-1,1,0),
+\]
+\[
+(t,0,t)=t(1,0,1).
+\]
+Así:
+\[
+(x,y,z)=s(-1,1,0)+t(1,0,1).
+\]
+Por lo tanto:
+\[
+W=\langle\{(-1,1,0),(1,0,1)\}\rangle.
+\]
+
+\begin{conclusionbox}
+En conclusión, un sistema generador para \(W\) es:
+\[
+\{(-1,1,0),(1,0,1)\}.
+\]
+\end{conclusionbox}
+\end{solbox}
+
+\begin{solbox}{Solución ejercicio 6}
+Se tiene:
+\[
+W=\{(x,y,z,t)\in\mathbb{R}^4:x-y+t=0\}.
+\]
+La idea es expresar el vector general \((x,y,z,t)\) en función de parámetros libres.
+
+Partimos con:
+\[
+x-y+t=0.
+\]
+Despejamos \(x\):
+\[
+x=y-t.
+\]
+Las variables \(y,z,t\) quedan libres. Tomamos:
+\[
+y=s,\qquad z=r,\qquad t=q.
+\]
+Entonces:
+\[
+x=s-q.
+\]
+Por lo tanto:
+\[
+(x,y,z,t)=(s-q,s,r,q).
+\]
+
+Ahora separamos por parámetros:
+\[
+(s-q,s,r,q)=(s,s,0,0)+(0,0,r,0)+(-q,0,0,q).
+\]
+Factorizando:
+\[
+(s,s,0,0)=s(1,1,0,0),
+\]
+\[
+(0,0,r,0)=r(0,0,1,0),
+\]
+\[
+(-q,0,0,q)=q(-1,0,0,1).
+\]
+Así:
+\[
+(x,y,z,t)=s(1,1,0,0)+r(0,0,1,0)+q(-1,0,0,1).
+\]
+
+\begin{conclusionbox}
+En conclusión, un sistema generador para \(W\) es:
+\[
+\{(1,1,0,0),(0,0,1,0),(-1,0,0,1)\}.
+\]
+\end{conclusionbox}
+\end{solbox}
+
+\begin{solbox}{Solución ejercicio 7}
+Se tiene:
+\[
+W=\left\{
+\begin{pmatrix}
+a&b\\
+c&d
+\end{pmatrix}\in M_{\mathbb{R}}(2):a=d
+\right\}.
+\]
+La condición \(a=d\) dice que los elementos de la diagonal principal son iguales.
+
+Entonces toda matriz de \(W\) tiene la forma:
+\[
+\begin{pmatrix}
+a&b\\
+c&a
+\end{pmatrix}.
+\]
+Ahora separamos la matriz según sus parámetros \(a,b,c\):
+\[
+\begin{pmatrix}
+a&b\\
+c&a
+\end{pmatrix}
+=
+\begin{pmatrix}
+a&0\\
+0&a
+\end{pmatrix}
++
+\begin{pmatrix}
+0&b\\
+0&0
+\end{pmatrix}
++
+\begin{pmatrix}
+0&0\\
+c&0
+\end{pmatrix}.
+\]
+Factorizando:
+\[
+\begin{pmatrix}
+a&0\\
+0&a
+\end{pmatrix}
+=
+a\begin{pmatrix}
+1&0\\
+0&1
+\end{pmatrix},
+\]
+\[
+\begin{pmatrix}
+0&b\\
+0&0
+\end{pmatrix}
+=
+b\begin{pmatrix}
+0&1\\
+0&0
+\end{pmatrix},
+\]
+\[
+\begin{pmatrix}
+0&0\\
+c&0
+\end{pmatrix}
+=
+c\begin{pmatrix}
+0&0\\
+1&0
+\end{pmatrix}.
+\]
+Por lo tanto:
+\[
+W=
+\left\langle
+\left\{
+\begin{pmatrix}1&0\\0&1\end{pmatrix},
+\begin{pmatrix}0&1\\0&0\end{pmatrix},
+\begin{pmatrix}0&0\\1&0\end{pmatrix}
+\right\}
+\right\rangle.
+\]
+
+\begin{conclusionbox}
+En conclusión, un sistema generador para \(W\) es:
+\[
+\left\{
+\begin{pmatrix}1&0\\0&1\end{pmatrix},
+\begin{pmatrix}0&1\\0&0\end{pmatrix},
+\begin{pmatrix}0&0\\1&0\end{pmatrix}
+\right\}.
+\]
+\end{conclusionbox}
+\end{solbox}
+
+\begin{solbox}{Solución ejercicio 8}
+Sea:
+\[
+p(x)=a_0+a_1x+a_2x^2.
+\]
+La condición del conjunto es:
+\[
+p(1)=0.
+\]
+Evaluamos:
+\[
+p(1)=a_0+a_1+a_2.
+\]
+Entonces:
+\[
+a_0+a_1+a_2=0.
+\]
+Despejamos:
+\[
+a_0=-a_1-a_2.
+\]
+Las variables \(a_1\) y \(a_2\) quedan libres. Tomamos:
+\[
+a_1=s,\qquad a_2=t.
+\]
+Entonces:
+\[
+a_0=-s-t.
+\]
+Por lo tanto:
+\[
+p(x)=(-s-t)+sx+tx^2.
+\]
+Separamos por parámetros:
+\[
+p(x)=s(-1+x)+t(-1+x^2).
+\]
+Así, todo polinomio de \(W\) se puede escribir como combinación lineal de \(-1+x\) y \(-1+x^2\).
+
+\begin{conclusionbox}
+En conclusión, un sistema generador para \(W\) es:
+\[
+\{-1+x,\,-1+x^2\}.
+\]
+\end{conclusionbox}
+\end{solbox}
+
+\begin{solbox}{Solución ejercicio 9}
+Queremos determinar si:
+\[
+\{(1,2),(2,4)\}
+\]
+es linealmente independiente o dependiente.
+
+Para eso estudiamos:
+\[
+\alpha(1,2)+\beta(2,4)=(0,0).
+\]
+Al sumar componente a componente:
+\[
+(\alpha+2\beta,2\alpha+4\beta)=(0,0).
+\]
+Por lo tanto:
+\[
+\alpha+2\beta=0,
+\]
+\[
+2\alpha+4\beta=0.
+\]
+La segunda ecuación es simplemente dos veces la primera:
+\[
+2(\alpha+2\beta)=0.
+\]
+Por lo tanto, no entrega nueva información. Esto permite soluciones no triviales.
+
+Por ejemplo, si tomamos:
+\[
+\beta=1,
+\]
+entonces:
+\[
+\alpha+2=0 \Rightarrow \alpha=-2.
+\]
+Así:
+\[
+-2(1,2)+1(2,4)=(0,0).
+\]
+Como encontramos una combinación no trivial que da el vector cero, el conjunto es linealmente dependiente.
+
+\begin{conclusionbox}
+En conclusión, el conjunto es linealmente dependiente.
+\end{conclusionbox}
+\end{solbox}
+
+\begin{solbox}{Solución ejercicio 10}
+Queremos estudiar:
+\[
+\{(1,0,1),(0,1,2),(2,1,4)\}.
+\]
+Planteamos la combinación lineal igual al vector cero:
+\[
+\alpha(1,0,1)+\beta(0,1,2)+\gamma(2,1,4)=(0,0,0).
+\]
+Sumando componente a componente:
+\[
+(\alpha+2\gamma,\beta+\gamma,\alpha+2\beta+4\gamma)=(0,0,0).
+\]
+Entonces:
+\[
+\alpha+2\gamma=0,
+\]
+\[
+\beta+\gamma=0,
+\]
+\[
+\alpha+2\beta+4\gamma=0.
+\]
+De la primera ecuación:
+\[
+\alpha=-2\gamma.
+\]
+De la segunda:
+\[
+\beta=-\gamma.
+\]
+Reemplazamos en la tercera:
+\[
+-2\gamma+2(-\gamma)+4\gamma=0.
+\]
+Esto se cumple para cualquier valor de \(\gamma\). Por lo tanto, podemos elegir un valor no nulo. Por ejemplo, si \(\gamma=1\), entonces:
+\[
+\alpha=-2,\qquad \beta=-1.
+\]
+Con esto tenemos una combinación no trivial que da el vector cero.
+
+\begin{conclusionbox}
+En conclusión, el conjunto es linealmente dependiente.
+\end{conclusionbox}
+\end{solbox}
+
+\begin{solbox}{Solución ejercicio 11}
+Para que el conjunto:
+\[
+\{(1,0,\lambda),(2,1,1),(0,\lambda,1)\}
+\]
+sea base de \(\mathbb{R}^3\), debe tener tres vectores linealmente independientes. Como son tres vectores en \(\mathbb{R}^3\), podemos formar una matriz con ellos y exigir que su determinante sea distinto de cero.
+
+Tomamos los vectores como columnas:
+\[
+A=
+\begin{pmatrix}
+1&2&0\\
+0&1&\lambda\\
+\lambda&1&1
+\end{pmatrix}.
+\]
+El conjunto será base si:
+\[
+|A|\neq 0.
+\]
+
+Calculamos el determinante expandiendo por la primera fila:
+\[
+|A|
+=
+1\begin{vmatrix}
+1&\lambda\\
+1&1
+\end{vmatrix}
+-
+2\begin{vmatrix}
+0&\lambda\\
+\lambda&1
+\end{vmatrix}
++
+0\begin{vmatrix}
+0&1\\
+\lambda&1
+\end{vmatrix}.
+\]
+Entonces:
+\[
+|A|=1(1-\lambda)-2(0-\lambda^2)+0.
+\]
+Por lo tanto:
+\[
+|A|=1-\lambda+2\lambda^2.
+\]
+Ordenando:
+\[
+|A|=2\lambda^2-\lambda+1.
+\]
+
+Ahora estudiamos cuándo este determinante podría ser cero:
+\[
+2\lambda^2-\lambda+1=0.
+\]
+El discriminante es:
+\[
+\Delta=(-1)^2-4(2)(1)=1-8=-7.
+\]
+Como:
+\[
+\Delta<0,
+\]
+la ecuación no tiene soluciones reales. Además, como el coeficiente de \(\lambda^2\) es positivo, la expresión nunca se anula en \(\mathbb{R}\).
+
+Entonces:
+\[
+2\lambda^2-\lambda+1\neq 0,\quad \forall \lambda\in\mathbb{R}.
+\]
+
+\begin{conclusionbox}
+En conclusión, el conjunto es base de \(\mathbb{R}^3\) para todo \(\lambda\in\mathbb{R}\).
+\end{conclusionbox}
+\end{solbox}
+
+\begin{solbox}{Solución ejercicio 12}
+El subespacio está dado por las condiciones:
+\[
+x+y-z+t=0,\qquad 2x-y+z=0.
+\]
+La idea es encontrar todos los vectores \((x,y,z,t)\) que cumplen ambas ecuaciones. Para ello resolvemos el sistema homogéneo asociado:
+\[
+\begin{pmatrix}
+1&1&-1&1&|&0\\
+2&-1&1&0&|&0
+\end{pmatrix}.
+\]
+
+Eliminamos la \(x\) de la segunda fila:
+\[
+f_2\leftarrow f_2-2f_1.
+\]
+Entonces:
+\[
+f_2=(2,-1,1,0)-2(1,1,-1,1)=(0,-3,3,-2).
+\]
+Por lo tanto:
+\[
+\begin{pmatrix}
+1&1&-1&1&|&0\\
+0&-3&3&-2&|&0
+\end{pmatrix}.
+\]
+
+La segunda fila representa:
+\[
+-3y+3z-2t=0.
+\]
+Despejamos \(y\):
+\[
+-3y=-3z+2t
+\]
+\[
+y=z-\frac{2}{3}t.
+\]
+
+Ahora usamos la primera ecuación:
+\[
+x+y-z+t=0.
+\]
+Despejamos \(x\):
+\[
+x=-y+z-t.
+\]
+Reemplazando \(y=z-\frac{2}{3}t\):
+\[
+x=-\left(z-\frac{2}{3}t\right)+z-t.
+\]
+Entonces:
+\[
+x=-z+\frac{2}{3}t+z-t=-\frac{1}{3}t.
+\]
+
+Así:
+\[
+x=-\frac{1}{3}t,\qquad y=z-\frac{2}{3}t.
+\]
+Como \(z\) y \(t\) quedan libres, los usamos como parámetros. Para evitar fracciones, tomamos:
+\[
+z=s,\qquad t=3r.
+\]
+Luego:
+\[
+x=-r,\qquad y=s-2r,\qquad z=s,\qquad t=3r.
+\]
+Por lo tanto:
+\[
+(x,y,z,t)=(-r,s-2r,s,3r).
+\]
+
+Ahora separamos el vector según cada parámetro:
+\[
+(x,y,z,t)=(0,s,s,0)+(-r,-2r,0,3r).
+\]
+Factorizando:
+\[
+(x,y,z,t)=s(0,1,1,0)+r(-1,-2,0,3).
+\]
+
+Esto significa que todo vector de \(W\) se puede escribir como combinación lineal de:
+\[
+(0,1,1,0)\quad \text{y}\quad (-1,-2,0,3).
+\]
+Además, estos dos vectores no son múltiplos entre sí, por lo que son linealmente independientes.
+
+\begin{conclusionbox}
+En conclusión, una base para \(W\) es:
+\[
+\{(0,1,1,0),(-1,-2,0,3)\},
+\]
+y:
+\[
+\dim(W)=2.
+\]
+\end{conclusionbox}
+\end{solbox}
+
+\begin{solbox}{Solución ejercicio 13}
+El espacio \(V\) está generado por:
+\[
+v_1=(1,0,1,0),\qquad
+v_2=(2,1,0,1),\qquad
+v_3=(3,1,1,1).
+\]
+Para encontrar una base, buscamos eliminar vectores redundantes, es decir, vectores que se puedan escribir como combinación lineal de los otros.
+
+Estudiamos si los tres generadores son linealmente independientes:
+\[
+\alpha v_1+\beta v_2+\gamma v_3=(0,0,0,0).
+\]
+Esto es:
+\[
+\alpha(1,0,1,0)+\beta(2,1,0,1)+\gamma(3,1,1,1)=(0,0,0,0).
+\]
+Al sumar componente a componente:
+\[
+(\alpha+2\beta+3\gamma,\beta+\gamma,\alpha+\gamma,\beta+\gamma)=(0,0,0,0).
+\]
+Por lo tanto:
+\[
+\alpha+2\beta+3\gamma=0,
+\]
+\[
+\beta+\gamma=0,
+\]
+\[
+\alpha+\gamma=0,
+\]
+\[
+\beta+\gamma=0.
+\]
+De \(\beta+\gamma=0\), se obtiene:
+\[
+\beta=-\gamma.
+\]
+De \(\alpha+\gamma=0\), se obtiene:
+\[
+\alpha=-\gamma.
+\]
+Reemplazando en la primera ecuación:
+\[
+-\gamma+2(-\gamma)+3\gamma=0.
+\]
+Esto se cumple para todo \(\gamma\), por lo que existen soluciones no triviales. Entonces los tres vectores son linealmente dependientes.
+
+Ahora observamos directamente que:
+\[
+v_1+v_2=(1,0,1,0)+(2,1,0,1)=(3,1,1,1)=v_3.
+\]
+Por lo tanto, \(v_3\) no aporta una nueva dirección al espacio generado.
+
+Nos quedamos con:
+\[
+v_1=(1,0,1,0),\qquad v_2=(2,1,0,1).
+\]
+Estos dos vectores no son múltiplos entre sí, por lo que son linealmente independientes. Además, generan el mismo espacio \(V\), porque \(v_3=v_1+v_2\).
+
+\begin{conclusionbox}
+En conclusión, una base para \(V\) es:
+\[
+\{(1,0,1,0),(2,1,0,1)\},
+\]
+y:
+\[
+\dim(V)=2.
+\]
+\end{conclusionbox}
+\end{solbox}
+
+\begin{solbox}{Solución ejercicio 14}
+Se quiere verificar si:
+\[
+T:\mathbb{R}^2\to\mathbb{R}^3,\qquad T(x,y)=(x+y,2x-y,x)
+\]
+es transformación lineal.
+
+Para ello debemos probar dos propiedades:
+
+\[
+T(u+v)=T(u)+T(v)
+\]
+y
+\[
+T(\alpha u)=\alpha T(u).
+\]
+
+Sea:
+\[
+u=(x_1,y_1),\qquad v=(x_2,y_2).
+\]
+Entonces:
+\[
+u+v=(x_1+x_2,y_1+y_2).
+\]
+Aplicamos \(T\):
+\[
+T(u+v)=T(x_1+x_2,y_1+y_2).
+\]
+Por definición de \(T\):
+\[
+T(u+v)=((x_1+x_2)+(y_1+y_2),2(x_1+x_2)-(y_1+y_2),x_1+x_2).
+\]
+Ordenando:
+\[
+T(u+v)=(x_1+y_1+x_2+y_2,2x_1-y_1+2x_2-y_2,x_1+x_2).
+\]
+Esto se puede separar como:
+\[
+(x_1+y_1,2x_1-y_1,x_1)+(x_2+y_2,2x_2-y_2,x_2).
+\]
+Por lo tanto:
+\[
+T(u+v)=T(u)+T(v).
+\]
+
+Ahora sea \(\alpha\in\mathbb{R}\). Entonces:
+\[
+\alpha u=(\alpha x_1,\alpha y_1).
+\]
+Aplicamos \(T\):
+\[
+T(\alpha u)=T(\alpha x_1,\alpha y_1).
+\]
+Por definición:
+\[
+T(\alpha u)=(\alpha x_1+\alpha y_1,2\alpha x_1-\alpha y_1,\alpha x_1).
+\]
+Factorizamos \(\alpha\):
+\[
+T(\alpha u)=\alpha(x_1+y_1,2x_1-y_1,x_1).
+\]
+Por lo tanto:
+\[
+T(\alpha u)=\alpha T(u).
+\]
+
+\begin{conclusionbox}
+En conclusión, \(T\) es una transformación lineal.
+\end{conclusionbox}
+\end{solbox}
+
+\begin{solbox}{Solución ejercicio 15}
+La transformación está dada por:
+\[
+T(x,y)=(x-y,2x+y,3y).
+\]
+Para evaluar una transformación, reemplazamos las coordenadas del vector en la regla de \(T\).
+
+\textbf{a)} Para \((1,2)\):
+\[
+T(1,2)=(1-2,2(1)+2,3(2)).
+\]
+Calculando componente a componente:
+\[
+T(1,2)=(-1,4,6).
+\]
+
+\textbf{b)} Para \((2,-1)\):
+\[
+T(2,-1)=(2-(-1),2(2)+(-1),3(-1)).
+\]
+Entonces:
+\[
+T(2,-1)=(3,3,-3).
+\]
+
+\textbf{c)} Para \((a,b)\):
+\[
+T(a,b)=(a-b,2a+b,3b).
+\]
+Aquí no se reemplazan valores numéricos, porque se pide la imagen de un vector general.
+
+\begin{conclusionbox}
+En conclusión:
+\[
+T(1,2)=(-1,4,6),\qquad T(2,-1)=(3,3,-3),
+\]
+y:
+\[
+T(a,b)=(a-b,2a+b,3b).
+\]
+\end{conclusionbox}
+\end{solbox}
+
+\begin{solbox}{Solución ejercicio 16}
+Por definición, el núcleo está formado por todos los vectores del dominio que la transformación envía al vector cero:
+\[
+\ker(T)=\{(x,y,z)\in\mathbb{R}^3:T(x,y,z)=(0,0)\}.
+\]
+Como:
+\[
+T(x,y,z)=(x+y-z,2x-y+z),
+\]
+debemos resolver:
+\[
+(x+y-z,2x-y+z)=(0,0).
+\]
+Esto genera el sistema:
+\[
+x+y-z=0,
+\]
+\[
+2x-y+z=0.
+\]
+
+Sumamos ambas ecuaciones para eliminar \(y\) y \(z\):
+\[
+(x+y-z)+(2x-y+z)=0+0.
+\]
+Así:
+\[
+3x=0.
+\]
+Por lo tanto:
+\[
+x=0.
+\]
+Reemplazamos \(x=0\) en la primera ecuación:
+\[
+0+y-z=0.
+\]
+Entonces:
+\[
+y=z.
+\]
+Como \(z\) queda libre, tomamos:
+\[
+z=t.
+\]
+Luego:
+\[
+y=t,\qquad x=0.
+\]
+Por lo tanto:
+\[
+(x,y,z)=(0,t,t).
+\]
+Factorizando:
+\[
+(x,y,z)=t(0,1,1).
+\]
+Así:
+\[
+\ker(T)=\langle\{(0,1,1)\}\rangle.
+\]
+
+\begin{conclusionbox}
+En conclusión:
+\[
+\ker(T)=\{(0,t,t):t\in\mathbb{R}\},
+\]
+una base para \(\ker(T)\) es:
+\[
+\{(0,1,1)\},
+\]
+y:
+\[
+\dim(\ker T)=1.
+\]
+\end{conclusionbox}
+\end{solbox}
+
+\begin{solbox}{Solución ejercicio 17}
+La transformación está dada por:
+\[
+T(x,y,z)=(x+y,y+z,x+z).
+\]
+
+\textbf{a)} Para calcular el núcleo, resolvemos:
+\[
+T(x,y,z)=(0,0,0).
+\]
+Entonces:
+\[
+(x+y,y+z,x+z)=(0,0,0).
+\]
+Esto genera el sistema:
+\[
+x+y=0,
+\]
+\[
+y+z=0,
+\]
+\[
+x+z=0.
+\]
+De la primera ecuación:
+\[
+x=-y.
+\]
+De la segunda:
+\[
+z=-y.
+\]
+Reemplazamos en la tercera:
+\[
+x+z=0.
+\]
+Como \(x=-y\) y \(z=-y\):
+\[
+-y-y=0.
+\]
+Entonces:
+\[
+-2y=0 \Rightarrow y=0.
+\]
+Luego:
+\[
+x=0,\qquad z=0.
+\]
+Por lo tanto:
+\[
+\ker(T)=\{(0,0,0)\}.
+\]
+
+\textbf{b)} Para encontrar la imagen, calculamos la imagen de la base canónica de \(\mathbb{R}^3\):
+\[
+e_1=(1,0,0),\qquad e_2=(0,1,0),\qquad e_3=(0,0,1).
+\]
+Entonces:
+\[
+T(1,0,0)=(1,0,1),
+\]
+\[
+T(0,1,0)=(1,1,0),
+\]
+\[
+T(0,0,1)=(0,1,1).
+\]
+Por lo tanto:
+\[
+\operatorname{Im}(T)=
+\left\langle
+\{(1,0,1),(1,1,0),(0,1,1)\}
+\right\rangle.
+\]
+
+\textbf{c)} Como:
+\[
+\ker(T)=\{(0,0,0)\},
+\]
+se tiene:
+\[
+\dim(\ker T)=0.
+\]
+Aplicamos el Teorema Núcleo--Imagen:
+\[
+\dim(\ker T)+\dim(\operatorname{Im}T)=\dim(\mathbb{R}^3).
+\]
+Reemplazando:
+\[
+0+\dim(\operatorname{Im}T)=3.
+\]
+Por lo tanto:
+\[
+\dim(\operatorname{Im}T)=3.
+\]
+
+\begin{conclusionbox}
+En conclusión:
+\[
+\ker(T)=\{(0,0,0)\},
+\]
+\[
+\operatorname{Im}(T)=
+\left\langle
+\{(1,0,1),(1,1,0),(0,1,1)\}
+\right\rangle,
+\]
+y:
+\[
+\dim(\operatorname{Im}T)=3.
+\]
+\end{conclusionbox}
+\end{solbox}
+
+\begin{solbox}{Solución ejercicio 18}
+Para estudiar inyectividad y sobreyectividad, comenzamos calculando el núcleo. Si el núcleo contiene solo al vector cero, entonces \(T\) es inyectiva.
+
+Resolvemos:
+\[
+T(x,y,z)=(0,0,0).
+\]
+Como:
+\[
+T(x,y,z)=(x+2y-z,2x+y+z,x-y+2z),
+\]
+obtenemos el sistema:
+\[
+x+2y-z=0,
+\]
+\[
+2x+y+z=0,
+\]
+\[
+x-y+2z=0.
+\]
+
+Escribimos la matriz aumentada asociada:
+\[
+\begin{pmatrix}
+1&2&-1&|&0\\
+2&1&1&|&0\\
+1&-1&2&|&0
+\end{pmatrix}.
+\]
+Eliminamos la \(x\) de la segunda fila:
+\[
+f_2\leftarrow f_2-2f_1.
+\]
+Entonces:
+\[
+f_2=(2,1,1)-2(1,2,-1)=(0,-3,3).
+\]
+Eliminamos la \(x\) de la tercera fila:
+\[
+f_3\leftarrow f_3-f_1.
+\]
+Entonces:
+\[
+f_3=(1,-1,2)-(1,2,-1)=(0,-3,3).
+\]
+Por lo tanto:
+\[
+\begin{pmatrix}
+1&2&-1&|&0\\
+0&-3&3&|&0\\
+0&-3&3&|&0
+\end{pmatrix}
+\sim
+\begin{pmatrix}
+1&2&-1&|&0\\
+0&-3&3&|&0\\
+0&0&0&|&0
+\end{pmatrix}.
+\]
+
+De la segunda fila:
+\[
+-3y+3z=0.
+\]
+Por lo tanto:
+\[
+y=z.
+\]
+De la primera fila:
+\[
+x+2y-z=0.
+\]
+Como \(y=z\), reemplazamos:
+\[
+x+2z-z=0.
+\]
+Entonces:
+\[
+x+z=0 \Rightarrow x=-z.
+\]
+Sea \(z=t\). Entonces:
+\[
+x=-t,\qquad y=t,\qquad z=t.
+\]
+Así:
+\[
+(x,y,z)=(-t,t,t)=t(-1,1,1).
+\]
+Por lo tanto:
+\[
+\ker(T)=\langle\{(-1,1,1)\}\rangle.
+\]
+Luego:
+\[
+\dim(\ker T)=1.
+\]
+
+Como el núcleo no es trivial, \(T\) no es inyectiva.
+
+Ahora usamos el Teorema Núcleo--Imagen:
+\[
+\dim(\ker T)+\dim(\operatorname{Im}T)=\dim(\mathbb{R}^3).
+\]
+Reemplazando:
+\[
+1+\dim(\operatorname{Im}T)=3.
+\]
+Entonces:
+\[
+\dim(\operatorname{Im}T)=2.
+\]
+Como la imagen tiene dimensión \(2\) y el codominio \(\mathbb{R}^3\) tiene dimensión \(3\), la imagen no puede ser todo \(\mathbb{R}^3\). Por lo tanto, \(T\) no es sobreyectiva.
+
+\begin{conclusionbox}
+En conclusión, \(T\) no es inyectiva, no es sobreyectiva y, por lo tanto, no es biyectiva.
+Como \(T\) no es biyectiva, entonces \(T\) no corresponde a un isomorfismo.
+\end{conclusionbox}
+\end{solbox}
+
+\end{soluciones}
+
+\end{document}

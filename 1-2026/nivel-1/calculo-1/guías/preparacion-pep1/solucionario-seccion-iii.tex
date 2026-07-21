@@ -1,0 +1,382 @@
+\documentclass[letterpaper, 12pt]{article}
+\input{solucionario-comun.tex}
+
+\begin{document}
+\portadasolucionario{Gu\'ia de Preparaci\'on PEP 1}{Secci\'on III -- Inyectividad, biyectividad e inversa}
+
+\begin{solucionbox}{Ejercicio 3.1}
+Sea $f:A\to B$ definida por
+\[
+    f(x)=(x+1)^2-2.
+\]
+Determine conjuntos $A$ y $B$ para que $f$ sea biyectiva y $2\in A$. Luego encuentre $f^{-1}$.
+
+\textbf{Soluci\'on:}
+
+La funci\'on corresponde a una par\'abola que abre hacia arriba. Su v\'ertice se encuentra en
+\[
+    V=(-1,-2).
+\]
+Para que una funci\'on cuadr\'atica sea inyectiva, debemos restringir su dominio a un lado del v\'ertice.
+
+Como el enunciado pide que $2\in A$, escogemos la rama derecha:
+\[
+    A=[-1,+\infty).
+\]
+En este intervalo la funci\'on es creciente, por lo tanto es inyectiva.
+
+Ahora determinamos el recorrido. Si $x\in[-1,+\infty)$, entonces
+\[
+    x+1\geq 0.
+\]
+Luego,
+\[
+    (x+1)^2\geq 0,
+\]
+y por tanto
+\[
+    (x+1)^2-2\geq -2.
+\]
+As\'i,
+\[
+    \Rec(f)=[-2,+\infty).
+\]
+Para que $f$ sea sobreyectiva, debemos tomar
+\[
+    B=\Rec(f)=[-2,+\infty).
+\]
+Con esto,
+\[
+    f:[-1,+\infty)\to[-2,+\infty)
+\]
+es biyectiva.
+
+Para hallar la inversa, escribimos
+\[
+    y=(x+1)^2-2.
+\]
+Despejamos $x$:
+\[
+    y+2=(x+1)^2.
+\]
+Como $x\in[-1,+\infty)$, se tiene $x+1\geq 0$, por lo que
+\[
+    \sqrt{y+2}=x+1.
+\]
+Luego,
+\[
+    x=-1+\sqrt{y+2}.
+\]
+Por lo tanto,
+\[
+    f^{-1}(y)=-1+\sqrt{y+2}.
+\]
+
+\respuesta{$A=[-1,+\infty)$, $B=[-2,+\infty)$ y $f^{-1}(y)=-1+\sqrt{y+2}$.}
+\end{solucionbox}
+
+\begin{solucionbox}{Ejercicio 3.2}
+Sea $k\in\R$ tal que
+\[
+    f:[-2,1]\to[k,27],
+    \qquad
+    f(x)=(x-3)^2+2
+\]
+est\'a bien definida. Demuestre que $f$ es inyectiva, determine $k$ para que sea sobreyectiva y encuentre $f^{-1}$ para ese valor de $k$.
+
+\textbf{Soluci\'on:}
+
+Primero probaremos que $f$ es inyectiva en $[-2,1]$.
+
+Sean $a,b\in[-2,1]$ tales que
+\[
+    f(a)=f(b).
+\]
+Entonces
+\[
+    (a-3)^2+2=(b-3)^2+2.
+\]
+Restando $2$:
+\[
+    (a-3)^2=(b-3)^2.
+\]
+Luego,
+\[
+    |a-3|=|b-3|.
+\]
+Como $a,b\in[-2,1]$, se tiene
+\[
+    a-3<0,\qquad b-3<0.
+\]
+Por lo tanto,
+\[
+    |a-3|=-(a-3),\qquad |b-3|=-(b-3).
+\]
+As\'i,
+\[
+    -(a-3)=-(b-3),
+\]
+lo que implica
+\[
+    a-3=b-3
+    \quad\Longrightarrow\quad
+    a=b.
+\]
+Por lo tanto, $f$ es inyectiva.
+
+Ahora hallamos el recorrido. Como $f$ es decreciente en $[-2,1]$, calculamos los extremos:
+\[
+    f(-2)=(-2-3)^2+2=25+2=27,
+\]
+\[
+    f(1)=(1-3)^2+2=4+2=6.
+\]
+Por lo tanto,
+\[
+    \Rec(f)=[6,27].
+\]
+Para que $f$ sea sobreyectiva sobre $[k,27]$, se debe cumplir
+\[
+    [k,27]=[6,27],
+\]
+es decir,
+\[
+    k=6.
+\]
+
+Para hallar la inversa, consideramos
+\[
+    y=(x-3)^2+2,
+    \qquad x\in[-2,1].
+\]
+Despejamos:
+\[
+    y-2=(x-3)^2.
+\]
+Como $x\in[-2,1]$, entonces $x-3<0$, por lo que
+\[
+    \sqrt{y-2}=|x-3|=-(x-3)=3-x.
+\]
+Luego,
+\[
+    x=3-\sqrt{y-2}.
+\]
+
+\respuesta{$k=6$ y $f^{-1}(y)=3-\sqrt{y-2}$, con $f^{-1}:[6,27]\to[-2,1]$.}
+\end{solucionbox}
+
+\begin{solucionbox}{Ejercicio 3.3}
+Considere
+\[
+    q(x)=2-\sqrt{9-(x-4)^2}.
+\]
+Determine $\Dom(q)$. Luego escoja un subconjunto $A_1\subseteq \Dom(q)$ donde $q$ sea inyectiva y encuentre una funci\'on inversa indicando dominio y recorrido.
+
+\textbf{Soluci\'on:}
+
+Para hallar el dominio, pedimos que el radicando sea mayor o igual que cero:
+\[
+    9-(x-4)^2\geq 0.
+\]
+Esto equivale a
+\[
+    (x-4)^2\leq 9.
+\]
+Aplicando ra\'iz:
+\[
+    |x-4|\leq 3.
+\]
+Por lo tanto,
+\[
+    -3\leq x-4\leq 3.
+\]
+Sumando $4$:
+\[
+    1\leq x\leq 7.
+\]
+Luego,
+\[
+    \Dom(q)=[1,7].
+\]
+
+La expresi\'on es sim\'etrica respecto de $x=4$, por lo que no es inyectiva en todo $[1,7]$. Escogemos una de sus ramas:
+\[
+    A_1=[4,7].
+\]
+En este intervalo, al aumentar $x$, el valor $(x-4)^2$ aumenta, por lo que $9-(x-4)^2$ disminuye, su ra\'iz disminuye y entonces $q(x)=2-\sqrt{9-(x-4)^2}$ aumenta. Por lo tanto, $q$ es inyectiva en $[4,7]$.
+
+Calculamos el recorrido en esta rama:
+\[
+    q(4)=2-\sqrt{9}=2-3=-1,
+\]
+\[
+    q(7)=2-\sqrt{9-9}=2.
+\]
+As\'i,
+\[
+    \Rec(q|_{[4,7]})=[-1,2].
+\]
+
+Ahora despejamos la inversa. Sea
+\[
+    y=2-\sqrt{9-(x-4)^2}.
+\]
+Entonces
+\[
+    \sqrt{9-(x-4)^2}=2-y.
+\]
+Elevando al cuadrado:
+\[
+    9-(x-4)^2=(2-y)^2.
+\]
+Luego,
+\[
+    (x-4)^2=9-(2-y)^2.
+\]
+Como $x\in[4,7]$, se tiene $x-4\geq 0$, por lo tanto
+\[
+    x-4=\sqrt{9-(2-y)^2}.
+\]
+As\'i,
+\[
+    x=4+\sqrt{9-(y-2)^2}.
+\]
+
+\respuesta{$\Dom(q)=[1,7]$. Tomando $A_1=[4,7]$, se tiene $q^{-1}(y)=4+\sqrt{9-(y-2)^2}$, con $q^{-1}:[-1,2]\to[4,7]$.}
+\end{solucionbox}
+
+\begin{solucionbox}{Ejercicio 3.4}
+Considere
+\[
+    F:]-2,2[\to\R,
+    \qquad
+    F(x)=\frac{x}{2-|x|}.
+\]
+Pruebe que $F$ es biyectiva y determine $F^{-1}$.
+
+\textbf{Soluci\'on:}
+
+Estudiamos la funci\'on por tramos.
+
+Si $x\in[0,2)$, entonces $|x|=x$, y
+\[
+    F(x)=\frac{x}{2-x}.
+\]
+Esta funci\'on toma valores en $[0,+\infty)$. Para verlo, si $y=\frac{x}{2-x}$, entonces
+\[
+    y(2-x)=x,
+\]
+\[
+    2y=xy+x=x(y+1),
+\]
+por lo tanto
+\[
+    x=\frac{2y}{1+y},\qquad y\geq 0.
+\]
+
+Si $x\in(-2,0)$, entonces $|x|=-x$, y
+\[
+    F(x)=\frac{x}{2+x}.
+\]
+Esta funci\'on toma valores en $(-\infty,0)$. Si
+\[
+    y=\frac{x}{2+x},
+\]
+entonces
+\[
+    y(2+x)=x,
+\]
+\[
+    2y+xy=x,
+\]
+\[
+    2y=x(1-y),
+\]
+por lo tanto
+\[
+    x=\frac{2y}{1-y},\qquad y<0.
+\]
+
+Como el primer tramo cubre $[0,+\infty)$ y el segundo cubre $(-\infty,0)$, el recorrido total es $\R$. Adem\'as, cada tramo es inyectivo y sus recorridos no se intersectan. Por lo tanto, $F$ es biyectiva.
+
+Unificando las dos expresiones:
+\[
+    F^{-1}(y)=
+    \begin{cases}
+        \dfrac{2y}{1-y}, & y<0,\\[1ex]
+        \dfrac{2y}{1+y}, & y\geq 0.
+    \end{cases}
+\]
+Como
+\[
+    1+|y|=
+    \begin{cases}
+        1-y, & y<0,\\
+        1+y, & y\geq 0,
+    \end{cases}
+\]
+podemos escribir
+\[
+    F^{-1}(y)=\frac{2y}{1+|y|}.
+\]
+
+\respuesta{$F$ es biyectiva y $F^{-1}(y)=\dfrac{2y}{1+|y|}$, con $F^{-1}:\R\to]-2,2[$.}
+\end{solucionbox}
+
+\begin{solucionbox}{Ejercicio 3.5}
+Sea
+\[
+    r:\R-\{-2\}\to\R-\{3\},
+    \qquad
+    r(x)=\frac{3x-1}{x+2}.
+\]
+Justifique que $r$ es biyectiva y encuentre $r^{-1}$.
+
+\textbf{Soluci\'on:}
+
+Para hallar la inversa, escribimos
+\[
+    y=\frac{3x-1}{x+2}.
+\]
+Multiplicamos por $x+2$:
+\[
+    y(x+2)=3x-1.
+\]
+Desarrollando:
+\[
+    xy+2y=3x-1.
+\]
+Agrupamos los t\'erminos con $x$:
+\[
+    xy-3x=-1-2y.
+\]
+Factorizamos:
+\[
+    x(y-3)=-(1+2y).
+\]
+Como el codominio excluye $y=3$, podemos dividir por $y-3$:
+\[
+    x=\frac{-(1+2y)}{y-3}
+     =\frac{1+2y}{3-y}.
+\]
+Entonces
+\[
+    r^{-1}(y)=\frac{1+2y}{3-y}.
+\]
+
+Esta expresi\'on est\'a definida para todo $y\neq 3$, y toma valores distintos de $-2$. En efecto, si
+\[
+    \frac{1+2y}{3-y}=-2,
+\]
+entonces
+\[
+    1+2y=-6+2y,
+\]
+lo cual es imposible. As\'i, la inversa va desde $\R-\{3\}$ hacia $\R-\{-2\}$.
+
+Como existe una funci\'on inversa definida en todo el codominio, $r$ es biyectiva.
+
+\respuesta{$r$ es biyectiva y $r^{-1}(y)=\dfrac{1+2y}{3-y}$, con $r^{-1}:\R-\{3\}\to\R-\{-2\}$.}
+\end{solucionbox}
+
+\end{document}

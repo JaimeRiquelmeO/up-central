@@ -1,0 +1,68 @@
+\documentclass[11pt]{article}
+
+\usepackage[letterpaper,margin=2cm]{geometry}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\thispagestyle{empty}
+
+\begin{center}
+    {\Large\textbf{Ejercicio e) - Cambio de variable}}
+\end{center}
+
+\[
+L=\lim_{x\to 2}\frac{x-\sqrt{x+2}}{\sqrt{4x+1}-3}
+\]
+
+\noindent Tomamos el cambio correcto:
+\[
+\beta=\sqrt{x+2}
+\quad\Rightarrow\quad
+x=\beta^2-2,
+\qquad
+x\to 2 \Rightarrow \beta\to 2.
+\]
+
+\noindent No se debe poner tambien \(\beta=\sqrt{4x+1}\); esa raiz se
+reescribe usando \(x=\beta^2-2\):
+\[
+\sqrt{4x+1}
+=\sqrt{4(\beta^2-2)+1}
+=\sqrt{4\beta^2-7}.
+\]
+
+Entonces
+\[
+L=
+\lim_{\beta\to 2}
+\frac{\beta^2-2-\beta}{\sqrt{4\beta^2-7}-3}
+=
+\lim_{\beta\to 2}
+\frac{(\beta-2)(\beta+1)}{\sqrt{4\beta^2-7}-3}.
+\]
+
+Racionalizamos el denominador:
+\[
+\sqrt{4\beta^2-7}-3
+=
+\frac{(4\beta^2-7)-9}{\sqrt{4\beta^2-7}+3}
+=
+\frac{4(\beta-2)(\beta+2)}{\sqrt{4\beta^2-7}+3}.
+\]
+
+Por lo tanto,
+\[
+L=
+\lim_{\beta\to 2}
+\frac{(\beta-2)(\beta+1)(\sqrt{4\beta^2-7}+3)}
+{4(\beta-2)(\beta+2)}
+=
+\frac{3(3+3)}{4(4)}
+=
+\boxed{\frac{9}{8}}.
+\]
+
+\vspace{0.4cm}
+\noindent\textbf{Verificacion con Python:} SymPy entrega \(\frac{9}{8}\).
+
+\end{document}

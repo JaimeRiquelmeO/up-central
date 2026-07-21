@@ -1,0 +1,318 @@
+\documentclass[letterpaper, 12pt]{article}
+\input{solucionario-comun.tex}
+
+\begin{document}
+\portadasolucionario{Gu\'ia de Preparaci\'on PEP 1}{Secci\'on I -- N\'umeros reales e inecuaciones}
+
+\begin{solucionbox}{Ejercicio 1.1}
+Resuelva la inecuaci\'on
+\[
+    \frac{x-4}{x^2-9}\geq 0.
+\]
+
+\textbf{Soluci\'on:}
+
+Primero factorizamos el denominador:
+\[
+    x^2-9=(x-3)(x+3).
+\]
+Debemos considerar la restricci\'on
+\[
+    x\neq -3,\qquad x\neq 3.
+\]
+Entonces la inecuaci\'on queda
+\[
+    \frac{x-4}{(x-3)(x+3)}\geq 0.
+\]
+Los puntos cr\'iticos son $x=-3$, $x=3$ y $x=4$. Construimos la tabla de signos:
+
+\[
+\begin{array}{c|cccc}
+    & (-\infty,-3) & (-3,3) & (3,4) & (4,+\infty) \\ \hline
+    x-4 & - & - & - & + \\
+    x-3 & - & - & + & + \\
+    x+3 & - & + & + & + \\ \hline
+    \dfrac{x-4}{(x-3)(x+3)} & - & + & - & +
+\end{array}
+\]
+
+Como buscamos que la expresi\'on sea mayor o igual que cero, tomamos los intervalos donde el signo es positivo y agregamos el punto que anula el numerador, $x=4$.
+
+\respuesta{$x\in(-3,3)\cup[4,+\infty)$.}
+\end{solucionbox}
+
+\begin{solucionbox}{Ejercicio 1.2}
+Determine el conjunto soluci\'on de
+\[
+    \frac{|x-1|-3}{x+2}<0.
+\]
+
+\textbf{Soluci\'on:}
+
+Primero observamos que el denominador no puede ser cero:
+\[
+    x+2\neq 0 \quad\Longrightarrow\quad x\neq -2.
+\]
+
+Ahora analizamos el numerador:
+\[
+    |x-1|-3=0
+    \quad\Longleftrightarrow\quad
+    |x-1|=3.
+\]
+Por propiedad del valor absoluto,
+\[
+    x-1=3 \quad \vee \quad x-1=-3,
+\]
+por lo tanto
+\[
+    x=4 \quad \vee \quad x=-2.
+\]
+
+Los puntos cr\'iticos son $x=-2$ y $x=4$. Adem\'as, $x=-2$ no pertenece al dominio de la expresi\'on.
+
+\[
+\begin{array}{c|ccc}
+    & (-\infty,-2) & (-2,4) & (4,+\infty) \\ \hline
+    |x-1|-3 & + & - & + \\
+    x+2 & - & + & + \\ \hline
+    \dfrac{|x-1|-3}{x+2} & - & - & +
+\end{array}
+\]
+
+Como la inecuaci\'on es estricta, no se incluyen los ceros del numerador. Adem\'as, $x=-2$ queda excluido por restricci\'on.
+
+\respuesta{$x\in(-\infty,-2)\cup(-2,4)$.}
+\end{solucionbox}
+
+\begin{solucionbox}{Ejercicio 1.3}
+Resuelva en $\R$:
+\[
+    \frac{x+2}{x-1}\leq \frac{x-3}{x+4}.
+\]
+
+\textbf{Soluci\'on:}
+
+Primero anotamos las restricciones:
+\[
+    x\neq 1,\qquad x\neq -4.
+\]
+Llevamos todo a un mismo lado:
+\[
+    \frac{x+2}{x-1}\leq \frac{x-3}{x+4}
+    \quad\Longleftrightarrow\quad
+    0\leq \frac{x-3}{x+4}-\frac{x+2}{x-1}.
+\]
+Calculamos la diferencia:
+\[
+    0\leq
+    \frac{(x-3)(x-1)-(x+2)(x+4)}{(x+4)(x-1)}.
+\]
+Desarrollando el numerador:
+\[
+    (x-3)(x-1)=x^2-4x+3,
+\]
+\[
+    (x+2)(x+4)=x^2+6x+8.
+\]
+Luego,
+\[
+    (x-3)(x-1)-(x+2)(x+4)
+    =x^2-4x+3-x^2-6x-8=-10x-5.
+\]
+Por tanto:
+\[
+    0\leq \frac{-10x-5}{(x+4)(x-1)}
+    =\frac{-5(2x+1)}{(x+4)(x-1)}.
+\]
+Como $-5<0$, esta desigualdad es equivalente a
+\[
+    \frac{2x+1}{(x+4)(x-1)}\leq 0.
+\]
+
+Los puntos cr\'iticos son
+\[
+    x=-4,\qquad x=-\frac12,\qquad x=1.
+\]
+
+\[
+\begin{array}{c|cccc}
+    & (-\infty,-4) & (-4,-\frac12) & (-\frac12,1) & (1,+\infty) \\ \hline
+    2x+1 & - & - & + & + \\
+    x+4 & - & + & + & + \\
+    x-1 & - & - & - & + \\ \hline
+    \dfrac{2x+1}{(x+4)(x-1)} & - & + & - & +
+\end{array}
+\]
+
+Buscamos signo menor o igual que cero. Se incluye $x=-\frac12$ porque anula el numerador y no anula el denominador.
+
+\respuesta{$x\in(-\infty,-4)\cup\left[-\dfrac12,1\right)$.}
+\end{solucionbox}
+
+\begin{solucionbox}{Ejercicio 1.4}
+El largo de un terreno rectangular supera al ancho en $7$ metros. Determine las dimensiones posibles si el \'area debe ser a lo m\'as $260\,m^2$.
+
+\textbf{Soluci\'on:}
+
+Designemos por $x$ al ancho del terreno, medido en metros. Como el largo supera al ancho en $7$ metros, el largo es
+\[
+    x+7.
+\]
+Como el \'area debe ser a lo m\'as $260\,m^2$, se debe cumplir
+\[
+    x(x+7)\leq 260.
+\]
+Desarrollando:
+\[
+    x^2+7x\leq 260
+    \quad\Longleftrightarrow\quad
+    x^2+7x-260\leq 0.
+\]
+Factorizamos:
+\[
+    x^2+7x-260=(x+20)(x-13).
+\]
+Entonces debemos resolver
+\[
+    (x+20)(x-13)\leq 0.
+\]
+
+Los puntos cr\'iticos son $x=-20$ y $x=13$. Como la par\'abola abre hacia arriba, la expresi\'on es menor o igual que cero entre sus ra\'ices:
+\[
+    x\in[-20,13].
+\]
+Pero $x$ representa una longitud, por lo tanto
+\[
+    x\geq 0.
+\]
+Intersectando:
+\[
+    x\in[-20,13]\cap[0,+\infty)=[0,13].
+\]
+Luego, el ancho puede variar entre $0$ y $13$ metros. El largo es $x+7$, por lo que var\'ia entre $7$ y $20$ metros.
+
+\respuesta{Ancho entre $0$ y $13$ m; largo entre $7$ y $20$ m.}
+\end{solucionbox}
+
+\begin{solucionbox}{Ejercicio 1.5}
+Resuelva la inecuaci\'on
+\[
+    \sqrt{x+3}\leq x-1.
+\]
+
+\textbf{Soluci\'on:}
+
+Primero consideramos las restricciones. Para que la ra\'iz est\'e definida:
+\[
+    x+3\geq 0 \quad\Longrightarrow\quad x\geq -3.
+\]
+Adem\'as, como $\sqrt{x+3}\geq 0$, para que se cumpla
+\[
+    \sqrt{x+3}\leq x-1
+\]
+necesitamos que
+\[
+    x-1\geq 0
+    \quad\Longrightarrow\quad
+    x\geq 1.
+\]
+Bajo esta restricci\'on podemos elevar al cuadrado ambos lados:
+\[
+    \sqrt{x+3}\leq x-1
+    \quad\Longleftrightarrow\quad
+    x+3\leq (x-1)^2.
+\]
+Desarrollando:
+\[
+    x+3\leq x^2-2x+1
+    \quad\Longleftrightarrow\quad
+    0\leq x^2-3x-2.
+\]
+Resolvemos la ecuaci\'on asociada:
+\[
+    x^2-3x-2=0.
+\]
+Por la f\'ormula cuadr\'atica:
+\[
+    x=\frac{3\pm\sqrt{(-3)^2-4(1)(-2)}}{2}
+     =\frac{3\pm\sqrt{17}}{2}.
+\]
+Como la par\'abola abre hacia arriba:
+\[
+    x^2-3x-2\geq 0
+    \quad\Longleftrightarrow\quad
+    x\in\left(-\infty,\frac{3-\sqrt{17}}{2}\right]\cup
+    \left[\frac{3+\sqrt{17}}{2},+\infty\right).
+\]
+Finalmente, debemos intersectar con $x\geq 1$:
+\[
+    x\in\left[\frac{3+\sqrt{17}}{2},+\infty\right).
+\]
+
+\respuesta{$x\in\left[\dfrac{3+\sqrt{17}}{2},+\infty\right)$.}
+\end{solucionbox}
+
+\begin{solucionbox}{Ejercicio 1.6}
+Determine el conjunto soluci\'on de
+\[
+    \sqrt{x^2-4x}>x-1.
+\]
+
+\textbf{Soluci\'on:}
+
+Primero hallamos el dominio:
+\[
+    x^2-4x\geq 0
+    \quad\Longleftrightarrow\quad
+    x(x-4)\geq 0.
+\]
+De la tabla de signos se obtiene
+\[
+    \Dom=\left(-\infty,0\right]\cup[4,+\infty).
+\]
+
+Ahora analizamos por casos.
+
+\textbf{Caso 1: $x\leq 0$.}
+
+Si $x\leq 0$, entonces
+\[
+    x-1<0.
+\]
+Pero
+\[
+    \sqrt{x^2-4x}\geq 0.
+\]
+Por lo tanto,
+\[
+    \sqrt{x^2-4x}>x-1
+\]
+se cumple para todo $x\leq 0$.
+
+\textbf{Caso 2: $x\geq 4$.}
+
+Si $x\geq 4$, entonces $x-1>0$, y podemos elevar al cuadrado:
+\[
+    \sqrt{x^2-4x}>x-1
+    \quad\Longleftrightarrow\quad
+    x^2-4x>(x-1)^2.
+\]
+Desarrollando:
+\[
+    x^2-4x>x^2-2x+1.
+\]
+Reduciendo:
+\[
+    -4x>-2x+1
+    \quad\Longleftrightarrow\quad
+    -2x>1
+    \quad\Longleftrightarrow\quad
+    x<-\frac12.
+\]
+Esto contradice la condici\'on $x\geq 4$, por lo que no hay soluciones en este caso.
+
+\respuesta{$x\in(-\infty,0]$.}
+\end{solucionbox}
+
+\end{document}

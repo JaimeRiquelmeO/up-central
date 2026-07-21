@@ -1,0 +1,426 @@
+% ============================================================
+%  PAUTA PEP 1 — FISICA I PARA INGENIERIA (FORMA A) — USACH
+%  Usach Premium
+%  Compila con: pdflatex pauta_pep1_forma_a.tex  (2 veces)
+% ============================================================
+
+\documentclass[letterpaper, 11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{eso-pic}
+\usepackage{tikz}
+\usetikzlibrary{patterns, arrows.meta, decorations.pathmorphing, calc, babel}
+\tcbuselibrary{skins, breakable}
+
+\geometry{letterpaper, margin=2cm, top=3cm, bottom=2.5cm, headheight=2cm}
+
+\definecolor{celesteSuave}{HTML}{F0F7FF}
+\definecolor{azulFuerte}{HTML}{1A5276}
+\definecolor{verdePaso}{HTML}{1E8449}
+\definecolor{rojoAlerta}{HTML}{C0392B}
+\definecolor{naranjaAcento}{HTML}{D35400}
+\definecolor{enlace}{HTML}{1A5276}
+
+\newcommand{\logoup}{./images/logo_up.png}
+\newcommand{\logousach}{./images/logo_usach.png}
+\newcommand{\logofondo}{./images/logo_up.png}
+
+\newcommand{\institucion}{Usach Premium}
+\newcommand{\curso}{Fisica I para Ingenieria}
+\newcommand{\guiasnumero}{Pauta PEP 1 --- Forma A}
+\newcommand{\semestre}{1er. Semestre de 2026}
+\newcommand{\preparadopor}{Usach Premium.}
+\newcommand{\webinstitucion}{www.usachpremium.cl}
+\newcommand{\instagraminstitucion}{https://www.instagram.com/usach.premium}
+\newcommand{\transparencia}{0.04}
+\newcommand{\fraseportada}{"Por y para estudiantes"}
+
+\hypersetup{colorlinks=true, linkcolor=enlace, urlcolor=enlace,
+            citecolor=enlace, pdfborder={0 0 0}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\includegraphics[height=1.2cm]{\logoup}}
+\fancyhead[R]{%
+    \begin{minipage}[b]{0.45\textwidth}
+        \raggedleft\fontsize{9pt}{11pt}\selectfont
+        \textbf{\color{azulFuerte}\institucion} \\
+        \curso\ --- \guiasnumero \\
+        \textit{\color{gray}@usach.premium}
+    \end{minipage}\hspace{0.1cm}%
+    \includegraphics[height=1.2cm]{\logousach}}
+\fancyfoot[L]{\fontsize{9pt}{11pt}\selectfont \textit{\fraseportada}}
+\fancyfoot[R]{\fontsize{9pt}{11pt}\selectfont P\'agina \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}
+                                   \renewcommand{\footrulewidth}{0pt}}
+
+\newcommand{\MarcaAgua}{
+    \AddToShipoutPicture{
+        \AtPageCenter{
+            \begin{tikzpicture}[remember picture, overlay]
+                \node[opacity=\transparencia] at (0,0)
+                    {\includegraphics[width=0.7\textwidth]{\logofondo}};
+            \end{tikzpicture}}}}
+
+\newtcolorbox{paso}[2][]{
+    colback=celesteSuave, colframe=azulFuerte, fonttitle=\bfseries,
+    coltitle=white, colbacktitle=azulFuerte,
+    title={\large Paso #2},
+    arc=6pt, boxrule=1pt, enhanced, breakable, #1
+}
+\newtcolorbox{justif}[1]{
+    colback=naranjaAcento!8, colframe=naranjaAcento, fonttitle=\bfseries\small,
+    title={#1}, arc=5pt, boxrule=0.8pt, enhanced, breakable
+}
+\newtcolorbox{enunciadobox}[1]{
+    colback=azulFuerte!10, colframe=azulFuerte, fonttitle=\bfseries,
+    coltitle=white, colbacktitle=azulFuerte, title={#1},
+    arc=7pt, boxrule=1.2pt, enhanced, breakable
+}
+\newtcolorbox{resultado}{
+    colback=azulFuerte, colframe=azulFuerte, colupper=white,
+    arc=10pt, boxrule=1.5pt, enhanced, drop shadow={black!15}
+}
+
+\begin{document}
+\thispagestyle{plain}
+\MarcaAgua
+
+\AddToShipoutPicture*{%
+    \put(54,700){\includegraphics[width=2cm]{\logoup}}
+    \put(420,706){\includegraphics[width=5cm]{\logousach}}}
+
+\vspace*{0.5cm}
+\begin{center}
+    \color{azulFuerte}
+    {\huge \textbf{PAUTA DE CORRECCI\'ON}} \\[0.5cm]
+    {\Huge \textbf{PEP 1 --- \curso}} \\[0.4cm]
+    {\Large Forma A \quad$\bullet$\quad C\'od: 10103-10140} \\[1.2cm]
+    \begin{tcolorbox}[colback=celesteSuave, colframe=azulFuerte, arc=10pt,
+        width=0.88\textwidth, center, boxrule=1.5pt]
+        \centering\vspace{0.2cm}
+        {\large \textbf{Contenidos evaluados}}\\[0.4cm]
+        \color{black}
+        \begin{itemize}[leftmargin=2.5cm, itemsep=3pt]
+            \item[\color{azulFuerte}$\Rightarrow$] Cinem\'atica: gr\'afico $v$-$t$ y aceleraci\'on
+            \item[\color{azulFuerte}$\Rightarrow$] Ecuaciones de posici\'on y encuentro de m\'oviles
+            \item[\color{azulFuerte}$\Rightarrow$] Lanzamiento vertical por etapas (MRUA)
+            \item[\color{azulFuerte}$\Rightarrow$] Suma de vectores: componentes, magnitud y direcci\'on
+        \end{itemize}
+        \vspace{0.15cm}
+    \end{tcolorbox}
+\end{center}
+
+\vspace{1.0cm}
+\begin{center}
+    {\Large \textbf{\semestre}} \\[0.6cm]
+    {\large \textbf{\preparadopor}}\\[0.4cm]
+    {\footnotesize\color{gray} Considera $g = 9{,}8\ \mathrm{m/s^2}$. Resultados finales aproximados a 2 decimales.}
+\end{center}
+
+\vspace{1.2cm}
+\begin{center}
+    {\color{azulFuerte}\hrule height 0.5pt}\vspace{0.3cm}
+    \begin{minipage}{0.45\textwidth}\centering
+        \textbf{Instagram:} \\\small\href{\instagraminstitucion}{@usach.premium}
+    \end{minipage}
+    \begin{minipage}{0.45\textwidth}\centering
+        \textbf{Web:} \\\small\href{http://\webinstitucion}{\webinstitucion}
+    \end{minipage}
+\end{center}
+
+\pagenumbering{arabic}
+\newpage
+
+% ============================================================
+% ============================  P1  ==========================
+% ============================================================
+\begin{enunciadobox}{Problema 1 --- Cami\'on de reparto aut\'onomo \hfill (20 puntos)}
+Cami\'on de masa $M=2195\,\mathrm{kg}$ que se mueve seg\'un el gr\'afico $v$-$t$
+(tres etapas). Un vehículo de apoyo ($m=1250\,\mathrm{kg}$) parte del mismo
+origen con retraso de $3\,\mathrm{s}$, rapidez inicial $v_0$ desconocida y
+aceleraci\'on $\vec{a}=(1{,}5\,\mathrm{m/s^2})\,\hat{\imath}$. Ambos se encuentran
+en la \textbf{segunda etapa} y en ese instante el apoyo alcanza $v_f=28\,\mathrm{m/s}$.
+\end{enunciadobox}
+
+\medskip
+\begin{center}
+\begin{tikzpicture}[x=0.28cm,y=0.13cm]
+  \draw[-{Latex[length=2mm]},line width=0.6pt] (0,0) -- (30,0) node[below left=1pt]{$t\,(\mathrm{s})$};
+  \draw[-{Latex[length=2mm]},line width=0.6pt] (0,0) -- (0,32) node[right=2pt]{$v\,(\mathrm{m/s})$};
+  \draw[dashed] (0,24) -- (26,24);
+  \draw[dashed] (8,0) -- (8,24);
+  \draw[dashed] (20,0) -- (20,24);
+  \draw[line width=1pt, azulFuerte] (0,0) -- (8,24) -- (20,24) -- (26,0);
+  \node[below] at (8,0) {$8$}; \node[below] at (20,0) {$20$}; \node[below] at (26,0) {$26$};
+  \node[left] at (0,24) {$24$}; \node[below left] at (0,0){$0$};
+  \node[verdePaso] at (4,13) {\scriptsize Etapa 1};
+  \node[verdePaso] at (14,26) {\scriptsize Etapa 2};
+  \node[verdePaso] at (24,13) {\scriptsize Etapa 3};
+\end{tikzpicture}
+\end{center}
+
+% ------------------- P1 (a) -------------------
+\begin{paso}{1.a: Aceleraciones $a_1$ y $a_3$ (pendiente del gr\'afico)}
+La aceleraci\'on es la pendiente de la recta $v$-$t$ en cada tramo.
+
+\textbf{Etapa 1} ($0\le t\le 8$): la velocidad pasa de $0$ a $24\,\mathrm{m/s}$:
+\[
+a_1=\frac{\Delta v}{\Delta t}=\frac{24-0}{8-0}=3\ \mathrm{m/s^2}.
+\]
+\textbf{Etapa 3} ($20\le t\le 26$): la velocidad pasa de $24$ a $0\,\mathrm{m/s}$:
+\[
+a_3=\frac{0-24}{26-20}=\frac{-24}{6}=-4\ \mathrm{m/s^2}.
+\]
+\begin{resultado}\centering
+$\displaystyle a_1 = 3{,}00\ \mathrm{m/s^2}\qquad\text{y}\qquad a_3 = -4{,}00\ \mathrm{m/s^2}$
+\end{resultado}
+\end{paso}
+
+% ------------------- P1 (b) -------------------
+\begin{paso}{1.b: Ecuaciones de posici\'on $x(t)$ (origen en la posici\'on inicial del cami\'on)}
+Se usa $x(t)=x_0+v_0 t+\tfrac12 a t^2$ en cada tramo, encadenando posici\'on y
+velocidad al final de cada etapa (la etapa 2 es MRU con $v=24\,\mathrm{m/s}$).
+
+\textbf{Etapa 1} ($0\le t\le 8$): parte del reposo en el origen, $a_1=3$:
+\[
+x_1(t)=\tfrac12(3)t^2=1{,}5\,t^2,\qquad x_1(8)=96\ \mathrm{m}.
+\]
+\textbf{Etapa 2} ($8\le t\le 20$): parte de $96\,\mathrm{m}$ con $v=24$ constante:
+\[
+x_2(t)=96+24\,(t-8),\qquad x_2(20)=384\ \mathrm{m}.
+\]
+\textbf{Etapa 3} ($20\le t\le 26$): parte de $384\,\mathrm{m}$ con $v=24$ y $a_3=-4$:
+\[
+x_3(t)=384+24\,(t-20)-2\,(t-20)^2,\qquad x_3(26)=456\ \mathrm{m}.
+\]
+\begin{resultado}\centering
+$\displaystyle x_1(t)=1{,}5\,t^2\quad;\quad x_2(t)=96+24(t-8)\quad;\quad x_3(t)=384+24(t-20)-2(t-20)^2$
+\end{resultado}
+\end{paso}
+
+% ------------------- P1 (c) -------------------
+\begin{paso}{1.c: Rapidez inicial $v_0$ del apoyo y posici\'on de encuentro $x^{*}$}
+El apoyo parte en $t=3\,\mathrm{s}$. Con $\tau=t-3$ (su tiempo de movimiento) y $a=1{,}5$:
+\[
+v_{\text{apoyo}}(\tau)=v_0+1{,}5\,\tau,\qquad
+x_{\text{apoyo}}(\tau)=v_0\,\tau+\tfrac12(1{,}5)\tau^2=v_0\,\tau+0{,}75\,\tau^2 .
+\]
+
+\textbf{Condici\'on 1 (rapidez en el encuentro).} El apoyo alcanza $v_f=28\,\mathrm{m/s}$:
+\[
+v_0+1{,}5\,\tau=28 \;\Rightarrow\; v_0=28-1{,}5\,\tau. \tag{i}
+\]
+
+\textbf{Condici\'on 2 (misma posici\'on en la etapa 2).} El encuentro ocurre en la
+etapa 2 del cami\'on, donde $x_{\text{cam}}=96+24\,(t-8)=96+24(\tau-5)$:
+\[
+v_0\tau+0{,}75\,\tau^2 = 96+24(\tau-5). \tag{ii}
+\]
+
+Reemplazando (i) en (ii):
+\[
+(28-1{,}5\tau)\tau+0{,}75\tau^2 = 24\tau-24
+\;\Longrightarrow\; 0{,}75\,\tau^2-4\tau-24=0
+\;\Longleftrightarrow\; 3\tau^2-16\tau-96=0.
+\]
+\[
+\tau=\frac{16+\sqrt{256+1152}}{6}=\frac{16+\sqrt{1408}}{6}\approx 8{,}92\ \mathrm{s}
+\;\Rightarrow\; t^{*}=\tau+3\approx 11{,}92\ \mathrm{s}.
+\]
+\begin{justif}{Verificaci\'on de la etapa}
+$t^{*}\approx 11{,}92\,\mathrm{s}\in[8,20]$: el encuentro efectivamente ocurre en la
+\textbf{segunda etapa}, como pide el enunciado.
+\end{justif}
+
+Rapidez inicial y posici\'on de encuentro:
+\[
+v_0=28-1{,}5(8{,}92)\approx 14{,}62\ \mathrm{m/s},\qquad
+x^{*}=96+24(11{,}92-8)\approx 190{,}09\ \mathrm{m}.
+\]
+\begin{resultado}\centering
+$\displaystyle v_0 \approx 14{,}62\ \mathrm{m/s}\qquad\text{y}\qquad x^{*}\approx 190{,}09\ \mathrm{m}$
+\end{resultado}
+\end{paso}
+
+\newpage
+% ============================================================
+% ============================  P2  ==========================
+% ============================================================
+\begin{enunciadobox}{Problema 2 --- Cohete de prueba (4 etapas) \hfill (20 puntos)}
+Lanzamiento vertical desde el suelo. \textbf{Etapa I:} sube libre con
+$V_{I0}=80\,\mathrm{m/s}$ (solo gravedad) hasta detenerse. \textbf{Etapa II:}
+motores con $a_{II}=4\,\mathrm{m/s^2}$ hasta $h=1000\,\mathrm{m}$. \textbf{Etapa III:}
+solo gravedad hasta la altura m\'axima. \textbf{Etapa IV:} frenado uniforme desde
+$H=200\,\mathrm{m}$ hasta el reposo al tocar el suelo. Se toma $\hat{\jmath}$ hacia arriba.
+\end{enunciadobox}
+
+% ------------------- P2 (a) -------------------
+\begin{paso}{2.a: Altura m\'axima $y_{\max}$}
+\textbf{Etapa I} (sube y se detiene, $a=-g$):
+\[
+0=V_{I0}^2-2g\,y_I \;\Rightarrow\; y_I=\frac{80^2}{2(9{,}8)}=326{,}53\ \mathrm{m}.
+\]
+\textbf{Etapa II} (de $y_I=326{,}53$ con $v=0$ hasta $h=1000$, $a_{II}=4$):
+\[
+v_{II}^2=0+2(4)(1000-326{,}53)=5387{,}76 \;\Rightarrow\; v_{II}\approx 73{,}40\ \mathrm{m/s}.
+\]
+\textbf{Etapa III} (solo gravedad, sube hasta detenerse):
+\[
+y_{\max}=h+\frac{v_{II}^2}{2g}=1000+\frac{5387{,}76}{2(9{,}8)}=1000+274{,}89 .
+\]
+\begin{resultado}\centering
+$\displaystyle y_{\max}\approx 1274{,}89\ \mathrm{m}$
+\end{resultado}
+\end{paso}
+
+% ------------------- P2 (b) -------------------
+\begin{paso}{2.b: Velocidad $\vec{v}_{IV}$ al inicio de la etapa final}
+Usando el dato $y_{\max}=1274{,}89\,\mathrm{m}$, el cohete \textbf{cae libremente}
+desde el reposo en $y_{\max}$ hasta $H=200\,\mathrm{m}$ (solo gravedad):
+\[
+v_{IV}^2=2g\,(y_{\max}-H)=2(9{,}8)(1274{,}89-200)=21067{,}84 .
+\]
+\[
+v_{IV}=\sqrt{21067{,}84}\approx 145{,}15\ \mathrm{m/s}\ \ (\text{hacia abajo}).
+\]
+\begin{justif}{Forma anal\'itica (vector)}
+El movimiento es descendente, por lo que la velocidad apunta en $-\hat{\jmath}$.
+\end{justif}
+\begin{resultado}\centering
+$\displaystyle \vec{v}_{IV}\approx -145{,}15\,\hat{\jmath}\ \ \mathrm{m/s}$
+\end{resultado}
+\end{paso}
+
+% ------------------- P2 (c) -------------------
+\begin{paso}{2.c: Aceleraci\'on $\vec{a}_{\mathrm{final}}$ en el aterrizaje}
+Usando el dato $v_{IV}=145{,}15\,\mathrm{m/s}$, el cohete frena de forma uniforme
+desde $H=200\,\mathrm{m}$ hasta quedar en reposo ($v=0$) al tocar el suelo:
+\[
+0=v_{IV}^2-2\,a_{\mathrm{final}}\,H
+\;\Rightarrow\;
+a_{\mathrm{final}}=\frac{v_{IV}^2}{2H}=\frac{145{,}15^2}{2(200)}\approx 52{,}67\ \mathrm{m/s^2}.
+\]
+\begin{justif}{Sentido de la aceleraci\'on}
+El m\'ovil baja ($-\hat{\jmath}$) y frena, por lo que la aceleraci\'on apunta hacia
+arriba, en $+\hat{\jmath}$.
+\end{justif}
+\begin{resultado}\centering
+$\displaystyle \vec{a}_{\mathrm{final}}\approx +52{,}67\,\hat{\jmath}\ \ \mathrm{m/s^2}$
+\end{resultado}
+\end{paso}
+
+\newpage
+% ============================================================
+% ============================  P3  ==========================
+% ============================================================
+\begin{enunciadobox}{Problema 3 --- Desplazamientos del dron \hfill (20 puntos)}
+$\vec{A}$: $100\,\mathrm{m}$ a $37^\circ$ al Norte del Este.\quad
+$\vec{B}$: $80\,\mathrm{m}$ a $53^\circ$ al Norte del Oeste.\quad
+$\vec{C}$: tramo desconocido.\quad
+Tras $\vec{A}+\vec{B}+\vec{C}$ el dron queda en
+$\vec{D}$: $50\,\mathrm{m}$ al Sur de la base. Ejes: $+x$ Este, $+y$ Norte.
+\end{enunciadobox}
+
+% ------------------- P3 (a) -------------------
+\begin{paso}{3.a: Componentes de $\vec{A}$, $\vec{B}$ y $\vec{D}$}
+\textbf{$\vec{A}$} ($37^\circ$ sobre el eje $+x$, hacia el Norte):
+\[
+A_x=100\cos 37^\circ\approx 79{,}86,\qquad A_y=100\sin 37^\circ\approx 60{,}18 .
+\]
+\textbf{$\vec{B}$} ($53^\circ$ desde el Oeste hacia el Norte $\Rightarrow$ $x<0$, $y>0$):
+\[
+B_x=-80\cos 53^\circ\approx -48{,}15,\qquad B_y=80\sin 53^\circ\approx 63{,}89 .
+\]
+\textbf{$\vec{D}$} (Sur puro):
+\[
+D_x=0,\qquad D_y=-50 .
+\]
+\begin{resultado}\centering
+$\vec{A}\approx(79{,}86,\,60{,}18)\,\mathrm{m}\quad
+ \vec{B}\approx(-48{,}15,\,63{,}89)\,\mathrm{m}\quad
+ \vec{D}=(0,\,-50)\,\mathrm{m}$
+\end{resultado}
+\end{paso}
+
+% ------------------- P3 (b) -------------------
+\begin{paso}{3.b: C\'alculo anal\'itico de $\vec{C}$}
+El recorrido total cumple $\vec{A}+\vec{B}+\vec{C}=\vec{D}$, por lo tanto:
+\[
+\vec{C}=\vec{D}-\vec{A}-\vec{B}.
+\]
+Componente a componente:
+\[
+C_x=0-79{,}86-(-48{,}15)\approx -31{,}72,
+\]
+\[
+C_y=-50-60{,}18-63{,}89\approx -174{,}07 .
+\]
+\begin{resultado}\centering
+$\displaystyle \vec{C}\approx(-31{,}72,\,-174{,}07)\ \mathrm{m}$
+\end{resultado}
+\end{paso}
+
+% ------------------- P3 (c) -------------------
+\begin{paso}{3.c: Magnitud y direcci\'on de $\vec{C}$ respecto a $+x$}
+\textbf{Magnitud:}
+\[
+\lVert\vec{C}\rVert=\sqrt{(-31{,}72)^2+(-174{,}07)^2}\approx 176{,}94\ \mathrm{m}.
+\]
+\textbf{Direcci\'on:} ambas componentes son negativas $\Rightarrow$ tercer cuadrante
+(Sur-Oeste). El \'angulo respecto a $+x$ es
+\[
+\theta=\arctan\!\left(\frac{-174{,}07}{-31{,}72}\right)
+\;\Rightarrow\;
+\theta\approx -100{,}33^\circ\ \equiv\ 259{,}67^\circ\ (\text{medido CCW desde }+x).
+\]
+\begin{justif}{Interpretaci\'on}
+Equivale a $\approx 79{,}67^\circ$ al Sur del Oeste: el dron debe volver hacia el
+suroeste para cerrar el per\'imetro.
+\end{justif}
+\begin{resultado}\centering
+$\displaystyle \lVert\vec{C}\rVert\approx 176{,}94\ \mathrm{m}\qquad
+\theta\approx 259{,}67^\circ\ \text{(o } -100{,}33^\circ\text{) respecto a }+x$
+\end{resultado}
+\end{paso}
+
+% ============================================================
+% RESUMEN
+% ============================================================
+\begin{tcolorbox}[colback=verdePaso!8, colframe=verdePaso, arc=8pt,
+    boxrule=1pt, enhanced, breakable,
+    title={\bfseries\color{white} Resumen de resultados},
+    colbacktitle=verdePaso, fonttitle=\bfseries]
+\small
+\begin{itemize}[leftmargin=1.6cm, itemsep=3pt]
+\item[\textbf{P1 (a)}] $a_1=3{,}00\,\mathrm{m/s^2}$;\quad $a_3=-4{,}00\,\mathrm{m/s^2}$
+\item[\textbf{P1 (b)}] $x_1=1{,}5t^2$;\quad $x_2=96+24(t-8)$;\quad $x_3=384+24(t-20)-2(t-20)^2$
+\item[\textbf{P1 (c)}] $v_0\approx 14{,}62\,\mathrm{m/s}$;\quad $x^{*}\approx 190{,}09\,\mathrm{m}$ (en $t^{*}\approx 11{,}92\,\mathrm{s}$)
+\item[\textbf{P2 (a)}] $y_{\max}\approx 1274{,}89\,\mathrm{m}$
+\item[\textbf{P2 (b)}] $\vec{v}_{IV}\approx -145{,}15\,\hat{\jmath}\,\mathrm{m/s}$
+\item[\textbf{P2 (c)}] $\vec{a}_{\mathrm{final}}\approx +52{,}67\,\hat{\jmath}\,\mathrm{m/s^2}$
+\item[\textbf{P3 (a)}] $\vec{A}\approx(79{,}86,\,60{,}18)$;\ $\vec{B}\approx(-48{,}15,\,63{,}89)$;\ $\vec{D}=(0,\,-50)\,\mathrm{m}$
+\item[\textbf{P3 (b)}] $\vec{C}\approx(-31{,}72,\,-174{,}07)\,\mathrm{m}$
+\item[\textbf{P3 (c)}] $\lVert\vec{C}\rVert\approx 176{,}94\,\mathrm{m}$;\quad $\theta\approx 259{,}67^\circ\ (-100{,}33^\circ)$
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.8cm}
+\begin{center}
+    \small\textbf{Usach Premium} --- ¡Nos vemos en la ayudant\'ia! \\
+    \textit{"Por y para estudiantes."}
+\end{center}
+
+\end{document}
