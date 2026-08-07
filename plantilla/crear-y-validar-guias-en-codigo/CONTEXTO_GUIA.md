@@ -33,6 +33,8 @@ Complete este archivo antes de generar ejercicios.
 
 ## Referencias
 
+- ¿Hay pruebas, controles, pautas o guías de años anteriores?: PENDIENTE
+- Ubicación de esos archivos: PENDIENTE
 - Guías o evaluaciones de referencia: PENDIENTE
 - Bibliografía o material fuente: PENDIENTE
 - Requisitos especiales: PENDIENTE

@@ -3,8 +3,11 @@ Quiero que crees una guía académica completa usando todos los archivos adjunto
 Antes de crearla:
 1. Lee completamente FORMULARIO_SOLICITUD.md, CONTEXTO_Y_REGLAS.md y la plantilla LaTeX.
 2. Revisa el PDF de ejemplo para reproducir su lenguaje visual, sin copiar su contenido académico.
-3. Si faltan el ramo, los contenidos, la cantidad de ejercicios, la dificultad o el tipo de solucionario, pregúntame esos datos antes de continuar.
-4. Resume la configuración acordada y diseña un inventario de ejercicios con identificadores E1, E2, etc.
+3. Pregúntame siempre si tengo pruebas, controles, pautas, guías o evaluaciones de años anteriores que pueda adjuntar como referencia para conocer el estilo, la dificultad, la notación y el tipo de ejercicios esperados.
+4. Si tengo material de años anteriores, espera a que lo adjunte y revísalo antes de diseñar la nueva guía. Úsalo como referencia académica, pero no copies ejercicios de forma literal salvo que yo lo solicite expresamente.
+5. Si no tengo material anterior, indícalo en el resumen de configuración y continúa usando los contenidos y requisitos proporcionados.
+6. Si faltan el ramo, los contenidos, la cantidad de ejercicios, la dificultad o el tipo de solucionario, pregúntame esos datos antes de continuar.
+7. Resume la configuración acordada y diseña un inventario de ejercicios con identificadores E1, E2, etc.
 
 Luego:
 1. Crea ejercicios originales, suficientes y sin ambigüedades, con progresión de dificultad adecuada.

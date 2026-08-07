@@ -20,6 +20,8 @@
 
 ## Referencias y restricciones
 
+- ¿Dispongo de pruebas, controles, pautas o guías de años anteriores?:
+- Archivos de años anteriores que adjuntaré:
 - Materiales adjuntos que deben respetarse:
 - Materias que no deben aparecer:
 - Notación exigida:

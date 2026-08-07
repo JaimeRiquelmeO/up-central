@@ -3,8 +3,9 @@
 ## Antes de editar
 
 1. Leer completamente `CONTEXTO_GUIA.md`, `CHECKLIST.md` y esta instrucción.
-2. Si `CONTEXTO_GUIA.md` tiene campos esenciales pendientes, preguntar al usuario por ramo, contenidos, cantidad de ejercicios, dificultad y tipo de solucionario.
-3. Revisar al menos dos guías comparables del repositorio para respetar el estilo académico y visual.
+2. Preguntar siempre si el usuario dispone de pruebas, controles, pautas, guías o evaluaciones de años anteriores. Si existen, revisarlas antes de diseñar los ejercicios y usarlas como referencia de estilo, dificultad, notación y cobertura, sin copiarlas literalmente salvo instrucción expresa.
+3. Si `CONTEXTO_GUIA.md` tiene campos esenciales pendientes, preguntar al usuario por ramo, contenidos, cantidad de ejercicios, dificultad y tipo de solucionario.
+4. Revisar al menos dos guías comparables del repositorio para respetar el estilo académico y visual.
 
 ## Archivos de salida
 
