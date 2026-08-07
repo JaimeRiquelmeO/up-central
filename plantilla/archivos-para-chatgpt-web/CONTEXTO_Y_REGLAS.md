@@ -9,6 +9,8 @@ La entrega debe parecer una guía del repositorio Usach Premium: formato carta, 
 - Mantener correspondencia exacta entre numeración, enunciados, respuestas y pruebas.
 - Especificar dominios, unidades, tolerancias y redondeos.
 - Si una referencia contiene un error, corregirlo y reportarlo fuera del PDF.
+- En una solicitud de validación, no modificar la guía salvo que el usuario pida expresamente una versión corregida.
+- Diferenciar claramente errores del enunciado, errores de cálculo, errores del solucionario y elementos que no puedan verificarse con los datos disponibles.
 
 ## Validación obligatoria
 

@@ -1,4 +1,12 @@
-# Solicitud de nueva guía
+# Solicitud de creación o validación de una guía
+
+## Modo de trabajo
+
+- [ ] Crear una guía nueva.
+- [ ] Validar una guía ya realizada.
+- Si es una guía existente, archivo adjunto:
+- Alcance solicitado: solo informe / corregir fuente / corregir fuente y generar PDF
+- ¿Autorizo validar todos los resultados utilizando Python?: sí / no
 
 ## Datos obligatorios
 

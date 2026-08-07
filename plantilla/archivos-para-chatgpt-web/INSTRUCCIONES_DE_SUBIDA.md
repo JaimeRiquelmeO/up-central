@@ -27,6 +27,8 @@ Si la interfaz limita la cantidad de archivos, comprima toda esta carpeta como Z
 6. Pida como entrega: fuente LaTeX, PDF final y script Python ejecutado.
 7. No acepte una declaración genérica de validación: solicite el resumen de pruebas aprobadas por ejercicio.
 
+Si desea revisar una guía existente, adjúntela junto con su fuente editable cuando esté disponible. El prompt preguntará si quiere validar todos los resultados con Python y si necesita solamente un informe o también una versión corregida.
+
 ## Resultado esperado
 
 - `main.tex` o equivalente;

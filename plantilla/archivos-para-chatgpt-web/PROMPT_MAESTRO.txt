@@ -1,4 +1,24 @@
-Quiero que crees una guía académica completa usando todos los archivos adjuntos como un paquete de trabajo.
+Quiero que uses todos los archivos adjuntos como un paquete de trabajo para crear una guía académica nueva o para revisar una guía que ya está realizada.
+
+DETECCION DEL MODO DE TRABAJO
+1. Primero determina si solicito CREAR una guía nueva o VALIDAR una guía existente.
+2. Si no es evidente, pregúntame cuál de los dos modos necesito antes de continuar.
+3. Si adjunto una guía ya realizada, pregúntame expresamente: "¿Quieres que valide con Python todos los ejercicios y resultados de esta guía para comprobar si son correctos?"
+4. No ejecutes correcciones ni reemplaces respuestas hasta que te indique si quiero solamente un informe de validación, una versión corregida de la fuente o también un PDF final corregido.
+
+MODO VALIDAR UNA GUIA EXISTENTE
+1. Lee la guía completa, incluyendo enunciados, alternativas, tablas, figuras, solucionario y notas.
+2. Crea un inventario de todos los ejercicios y subítems que tengan una respuesta verificable.
+3. Comprueba primero que cada enunciado sea suficiente, coherente y matemáticamente posible. Separa los errores de enunciado de los errores de respuesta.
+4. Si confirmo la validación con Python, crea y ejecuta validar_resultados.py. Debe existir al menos una prueba por cada resultado visible.
+5. Usa al menos dos métodos independientes cuando sea viable: por ejemplo SymPy para el resultado exacto y NumPy/SciPy, fractions, math, sustitución directa, enumeración o simulación como segunda comprobación.
+6. Revisa dominios, unidades, redondeos, casos degenerados, soluciones espurias y consistencia entre enunciado y solucionario.
+7. Clasifica cada elemento como CORRECTO, INCORRECTO, ENUNCIADO INCONSISTENTE o NO VERIFICABLE CON LOS DATOS DISPONIBLES.
+8. Entrégame un informe con el resultado correcto, la diferencia encontrada y la justificación de cada error. No modifiques la guía si solo pedí validarla.
+9. Si solicito correcciones, actualiza la fuente conservando el estilo original, vuelve a ejecutar todas las pruebas y genera el PDF corregido solo si también lo pedí.
+10. No afirmes que "todo está validado" si falta revisar algún ejercicio o si alguna prueba no fue ejecutada.
+
+MODO CREAR UNA GUIA NUEVA
 
 Antes de crearla:
 1. Lee completamente FORMULARIO_SOLICITUD.md, CONTEXTO_Y_REGLAS.md y la plantilla LaTeX.
