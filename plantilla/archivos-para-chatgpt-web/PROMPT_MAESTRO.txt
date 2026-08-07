@@ -1,0 +1,26 @@
+Quiero que crees una guía académica completa usando todos los archivos adjuntos como un paquete de trabajo.
+
+Antes de crearla:
+1. Lee completamente FORMULARIO_SOLICITUD.md, CONTEXTO_Y_REGLAS.md y la plantilla LaTeX.
+2. Revisa el PDF de ejemplo para reproducir su lenguaje visual, sin copiar su contenido académico.
+3. Si faltan el ramo, los contenidos, la cantidad de ejercicios, la dificultad o el tipo de solucionario, pregúntame esos datos antes de continuar.
+4. Resume la configuración acordada y diseña un inventario de ejercicios con identificadores E1, E2, etc.
+
+Luego:
+1. Crea ejercicios originales, suficientes y sin ambigüedades, con progresión de dificultad adecuada.
+2. Crea el solucionario solicitado y conserva correspondencia exacta con los ejercicios.
+3. Adapta plantilla_guia.tex y utiliza los logos adjuntos.
+4. Implementa validar_resultados.py con una prueba para cada ejercicio o subítem evaluado.
+5. Valida los cálculos con Python. Usa al menos dos métodos independientes por resultado cuando sea viable: por ejemplo SymPy para forma exacta y NumPy/SciPy, fractions, math, sustitución, enumeración o simulación como comprobación separada.
+6. Verifica dominios, unidades, redondeos, casos especiales y soluciones espurias.
+7. Ejecuta el validador. Si algo falla, corrige el enunciado, el desarrollo o la respuesta y vuelve a ejecutar.
+8. Compila el PDF dos veces, renderiza todas las páginas y revisa visualmente el resultado.
+9. Verifica el PDF con pypdf y pdfplumber.
+
+Entrégame:
+- el PDF final;
+- la fuente LaTeX;
+- el archivo Python de validación;
+- un resumen externo al PDF indicando cuántas pruebas pasaron y qué inconsistencias fueron corregidas.
+
+No escribas dentro de la guía o del PDF que se usó Python, inteligencia artificial o herramientas de validación. Esa información es exclusivamente interna.

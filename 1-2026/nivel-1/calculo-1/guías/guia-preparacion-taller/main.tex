@@ -1,0 +1,748 @@
+% ============================================================
+%  GUÍA DE PREPARACIÓN - TALLER
+%  Cálculo I - Usach Premium
+%  Contenidos: límites, continuidad, funciones trigonométricas,
+%  funciones exponenciales y logaritmos.
+% ============================================================
+
+\documentclass[letterpaper,12pt]{article}
+
+% ============================================================
+% PAQUETES
+% ============================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{eso-pic}
+\makeatletter
+\providecommand{\IfPDFManagementActiveF}[1]{#1}
+\makeatother
+\usepackage{transparent}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,babel,calc,patterns,shadows.blur}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usepackage{needspace}
+\tcbuselibrary{skins,breakable}
+
+% ============================================================
+% GEOMETRÍA Y COLORES
+% ============================================================
+\geometry{letterpaper,margin=1.5cm,top=3cm,bottom=2.5cm,headheight=2cm}
+
+\definecolor{celesteSuave}{HTML}{F0F7FF}
+\definecolor{azulFuerte}{HTML}{1A5276}
+\definecolor{azulMedio}{HTML}{2980B9}
+\definecolor{turquesaUsach}{HTML}{33CCCC}
+\definecolor{enlace}{HTML}{1A5276}
+\definecolor{grisTexto}{HTML}{4D5656}
+\definecolor{verdeValidado}{HTML}{1E8449}
+
+% ============================================================
+% INFORMACIÓN DE LA GUÍA
+% ============================================================
+\newcommand{\logoup}{../../../../../template/images/logo_up.png}
+\newcommand{\logousach}{../../../../../template/images/logo_usach.png}
+\newcommand{\logofondo}{../../../../../template/images/logo_up.png}
+
+\newcommand{\institucion}{Usach Premium}
+\newcommand{\curso}{Cálculo I}
+\newcommand{\guiasnumero}{Guía de preparación - Taller}
+\newcommand{\semestre}{1er. Semestre de 2026}
+\newcommand{\preparadopor}{Usach Premium.}
+\newcommand{\webinstitucion}{www.usachpremium.cl}
+\newcommand{\instagraminstitucion}{https://www.instagram.com/usach.premium}
+\newcommand{\transparencia}{0.045}
+\newcommand{\fraseportada}{"Por y para estudiantes"}
+
+\newcommand{\seno}{\operatorname{sen}}
+\newcommand{\Dom}{\operatorname{Dom}}
+\newcommand{\Rec}{\operatorname{Rec}}
+\newcommand{\R}{\mathbb{R}}
+
+\newcommand{\listacontenidos}{%
+    \item[\color{azulFuerte}$\Rightarrow$] Límites y continuidad
+    \item[\color{azulFuerte}$\Rightarrow$] Funciones trigonométricas
+    \item[\color{azulFuerte}$\Rightarrow$] Funciones exponenciales y logaritmos
+    \item[\color{azulFuerte}$\Rightarrow$] 18 ejercicios con solucionario
+}
+
+% ============================================================
+% HIPERVÍNCULOS, ENCABEZADO Y PIE
+% ============================================================
+\hypersetup{
+    colorlinks=true,
+    linkcolor=enlace,
+    urlcolor=enlace,
+    citecolor=enlace,
+    pdfborder={0 0 0},
+    pdftitle={Guía de preparación - Taller de Cálculo I},
+    pdfauthor={Usach Premium}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\includegraphics[height=1.2cm]{\logoup}}
+\fancyhead[R]{%
+    \begin{minipage}[b]{0.47\textwidth}
+        \raggedleft
+        \fontsize{9pt}{11pt}\selectfont
+        \textbf{\color{azulFuerte}\institucion}\\
+        \curso\ - Preparación Taller\\
+        \textit{\color{gray}@usach.premium}
+    \end{minipage}\hspace{0.1cm}%
+    \includegraphics[height=1.2cm]{\logousach}%
+}
+\fancyfoot[L]{\fontsize{9pt}{11pt}\selectfont\textit{\fraseportada}}
+\fancyfoot[R]{\fontsize{9pt}{11pt}\selectfont Página \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\fancypagestyle{plain}{%
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+
+% ============================================================
+% MARCA DE AGUA Y CAJAS
+% ============================================================
+\newcommand{\MarcaAgua}{%
+    \AddToShipoutPicture{%
+        \AtPageCenter{%
+            \makebox(0,0){%
+                \transparent{\transparencia}%
+                \includegraphics[width=0.7\textwidth]{\logofondo}%
+            }%
+        }%
+    }%
+}
+
+\newtcolorbox{resumenbox}[1]{%
+    colback=celesteSuave,
+    colframe=azulFuerte,
+    colbacktitle=azulFuerte,
+    coltitle=white,
+    title=\textbf{#1},
+    fonttitle=\bfseries,
+    arc=7pt,
+    boxrule=1pt,
+    enhanced,
+    breakable
+}
+
+\newtcolorbox{ejerciciobox}[1]{%
+    colback=white,
+    colframe=azulFuerte,
+    colbacktitle=azulFuerte,
+    coltitle=white,
+    title=\textbf{#1},
+    fonttitle=\bfseries,
+    arc=7pt,
+    boxrule=1pt,
+    enhanced,
+    drop shadow={black!6},
+    breakable
+}
+
+\newtcolorbox{solbox}[1]{%
+    colback=celesteSuave,
+    colframe=azulFuerte,
+    title=\textbf{#1},
+    fonttitle=\bfseries,
+    arc=5pt,
+    boxrule=0.9pt,
+    breakable
+}
+
+\newtcolorbox{validacionbox}{%
+    colback=verdeValidado!6,
+    colframe=verdeValidado,
+    coltext=black,
+    arc=6pt,
+    boxrule=1pt
+}
+
+\newcommand{\tituloSeccion}[1]{%
+    \needspace{4\baselineskip}
+    \subsection*{\color{azulFuerte}#1}
+}
+
+\setlist[enumerate]{itemsep=0.4em,topsep=0.4em}
+
+% ============================================================
+\begin{document}
+\hypersetup{pageanchor=false}
+\thispagestyle{plain}
+
+% ============================================================
+% PORTADA
+% ============================================================
+\AddToShipoutPicture*{%
+    \put(54,700){\includegraphics[width=2cm]{\logoup}}
+    \put(420,706){\includegraphics[width=5cm]{\logousach}}
+}
+
+\vspace*{0.5cm}
+
+\begin{center}
+    \color{azulFuerte}
+    {\huge\textbf{GUÍA DE EJERCICIOS}}\\[0.5cm]
+    {\Huge\textbf{\curso}}\\[0.3cm]
+    {\Large\guiasnumero}\\[1.5cm]
+
+    \begin{tcolorbox}[
+        colback=celesteSuave,
+        colframe=azulFuerte,
+        arc=10pt,
+        width=0.85\textwidth,
+        center,
+        boxrule=1.5pt]
+        \centering
+        \vspace{0.2cm}
+        {\Large\textbf{Contenidos}}
+        \vspace{0.3cm}
+        \color{black}
+        \begin{itemize}[leftmargin=2.5cm,itemsep=0.35cm]
+            \listacontenidos
+        \end{itemize}
+        \vspace{0.2cm}
+    \end{tcolorbox}
+\end{center}
+
+\vspace{1.2cm}
+
+\begin{center}
+    {\Large\textbf{\semestre}}\\[0.7cm]
+    {\large\textbf{\preparadopor}}\\[1cm]
+    \begin{tcolorbox}[
+        colback=verdeValidado!6,
+        colframe=verdeValidado,
+        width=0.62\textwidth,
+        center,
+        arc=6pt,
+        boxrule=1pt]
+        \centering
+        \textcolor{verdeValidado}{\textbf{Solucionario verificado con Python}}
+    \end{tcolorbox}
+\end{center}
+
+\vfill
+
+\begin{center}
+    {\color{azulFuerte}\hrule height 0.5pt}
+    \vspace{0.3cm}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \textbf{Instagram:}\\
+        \small\href{\instagraminstitucion}{@usach.premium}
+    \end{minipage}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \textbf{Web:}\\
+        \small\href{http://\webinstitucion}{\webinstitucion}
+    \end{minipage}
+\end{center}
+
+\clearpage
+\pagenumbering{arabic}
+\hypersetup{pageanchor=true}
+\MarcaAgua
+
+% ============================================================
+% RESUMEN
+% ============================================================
+\section*{\color{azulFuerte}Antes de comenzar}
+
+\begin{resumenbox}{MAPA RÁPIDO}
+\begin{minipage}[t]{0.31\textwidth}
+\raggedright
+\textbf{\color{azulFuerte}Límites}
+
+Primero sustituye. Si aparece \(0/0\), simplifica mediante factorización o racionalización.
+
+Para que \(f\) sea continua en \(a\), deben coincidir el límite por la izquierda, el límite por la derecha y \(f(a)\).
+\end{minipage}\hfill
+\begin{minipage}[t]{0.31\textwidth}
+\raggedright
+\textbf{\color{azulFuerte}Trigonometría}
+
+Si
+\[
+f(x)=A\seno(Bx)+D,
+\]
+entonces
+\[
+\text{amplitud}=|A|,
+\]
+\[
+T=\frac{2\pi}{|B|}.
+\]
+\[
+\seno^2x+\cos^2x=1.
+\]
+\end{minipage}\hfill
+\begin{minipage}[t]{0.31\textwidth}
+\raggedright
+\textbf{\color{azulFuerte}Exponencial y logaritmo}
+
+\[
+b^u=b^v\Longrightarrow u=v
+\]
+\[
+b^x=c\Longleftrightarrow x=\log_b(c)
+\]
+\[
+\log_b(MN)=\log_bM+\log_bN.
+\]
+Antes de resolver un logaritmo, exige que su argumento sea positivo.
+\end{minipage}
+\end{resumenbox}
+
+\begin{validacionbox}
+\textbf{\color{verdeValidado}Sugerencia de trabajo:}
+resuelve primero sin mirar el solucionario. En las ecuaciones, comprueba que cada respuesta pertenezca al dominio y al intervalo pedido.
+\end{validacionbox}
+
+% ============================================================
+% EJERCICIOS
+% ============================================================
+\section*{\color{azulFuerte}Ejercicios}
+
+\tituloSeccion{I. Límites y continuidad}
+\noindent Calcule los límites de los ejercicios 1 al 5.
+
+\begin{multicols}{2}
+\begin{enumerate}[label=\color{azulFuerte}\textbf{\arabic*.},leftmargin=*,itemsep=1.1em]
+    \item
+    \[
+        \lim_{x\to2}\frac{x^2+3x-1}{x+1}.
+    \]
+
+    \item
+    \[
+        \lim_{x\to3}\frac{x^2-9}{x-3}.
+    \]
+
+    \item
+    \[
+        \lim_{x\to4}\frac{\sqrt{x}-2}{x-4}.
+    \]
+
+    \item
+    \[
+        \lim_{x\to0}\frac{\seno(5x)}{x}.
+    \]
+
+    \item
+    \[
+        \lim_{x\to+\infty}
+        \frac{3x^2-x+4}{2x^2+5}.
+    \]
+\end{enumerate}
+\end{multicols}
+
+\begin{ejerciciobox}{6. CONTINUIDAD CON PARÁMETROS}
+Considere
+\[
+f(x)=
+\begin{cases}
+\displaystyle\frac{\sqrt{3x+1}-2}{x-1}, & x<1,\\[2mm]
+c, & x=1,\\[2mm]
+\displaystyle a\,\frac{\sqrt{x+3}-2}{x-1}, & x>1.
+\end{cases}
+\]
+Determine \(a,c\in\R\) para que \(f\) sea continua en \(x=1\).
+\end{ejerciciobox}
+
+\tituloSeccion{II. Funciones trigonométricas}
+
+\begin{multicols}{2}
+\begin{enumerate}[label=\color{azulFuerte}\textbf{\arabic*.},leftmargin=*,start=7,itemsep=1em]
+    \item Para
+    \[
+        f(x)=2\seno(3x)-1,
+    \]
+    determine amplitud, período, eje medio, valor máximo, valor mínimo y recorrido.
+
+    \item Para
+    \[
+        g(x)=-3\cos\left(\frac{x}{2}\right)+2,
+    \]
+    determine amplitud, período, eje medio, valor máximo, valor mínimo, recorrido y \(g(0)\).
+
+    \item Resuelva en \(x\in[0,2\pi)\):
+    \[
+        \seno x=-\frac{\sqrt3}{2}.
+    \]
+
+    \item Resuelva en \(x\in[0,2\pi)\):
+    \[
+        2\cos^2x+3\cos x+1=0.
+    \]
+\end{enumerate}
+\end{multicols}
+
+\begin{ejerciciobox}{11. IDENTIDAD CON ÁNGULO AGUDO}
+Sea \(\alpha\) un ángulo agudo que cumple
+\[
+    \frac{1}{\csc\alpha}=\frac{1+\cos\alpha}{2}.
+\]
+Determine el valor exacto de \(\seno\alpha\).
+\end{ejerciciobox}
+
+\begin{ejerciciobox}{12. MODELO PERIÓDICO}
+La altura, en metros, de una boya está dada por
+\[
+    h(t)=5+4\seno\left(\frac{\pi t}{6}\right),
+    \qquad t\geq0,
+\]
+donde \(t\) se mide en horas. Determine el período, la altura máxima, la altura mínima y el primer instante en que alcanza su altura máxima.
+\end{ejerciciobox}
+
+\tituloSeccion{III. Funciones exponenciales y logaritmos}
+
+\begin{multicols}{2}
+\begin{enumerate}[label=\color{azulFuerte}\textbf{\arabic*.},leftmargin=*,start=13,itemsep=1em]
+    \item Calcule:
+    \[
+        \log_2(32)+\log_3\left(\frac19\right).
+    \]
+
+    \item Resuelva:
+    \[
+        3^{2x-1}=27.
+    \]
+
+    \item Resuelva y revise el dominio:
+    \[
+        \log_2(x-1)+\log_2(x-3)=3.
+    \]
+
+    \item Resuelva:
+    \[
+        2e^x-5=0.
+    \]
+
+    \item Para
+    \[
+        q(x)=\ln(2x-4)+1,
+    \]
+    determine dominio, asíntota vertical, recorrido y el punto donde la gráfica corta al eje \(x\).
+\end{enumerate}
+\end{multicols}
+
+\begin{ejerciciobox}{18. MODELO EXPONENCIAL}
+Una población se modela mediante
+\[
+    P(t)=A\,2^{kt},
+\]
+donde \(t\) se mide en días. Inicialmente hay \(500\) individuos y después de \(6\) días hay \(2000\).
+
+\begin{enumerate}[label=\alph*),leftmargin=*]
+    \item Determine \(A\), \(k\) y la fórmula final de \(P(t)\).
+    \item Determine cuándo la población llegará a \(5000\) individuos. Exprese el resultado con logaritmos y entregue también una aproximación decimal.
+\end{enumerate}
+\end{ejerciciobox}
+
+% ============================================================
+% SOLUCIONARIO
+% ============================================================
+\clearpage
+\begin{center}
+    \begin{tcolorbox}[
+        colback=azulFuerte,
+        colframe=azulFuerte,
+        colupper=white,
+        width=0.8\textwidth,
+        center,
+        arc=10pt]
+        \centering\Large\textbf{SOLUCIONARIO}
+    \end{tcolorbox}
+\end{center}
+
+\begin{validacionbox}
+\centering
+\textbf{\color{verdeValidado}18 de 18 resultados verificados con Python y SymPy.}
+\end{validacionbox}
+
+\begin{solbox}{I. Límites y continuidad}
+\begin{enumerate}[label=\color{azulFuerte}\textbf{\arabic*.},leftmargin=*,itemsep=1em]
+    \item Como el denominador no se anula en \(x=2\), sustituimos directamente:
+    \[
+    \lim_{x\to2}\frac{x^2+3x-1}{x+1}
+    =\frac{4+6-1}{3}
+    =\boxed{3}.
+    \]
+
+    \item Factorizamos \(x^2-9=(x-3)(x+3)\):
+    \[
+    \lim_{x\to3}\frac{(x-3)(x+3)}{x-3}
+    =\lim_{x\to3}(x+3)
+    =\boxed{6}.
+    \]
+
+    \item Racionalizamos:
+    \[
+    \frac{\sqrt{x}-2}{x-4}
+    \cdot\frac{\sqrt{x}+2}{\sqrt{x}+2}
+    =\frac{1}{\sqrt{x}+2}.
+    \]
+    Por tanto,
+    \[
+        \lim_{x\to4}\frac{\sqrt{x}-2}{x-4}
+        =\boxed{\frac14}.
+    \]
+
+    \item Usamos \(\lim_{u\to0}\frac{\seno u}{u}=1\):
+    \[
+    \lim_{x\to0}\frac{\seno(5x)}{x}
+    =5\lim_{x\to0}\frac{\seno(5x)}{5x}
+    =\boxed{5}.
+    \]
+
+    \item Dividimos numerador y denominador por \(x^2\):
+    \[
+    \lim_{x\to+\infty}
+    \frac{3-\frac1x+\frac4{x^2}}{2+\frac5{x^2}}
+    =\boxed{\frac32}.
+    \]
+
+    \item Para el tramo izquierdo:
+    \[
+    \begin{aligned}
+    \lim_{x\to1^-}\frac{\sqrt{3x+1}-2}{x-1}
+    &=
+    \lim_{x\to1^-}
+    \frac{3}{\sqrt{3x+1}+2}\\
+    &=\frac34.
+    \end{aligned}
+    \]
+    Para el tramo derecho:
+    \[
+    \begin{aligned}
+    \lim_{x\to1^+}
+    a\frac{\sqrt{x+3}-2}{x-1}
+    &=
+    a\lim_{x\to1^+}
+    \frac{1}{\sqrt{x+3}+2}\\
+    &=\frac{a}{4}.
+    \end{aligned}
+    \]
+    La continuidad exige
+    \[
+        \frac34=c=\frac{a}{4}.
+    \]
+    Así,
+    \[
+        \boxed{a=3,\qquad c=\frac34}.
+    \]
+\end{enumerate}
+\end{solbox}
+
+\begin{solbox}{II. Funciones trigonométricas}
+\begin{enumerate}[label=\color{azulFuerte}\textbf{\arabic*.},leftmargin=*,start=7,itemsep=1em]
+    \item En \(f(x)=2\seno(3x)-1\):
+    \[
+    \text{amplitud}=2,
+    \qquad
+    \text{período}=\frac{2\pi}{3},
+    \qquad
+    \text{eje medio}:y=-1.
+    \]
+    Como \(-1\leq\seno(3x)\leq1\),
+    \[
+        \boxed{\max f=1,\quad \min f=-3,\quad \Rec(f)=[-3,1]}.
+    \]
+
+    \item En \(g(x)=-3\cos(x/2)+2\):
+    \[
+    \text{amplitud}=3,
+    \qquad
+    \text{período}=4\pi,
+    \qquad
+    \text{eje medio}:y=2.
+    \]
+    Por tanto,
+    \[
+        \boxed{\max g=5,\quad \min g=-1,\quad \Rec(g)=[-1,5]}.
+    \]
+    Además,
+    \[
+        \boxed{g(0)=-3\cos0+2=-1}.
+    \]
+
+    \item El seno es negativo en los cuadrantes III y IV, con ángulo de referencia \(\pi/3\):
+    \[
+        \boxed{x\in\left\{\frac{4\pi}{3},\frac{5\pi}{3}\right\}}.
+    \]
+
+    \item Factorizamos como una ecuación cuadrática en \(\cos x\):
+    \[
+    2\cos^2x+3\cos x+1
+    =(2\cos x+1)(\cos x+1)=0.
+    \]
+    Entonces \(\cos x=-\frac12\) o \(\cos x=-1\), de donde
+    \[
+        \boxed{x\in\left\{\frac{2\pi}{3},\pi,\frac{4\pi}{3}\right\}}.
+    \]
+
+    \item Como \(1/\csc\alpha=\seno\alpha\),
+    \[
+        2\seno\alpha=1+\cos\alpha
+        \quad\Longrightarrow\quad
+        \cos\alpha=2\seno\alpha-1.
+    \]
+    Elevamos al cuadrado y usamos \(\cos^2\alpha=1-\seno^2\alpha\):
+    \[
+    1-\seno^2\alpha=(2\seno\alpha-1)^2
+    \Longrightarrow
+    \seno\alpha(5\seno\alpha-4)=0.
+    \]
+    Como \(\alpha\) es agudo,
+    \[
+        \boxed{\seno\alpha=\frac45}.
+    \]
+
+    \item El argumento del seno aumenta en \(2\pi\) cuando \(t\) aumenta en \(12\), por lo que el período es
+    \[
+        \boxed{T=12\text{ horas}}.
+    \]
+    Como \(-1\leq\seno(\pi t/6)\leq1\),
+    \[
+        \boxed{h_{\min}=1\text{ m},\qquad h_{\max}=9\text{ m}}.
+    \]
+    El primer máximo ocurre cuando
+    \[
+        \frac{\pi t}{6}=\frac{\pi}{2},
+    \]
+    así que
+    \[
+        \boxed{t=3\text{ horas}}.
+    \]
+\end{enumerate}
+\end{solbox}
+
+\begin{solbox}{III. Funciones exponenciales y logaritmos}
+\begin{enumerate}[label=\color{azulFuerte}\textbf{\arabic*.},leftmargin=*,start=13,itemsep=1em]
+    \item
+    \[
+    \log_2(32)+\log_3\left(\frac19\right)
+    =5+(-2)
+    =\boxed{3}.
+    \]
+
+    \item Como \(27=3^3\),
+    \[
+    3^{2x-1}=3^3
+    \Longrightarrow
+    2x-1=3
+    \Longrightarrow
+    \boxed{x=2}.
+    \]
+
+    \item El dominio exige
+    \[
+        x-1>0,\qquad x-3>0
+        \quad\Longrightarrow\quad x>3.
+    \]
+    Usamos la propiedad del producto:
+    \[
+    \log_2\bigl((x-1)(x-3)\bigr)=3
+    \Longrightarrow
+    (x-1)(x-3)=8.
+    \]
+    Así,
+    \[
+    x^2-4x-5=0
+    \Longrightarrow
+    (x-5)(x+1)=0.
+    \]
+    Se descarta \(x=-1\) por no pertenecer al dominio. Entonces,
+    \[
+        \boxed{x=5}.
+    \]
+
+    \item
+    \[
+    2e^x-5=0
+    \Longrightarrow
+    e^x=\frac52
+    \Longrightarrow
+    \boxed{x=\ln\left(\frac52\right)}.
+    \]
+
+    \item El argumento del logaritmo debe ser positivo:
+    \[
+        2x-4>0
+        \Longrightarrow
+        \boxed{\Dom(q)=(2,+\infty)}.
+    \]
+    Cuando \(x\to2^+\), \(\ln(2x-4)\to-\infty\), por lo que la asíntota vertical es
+    \[
+        \boxed{x=2}.
+    \]
+    El recorrido de un logaritmo trasladado sigue siendo
+    \[
+        \boxed{\Rec(q)=\R}.
+    \]
+    Para hallar el corte con el eje \(x\):
+    \[
+    \ln(2x-4)+1=0
+    \Longrightarrow
+    2x-4=e^{-1}.
+    \]
+    Por tanto, el punto es
+    \[
+        \boxed{\left(2+\frac{1}{2e},\,0\right)}.
+    \]
+
+    \item De \(P(0)=500\):
+    \[
+        A\,2^{k\cdot0}=A=500.
+    \]
+    Luego, usando \(P(6)=2000\):
+    \[
+    500\,2^{6k}=2000
+    \Longrightarrow
+    2^{6k}=4=2^2
+    \Longrightarrow
+    k=\frac13.
+    \]
+    El modelo es
+    \[
+        \boxed{P(t)=500\,2^{t/3}}.
+    \]
+    Para llegar a \(5000\):
+    \[
+    500\,2^{t/3}=5000
+    \Longrightarrow
+    2^{t/3}=10
+    \Longrightarrow
+    \frac{t}{3}=\log_2(10).
+    \]
+    Finalmente,
+    \[
+        \boxed{t=3\log_2(10)\approx9{,}97\text{ días}}.
+    \]
+\end{enumerate}
+\end{solbox}
+
+\vspace{0.8cm}
+\begin{center}
+    \small\textbf{Usach Premium} - Nos vemos en la ayudantía.\\
+    \textit{"Por y para estudiantes."}
+\end{center}
+
+\end{document}

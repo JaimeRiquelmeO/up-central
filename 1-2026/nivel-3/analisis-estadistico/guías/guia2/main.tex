@@ -1,0 +1,433 @@
+% ============================================================
+% GUÍA 2 - ANÁLISIS ESTADÍSTICO
+% Formato institucional Usach Premium
+% Resultados finales validados con SciPy, mpmath y SymPy
+% ============================================================
+
+\documentclass[letterpaper,12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{eso-pic}
+\tcbuselibrary{skins,breakable}
+
+\geometry{letterpaper,margin=1.5cm,top=3cm,bottom=2.5cm,headheight=2cm}
+\setlist[enumerate,2]{itemsep=0.3em,topsep=0.4em}
+
+\definecolor{celesteSuave}{HTML}{F0F7FF}
+\definecolor{azulFuerte}{HTML}{1A5276}
+\definecolor{turquesaUsach}{HTML}{33CCCC}
+\definecolor{enlace}{HTML}{1A5276}
+
+\newcommand{\logoup}{./images/logo_up.png}
+\newcommand{\logousach}{./images/logo_usach.png}
+\newcommand{\logofondo}{./images/logo_up.png}
+
+\newcommand{\institucion}{Usach Premium}
+\newcommand{\curso}{Análisis Estadístico}
+\newcommand{\guiasnumero}{Guía 2 - Estimación puntual, estadística descriptiva e intervalos}
+\newcommand{\semestre}{1er. Semestre de 2026}
+\newcommand{\preparadopor}{Nicolás Gatica}
+\newcommand{\webinstitucion}{www.usachpremium.cl}
+\newcommand{\instagraminstitucion}{https://www.instagram.com/usach.premium}
+\newcommand{\fraseportada}{"Por y para estudiantes"}
+
+\newcommand{\listacontenidos}{
+    \item[\color{azulFuerte}$\Rightarrow$] Estimación por máxima verosimilitud y propiedades de estimadores
+    \item[\color{azulFuerte}$\Rightarrow$] Estadística descriptiva y tablas de frecuencia agrupadas
+    \item[\color{azulFuerte}$\Rightarrow$] Intervalos de confianza para medias, proporciones y varianzas
+    \item[\color{azulFuerte}$\Rightarrow$] Tamaño muestral y comparación de variabilidad
+}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=enlace,
+    urlcolor=enlace,
+    citecolor=enlace,
+    pdfborder={0 0 0}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\includegraphics[height=1.2cm]{\logoup}}
+\fancyhead[R]{%
+    \begin{minipage}[b]{0.42\textwidth}
+        \raggedleft
+        \fontsize{9pt}{11pt}\selectfont
+        \textbf{\color{azulFuerte}\institucion} \\
+        \curso\ -- Guía 2 \\
+        \textit{\color{gray}@usach.premium}
+    \end{minipage}\hspace{0.1cm}%
+    \includegraphics[height=1.2cm]{\logousach}
+}
+\fancyfoot[L]{\fontsize{9pt}{11pt}\selectfont\textit{\fraseportada}}
+\fancyfoot[R]{\fontsize{9pt}{11pt}\selectfont Página \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\fancypagestyle{plain}{%
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+
+\newcommand{\MarcaAgua}{%
+    \AddToShipoutPictureBG{%
+        \AtPageLowerLeft{%
+            \color{white}\rule{\paperwidth}{\paperheight}%
+        }%
+        \AtPageCenter{%
+            \makebox(0,0){%
+                \includegraphics[decodearray={0.94 1 0.94 1 0.94 1},width=0.7\textwidth]{\logofondo}%
+            }%
+        }%
+    }%
+}
+
+\newtcolorbox{resultbox}[1]{%
+    enhanced,
+    breakable,
+    colback=celesteSuave,
+    colframe=azulFuerte,
+    colbacktitle=azulFuerte,
+    coltitle=white,
+    title=\textbf{#1},
+    fonttitle=\bfseries,
+    boxrule=0.8pt,
+    arc=2mm,
+    before skip=8pt,
+    after skip=8pt
+}
+
+\newenvironment{introduccion}{%
+    \section*{Introducción}
+    \MarcaAgua
+}{}
+
+\newenvironment{ejercicios}{%
+    \section*{Ejercicios}
+}{}
+
+\newenvironment{resultados}{%
+    \newpage
+    \begin{center}
+        \begin{tcolorbox}[
+            colback=azulFuerte,
+            colframe=azulFuerte,
+            colupper=white,
+            width=0.8\textwidth,
+            center,
+            arc=10pt]
+            \centering\Large\textbf{RESULTADOS}
+        \end{tcolorbox}
+    \end{center}
+    \small
+}{}
+
+\begin{document}
+\pagecolor{white}
+\thispagestyle{plain}
+
+\AddToShipoutPicture*{%
+    \put(54,700){\includegraphics[width=2cm]{\logoup}}
+    \put(420,706){\includegraphics[width=5cm]{\logousach}}
+}
+
+\vspace*{0.5cm}
+
+\begin{center}
+    \color{azulFuerte}
+    {\huge\textbf{GUÍA DE EJERCICIOS}} \\[0.5cm]
+    {\Huge\textbf{\curso}} \\[0.3cm]
+    {\Large\guiasnumero} \\[1.2cm]
+
+    \begin{tcolorbox}[
+        colback=celesteSuave,
+        colframe=azulFuerte,
+        arc=10pt,
+        width=0.85\textwidth,
+        center,
+        boxrule=1.5pt]
+        \centering
+        \vspace{0.2cm}
+        {\Large\textbf{Contenidos}}
+        \vspace{0.3cm}
+        \color{black}
+        \begin{itemize}[leftmargin=2.1cm]
+            \listacontenidos
+        \end{itemize}
+        \vspace{0.2cm}
+    \end{tcolorbox}
+\end{center}
+
+\vspace{1.2cm}
+
+\begin{center}
+    {\Large\textbf{\semestre}} \\[0.8cm]
+    {\large\textbf{Preparado por: \preparadopor}}
+\end{center}
+
+\vfill
+
+\begin{center}
+    {\color{azulFuerte}\hrule height 0.5pt}
+    \vspace{0.3cm}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \textbf{Instagram:} \\
+        \small\href{\instagraminstitucion}{@usach.premium}
+    \end{minipage}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \textbf{Web:} \\
+        \small\href{https://\webinstitucion}{\webinstitucion}
+    \end{minipage}
+\end{center}
+
+\pagenumbering{arabic}
+\newpage
+
+\begin{introduccion}
+Esta guía tiene como objetivo ejercitar herramientas de estimación puntual, estadística descriptiva e inferencia por intervalos. En los problemas de datos agrupados se empleará interpolación lineal dentro de cada intervalo; en los problemas inferenciales se deberá identificar la distribución de referencia apropiada y conservar las unidades de medida.
+\end{introduccion}
+
+\begin{ejercicios}
+
+\subsection*{I. Estimación por máxima verosimilitud y propiedades}
+\hrule
+\vspace{0.4cm}
+
+\begin{enumerate}[leftmargin=*,itemsep=0.9em]
+
+    \item El tiempo de respuesta $X$ (en segundos) de un servidor ante peticiones de alta carga sigue una distribución continua con densidad
+    \[
+        f(x;\theta)=
+        \begin{cases}
+            \dfrac{2x}{\theta^2}e^{-(x/\theta)^2}, & x>0,\\
+            0, & \text{en otro caso},
+        \end{cases}
+        \qquad \theta>0.
+    \]
+    Sabiendo que $E[X^2]=\theta^2$:
+    \begin{enumerate}[label=\alph*)]
+        \item Dada una muestra aleatoria $(X_1,X_2,\dots,X_n)$, obtenga el estimador máximo verosímil de $\theta$.
+        \item Determine si el estimador obtenido es insesgado para $\theta$ y si su cuadrado es insesgado para $\theta^2$.
+    \end{enumerate}
+
+    \item La resistencia a la tracción $X$ (en MPa) de una aleación metálica tiene densidad
+    \[
+        f(x;\theta)=
+        \begin{cases}
+            (\theta+1)(1-x)^\theta, & 0<x<1,\ \theta>-1,\\
+            0, & \text{en otro caso}.
+        \end{cases}
+    \]
+    \begin{enumerate}[label=\alph*)]
+        \item Obtenga el estimador máximo verosímil de $\theta$ a partir de una muestra aleatoria de tamaño $n$.
+        \item Para $n=5$ y $x=\{0{,}12;0{,}25;0{,}08;0{,}35;0{,}18\}$, calcule la estimación puntual de $\theta$.
+    \end{enumerate}
+
+    \item Para estimar la media $\mu$ de una población con varianza conocida $\sigma^2$, se proponen, para $n>3$,
+    \[
+        \widehat\Theta_1=\overline X, \qquad
+        \widehat\Theta_2=\frac{2X_1+X_n}{3}, \qquad
+        \widehat\Theta_3=\sum_{i=1}^{n}w_iX_i,
+        \quad w_i=\frac{2i}{n(n+1)}.
+    \]
+    \begin{enumerate}[label=\alph*)]
+        \item Determine cuáles de los tres estimadores son insesgados para $\mu$.
+        \item Compare sus varianzas y determine el estimador más eficiente.
+    \end{enumerate}
+
+    \item La cantidad de fallas por metro $X$ en un cable submarino sigue una distribución de Poisson truncada en cero:
+    \[
+        P(X=x;\lambda)=\frac{\lambda^xe^{-\lambda}}{x!\,(1-e^{-\lambda})},
+        \qquad x=1,2,3,\dots,\quad \lambda>0.
+    \]
+    \begin{enumerate}[label=\alph*)]
+        \item Derive la ecuación que determina el estimador máximo verosímil de $\lambda$.
+        \item Exprese la condición implícita que debe cumplir $\widehat\lambda_{\mathrm{EMV}}$ en términos de $\overline X$.
+    \end{enumerate}
+
+\end{enumerate}
+
+\subsection*{II. Estadística descriptiva y tablas de frecuencia}
+\hrule
+\vspace{0.4cm}
+
+\begin{enumerate}[resume,leftmargin=*,itemsep=0.9em]
+
+    \item Un laboratorio analiza la deformación plástica (en mm) de 50 probetas de hormigón:
+    \begin{center}
+    \begin{tabular}{cc}
+        \toprule
+        \textbf{Intervalo (mm)} & \textbf{Frecuencia ($n_i$)} \\
+        \midrule
+        $[10{,}0;15{,}0)$ & 6 \\
+        $[15{,}0;20{,}0)$ & 12 \\
+        $[20{,}0;25{,}0)$ & 18 \\
+        $[25{,}0;30{,}0)$ & 9 \\
+        $[30{,}0;35{,}0]$ & 5 \\
+        \bottomrule
+    \end{tabular}
+    \end{center}
+    \begin{enumerate}[label=\alph*)]
+        \item Calcule el rango intercuartílico $RI=Q_3-Q_1$ mediante interpolación para datos agrupados.
+        \item Determine el porcentaje de probetas con deformación entre $17{,}5$ mm y $28{,}0$ mm, suponiendo distribución uniforme dentro de cada intervalo.
+    \end{enumerate}
+
+    \item A partir de los datos del Ejercicio 5:
+    \begin{enumerate}[label=\alph*)]
+        \item Determine si existen datos atípicos mediante el intervalo de Tukey $[Q_1-1{,}5RI;Q_3+1{,}5RI]$.
+        \item Calcule $P_{80}$ y determine si el lote cumple la exigencia de que dicho percentil no supere $27{,}5$ mm.
+    \end{enumerate}
+
+    \item Se registró la dureza Rockwell (en HRB) de 50 vigas de acero:
+    \begin{center}
+    \begin{tabular}{cc}
+        \toprule
+        \textbf{Intervalo (HRB)} & \textbf{Frecuencia ($n_i$)} \\
+        \midrule
+        $[40;50)$ & 4 \\
+        $[50;60)$ & 10 \\
+        $[60;70)$ & 20 \\
+        $[70;80)$ & 11 \\
+        $[80;90]$ & 5 \\
+        \bottomrule
+    \end{tabular}
+    \end{center}
+    \begin{enumerate}[label=\alph*)]
+        \item Obtenga $Q_1$, la mediana $M_e$ y $Q_3$ mediante interpolación para datos agrupados.
+        \item Determine el porcentaje de vigas con dureza entre 55 HRB y 76 HRB, suponiendo distribución uniforme dentro de cada intervalo.
+    \end{enumerate}
+
+    \item En un estudio sobre recubrimientos epóxicos se midió el tiempo hasta el desprendimiento (en días) de 60 muestras:
+    \begin{center}
+    \begin{tabular}{cc}
+        \toprule
+        \textbf{Intervalo (días)} & \textbf{Frecuencia ($n_i$)} \\
+        \midrule
+        $[100;120)$ & 8 \\
+        $[120;140)$ & 15 \\
+        $[140;160)$ & 22 \\
+        $[160;180)$ & 11 \\
+        $[180;200]$ & 4 \\
+        \bottomrule
+    \end{tabular}
+    \end{center}
+    \begin{enumerate}[label=\alph*)]
+        \item Calcule el rango intercuartílico y el intervalo de valores no atípicos según Tukey.
+        \item Determine el tiempo máximo de resistencia correspondiente al 25\% de menor durabilidad.
+    \end{enumerate}
+
+\end{enumerate}
+
+\subsection*{III. Intervalos de confianza y tamaño muestral}
+\hrule
+\vspace{0.4cm}
+\begingroup
+\small
+
+\begin{enumerate}[resume,leftmargin=*,itemsep=0.9em]
+
+    \item El tiempo de fraguado $X$ (en horas) de una mezcla se modela mediante una distribución normal con varianza desconocida. Para $n=36$ se obtuvo
+    \[
+        \sum x_i=518{,}4 \text{ horas},
+        \qquad
+        \sum x_i^2=7532{,}16 \text{ horas}^2.
+    \]
+    \begin{enumerate}[label=\alph*)]
+        \item Construya un intervalo de confianza del 99\% para $\mu$.
+        \item Construya un intervalo de confianza del 95\% para $\sigma^2$.
+    \end{enumerate}
+
+    \item En una muestra preliminar de 50 tramos se obtuvo una desviación estándar de $s=11{,}84$ minutos.
+    \begin{enumerate}[label=\alph*)]
+        \item Determine el tamaño muestral mínimo para estimar la media con 95\% de confianza y error máximo $E=2{,}5$ minutos.
+        \item Si se mantiene $n=50$, determine el margen de error alcanzado con 99\% de confianza.
+    \end{enumerate}
+
+    \item De 50 vigas estructurales, 18 presentaron microfisuras antes de alcanzar la carga de diseño.
+    \begin{enumerate}[label=\alph*)]
+        \item Calcule, mediante la aproximación normal de Wald, un intervalo de confianza del 95\% para la proporción poblacional $p$.
+        \item Si la norma exige $p<0{,}25$, determine si puede concluirse con 95\% de confianza que la producción cumple la norma.
+    \end{enumerate}
+
+    \item Se evalúa la resistencia a la tensión de dos tipos de anclajes estructurales:
+    \begin{itemize}
+        \item \textbf{Tipo A:} $n_A=50$, $\overline X_A=145{,}2$ kN, $s_A=12{,}4$ kN.
+        \item \textbf{Tipo B:} $n_B=50$, $\overline X_B=88{,}6$ kN, $s_B=6{,}2$ kN.
+    \end{itemize}
+    \begin{enumerate}[label=\alph*)]
+        \item Compare sus coeficientes de variación y determine cuál presenta mayor homogeneidad relativa.
+        \item Suponiendo normalidad para el Tipo B, construya un intervalo de confianza del 90\% para $\sigma_B^2$ y determine si es factible que sea superior a $50$ kN$^2$.
+    \end{enumerate}
+
+\end{enumerate}
+\endgroup
+\end{ejercicios}
+
+\begin{resultados}
+
+\begin{resultbox}{Ejercicios 1 al 4}
+\begin{enumerate}[label=\color{azulFuerte}\bfseries\arabic*.,leftmargin=*,itemsep=0.75em]
+    \item \textbf{a)} $\displaystyle \widehat\theta_{\mathrm{EMV}}=\sqrt{\frac1n\sum_{i=1}^n X_i^2}$. \\
+          \textbf{b)} $\widehat\theta_{\mathrm{EMV}}^2$ es insesgado para $\theta^2$; $\widehat\theta_{\mathrm{EMV}}$ es sesgado hacia abajo, con $\displaystyle E[\widehat\theta_{\mathrm{EMV}}]=\theta\,\frac{\Gamma(n+\tfrac12)}{\sqrt n\,\Gamma(n)}<\theta$.
+
+    \item \textbf{a)} $\displaystyle \widehat\theta_{\mathrm{EMV}}=-\frac{n}{\sum_{i=1}^n\ln(1-X_i)}-1$. \quad
+          \textbf{b)} $\widehat\theta_{\mathrm{EMV}}=3{,}432110$.
+
+    \item \textbf{a)} Los tres estimadores son insesgados para $\mu$. \\
+          \textbf{b)} $\displaystyle V(\widehat\Theta_1)=\frac{\sigma^2}{n}$, $\displaystyle V(\widehat\Theta_2)=\frac{5\sigma^2}{9}$ y $\displaystyle V(\widehat\Theta_3)=\frac{2(2n+1)}{3n(n+1)}\sigma^2$; el más eficiente es $\widehat\Theta_1$.
+
+    \item \textbf{a)} $\displaystyle \frac{\overline X}{\widehat\lambda}-1-\frac{1}{e^{\widehat\lambda}-1}=0$. \quad
+          \textbf{b)} $\displaystyle \overline X=\frac{\widehat\lambda_{\mathrm{EMV}}}{1-e^{-\widehat\lambda_{\mathrm{EMV}}}}$.
+\end{enumerate}
+\end{resultbox}
+
+\begin{resultbox}{Ejercicios 5 al 8}
+\begin{enumerate}[label=\color{azulFuerte}\bfseries\arabic*.,start=5,leftmargin=*,itemsep=0.75em]
+    \item \textbf{a)} $Q_1=17{,}7083$ mm, $Q_3=25{,}8333$ mm y $RI=8{,}1250$ mm. \quad
+          \textbf{b)} $58{,}8\%$.
+
+    \item \textbf{a)} Intervalo de Tukey: $[5{,}5208;38{,}0208]$ mm; no se observan valores atípicos. \\
+          \textbf{b)} $P_{80}=27{,}2222$ mm; el lote cumple.
+
+    \item \textbf{a)} $Q_1=58{,}5$ HRB, $M_e=65{,}5$ HRB y $Q_3=73{,}1818$ HRB. \quad
+          \textbf{b)} $63{,}2\%$.
+
+    \item \textbf{a)} $Q_1=129{,}3333$ días, $Q_3=160$ días, $RI=30{,}6667$ días e intervalo de Tukey $[83{,}3333;206]$ días. \\
+          \textbf{b)} $129{,}3333$ días.
+\end{enumerate}
+\end{resultbox}
+
+\begin{resultbox}{Ejercicios 9 al 12}
+\begin{enumerate}[label=\color{azulFuerte}\bfseries\arabic*.,start=9,leftmargin=*,itemsep=0.75em]
+    \item \textbf{a)} $\overline x=14{,}4$ h, $s^2=1{,}92$ h$^2$ e $IC_{99\%}(\mu)=[13{,}7710;15{,}0290]$ h. \\
+          \textbf{b)} $IC_{95\%}(\sigma^2)=[1{,}2631;3{,}2670]$ h$^2$.
+
+    \item \textbf{a)} $n_{\min}=87$. \quad
+          \textbf{b)} $E=4{,}3130$ minutos.
+
+    \item \textbf{a)} $\widehat p=0{,}36$ e $IC_{95\%}(p)=[0{,}2270;0{,}4930]$. \quad
+          \textbf{b)} No se puede concluir que la producción cumpla la norma.
+
+    \item \textbf{a)} $CV_A=8{,}5399\%$ y $CV_B=6{,}9977\%$; el Tipo B es más homogéneo. \\
+          \textbf{b)} $IC_{90\%}(\sigma_B^2)=[28{,}3931;55{,}5126]$ kN$^2$; sí, una varianza superior a $50$ kN$^2$ es factible.
+\end{enumerate}
+\end{resultbox}
+
+\end{resultados}
+
+\end{document}

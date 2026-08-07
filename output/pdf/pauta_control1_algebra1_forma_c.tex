@@ -1,0 +1,280 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{lastpage}
+\tcbuselibrary{breakable,skins}
+
+\geometry{letterpaper,left=1.8cm,right=1.8cm,top=2.5cm,bottom=1.8cm,headheight=1.6cm}
+
+\definecolor{azul}{HTML}{174A70}
+\definecolor{celeste}{HTML}{EDF5FA}
+\definecolor{gris}{HTML}{5F6872}
+\definecolor{verde}{HTML}{24724A}
+
+\newcommand{\logousach}{../../template/images/logo_usach.png}
+\newcommand{\logoup}{../../template/images/logo_up.png}
+\newcommand{\R}{\operatorname{Re}}
+\newcommand{\Ima}{\operatorname{Im}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\includegraphics[height=1.05cm]{\logousach}}
+\fancyhead[R]{\begin{minipage}[b]{0.62\textwidth}\raggedleft
+  \small\textbf{\color{azul}Álgebra I}\\
+  \footnotesize Control 1 - Forma C
+\end{minipage}}
+\fancyfoot[L]{\footnotesize Documento de apoyo académico}
+\fancyfoot[R]{\footnotesize Página \thepage\ de \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\newtcolorbox{enunciado}[1]{
+  enhanced,breakable,colback=celeste,colframe=azul,
+  colbacktitle=azul,coltitle=white,fonttitle=\bfseries,
+  title={#1},arc=3pt,boxrule=0.8pt,left=8pt,right=8pt,top=4pt,bottom=4pt
+}
+\newtcolorbox{desarrollo}[1]{
+  enhanced,breakable,colback=white,colframe=azul!65,
+  colbacktitle=celeste,coltitle=azul,fonttitle=\bfseries,
+  title={#1},arc=3pt,boxrule=0.7pt,left=9pt,right=9pt,top=4pt,bottom=4pt
+}
+\newtcolorbox{respuesta}{
+  colback=verde!7,colframe=verde,arc=3pt,boxrule=0.9pt,
+  left=8pt,right=8pt,top=4pt,bottom=4pt
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\renewcommand{\arraystretch}{1.18}
+
+\begin{document}
+\thispagestyle{empty}
+
+\begin{minipage}[c]{0.18\textwidth}
+  \includegraphics[width=2.35cm]{\logousach}
+\end{minipage}
+\begin{minipage}[c]{0.64\textwidth}
+  \centering
+  {\large\bfseries\color{azul} Álgebra I}\\
+  {\small Control 1 - Forma C}
+\end{minipage}
+\begin{minipage}[c]{0.17\textwidth}
+  \raggedleft\includegraphics[width=2.0cm]{\logoup}
+\end{minipage}
+
+\vspace{1.8cm}
+
+\begin{center}
+  {\color{azul}\rule{0.82\textwidth}{1.2pt}}\\[0.5cm]
+  {\Huge\bfseries\color{azul} PAUTA DE CORRECCIÓN}\\[0.35cm]
+  {\LARGE\bfseries Control 1}\\[0.2cm]
+  {\Large Forma C}\\[0.45cm]
+  {\color{azul}\rule{0.82\textwidth}{1.2pt}}
+\end{center}
+
+\vspace{1.15cm}
+
+\begin{tcolorbox}[colback=celeste,colframe=azul,arc=4pt,boxrule=0.9pt]
+\centering
+\begin{tabular}{rl}
+\textbf{Contenido:} & Números complejos\\
+\textbf{Duración del control:} & 50 minutos
+\end{tabular}
+\end{tcolorbox}
+
+\vfill
+\begin{center}
+  \small\color{gris}Pauta desarrollada para los dos ejercicios del Control 1, Forma C.
+\end{center}
+
+\newpage
+\small
+\setlength{\parskip}{2pt}
+\setlength{\abovedisplayskip}{4pt}
+\setlength{\belowdisplayskip}{4pt}
+\setlength{\abovedisplayshortskip}{3pt}
+\setlength{\belowdisplayshortskip}{3pt}
+
+\begin{enunciado}{Ejercicio 1}
+Sean \(z,w\in\mathbb{C}\) dados por
+\[
+ z=\frac{1-7i}{2+i},
+ \qquad
+ w=\frac{6+2i}{-i+2}.
+\]
+Determine el valor de
+\[
+ \R\!\left(3\overline z-2\overline w\right)+\Ima\!\left(z^3\right).
+\]
+\end{enunciado}
+
+\begin{desarrollo}{1. Expresar \(z\) y \(w\) en forma binómica}
+Racionalizamos cada denominador usando su conjugado:
+\[
+\begin{aligned}
+z
+&=\frac{1-7i}{2+i}\cdot\frac{2-i}{2-i}
+ =\frac{(1-7i)(2-i)}{(2+i)(2-i)}\\
+&=\frac{2-i-14i+7i^2}{2^2+1^2}
+ =\frac{-5-15i}{5}
+ =-1-3i.
+\end{aligned}
+\]
+\[
+\begin{aligned}
+w
+&=\frac{6+2i}{2-i}\cdot\frac{2+i}{2+i}
+ =\frac{(6+2i)(2+i)}{(2-i)(2+i)}\\
+&=\frac{12+6i+4i+2i^2}{2^2+1^2}
+ =\frac{10+10i}{5}
+ =2+2i.
+\end{aligned}
+\]
+\end{desarrollo}
+
+\begin{desarrollo}{2. Calcular la parte real solicitada}
+Como
+\[
+\overline z=-1+3i,
+\qquad
+\overline w=2-2i,
+\]
+se obtiene
+\[
+\begin{aligned}
+3\overline z-2\overline w
+&=3(-1+3i)-2(2-2i)\\
+&=(-3+9i)-(4-4i)\\
+&=-7+13i.
+\end{aligned}
+\]
+Por lo tanto,
+\[
+\R\!\left(3\overline z-2\overline w\right)=-7.
+\]
+\end{desarrollo}
+
+\begin{desarrollo}{3. Calcular la parte imaginaria de \(z^3\)}
+Primero,
+\[
+z^2=(-1-3i)^2=1+6i+9i^2=-8+6i.
+\]
+Luego,
+\[
+\begin{aligned}
+z^3
+&=(-8+6i)(-1-3i)\\
+&=8+24i-6i-18i^2\\
+&=26+18i.
+\end{aligned}
+\]
+En consecuencia,
+\[
+\Ima(z^3)=18.
+\]
+\end{desarrollo}
+
+\begin{respuesta}
+\textbf{Respuesta final.}
+\[
+\boxed{\R\!\left(3\overline z-2\overline w\right)+\Ima(z^3)
+=-7+18=11}
+\]
+\end{respuesta}
+
+\newpage
+
+\begin{enunciado}{Ejercicio 2}
+Sea \(z\in\mathbb{C}\) tal que
+\[
+z^2-2+4i\sqrt2=0.
+\]
+Determine los valores de \(\R(z)\) e \(\Ima(z)\).
+\end{enunciado}
+
+\begin{desarrollo}{1. Aislar el cuadrado y plantear la forma binómica}
+De la ecuación,
+\[
+z^2=2-4i\sqrt2.
+\]
+Sea \(z=a+bi\), con \(a,b\in\mathbb{R}\). Entonces
+\[
+z^2=(a+bi)^2=(a^2-b^2)+2ab\,i.
+\]
+Igualando partes real e imaginaria:
+\[
+\boxed{a^2-b^2=2},
+\qquad
+\boxed{2ab=-4\sqrt2},
+\]
+es decir, \(ab=-2\sqrt2\).
+\end{desarrollo}
+
+\begin{desarrollo}{2. Determinar \(a\) y \(b\)}
+El módulo de \(z^2\) satisface
+\[
+|z^2|=\left|2-4i\sqrt2\right|
+=\sqrt{2^2+\left(-4\sqrt2\right)^2}
+=\sqrt{4+32}=6.
+\]
+Pero \(|z^2|=|z|^2=a^2+b^2\); por tanto,
+\[
+a^2+b^2=6.
+\]
+Sumando esta igualdad con \(a^2-b^2=2\):
+\[
+2a^2=8
+\quad\Longrightarrow\quad
+a^2=4
+\quad\Longrightarrow\quad
+a=\pm2.
+\]
+Usamos \(ab=-2\sqrt2\):
+\[
+\begin{array}{c|c|c}
+a & b=-\dfrac{2\sqrt2}{a} & z=a+bi\\ \midrule
+2 & -\sqrt2 & 2-\sqrt2\,i\\
+-2 & \sqrt2 & -2+\sqrt2\,i
+\end{array}
+\]
+\end{desarrollo}
+
+\begin{desarrollo}{3. Comprobación algebraica}
+\[
+\begin{aligned}
+(2-\sqrt2\,i)^2
+&=4-4\sqrt2\,i+2i^2
+=2-4\sqrt2\,i,\\
+(-2+\sqrt2\,i)^2
+&=4-4\sqrt2\,i+2i^2
+=2-4\sqrt2\,i.
+\end{aligned}
+\]
+Ambos valores satisfacen la ecuación original.
+\end{desarrollo}
+
+\begin{respuesta}
+\textbf{Respuesta final.} Existen dos soluciones:
+\[
+\boxed{
+\begin{array}{c|cc}
+z & \R(z) & \Ima(z)\\ \midrule
+2-\sqrt2\,i & 2 & -\sqrt2\\
+-2+\sqrt2\,i & -2 & \sqrt2
+\end{array}}
+\]
+\end{respuesta}
+
+\end{document}

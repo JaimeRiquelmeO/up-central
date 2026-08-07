@@ -1,0 +1,195 @@
+\documentclass[letterpaper,12pt,twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
+
+\geometry{letterpaper,margin=1.7cm,top=3cm,bottom=2.5cm,headheight=42pt}
+\definecolor{celesteSuave}{HTML}{F0F7FF}
+\definecolor{azulFuerte}{HTML}{1A5276}
+\definecolor{verdeValida}{HTML}{277A53}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LO,LE]{\includegraphics[height=1.05cm]{images/logo_up.png}}
+\fancyhead[RO,RE]{\begin{minipage}[b]{0.42\textwidth}\raggedleft\small
+\textbf{\color{azulFuerte}Usach Premium}\\
+Álgebra 2026\\[-1mm]
+\textit{\color{gray}@usach.premium}
+\end{minipage}\hspace{2mm}\includegraphics[height=1.05cm]{images/logo_usach.png}}
+\fancyfoot[LO,LE]{\small\textit{``Por y para estudiantes''}}
+\fancyfoot[RO,RE]{\small Página \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancypagestyle{plain}{%
+  \fancyhf{}
+  \fancyhead[LO,LE]{\includegraphics[height=1.05cm]{images/logo_up.png}}
+  \fancyhead[RO,RE]{\begin{minipage}[b]{0.42\textwidth}\raggedleft\small
+    \textbf{\color{azulFuerte}Usach Premium}\\
+    Álgebra 2026\\[-1mm]
+    \textit{\color{gray}@usach.premium}
+  \end{minipage}\hspace{2mm}\includegraphics[height=1.05cm]{images/logo_usach.png}}
+  \fancyfoot[LO,LE]{\small\textit{``Por y para estudiantes''}}
+  \fancyfoot[RO,RE]{\small Página \thepage}
+  \renewcommand{\headrulewidth}{0.4pt}
+  \renewcommand{\footrulewidth}{0.4pt}
+}
+
+\newtcolorbox{theorybox}[1]{colback=white,colframe=azulFuerte,arc=5pt,boxrule=1pt,
+  title=\textbf{#1},breakable}
+\newtcolorbox{solutionbox}[1]{colback=celesteSuave,colframe=azulFuerte,arc=5pt,
+  boxrule=0.8pt,title=\textbf{#1},breakable}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\begin{center}
+\color{azulFuerte}
+{\huge\bfseries GUÍA DE EJERCICIOS}\\[5mm]
+{\Large\bfseries Guía 6 -- Sumatorias y propiedades}\\[5mm]
+{\Huge\bfseries Álgebra}\\[13mm]
+\begin{tcolorbox}[colback=celesteSuave,colframe=azulFuerte,arc=10pt,
+  width=0.85\textwidth,boxrule=1.5pt]
+\centering {\Large\bfseries Contenidos de la guía}\par\medskip
+\color{black}
+\begin{itemize}[leftmargin=2.6cm]
+  \item[$\color{azulFuerte}\Rightarrow$] Propiedades de las sumatorias.
+  \item[$\color{azulFuerte}\Rightarrow$] Sumatorias notables.
+  \item[$\color{azulFuerte}\Rightarrow$] Ejercicios propuestos.
+\end{itemize}
+\end{tcolorbox}
+\vfill
+{\Large\bfseries 1.er semestre de 2026}\\[10mm]
+{\large\bfseries Usach Premium}\\[12mm]
+\textit{``El fracaso no consiste en fallar, sino en no intentarlo.''}
+\end{center}
+
+\newpage
+\pagenumbering{arabic}
+\section*{Resumen teórico}
+
+\begin{theorybox}{1. Propiedades de las sumatorias}
+\begin{enumerate}[label=\arabic*.,itemsep=0.55em]
+  \item $\displaystyle \sum_{k=m}^{n}a_k=0$ cuando $m>n$ (convención de suma vacía).
+  \item $\displaystyle \sum_{k=m}^{n}c\,a_k=c\sum_{k=m}^{n}a_k$, si $c$ no depende de $k$.
+  \item $\displaystyle \sum_{k=m}^{n}c=c(n-m+1)$, para $m\le n$.
+  \item $\displaystyle \sum_{k=m}^{n}(a_k+b_k)=\sum_{k=m}^{n}a_k+\sum_{k=m}^{n}b_k$.
+  \item El índice es mudo: $\displaystyle \sum_{k=m}^{n}a_k=\sum_{j=m}^{n}a_j$.
+  \item Traslación: $\displaystyle \sum_{k=m}^{n}a_k=\sum_{k=m+r}^{n+r}a_{k-r}$.
+  \item Separación: $\displaystyle \sum_{k=m}^{n}a_k=\sum_{k=m}^{r}a_k+\sum_{k=r+1}^{n}a_k$, si $m\le r\le n$.
+  \item $\displaystyle \sum_{k=m}^{m}a_k=a_m$.
+  \item Telescópica: $\displaystyle \sum_{k=m}^{n}(a_{k+1}-a_k)=a_{n+1}-a_m$.
+\end{enumerate}
+\end{theorybox}
+
+\begin{theorybox}{2. Sumatorias notables}
+\begin{align*}
+\sum_{k=1}^{n}k&=\frac{n(n+1)}2,&
+\sum_{k=1}^{n}k^2&=\frac{n(n+1)(2n+1)}6,\\
+\sum_{k=1}^{n}k^3&=\left(\frac{n(n+1)}2\right)^2,&
+\sum_{k=1}^{n}ar^{k-1}&=a\frac{1-r^n}{1-r}\quad(r\ne1).
+\end{align*}
+\end{theorybox}
+
+\newpage
+\section*{I. Ejercicios propuestos}
+\begin{enumerate}[label=\textbf{\arabic*)},leftmargin=*,itemsep=1.1em]
+\item Si $\sum_{i=1}^{10}x_i^2=196$, $\sum_{i=1}^{10}(2x_i-3)^2=1130$,
+$x_8=x_9=-3$ y $x_{10}=5$, determine $\displaystyle\sum_{i=1}^{7}x_i$.
+
+\item Determine $b\in\R$ tal que
+\[\sum_{k=2}^{8}\frac{2b-4}{(5k-9)(5k+1)}=\frac{329}{1476}.\]
+
+\item Encuentre los $p<0$ para los cuales
+\[\sum_{k=2}^{p+2}\frac{k-2p}{2}=\sum_{k=4}^{p+4}(3p+1).\]
+\textit{Nota de dominio:} los límites de una sumatoria finita deben ser enteros; por ello se entiende $p\in\Z$.
+
+\item Determine $n\in\N$ tal que
+\[\sum_{k=n-1}^{2n-2}\left(\frac{k}{3}+\frac12\right)
+=\sum_{k=3}^{11}\frac{115}{8k^2-2}.\]
+
+\item Calcule $\displaystyle S=\sum_{i=10}^{40}i(i+1)^2$.
+
+\item Sea
+\[a_k=\begin{cases}(1/3)^k,&1\le k<100,\\(k+1)^2,&100\le k\le200.
+\end{cases}\]
+Calcule $\displaystyle S=\sum_{k=1}^{200}a_k$.
+
+\item Demuestre que
+\[\sum_{i=1}^{n}(3i-2)=\frac{n(3n-1)}2\qquad(n\in\N).\]
+
+\item Demuestre que
+\[\sum_{i=0}^{n}a^i=\frac{a^{n+1}-1}{a-1}\qquad(a\ne1),\]
+y úselo para calcular $\displaystyle S=\sum_{i=1}^{100}(1/2)^i$.
+
+\item Considere
+\[a_n=\begin{cases}n^2+2n,&1\le n\le8,\\
+\sqrt[3]{3n}-\sqrt[3]{3n+3},&n\ge9.
+\end{cases}\]
+Determine $\displaystyle\sum_{k=2}^{71}a_k$.
+
+\item Determine los valores admisibles de $c$ en
+\[\sum_{k=1}^{20}(k^2-10)-\sum_{k=1}^{c}(k+9)=2610.\]
+\textit{Nota de dominio:} se entiende $c\in\N_0$, pues es el límite superior de una suma finita.
+
+\item Si $\displaystyle\sum_{k=1}^{n}a_k=2n^2+3n$, calcule
+$\displaystyle\sum_{k=7}^{20}\frac{a_k-5}{2}$.
+
+\item Si
+\[\sum_{k=1}^{8}a_k=120,\qquad \sum_{k=1}^{8}a_k^2=160,
+\qquad a_9=6,\qquad a_{10}=8,\]
+calcule:
+\begin{enumerate}[label=\roman*),itemsep=0.25em]
+  \item $\displaystyle\sum_{k=1}^{10}a_k^2$;
+  \item $\displaystyle\sum_{k=1}^{9}a_k(a_k-2)$;
+  \item $\displaystyle\sum_{k=1}^{10}(a_k-1)^2-\sum_{k=1}^{8}(a_k-1)^2$.
+\end{enumerate}
+
+\item Calcule $\displaystyle\sum_{k=16}^{80}\frac1{\sqrt{k}+\sqrt{k+1}}$.
+\end{enumerate}
+
+\clearpage
+\thispagestyle{fancy}
+\vspace*{0.2cm}
+\begin{center}
+\begin{tcolorbox}[colback=azulFuerte,colframe=azulFuerte,colupper=white,
+  width=0.8\textwidth,arc=10pt]
+\centering\Large\bfseries SOLUCIONARIO
+\end{tcolorbox}
+\end{center}
+
+\begin{solutionbox}{I. Respuestas}
+\begin{enumerate}[label=\color{azulFuerte}\bfseries\arabic*),leftmargin=*,itemsep=0.55em]
+  \item $\displaystyle -\frac{61}{3}$
+  \item $b=3$
+  \item $p\in\Z_{<0}$
+  \item $n=3$
+  \item $S=714860$
+  \item $\displaystyle S=\frac12\left[1-\left(\frac13\right)^{99}\right]+2388751$
+  \item[8)] $\displaystyle S=1-\left(\frac12\right)^{100}$
+  \item[9)] $270$
+  \item[10)] $c=5$
+  \item[11)] $350$
+  \item[12)] i) $260$\quad ii) $-56$\quad iii) $74$
+  \item[13)] $5$
+  \item[Nota:] Los ejercicios 7 y 8 incluyen demostraciones en sus enunciados.
+\end{enumerate}
+\end{solutionbox}
+
+\begin{center}
+\small\textbf{Usach Premium} -- ¡Nos vemos en la ayudantía!\\
+\textit{``Por y para estudiantes.''}
+\end{center}
+\thispagestyle{fancy}
+
+\end{document}

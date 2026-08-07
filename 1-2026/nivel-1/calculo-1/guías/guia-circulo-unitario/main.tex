@@ -1,0 +1,830 @@
+% ============================================================
+%  GUÍA COMPLEMENTARIA - CÍRCULO UNITARIO E IDENTIDADES
+%  Cálculo I - Usach Premium
+%
+%  Calibración:
+%  - Plantilla institucional definida en template/ESTILOS.md.
+%  - Progresión desde valores notables hasta identidades,
+%    ecuaciones y aplicaciones.
+% ============================================================
+
+\documentclass[letterpaper,12pt]{article}
+
+% ============================================================
+% PAQUETES
+% ============================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{eso-pic}
+\makeatletter
+\providecommand{\IfPDFManagementActiveF}[1]{#1}
+\makeatother
+\usepackage{transparent}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,babel,calc,patterns,shadows.blur}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usepackage{needspace}
+\tcbuselibrary{skins,breakable}
+
+% ============================================================
+% GEOMETRÍA Y COLORES
+% ============================================================
+\geometry{letterpaper,margin=1.5cm,top=3cm,bottom=2.5cm,headheight=2cm}
+
+\definecolor{celesteSuave}{HTML}{F0F7FF}
+\definecolor{azulFuerte}{HTML}{1A5276}
+\definecolor{azulMedio}{HTML}{2980B9}
+\definecolor{turquesaUsach}{HTML}{33CCCC}
+\definecolor{enlace}{HTML}{1A5276}
+\definecolor{grisTexto}{HTML}{4D5656}
+\definecolor{verdeClave}{HTML}{1E8449}
+
+% ============================================================
+% INFORMACIÓN DE LA GUÍA
+% ============================================================
+\newcommand{\logoup}{../../../../../template/images/logo_up.png}
+\newcommand{\logousach}{../../../../../template/images/logo_usach.png}
+\newcommand{\logofondo}{../../../../../template/images/logo_up.png}
+
+\newcommand{\institucion}{Usach Premium}
+\newcommand{\curso}{Cálculo I}
+\newcommand{\guiasnumero}{Guía complementaria - Círculo unitario}
+\newcommand{\semestre}{1er. Semestre de 2026}
+\newcommand{\preparadopor}{Usach Premium.}
+\newcommand{\webinstitucion}{www.usachpremium.cl}
+\newcommand{\instagraminstitucion}{https://www.instagram.com/usach.premium}
+\newcommand{\transparencia}{0.045}
+\newcommand{\fraseportada}{"Por y para estudiantes"}
+
+\newcommand{\seno}{\operatorname{sen}}
+\newcommand{\R}{\mathbb{R}}
+
+\newcommand{\listacontenidos}{%
+    \item[\color{azulFuerte}$\Rightarrow$] Círculo unitario y valores exactos
+    \item[\color{azulFuerte}$\Rightarrow$] Identidades pitagóricas
+    \item[\color{azulFuerte}$\Rightarrow$] Ecuaciones trigonométricas base
+    \item[\color{azulFuerte}$\Rightarrow$] Ejercicios progresivos y desafíos
+}
+
+% ============================================================
+% HIPERVÍNCULOS, ENCABEZADO Y PIE
+% ============================================================
+\hypersetup{
+    colorlinks=true,
+    linkcolor=enlace,
+    urlcolor=enlace,
+    citecolor=enlace,
+    pdfborder={0 0 0},
+    pdftitle={Guía complementaria - Círculo unitario e identidades},
+    pdfauthor={Usach Premium}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\includegraphics[height=1.2cm]{\logoup}}
+\fancyhead[R]{%
+    \begin{minipage}[b]{0.47\textwidth}
+        \raggedleft
+        \fontsize{9pt}{11pt}\selectfont
+        \textbf{\color{azulFuerte}\institucion}\\
+        \curso\ - Círculo unitario\\
+        \textit{\color{gray}@usach.premium}
+    \end{minipage}\hspace{0.1cm}%
+    \includegraphics[height=1.2cm]{\logousach}%
+}
+\fancyfoot[L]{\fontsize{9pt}{11pt}\selectfont\textit{\fraseportada}}
+\fancyfoot[R]{\fontsize{9pt}{11pt}\selectfont Página \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\fancypagestyle{plain}{%
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+
+% ============================================================
+% MARCA DE AGUA Y CAJAS
+% ============================================================
+\newcommand{\MarcaAgua}{%
+    \AddToShipoutPicture{%
+        \AtPageCenter{%
+            \makebox(0,0){%
+                \transparent{\transparencia}%
+                \includegraphics[width=0.7\textwidth]{\logofondo}%
+            }%
+        }%
+    }%
+}
+
+\newtcolorbox{teoriabox}[1]{%
+    colback=celesteSuave,
+    colframe=azulFuerte,
+    colbacktitle=azulFuerte,
+    coltitle=white,
+    title=\textbf{#1},
+    fonttitle=\bfseries,
+    arc=7pt,
+    boxrule=1pt,
+    enhanced,
+    breakable
+}
+
+\newtcolorbox{recordatoriobox}[1]{%
+    colback=white,
+    colframe=azulMedio,
+    title=\textbf{#1},
+    fonttitle=\bfseries,
+    arc=5pt,
+    boxrule=0.9pt
+}
+
+\newtcolorbox{desafiointegradorbox}[1]{%
+    colback=white,
+    colframe=azulFuerte,
+    colbacktitle=azulFuerte,
+    coltitle=white,
+    title=\textbf{#1},
+    fonttitle=\bfseries,
+    arc=8pt,
+    boxrule=1.2pt,
+    enhanced,
+    drop shadow={black!7},
+    breakable
+}
+
+\newtcolorbox{solbox}[1]{%
+    colback=celesteSuave,
+    colframe=azulFuerte,
+    title=\textbf{#1},
+    fonttitle=\bfseries,
+    arc=5pt,
+    boxrule=0.9pt,
+    breakable
+}
+
+\newcommand{\tituloSeccion}[1]{%
+    \needspace{4\baselineskip}
+    \subsection*{\color{azulFuerte}#1}
+}
+
+\setlist[enumerate]{itemsep=0.35em,topsep=0.35em}
+
+% ============================================================
+\begin{document}
+\hypersetup{pageanchor=false}
+\thispagestyle{plain}
+
+% ============================================================
+% PORTADA
+% ============================================================
+\AddToShipoutPicture*{%
+    \put(54,700){\includegraphics[width=2cm]{\logoup}}
+    \put(420,706){\includegraphics[width=5cm]{\logousach}}
+}
+
+\vspace*{0.5cm}
+
+\begin{center}
+    \color{azulFuerte}
+    {\huge\textbf{GUÍA DE EJERCICIOS}}\\[0.5cm]
+    {\Huge\textbf{\curso}}\\[0.3cm]
+    {\Large\guiasnumero}\\[1.5cm]
+
+    \begin{tcolorbox}[
+        colback=celesteSuave,
+        colframe=azulFuerte,
+        arc=10pt,
+        width=0.85\textwidth,
+        center,
+        boxrule=1.5pt]
+        \centering
+        \vspace{0.2cm}
+        {\Large\textbf{Contenidos}}
+        \vspace{0.3cm}
+        \color{black}
+        \begin{itemize}[leftmargin=2.6cm,itemsep=0.35cm]
+            \listacontenidos
+        \end{itemize}
+        \vspace{0.2cm}
+    \end{tcolorbox}
+\end{center}
+
+\vspace{1.5cm}
+
+\begin{center}
+    {\Large\textbf{\semestre}}\\[0.8cm]
+    {\large\textbf{\preparadopor}}\\[1.2cm]
+    \textit{\color{grisTexto}La idea no es memorizar una vuelta: es aprender a leerla.}
+\end{center}
+
+\vfill
+
+\begin{center}
+    {\color{azulFuerte}\hrule height 0.5pt}
+    \vspace{0.3cm}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \textbf{Instagram:}\\
+        \small\href{\instagraminstitucion}{@usach.premium}
+    \end{minipage}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \textbf{Web:}\\
+        \small\href{http://\webinstitucion}{\webinstitucion}
+    \end{minipage}
+\end{center}
+
+\clearpage
+\pagenumbering{arabic}
+\hypersetup{pageanchor=true}
+\MarcaAgua
+
+% ============================================================
+% TEORÍA BREVE
+% ============================================================
+\section*{\color{azulFuerte}El círculo unitario, en breve}
+
+\begin{teoriabox}{LA IDEA, SIN PALABRAS COMPLICADAS}
+\begin{minipage}[c]{0.56\textwidth}
+\raggedright
+\begin{enumerate}[leftmargin=*,label=\color{azulFuerte}\bfseries\arabic*.,itemsep=0.45em]
+    \item Imagina una rueda de radio \(1\), con su centro en el punto \((0,0)\).
+    \item Empezamos en el punto de la derecha, \((1,0)\), y giramos el ángulo \(\theta\).
+    \item Al detenernos llegamos a un punto:
+    \[
+        P(\theta)=(\cos\theta,\seno\theta).
+    \]
+    El coseno indica si estamos a la derecha o a la izquierda; el seno, si estamos arriba o abajo.
+    \item Los mismos números se repiten alrededor del círculo. Según dónde quede el punto, pueden ser positivos o negativos.
+    \item Una vuelta completa son \(360^\circ\). En radianes, esa misma vuelta se escribe \(2\pi\).
+\end{enumerate}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.39\textwidth}
+\centering
+\begin{tikzpicture}[scale=2.25,>=Latex]
+    \draw[->,gray!70] (-1.25,0)--(1.28,0) node[right] {\scriptsize \(x\)};
+    \draw[->,gray!70] (0,-1.25)--(0,1.28) node[above] {\scriptsize \(y\)};
+    \draw[azulFuerte,line width=1.1pt] (0,0) circle (1);
+    \coordinate (P) at (40:1);
+    \draw[azulMedio,line width=1.1pt,->] (0,0)--(P);
+    \draw[dashed,gray] (P)--({cos(40)},0);
+    \draw[dashed,gray] (P)--(0,{sin(40)});
+    \fill[azulFuerte] (P) circle (0.025);
+    \draw[azulMedio,->] (0.3,0) arc[start angle=0,end angle=40,radius=0.3];
+    \node[azulFuerte] at (0.37,0.12) {\scriptsize \(\theta\)};
+    \node[above right,align=left] at (P) {\scriptsize \(P(\theta)\)\\[-1mm]\scriptsize \((\cos\theta,\seno\theta)\)};
+    \node[below] at ({cos(40)},0) {\scriptsize \(\cos\theta\)};
+    \node[left] at (0,{sin(40)}) {\scriptsize \(\seno\theta\)};
+    \node[gray] at (0.55,0.72) {\tiny I};
+    \node[gray] at (-0.55,0.72) {\tiny II};
+    \node[gray] at (-0.55,-0.72) {\tiny III};
+    \node[gray] at (0.55,-0.72) {\tiny IV};
+\end{tikzpicture}
+\end{minipage}
+\end{teoriabox}
+
+\begin{recordatoriobox}{CÓMO LEER CUALQUIER ÁNGULO}
+\begin{enumerate}[label=\color{azulFuerte}\bfseries\arabic*.,leftmargin=*,itemsep=0.25em]
+    \item Si el ángulo da más de una vuelta, quita vueltas completas hasta quedarte con una sola.
+    \item Mira el ángulo pequeño que queda entre la línea y la horizontal. Ese es el \textbf{ángulo de referencia}.
+    \item Mira dónde quedó el punto: derecha o izquierda para el coseno; arriba o abajo para el seno.
+\end{enumerate}
+\end{recordatoriobox}
+
+\begin{teoriabox}{LOS CINCO ÁNGULOS QUE CONVIENE CONOCER}
+\centering
+\renewcommand{\arraystretch}{1.45}
+\small
+\begin{tabular}{>{\columncolor{azulFuerte}\color{white}\bfseries}c|ccccc}
+\rowcolor{azulFuerte}
+\color{white}\(\theta\) &
+\color{white}\(0\) &
+\color{white}\(\frac{\pi}{6}\) &
+\color{white}\(\frac{\pi}{4}\) &
+\color{white}\(\frac{\pi}{3}\) &
+\color{white}\(\frac{\pi}{2}\)\\
+\(\seno\theta\) & \(0\) & \(\frac12\) & \(\frac{\sqrt2}{2}\) & \(\frac{\sqrt3}{2}\) & \(1\)\\
+\(\cos\theta\) & \(1\) & \(\frac{\sqrt3}{2}\) & \(\frac{\sqrt2}{2}\) & \(\frac12\) & \(0\)\\
+\(\tan\theta\) & \(0\) & \(\frac{\sqrt3}{3}\) & \(1\) & \(\sqrt3\) & no existe\\
+\end{tabular}
+\end{teoriabox}
+
+\begin{minipage}[t]{0.47\textwidth}
+\begin{recordatoriobox}{¿POSITIVO O NEGATIVO?}
+\centering
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{c|ccc}
+\textbf{Cuadrante} & \(\seno\) & \(\cos\) & \(\tan\)\\ \hline
+I   & \(+\) & \(+\) & \(+\)\\
+II  & \(+\) & \(-\) & \(-\)\\
+III & \(-\) & \(-\) & \(+\)\\
+IV  & \(-\) & \(+\) & \(-\)\\
+\end{tabular}
+\end{recordatoriobox}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.50\textwidth}
+\begin{recordatoriobox}{GRADOS Y RADIANES}
+\[
+    180^\circ=\pi\ \text{rad}
+\]
+\[
+    \theta_{\mathrm{rad}}=\theta_{\mathrm{gra}}\frac{\pi}{180},
+    \qquad
+    \theta_{\mathrm{gra}}=\theta_{\mathrm{rad}}\frac{180}{\pi}.
+\]
+\end{recordatoriobox}
+\end{minipage}
+
+\begin{teoriabox}{FÓRMULAS QUE VAMOS A USAR}
+\begin{multicols}{2}
+\[
+\boxed{\seno^2x+\cos^2x=1}
+\]
+\[
+\boxed{1+\tan^2x=\sec^2x}
+\]
+\[
+\boxed{1+\cot^2x=\csc^2x}
+\]
+\columnbreak
+\[
+\tan x=\frac{\seno x}{\cos x},
+\qquad
+\cot x=\frac{\cos x}{\seno x}
+\]
+\[
+\sec x=\frac{1}{\cos x},
+\qquad
+\csc x=\frac{1}{\seno x}
+\]
+\end{multicols}
+\vspace{-0.3cm}
+\textbf{Para resolver una ecuación:} deja el seno, coseno o tangente solo; busca el valor en la tabla; marca todas las posiciones posibles en el círculo y conserva los ángulos que pide el ejercicio.
+\end{teoriabox}
+
+% ============================================================
+% EJERCICIOS
+% ============================================================
+\section*{\color{azulFuerte}Entrenamiento progresivo}
+
+\tituloSeccion{I. Orientarse en la vuelta}
+\begin{enumerate}[label=\color{azulFuerte}\textbf{\arabic*.},leftmargin=*]
+    \item Convierta a radianes:
+    \[
+        30^\circ,\qquad 135^\circ,\qquad 225^\circ,\qquad 330^\circ.
+    \]
+    \item Convierta a grados:
+    \[
+        \frac{2\pi}{3},\qquad \frac{5\pi}{4},\qquad \frac{11\pi}{6},\qquad -\frac{\pi}{3}.
+    \]
+    \item Encuentre el ángulo coterminal que pertenece a \([0,2\pi)\):
+    \[
+        \frac{13\pi}{6},\qquad -\frac{3\pi}{4},\qquad \frac{17\pi}{3},\qquad -\frac{5\pi}{2}.
+    \]
+    \item Indique el cuadrante y el ángulo de referencia:
+    \[
+        \frac{5\pi}{6},\qquad \frac{7\pi}{4},\qquad \frac{4\pi}{3},\qquad \frac{11\pi}{6}.
+    \]
+    \item Escriba las coordenadas \(P(\theta)=(\cos\theta,\seno\theta)\) para
+    \[
+        \theta=0,\qquad \frac{\pi}{2},\qquad \pi,\qquad \frac{3\pi}{2}.
+    \]
+    \item Indique solamente los signos de \(\seno\theta\), \(\cos\theta\) y \(\tan\theta\) si
+    \[
+        \theta=\frac{2\pi}{3},\qquad \frac{5\pi}{4},\qquad \frac{11\pi}{6}.
+    \]
+\end{enumerate}
+
+\tituloSeccion{II. Leer valores exactos}
+\begin{multicols}{2}
+\begin{enumerate}[label=\color{azulFuerte}\textbf{\arabic*.},leftmargin=*,start=7]
+    \item \(\seno\left(\frac{5\pi}{6}\right)\)
+    \item \(\cos\left(\frac{7\pi}{4}\right)\)
+    \item \(\tan\left(\frac{4\pi}{3}\right)\)
+    \item \(\sec\left(\frac{2\pi}{3}\right)\)
+    \item \(\csc\left(\frac{5\pi}{4}\right)\)
+    \item Calcule:
+    \[
+    \seno\left(-\frac{\pi}{3}\right),\
+    \cos\left(\frac{13\pi}{6}\right),\
+    \tan\left(\frac{3\pi}{4}\right).
+    \]
+    \item Indique cuáles no existen:
+    \[
+    \tan\left(\frac{\pi}{2}\right),\
+    \csc(\pi),\
+    \sec\left(\frac{3\pi}{2}\right).
+    \]
+    \item Si \(P=(-12/13,5/13)\), indique el cuadrante y calcule las seis razones trigonométricas.
+\end{enumerate}
+\end{multicols}
+
+\tituloSeccion{III. Usar identidades pitagóricas}
+\begin{enumerate}[label=\color{azulFuerte}\textbf{\arabic*.},leftmargin=*,start=15]
+    \item Si \(\seno\theta=-\frac35\) y \(\theta\) está en el IV cuadrante, calcule \(\cos\theta\) y \(\tan\theta\).
+    \item Si \(\cos\theta=-\frac5{13}\) y \(\theta\) está en el III cuadrante, calcule \(\seno\theta\) y \(\tan\theta\).
+    \item Si \(\tan\theta=-\frac8{15}\) y \(\theta\) está en el II cuadrante, calcule \(\seno\theta\) y \(\cos\theta\).
+    \item Simplifique:
+    \begin{multicols}{2}
+    \begin{enumerate}[label=\alph*),leftmargin=*]
+        \item \(\displaystyle\frac{1-\seno^2x}{\cos x}\)
+        \item \(\displaystyle\frac{\sec^2x-1}{\tan x}\)
+        \item \(\displaystyle(1-\cos^2x)\csc x\)
+        \item \(\displaystyle\cos^2x(1+\tan^2x)\)
+    \end{enumerate}
+    \end{multicols}
+    \item Demuestre que
+    \[
+        \tan x+\cot x=\sec x\,\csc x.
+    \]
+    \item Simplifique e indique las restricciones:
+    \[
+        \frac{1}{1+\seno x}+\frac{1}{1-\seno x}.
+    \]
+\end{enumerate}
+
+\tituloSeccion{IV. Ecuaciones base}
+\noindent En los ejercicios 21 al 30, resuelva en \(x\in[0,2\pi)\).
+
+\begin{multicols}{2}
+\begin{enumerate}[label=\color{azulFuerte}\textbf{\arabic*.},leftmargin=*,start=21,itemsep=0.65em]
+    \item \(\seno x=\frac12\)
+    \item \(\cos x=-\frac{\sqrt2}{2}\)
+    \item \(\tan x=-\sqrt3\)
+    \item
+    \begin{enumerate}[label=\alph*),leftmargin=*]
+        \item \(2\seno x+1=0\)
+        \item \(2\cos x=\sqrt3\)
+    \end{enumerate}
+    \item \(4\seno^2x=3\)
+    \item \(\tan^2x=1\)
+    \item \(\seno x\cos x=0\)
+    \item \(\seno^2x-\cos x=1\)
+    \item \(2\seno^2x+3\cos x=3\)
+    \item \(\sec^2x=4\)
+\end{enumerate}
+\end{multicols}
+
+\tituloSeccion{V. Desafíos integradores}
+\noindent En esta sección se combinan identidades, valores exactos y aplicaciones con ángulos notables.
+
+\begin{desafiointegradorbox}{31. IDENTIDAD CON ÁNGULO AGUDO}
+Sea \(\alpha\) un ángulo agudo tal que
+\[
+    \tan\alpha=2-\sec\alpha.
+\]
+Determine el valor exacto de \(\cos\alpha\).
+\end{desafiointegradorbox}
+
+\begin{desafiointegradorbox}{32. IDENTIDAD PITAGÓRICA Y ECUACIÓN}
+Sea \(\alpha\) un ángulo agudo tal que
+\[
+    \frac{1}{\csc\alpha}=\frac{1+\cos\alpha}{2}.
+\]
+Determine el valor exacto de \(\seno\alpha\).
+\end{desafiointegradorbox}
+
+\begin{desafiointegradorbox}{33. SUMA DE ÁNGULOS}
+Calcule el valor exacto de \(\seno(105^\circ)\) usando \(105^\circ=60^\circ+45^\circ\).
+\end{desafiointegradorbox}
+
+\begin{desafiointegradorbox}{34. CABLE TENSOR}
+Una torre vertical de \(10\) m está instalada sobre una ladera. En el triángulo formado por la torre, el suelo y un cable tensor \(d\), el lado de \(10\) m está opuesto a \(30^\circ\) y el cable está opuesto a \(105^\circ\). Use la ley de senos y determine \(d\).
+\end{desafiointegradorbox}
+
+\begin{desafiointegradorbox}{35. AVIÓN Y DOS ÁNGULOS DE ELEVACIÓN}
+Un avión se observa desde la base y desde la azotea de un edificio de \(20\) m. Los ángulos de elevación son \(60^\circ\) desde la base y \(45^\circ\) desde la azotea. Determine la altura del avión respecto del suelo.
+\end{desafiointegradorbox}
+
+\begin{desafiointegradorbox}{36. CAMBIO DE POSICIÓN}
+Una persona observa la cima de una torre de \(50\) m con un ángulo de elevación de \(30^\circ\). Luego avanza en línea recta hacia la torre hasta observarla con un ángulo de \(60^\circ\). ¿Cuántos metros avanzó?
+\end{desafiointegradorbox}
+
+\begin{desafiointegradorbox}{37. ÁNGULO DOBLE DESDE UN PUNTO DEL CÍRCULO}
+Si \(\alpha\) está en el II cuadrante y \(\cos\alpha=-\frac{12}{13}\), calcule
+\[
+    \seno(2\alpha)
+    \qquad\text{y}\qquad
+    \cos(2\alpha).
+\]
+\end{desafiointegradorbox}
+
+\begin{desafiointegradorbox}{38. DESAFÍO DE CIERRE}
+Resuelva en \(x\in[0,2\pi)\):
+\[
+    \frac{1}{1+\seno x}+\frac{1}{1-\seno x}=4.
+\]
+\end{desafiointegradorbox}
+
+\begin{teoriabox}{AUTOEVALUACIÓN: RECONSTRUYE LA VUELTA}
+\small
+Sin mirar la tabla, rotule cada semirrecta con su ángulo en radianes. Luego escriba junto a cada punto sus coordenadas \((\cos\theta,\seno\theta)\).
+
+\begin{center}
+\begin{tikzpicture}[scale=3.15]
+    \draw[->,gray!70] (-1.3,0)--(1.3,0) node[right] {\scriptsize \(x\)};
+    \draw[->,gray!70] (0,-1.3)--(0,1.3) node[above] {\scriptsize \(y\)};
+    \draw[azulFuerte,line width=1.1pt] (0,0) circle (1);
+    \foreach \a in {0,30,45,60,90,120,135,150,180,210,225,240,270,300,315,330}{
+        \draw[gray!45,thin] (0,0)--(\a:1);
+        \filldraw[fill=white,draw=azulMedio,line width=0.6pt] (\a:1) circle (0.018);
+    }
+    \node[gray!70] at (0.55,0.72) {\scriptsize I};
+    \node[gray!70] at (-0.55,0.72) {\scriptsize II};
+    \node[gray!70] at (-0.55,-0.72) {\scriptsize III};
+    \node[gray!70] at (0.55,-0.72) {\scriptsize IV};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Chequeo final:}\quad
+\(\seno^2\theta+\cos^2\theta=\rule{1.2cm}{0.4pt}\),\qquad
+\(P(\theta)=\bigl(\rule{1.5cm}{0.4pt},\rule{1.5cm}{0.4pt}\bigr)\).
+\end{teoriabox}
+
+% ============================================================
+% SOLUCIONARIO
+% ============================================================
+\clearpage
+\begin{center}
+    \begin{tcolorbox}[
+        colback=azulFuerte,
+        colframe=azulFuerte,
+        colupper=white,
+        width=0.8\textwidth,
+        center,
+        arc=10pt]
+        \centering\Large\textbf{SOLUCIONARIO}
+    \end{tcolorbox}
+\end{center}
+
+\begin{solbox}{I. Orientarse en la vuelta}
+\begin{enumerate}[label=\color{azulFuerte}\textbf{\arabic*.},leftmargin=*]
+    \item \(\displaystyle \frac{\pi}{6},\ \frac{3\pi}{4},\ \frac{5\pi}{4},\ \frac{11\pi}{6}\).
+    \item \(\displaystyle 120^\circ,\ 225^\circ,\ 330^\circ,\ -60^\circ\).
+    \item \(\displaystyle \frac{\pi}{6},\ \frac{5\pi}{4},\ \frac{5\pi}{3},\ \frac{3\pi}{2}\).
+    \item II y \(\pi/6\); IV y \(\pi/4\); III y \(\pi/3\); IV y \(\pi/6\).
+    \item \((1,0),\ (0,1),\ (-1,0),\ (0,-1)\).
+    \item II: \((+,-,-)\); III: \((-,-,+)\); IV: \((-,+,-)\), en el orden \((\seno,\cos,\tan)\).
+\end{enumerate}
+\end{solbox}
+
+\begin{solbox}{II. Leer valores exactos}
+\begin{multicols}{2}
+\begin{enumerate}[label=\color{azulFuerte}\textbf{\arabic*.},leftmargin=*,start=7]
+    \item \(\frac12\).
+    \item \(\frac{\sqrt2}{2}\).
+    \item \(\sqrt3\).
+    \item \(-2\).
+    \item \(-\sqrt2\).
+    \item \(\displaystyle-\frac{\sqrt3}{2},\ \frac{\sqrt3}{2},\ -1\).
+    \item Las tres expresiones no existen.
+    \item Cuadrante II:
+    \[
+    \seno=\frac5{13},\quad
+    \cos=-\frac{12}{13},\quad
+    \tan=-\frac5{12},
+    \]
+    \[
+    \csc=\frac{13}{5},\quad
+    \sec=-\frac{13}{12},\quad
+    \cot=-\frac{12}{5}.
+    \]
+\end{enumerate}
+\end{multicols}
+\end{solbox}
+
+\begin{solbox}{III. Usar identidades pitagóricas}
+\begin{enumerate}[label=\color{azulFuerte}\textbf{\arabic*.},leftmargin=*,start=15]
+    \item
+    \[
+    \cos^2\theta=1-\frac9{25}=\frac{16}{25}.
+    \]
+    Como \(\theta\) está en IV, \(\cos\theta>0\). Así,
+    \[
+        \cos\theta=\frac45,\qquad \tan\theta=-\frac34.
+    \]
+
+    \item
+    \[
+    \seno^2\theta=1-\frac{25}{169}=\frac{144}{169}.
+    \]
+    En III, seno y coseno son negativos:
+    \[
+        \seno\theta=-\frac{12}{13},\qquad \tan\theta=\frac{12}{5}.
+    \]
+
+    \item Un triángulo de referencia con catetos \(8\) y \(15\) tiene hipotenusa \(17\). En II:
+    \[
+        \seno\theta=\frac8{17},\qquad \cos\theta=-\frac{15}{17}.
+    \]
+
+    \item
+    \begin{multicols}{2}
+    \begin{enumerate}[label=\alph*),leftmargin=*]
+        \item \(\cos x\).
+        \item \(\tan x\).
+        \item \(\seno x\).
+        \item \(1\).
+    \end{enumerate}
+    \end{multicols}
+
+    \item
+    \[
+    \tan x+\cot x
+    =\frac{\seno x}{\cos x}+\frac{\cos x}{\seno x}
+    =\frac{\seno^2x+\cos^2x}{\seno x\cos x}
+    =\frac1{\seno x\cos x}
+    =\sec x\,\csc x.
+    \]
+
+    \item
+    \[
+    \frac{1}{1+\seno x}+\frac{1}{1-\seno x}
+    =\frac{2}{1-\seno^2x}
+    =\frac{2}{\cos^2x}
+    =2\sec^2x.
+    \]
+    Restricciones: \(\seno x\neq\pm1\), equivalentes a \(\cos x\neq0\).
+\end{enumerate}
+\end{solbox}
+
+\begin{solbox}{IV. Ecuaciones base}
+\begin{enumerate}[label=\color{azulFuerte}\textbf{\arabic*.},leftmargin=*,start=21]
+    \item \(\displaystyle x\in\left\{\frac{\pi}{6},\frac{5\pi}{6}\right\}\).
+    \item \(\displaystyle x\in\left\{\frac{3\pi}{4},\frac{5\pi}{4}\right\}\).
+    \item \(\displaystyle x\in\left\{\frac{2\pi}{3},\frac{5\pi}{3}\right\}\).
+    \item
+    \begin{enumerate}[label=\alph*),leftmargin=*]
+        \item \(\displaystyle x\in\left\{\frac{7\pi}{6},\frac{11\pi}{6}\right\}\).
+        \item \(\displaystyle x\in\left\{\frac{\pi}{6},\frac{11\pi}{6}\right\}\).
+    \end{enumerate}
+    \item \(\displaystyle x\in\left\{\frac{\pi}{3},\frac{2\pi}{3},\frac{4\pi}{3},\frac{5\pi}{3}\right\}\).
+    \item \(\displaystyle x\in\left\{\frac{\pi}{4},\frac{3\pi}{4},\frac{5\pi}{4},\frac{7\pi}{4}\right\}\).
+    \item \(\displaystyle x\in\left\{0,\frac{\pi}{2},\pi,\frac{3\pi}{2}\right\}\).
+    \item Use \(\seno^2x=1-\cos^2x\):
+    \[
+        1-\cos^2x-\cos x=1
+        \iff \cos x(\cos x+1)=0.
+    \]
+    Por tanto,
+    \[
+        x\in\left\{\frac{\pi}{2},\pi,\frac{3\pi}{2}\right\}.
+    \]
+    \item
+    \[
+    2(1-\cos^2x)+3\cos x=3
+    \iff 2\cos^2x-3\cos x+1=0.
+    \]
+    Como \((2\cos x-1)(\cos x-1)=0\),
+    \[
+        x\in\left\{0,\frac{\pi}{3},\frac{5\pi}{3}\right\}.
+    \]
+    \item \(\sec^2x=4\iff\cos x=\pm\frac12\). Entonces,
+    \[
+        x\in\left\{\frac{\pi}{3},\frac{2\pi}{3},\frac{4\pi}{3},\frac{5\pi}{3}\right\}.
+    \]
+\end{enumerate}
+\end{solbox}
+
+\begin{solbox}{V. Desafíos integradores}
+\begin{enumerate}[label=\color{azulFuerte}\textbf{\arabic*.},leftmargin=*,start=31,itemsep=1em]
+    \item Como \(\alpha\) es agudo, \(\seno\alpha>0\) y \(\cos\alpha>0\). Reescribimos:
+    \[
+    \frac{\seno\alpha}{\cos\alpha}
+    =2-\frac1{\cos\alpha}
+    \iff
+    \seno\alpha=2\cos\alpha-1.
+    \]
+    Al elevar al cuadrado y usar \(\seno^2\alpha=1-\cos^2\alpha\):
+    \[
+    1-\cos^2\alpha=(2\cos\alpha-1)^2
+    \iff
+    \cos\alpha(5\cos\alpha-4)=0.
+    \]
+    El valor \(\cos\alpha=0\) no corresponde a un ángulo agudo ni pertenece al dominio de la ecuación. Por tanto,
+    \[
+        \boxed{\cos\alpha=\frac45}.
+    \]
+
+    \item Como \(1/\csc\alpha=\seno\alpha\),
+    \[
+        2\seno\alpha=1+\cos\alpha
+        \iff
+        \cos\alpha=2\seno\alpha-1.
+    \]
+    Al cuadrar y usar \(\cos^2\alpha=1-\seno^2\alpha\):
+    \[
+        1-\seno^2\alpha=(2\seno\alpha-1)^2
+        \iff
+        \seno\alpha(5\seno\alpha-4)=0.
+    \]
+    Como \(\alpha\) es agudo,
+    \[
+        \boxed{\seno\alpha=\frac45}.
+    \]
+
+    \item
+    \[
+    \begin{aligned}
+    \seno(105^\circ)
+    &=\seno(60^\circ+45^\circ)\\
+    &=\seno60^\circ\cos45^\circ+\cos60^\circ\seno45^\circ\\
+    &=\frac{\sqrt3}{2}\frac{\sqrt2}{2}
+      +\frac12\frac{\sqrt2}{2}
+    =\boxed{\frac{\sqrt6+\sqrt2}{4}}.
+    \end{aligned}
+    \]
+
+    \item Por la ley de senos,
+    \[
+        \frac{d}{\seno105^\circ}
+        =\frac{10}{\seno30^\circ}.
+    \]
+    Luego,
+    \[
+        d=20\seno105^\circ
+        =20\left(\frac{\sqrt6+\sqrt2}{4}\right)
+        =\boxed{5(\sqrt6+\sqrt2)\ \text{m}}.
+    \]
+
+    \item Sea \(H\) la altura del avión y \(a\) la distancia horizontal al edificio. Entonces
+    \[
+        \tan60^\circ=\frac{H}{a},
+        \qquad
+        \tan45^\circ=\frac{H-20}{a}.
+    \]
+    De la segunda igualdad, \(a=H-20\). Sustituyendo:
+    \[
+        \sqrt3=\frac{H}{H-20}
+        \iff
+        H=30+10\sqrt3.
+    \]
+    La altura es
+    \[
+        \boxed{(30+10\sqrt3)\ \text{m}}.
+    \]
+
+    \item La distancia inicial a la torre es
+    \[
+        d_1=\frac{50}{\tan30^\circ}=50\sqrt3,
+    \]
+    y la distancia final es
+    \[
+        d_2=\frac{50}{\tan60^\circ}=\frac{50}{\sqrt3}.
+    \]
+    Por tanto, avanzó
+    \[
+        d_1-d_2
+        =50\sqrt3-\frac{50}{\sqrt3}
+        =\boxed{\frac{100\sqrt3}{3}\ \text{m}}.
+    \]
+
+    \item Como \(\alpha\) está en II, \(\seno\alpha=\frac5{13}\). Así,
+    \[
+        \seno(2\alpha)=2\seno\alpha\cos\alpha
+        =2\left(\frac5{13}\right)\left(-\frac{12}{13}\right)
+        =\boxed{-\frac{120}{169}},
+    \]
+    \[
+        \cos(2\alpha)=\cos^2\alpha-\seno^2\alpha
+        =\frac{144}{169}-\frac{25}{169}
+        =\boxed{\frac{119}{169}}.
+    \]
+
+    \item La expresión está definida cuando \(\seno x\neq\pm1\). Usando el ejercicio 20:
+    \[
+        2\sec^2x=4
+        \iff
+        \cos^2x=\frac12.
+    \]
+    En \([0,2\pi)\),
+    \[
+        \boxed{x\in\left\{
+        \frac{\pi}{4},\frac{3\pi}{4},
+        \frac{5\pi}{4},\frac{7\pi}{4}
+        \right\}}.
+    \]
+\end{enumerate}
+\end{solbox}
+
+\vspace{0.8cm}
+\begin{center}
+    \small\textbf{Usach Premium} - Nos vemos en la ayudantía.\\
+    \textit{"Por y para estudiantes."}
+\end{center}
+
+\end{document}

@@ -1,0 +1,955 @@
+
+%  GUÍA DE EJERCICIOS — USACH PREMIUM
+%  Química General — Guía: Redox y Electroquímica
+%
+%  Compila con: pdflatex guia-redox.tex (2 veces)
+% ============================================================
+
+\documentclass[letterpaper, 12pt, twoside]{article}
+
+% ============================================================
+% PAQUETES
+% ============================================================
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{eso-pic}
+\usepackage{tikz}
+\usepackage{ragged2e}
+\usepackage{booktabs}
+\usetikzlibrary{patterns,arrows.meta}
+\tcbuselibrary{skins}
+\setlength{\parindent}{0pt}
+
+% ============================================================
+% GEOMETRÍA
+% ============================================================
+\geometry{letterpaper, margin=1.5cm, top=3cm, bottom=2.5cm, headheight=2cm}
+
+% ============================================================
+% COLORES — GAMA ROJA
+% ============================================================
+\definecolor{azulFuerte}{HTML}{1A5276}       % encabezado (se mantiene institucional)
+\definecolor{enlace}{HTML}{7B1515}
+\definecolor{rojoFuerte}{HTML}{8B1A1A}        % marcos y títulos principales
+\definecolor{rojoMedio}{HTML}{C0392B}         % acentos y flechas
+\definecolor{rojoSuave}{HTML}{FDECEA}         % fondos de cajas
+\definecolor{rojoOscuro}{HTML}{5D1010}        % banner solucionario
+\definecolor{rojoTitulo}{HTML}{A93226}        % títulos de portada
+
+% ============================================================
+% RUTAS DE IMÁGENES
+% ============================================================
+\newcommand{\logoup}{./Imagenes/logo_up.png}
+\newcommand{\logousach}{./Imagenes/logo_usach.png}
+\newcommand{\logofondo}{./Imagenes/logo_up.png}
+
+% ============================================================
+% INFORMACIÓN DE LA GUÍA
+% ============================================================
+\newcommand{\institucion}{Usach Premium}
+\newcommand{\curso}{Química General}
+\newcommand{\guiasnumero}{Guía 5 - Redox \& Electroquimica}
+\newcommand{\semestre}{1er Semestre 2026}
+\newcommand{\preparadopor}{Leonard Sanchez}
+\newcommand{\webinstitucion}{www.usachpremium.cl}
+\newcommand{\instagraminstitucion}{https://www.instagram.com/usach.premium}
+\newcommand{\transparencia}{0.05}
+\newcommand{\fraseportada}{"Por y para estudiantes"}
+
+\newcommand{\listacontenidos}{
+    \item[\color{rojoMedio}$\Rightarrow$] Fundamentos de Óxido-Reducción (Redox)
+    \item[\color{rojoMedio}$\Rightarrow$] Agentes Oxidante y Reductor
+    \item[\color{rojoMedio}$\Rightarrow$] Balanceo por el Método Ion-Electrón (Medio Ácido y Básico)
+    \item[\color{rojoMedio}$\Rightarrow$] Celdas Galvánicas y Potencial Estándar ($E^\circ$)
+    \item[\color{rojoMedio}$\Rightarrow$] Ecuación de Nernst y Condiciones No Estándar
+    \item[\color{rojoMedio}$\Rightarrow$] Termodinámica y Espontaneidad ($\Delta G$)
+    \item[\color{rojoMedio}$\Rightarrow$] Electrólisis y Leyes de Faraday
+}
+
+% ============================================================
+% HYPERREF
+% ============================================================
+\hypersetup{
+    colorlinks=true,
+    linkcolor=enlace,
+    urlcolor=enlace,
+    citecolor=enlace,
+    pdfborder={0 0 0},
+}
+
+% ============================================================
+% ENCABEZADO Y PIE DE PÁGINA
+% ============================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LO,LE]{%
+    \includegraphics[height=1.2cm]{\logoup}%
+}
+\fancyhead[RO,RE]{%
+    \begin{minipage}[b]{0.42\textwidth}
+        \raggedleft
+        \fontsize{9pt}{11pt}\selectfont
+        \textbf{\color{azulFuerte}\institucion} \\
+        \curso\ — \guiasnumero \\
+        \textit{\color{gray}@usach.premium}
+    \end{minipage}\hspace{0.1cm}%
+    \includegraphics[height=1.2cm]{\logousach}%
+}
+\fancyfoot[LO,LE]{\fontsize{9pt}{11pt}\selectfont \textit{\fraseportada}}
+\fancyfoot[RO,RE]{\fontsize{9pt}{11pt}\selectfont Página \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyhead[LO,LE]{\includegraphics[height=1.2cm]{\logoup}}
+    \fancyhead[RO,RE]{%
+        \begin{minipage}[b]{0.42\textwidth}
+            \raggedleft
+            \fontsize{9pt}{11pt}\selectfont
+            \textbf{\color{azulFuerte}\institucion} \\
+            \curso\ — \guiasnumero \\
+            \textit{\color{gray}@usach.premium}
+        \end{minipage}\hspace{0.1cm}%
+        \includegraphics[height=1.2cm]{\logousach}}
+    \fancyfoot[LO,LE]{\fontsize{9pt}{11pt}\selectfont \textit{\fraseportada}}
+    \fancyfoot[RO,RE]{\fontsize{9pt}{11pt}\selectfont Página \thepage}
+    \renewcommand{\headrulewidth}{0.4pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+}
+
+% ============================================================
+% MARCA DE AGUA
+% ============================================================
+\newcommand{\MarcaAgua}{
+    \AddToShipoutPicture{
+        \AtPageCenter{
+            \makebox(0,0){%
+                \begin{tikzpicture}
+                    \node[opacity=\transparencia] {\includegraphics[width=0.7\textwidth]{\logofondo}};
+                \end{tikzpicture}%
+            }
+        }
+    }
+}
+
+% ============================================================
+% CAJAS — GAMA ROJA
+% ============================================================
+
+% Caja de fórmulas / resumen
+\newenvironment{formulabox}[1]{%
+    \begin{tcolorbox}[colback=rojoSuave, colframe=rojoFuerte,
+        title=\textbf{#1}, fonttitle=\bfseries]
+}{%
+    \end{tcolorbox}
+}
+
+% Caja de desafío (borde rojo oscuro, fondo blanco, título blanco)
+\newtcolorbox{desafiobox}[1]{
+    colback=white,
+    colframe=rojoFuerte,
+    fonttitle=\bfseries,
+    coltitle=white,
+    title=#1,
+    arc=8pt,
+    boxrule=1.2pt,
+    enhanced,
+    drop shadow={black!10}
+}
+
+% Caja de soluciones
+\newenvironment{solbox}[1]{%
+    \begin{tcolorbox}[colback=rojoSuave, colframe=rojoFuerte,
+        title=\textbf{#1}, fonttitle=\bfseries]
+}{%
+    \end{tcolorbox}
+}
+
+% ============================================================
+% ENTORNOS DE SECCIÓN (activan marca de agua)
+% ============================================================
+
+\newenvironment{introduccion}{%
+    \section*{Introducción}%
+    \MarcaAgua
+}{}
+
+\newenvironment{ejercicios}{%
+    \MarcaAgua
+}{}
+
+\newenvironment{soluciones}{%
+    \newpage
+    \begin{center}
+        \begin{tcolorbox}[colback=rojoOscuro, colframe=rojoOscuro,
+            colupper=white, width=0.8\textwidth, center, arc=10pt]
+            \centering\Large\textbf{SOLUCIONARIO}
+        \end{tcolorbox}
+    \end{center}
+    \thispagestyle{fancy}
+    \MarcaAgua
+    \small
+}{}
+
+% ============================================================
+\begin{document}
+\shorthandoff{>}
+\thispagestyle{empty}
+
+% ============================================================
+% PORTADA
+% ============================================================
+
+\AddToShipoutPicture*{%
+    \put(54, 700){\includegraphics[width=2cm]{\logoup}}
+    \put(420, 706){\includegraphics[width=5cm]{\logousach}}
+}
+
+\vspace*{0.5cm}
+
+\begin{center}
+    \color{azulFuerte}
+    {\huge \textbf{GUÍA DE ESTUDIO}} \\[0.5cm]
+    {\Huge \textbf{\curso}} \\[0.3cm]
+    {\Large \guiasnumero} \\[1.5cm]
+
+    \begin{tcolorbox}[colback=rojoSuave, colframe=rojoFuerte, arc=10pt,
+        width=0.85\textwidth, center, boxrule=1.5pt]
+        \centering
+        \vspace{0.2cm}
+        {\Large \textbf{Contenidos}}
+        \vspace{0.3cm}
+        \color{black}
+        \begin{itemize}[leftmargin=3cm]
+            \listacontenidos
+        \end{itemize}
+        \vspace{0.2cm}
+    \end{tcolorbox}
+\end{center}
+
+\vspace{1.5cm}
+
+\begin{center}
+    {\Large \textbf{\semestre}} \\[0.8cm]
+    {\large \textbf{\preparadopor}} \\[0.6cm]
+    \textit{\small ``¡Mucho éxito en la PEP II! Ya queda el último esfuerzo.''}
+\end{center}
+
+\vspace{2cm}
+
+\begin{center}
+    {\color{rojoMedio}\hrule height 0.5pt}
+    \vspace{0.3cm}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \textbf{Instagram:} \\
+        \small\href{\instagraminstitucion}{@usach.premium}
+    \end{minipage}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \textbf{Web:} \\
+        \small\href{http://\webinstitucion}{\webinstitucion}
+    \end{minipage}
+\end{center}
+
+\pagenumbering{arabic}
+\newpage
+
+% ============================================================
+% INTRODUCCIÓN
+% ============================================================
+\begin{introduccion}
+Las reacciones de óxido-reducción (Redox) son procesos químicos definidos por la \textbf{transferencia neta de electrones} ($e^-$) entre dos sustancias. Para que una especie gane electrones, otra debe perderlos obligatoriamente. Estas reacciones acopladas se denominan \textbf{semirreacciones} y son la base de fenómenos tan cotidianos como la corrosión del hierro y el funcionamiento de las baterías.
+
+\vspace{0.3cm}
+
+\begin{formulabox}{Conceptos Fundamentales: Oxidación y Reducción}
+    \begin{itemize}
+        \item \textbf{Oxidación:} Un elemento \textbf{pierde electrones}. Su estado de oxidación \textbf{aumenta} (se hace más positivo). Ejemplo: $Cu^0 \rightarrow Cu^{+2} + 2e^-$
+        \vspace{0.1cm}
+        \item \textbf{Reducción:} Un elemento \textbf{gana electrones}. Su estado de oxidación \textbf{disminuye} (se hace más negativo).
+        \vspace{0.1cm}
+        \item \textbf{Agente Oxidante:} Sustancia que se reduce al arrebatarle electrones al agente reductor. El mejor agente oxidante tiene el $E^\circ$ más positivo.
+        \vspace{0.1cm}
+        \item \textbf{Agente Reductor:} Sustancia que se oxida al ceder sus electrones. El mejor agente reductor tiene el $E^\circ$ más negativo.
+    \end{itemize}
+    \vspace{0.2cm}
+    \begin{center}
+    \textit{Regla mnemotécnica:} \textbf{``Red Cat''} y \textbf{``Ox-An''} — \textbf{Red}ucción en el \textbf{Cát}odo; \textbf{Ox}idación en el \textbf{Án}odo.
+\end{center}
+\end{formulabox}
+\subsection*{Ejemplo Cotidiano: Corrosión del Hierro}
+La corrosión ambiental es un proceso redox clásico. El hierro expuesto al aire húmedo se oxida de forma natural:
+\[ 4Fe_{(s)} + 3O_{2(g)} \rightarrow 2Fe_2O_{3(s)} \]
+El oxígeno actúa como agente oxidante, robando los electrones del hierro (agente reductor), lo que compromete la integridad de estructuras y herramientas.
+\end{introduccion}
+\vspace{0.35cm}
+\begin{center}
+\begin{tikzpicture}[scale=0.9,>=Stealth]
+    \draw[rounded corners=4pt,fill=gray!22,draw=gray!70,thick]
+        (-4,-0.65) rectangle (4,0.65);
+    \node[font=\bfseries] at (0,0) {$Fe_{(s)}$};
+    \foreach \x/\y/\s in {-3.2/0.50/0.22,-2.3/-0.48/0.28,-1.3/0.46/0.20,
+        -0.4/-0.52/0.24,0.7/0.48/0.27,1.8/-0.46/0.21,2.8/0.51/0.25,3.45/-0.42/0.18}
+        \fill[rojoMedio!75!brown] (\x,\y) circle (\s);
+    \draw[->,thick,blue!65!black] (-2.4,2.0) -- (-2.4,0.85)
+        node[midway,left] {$O_2$};
+    \draw[->,thick,cyan!65!blue] (0,2.0) -- (0,0.85)
+        node[midway,left] {$H_2O$};
+    \draw[->,thick,rojoFuerte] (2.5,0.85) -- (2.5,1.9)
+        node[midway,right] {$Fe_2O_3$};
+    \node[font=\small\itshape,text=gray!70!black] at (0,-1.15)
+        {Oxidación del hierro en presencia de oxígeno y humedad};
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+% ============================================================
+% CUERPO DE CONTENIDOS
+% ============================================================
+
+\begin{formulabox}{Pasos — Medio Ácido}
+\textbf{Ejemplo:} $\text{Fe}^{2+} + \text{MnO}_4^- \rightarrow \text{Fe}^{3+} + \text{Mn}^{2+}$
+
+\begin{enumerate}[leftmargin=15pt, itemsep=0.3em]
+\vspace{0.2cm}
+    \item \textbf{Identificación:} Detectar los elementos que cambian su E.O. y escribir las dos semirreacciones.
+    \begin{itemize}[leftmargin=15pt, topsep=2pt, itemsep=0pt]
+        \item \textbf{Ox:} $\text{Fe}^{2+} \rightarrow \text{Fe}^{3+}$
+        \item \textbf{Red:} $\text{MnO}_4^- \rightarrow \text{Mn}^{2+}$
+    \end{itemize}
+    \vspace{0.2cm}
+    \item \textbf{Masa principal:} Balancear todos los átomos distintos al O y al H.
+    \begin{itemize}[leftmargin=15pt, topsep=2pt, itemsep=0pt]
+        \item \textit{(El Fe y el Mn ya están balanceados, 1 átomo en cada lado).}
+    \end{itemize}
+    \vspace{0.2cm}
+    \item \textbf{Balance de O:} Añadir $\text{H}_2\text{O}$ al lado deficiente en oxígeno.
+    \begin{itemize}[leftmargin=15pt, topsep=2pt, itemsep=0pt]
+        \item \textbf{Red:} $\text{MnO}_4^- \rightarrow \text{Mn}^{2+} + \mathbf{4H_2O}$
+    \end{itemize}
+    \vspace{0.2cm}
+    \item \textbf{Balance de H:} Añadir $\text{H}^+$ al lado opuesto.
+    \begin{itemize}[leftmargin=15pt, topsep=2pt, itemsep=0pt]
+        \item \textbf{Red:} $\text{MnO}_4^- + \mathbf{8H^+} \rightarrow \text{Mn}^{2+} + 4\text{H}_2\text{O}$
+    \end{itemize}
+    \vspace{0.2cm}
+    \item \textbf{Balance de carga:} Añadir $e^-$ al lado más positivo.
+    \begin{itemize}[leftmargin=15pt, topsep=2pt, itemsep=0pt]
+        \item \textbf{Ox:} $\text{Fe}^{2+} \rightarrow \text{Fe}^{3+} + \mathbf{1e^-}$
+        \item \textbf{Red:} $\text{MnO}_4^- + 8\text{H}^+ + \mathbf{5e^-} \rightarrow \text{Mn}^{2+} + 4\text{H}_2\text{O}$
+    \end{itemize}
+    \vspace{0.2cm}
+    \item \textbf{Igualación de electrones:} Multiplicar cada semirreacción por el factor cruzado necesario para igualar el número de $e^-$ transferidos.
+    \begin{itemize}[leftmargin=15pt, topsep=2pt, itemsep=0pt]
+        \item \textit{(Multiplicamos la semirreacción de Oxidación $\times 5$)}
+        \item \textbf{Ox (ajustada):} $5\text{Fe}^{2+} \rightarrow 5\text{Fe}^{3+} + \mathbf{5e^-}$
+    \end{itemize}
+    \vspace{0.2cm}
+    \item \textbf{Suma y ecuación global:} Sumar las semirreacciones y cancelar las especies repetidas para obtener la ecuación global.
+    \begin{itemize}[leftmargin=15pt, topsep=2pt, itemsep=0pt]
+        \item \textit{(Se cancelan los $5e^-$ de ambos lados)}
+        \item \textbf{Global:} $5\text{Fe}^{2+} + \text{MnO}_4^- + 8\text{H}^+ \rightarrow 5\text{Fe}^{3+} + \text{Mn}^{2+} + 4\text{H}_2\text{O}$
+    \end{itemize}
+    \vspace{0.2cm}
+    \item \textbf{Verificación:} Rectificar que la cantidad de átomos y la carga total estén correctamente balanceadas en ambos lados.
+\end{enumerate}
+\end{formulabox}
+%-----------BALANCE BASE------------
+\begin{formulabox}{Pasos — Medio Básico}
+\footnotesize
+\textbf{Ejemplo:} $\text{MnO}_4^- + \text{I}^- \rightarrow \text{MnO}_2 + \text{I}_2$
+
+\begin{enumerate}[leftmargin=15pt, itemsep=0.3em]
+\vspace{0.2cm}
+    \item \textbf{Identificación:} Detectar los elementos que cambian su E.O. y escribir las dos semirreacciones.
+    \begin{itemize}[leftmargin=15pt, topsep=2pt, itemsep=0pt]
+        \item \textbf{Ox:} $\text{I}^- \rightarrow \text{I}_2$
+        \item \textbf{Red:} $\text{MnO}_4^- \rightarrow \text{MnO}_2$
+    \end{itemize}
+\vspace{0.2cm}
+    \item \textbf{Masa principal:} Balancear todos los átomos distintos al O y al H.
+    \begin{itemize}[leftmargin=15pt, topsep=2pt, itemsep=0pt]
+        \item \textbf{Ox:} $\mathbf{2}\text{I}^- \rightarrow \text{I}_2$
+    \end{itemize}
+\vspace{0.2cm}
+    \item \textbf{Balance de O:} Añadir $\text{H}_2\text{O}$ al lado deficiente en oxígeno.
+    \begin{itemize}[leftmargin=15pt, topsep=2pt, itemsep=0pt]
+        \item \textbf{Red:} $\text{MnO}_4^- \rightarrow \text{MnO}_2 + \mathbf{2H_2O}$
+    \end{itemize}
+\vspace{0.2cm}
+    \item \textbf{Balance de H:} Añadir $\text{H}^+$ al lado opuesto.
+    \begin{itemize}[leftmargin=15pt, topsep=2pt, itemsep=0pt]
+        \item \textbf{Red:} $\text{MnO}_4^- + \mathbf{4H^+} \rightarrow \text{MnO}_2 + 2\text{H}_2\text{O}$
+    \end{itemize}
+\vspace{0.2cm}
+    \item \textbf{Balance de carga:} Añadir $e^-$ al lado más positivo.
+    \begin{itemize}[leftmargin=15pt, topsep=2pt, itemsep=0pt]
+        \item \textbf{Ox:} $2\text{I}^- \rightarrow \text{I}_2 + \mathbf{2e^-}$
+        \item \textbf{Red:} $\text{MnO}_4^- + 4\text{H}^+ + \mathbf{3e^-} \rightarrow \text{MnO}_2 + 2\text{H}_2\text{O}$
+    \end{itemize}
+\vspace{0.2cm}
+    \item \textbf{Igualación de electrones:} Multiplicar cada semirreacción por el factor cruzado necesario para igualar el número de $e^-$ transferidos.
+    \begin{itemize}[leftmargin=15pt, topsep=2pt, itemsep=0pt]
+        \item \textit{(Multiplicamos Ox $\times 3$ y Red $\times 2$)}
+        \item \textbf{Ox (ajustada):} $6\text{I}^- \rightarrow 3\text{I}_2 + \mathbf{6e^-}$
+        \item \textbf{Red (ajustada):} $2\text{MnO}_4^- + 8\text{H}^+ + \mathbf{6e^-} \rightarrow 2\text{MnO}_2 + 4\text{H}_2\text{O}$
+    \end{itemize}
+\vspace{0.1cm}
+    \item \textbf{Suma preliminar ácida:} Sumar las semirreacciones y cancelar las especies repetidas (como si fuera medio ácido).
+    \begin{itemize}[leftmargin=15pt, topsep=2pt, itemsep=0pt]
+        \item \textit{(Se cancelan los $6e^-$ de ambos lados)}
+        \item \textbf{Preliminar:} $2\text{MnO}_4^- + 6\text{I}^- + 8\text{H}^+ \rightarrow 2\text{MnO}_2 + 3\text{I}_2 + 4\text{H}_2\text{O}$
+    \end{itemize}
+\vspace{0.1cm}
+    \item \textbf{Balance de $\text{OH}^-$:} Añadir iones $\text{OH}^-$ a ambos lados de la ecuación preliminar para neutralizar todos los $\text{H}^+$ presentes.
+    \begin{itemize}[leftmargin=15pt, topsep=2pt, itemsep=0pt]
+        \item \textit{(Como hay $8\text{H}^+$, sumamos $8\text{OH}^-$ a ambos lados)}
+        \item \textbf{Ajuste:} $2\text{MnO}_4^- + 6\text{I}^- + 8\text{H}^+ + \mathbf{8OH^-} \rightarrow 2\text{MnO}_2 + 3\text{I}_2 + 4\text{H}_2\text{O} + \mathbf{8OH^-}$
+    \end{itemize}
+\vspace{0.1cm}
+    \item \textbf{Formación y cancelación de agua:} Fusionar los $\text{H}^+$ y $\text{OH}^-$ del mismo lado para formar agua, y luego simplificar el agua repetida en ambos lados.
+    \begin{itemize}[leftmargin=15pt, topsep=2pt, itemsep=0pt]
+        \item \textit{(Los $8\text{H}^+$ y $8\text{OH}^-$ de la izquierda forman $8\text{H}_2\text{O}$. Luego restamos las $4\text{H}_2\text{O}$ de la derecha a las $8\text{H}_2\text{O}$ de la izquierda)}
+        \item \textbf{Simplificación:} $2\text{MnO}_4^- + 6\text{I}^- + \mathbf{4H_2O} \rightarrow 2\text{MnO}_2 + 3\text{I}_2 + \mathbf{8OH^-}$
+    \end{itemize}
+\vspace{0.1cm}
+    \item \textbf{Ecuación global y verificación:} Escribir la reacción final y comprobar que la masa y la carga total estén correctamente balanceadas en ambos lados.
+    \begin{itemize}[leftmargin=15pt, topsep=2pt, itemsep=0pt]
+        \item \textbf{Global final:} $2\text{MnO}_4^- + 6\text{I}^- + 4\text{H}_2\text{O} \rightarrow 2\text{MnO}_2 + 3\text{I}_2 + 8\text{OH}^-$
+       
+    \end{itemize}
+\end{enumerate}
+\end{formulabox}
+%-----------FIN-------
+
+\newpage
+
+% ============================================================
+% CELDAS GALVÁNICAS Y POTENCIAL ESTÁNDAR
+% ============================================================
+\section*{Celdas Galvánicas y Potencial Estándar}
+
+Una \textbf{celda electroquímica} es el dispositivo donde ocurre una reacción redox: separa físicamente la semirreacción de oxidación de la de reducción en dos semiceldas distintas, obligando a los electrones a viajar por un cable externo y generando así corriente eléctrica.
+
+\begin{formulabox}{Tipos de Celda, Electrodos y Puente Salino}
+    \begin{itemize}
+        \item \textbf{Celda Galvánica (o Voltaica):} Usa una reacción redox \textbf{espontánea} para generar corriente. Convierte energía química en energía eléctrica (es, literalmente, una pila). \vspace{0.5cm}    
+        \item \textbf{Celda Electrolítica:} Usa una fuente de corriente eléctrica \textbf{externa} para forzar una reacción \textbf{no espontánea}. Convierte energía eléctrica en energía química. \vspace{0.5cm}
+        
+        \item \textbf{Ánodo:} Electrodo donde siempre ocurre la \textbf{oxidación}. En la celda galvánica, los electrones nacen aquí y son empujados hacia el cable, por lo que es el polo \textbf{negativo}. \vspace{0.5cm}
+        \item \textbf{Cátodo:} Electrodo donde siempre ocurre la \textbf{reducción}. Recibe los electrones por el cable para que sean consumidos por los iones de la solución, por lo que actúa como el polo \textbf{positivo}. \vspace{0.25cm}
+        \item \textbf{Puente Salino:} Tubo en forma de "U" relleno con un electrolito inerte (ej. $KCl$ en gel de agar-agar) que conecta ambas semiceldas. Libera aniones hacia el ánodo y cationes hacia el cátodo, manteniendo la neutralidad eléctrica en ambos vasos y evitando que la celda se polarice y detenga su funcionamiento.
+    \end{itemize}
+    \vspace{0.2cm}
+    
+    \begin{center}
+    \begin{tikzpicture}[scale=0.78,>=Stealth]
+        \draw[thick] (-4,-1.8) -- (-4,0.7) -- (-1,0.7) -- (-1,-1.8);
+        \draw[thick] (1,-1.8) -- (1,0.7) -- (4,0.7) -- (4,-1.8);
+        \fill[blue!13] (-3.95,-1.75) rectangle (-1.05,0.15);
+        \fill[blue!13] (1.05,-1.75) rectangle (3.95,0.15);
+        \draw[very thick,gray!75] (-3,1.3) -- (-3,-1.25);
+        \draw[very thick,orange!75!black] (3,1.3) -- (3,-1.25);
+        \draw[thick] (-3,1.3) -- (-3,2.1) -- (3,2.1) -- (3,1.3);
+        \draw[->,rojoFuerte,very thick] (-1.4,2.1) -- (1.4,2.1)
+            node[midway,above] {$e^-$};
+        \draw[rojoMedio,very thick,rounded corners=9pt]
+            (-2.0,0.1) -- (-2.0,1.25) -- (2.0,1.25) -- (2.0,0.1);
+        \node[below] at (-3,-1.25) {$Zn$};
+        \node[below] at (3,-1.25) {$Cu$};
+        \node[font=\small] at (-2.5,-0.45) {$Zn^{2+}$};
+        \node[font=\small] at (2.5,-0.45) {$Cu^{2+}$};
+        \node[font=\small,text=rojoFuerte] at (0,1.55) {Puente salino};
+        \node[font=\small\bfseries] at (-2.5,-2.15) {Ánodo};
+        \node[font=\small\bfseries] at (2.5,-2.15) {Cátodo};
+    \end{tikzpicture}
+    \end{center}
+    
+\end{formulabox}
+\newpage
+\thispagestyle{fancy}
+\vspace*{0.2cm}
+\begingroup\small
+
+\subsection*{Notación de Celda (Diagrama de Pila)}
+\thispagestyle{fancy}
+Es el lenguaje estandarizado para resumir gráficamente los componentes de una celda sin necesidad de dibujarla. La convención internacional exige un orden estricto:
+\begin{itemize}[leftmargin=15pt, topsep=2pt, itemsep=2pt]
+    \item El \textbf{ánodo} siempre se escribe a la \textbf{izquierda} (compartimiento de oxidación).
+    \item El \textbf{cátodo} siempre se escribe a la \textbf{derecha} (compartimiento de reducción).
+    \item Línea vertical simple ($|$): representa un límite de fase física (ej. electrodo sólido / solución acuosa).
+    \item Línea vertical doble ($\parallel$): representa el puente salino que conecta ambas semiceldas.
+    \item Las concentraciones se indican entre corchetes junto al ion correspondiente; si no se especifican, se asume el estándar de 1 M.
+\end{itemize}
+
+\vspace{0.2cm}
+\begin{center}
+    \textbf{Ejemplo (Pila Zinc–Cobre):}\quad $Zn_{(s)} \mid Zn^{2+}_{(ac)}\ [1\ \text{M}] \parallel Cu^{2+}_{(ac)}\ [1\ \text{M}] \mid Cu_{(s)}$
+\end{center}
+\begin{center}
+   \textbf{De Pila a Reacción:} \quad $\mathrm{Zn}_{(s)} + \mathrm{Cu}^{2+}_{(ac)} \rightarrow \mathrm{Zn}^{2+}_{(ac)} + \mathrm{Cu}_{(s)}$
+\end{center}
+\vspace{0.1cm}
+
+\begin{formulabox}{Potencial Estándar de Reducción ($E^\circ$) y FEM}
+    El \textbf{potencial estándar de reducción} ($E^\circ$), medido en Voltios, indica la tendencia de una especie a \textbf{ganar electrones} frente a un estándar universal (el electrodo de hidrógeno). Mientras más positivo es $E^\circ$, mayor es la tendencia de esa especie a reducirse (a quedarse en el cátodo).
+    \vspace{0.15cm}
+    \begin{itemize}[leftmargin=15pt, topsep=2pt, itemsep=0pt]
+        \item \textbf{Condiciones estándar:} $25^\circ\text{C}$ ($298$ K), $1\ \text{atm}$ para los gases y concentraciones de exactamente $1\ \text{M}$.
+        \item El \textbf{mejor agente oxidante} es la sustancia con el $E^\circ$ más positivo; el \textbf{mejor agente reductor} es la sustancia con el $E^\circ$ más negativo.
+    \end{itemize}
+    \vspace{0.2cm}
+    La \textbf{Fuerza Electromotriz (FEM)} es la diferencia de potencial que empuja a los electrones a través del cable:
+    \[ \Delta E^\circ_{\text{celda}} = E^\circ_{\text{cátodo}} - E^\circ_{\text{ánodo}} \]
+    Si $\Delta E^\circ_{\text{celda}} > 0$, la reacción global es \textbf{espontánea} y corresponde a una celda galvánica.
+    
+    \vspace{0.25cm}
+    Si $\Delta E^\circ_{\text{celda}} < 0$, la reacción global es \textbf{No espontánea} y corresponde a una celda electrolitica.
+\end{formulabox}
+
+\subsection*{Tipos de Celdas Comerciales}
+\begin{itemize}[leftmargin=15pt, topsep=2pt, itemsep=2pt]
+    \item \textbf{Celdas Primarias:} No recargables (ej. pilas alcalinas); sus reactivos se agotan permanentemente.
+    \item \textbf{Celdas Secundarias:} Recargables (ej. baterías de litio); al aplicar corriente inversa, la reacción retrocede y regenera los reactivos.
+    \item \textbf{Celdas de Combustible:} Los reactivos (ej. $H_2$ y $O_2$) se suministran de forma continua desde un tanque externo, por lo que no se agotan mientras haya suministro de combustible.
+    \vspace{0.5cm}
+\end{itemize}
+
+\endgroup
+\thispagestyle{fancy}
+\newpage
+% ============================================================
+% ECUACIÓN DE NERNST
+% ============================================================
+\section*{Ecuación de Nernst y Condiciones No Estándar}
+
+El potencial estándar ($E^\circ$) es un valor teórico fijo, válido solo si las concentraciones son exactamente 1 M. A medida que una celda funciona, los reactivos se consumen y los productos aumentan, por lo que el voltaje real cambia. La \textbf{ecuación de Nernst} corrige $E^\circ$ según la temperatura y el cociente de reacción $Q$.
+
+\begin{formulabox}{Ecuación de Nernst}
+    \[ E_{\text{celda}} = E^\circ_{\text{celda}} - \frac{0.0592}{n}\log(Q) \]
+    \begin{itemize}[leftmargin=15pt, topsep=2pt, itemsep=0pt]
+    \vspace{0.25cm}
+        \item $E_{\text{celda}}$: potencial real de la celda en un instante dado (V).
+          \vspace{0.25cm}
+        \item $E^\circ_{\text{celda}}$: potencial estándar de la celda (V).
+          \vspace{0.25cm}
+        \item $n$: moles de $e^-$ transferidos en la reacción balanceada.
+          \vspace{0.25cm}
+        \item $Q = \dfrac{[\text{Productos}]^{\text{coef}}}{[\text{Reactivos}]^{\text{coef}}}$ — no incluye sólidos ni líquidos puros.
+
+    \end{itemize}
+    \vspace{0.2cm}
+    \textit{Nota:} cuando una pila se descarga por completo, las concentraciones se igualan ($Q = K$) y el potencial real cae a $E = 0\ \text{V}$, aunque su $E^\circ$ teórico siga siendo el mismo (la batería queda agotada).
+\end{formulabox}
+\subsection*{Ejemplo Resuelto Paso a Paso (Ecuación de Nernst)}
+\textbf{Reacción:} $\mathrm{Hg}^{2+}_{(ac)} + 2\mathrm{Tl}_{(s)} \rightarrow \mathrm{Hg}_{(l)} + 2\mathrm{Tl}^+_{(ac)}$
+
+\begin{enumerate}[leftmargin=15pt, itemsep=0.3em]
+\vspace{0.2cm}
+    \item \textbf{Recopilación de datos y exclusiones:}
+    \begin{itemize}[leftmargin=15pt, topsep=2pt, itemsep=0pt]
+        \item Potencial estándar ($E^\circ$): $1.20\ \text{V}$
+        \item Electrones transferidos ($n$): $2$
+        \item Concentraciones: $[\mathrm{Hg}^{2+}] = 0.15\ \text{M}$, $[\mathrm{Tl}^+] = 0.93\ \text{M}$
+        \item \textit{Nota:} El Talio sólido ($\mathrm{Tl}_{(s)}$) y el Mercurio líquido ($\mathrm{Hg}_{(l)}$) se excluyen del cálculo matemático porque su concentración es constante.
+    \end{itemize}
+
+\vspace{0.2cm}
+    \item \textbf{Armado del Cociente de Reacción ($Q$):}
+    Se estructuran los productos sobre los reactivos. La concentración de $[\mathrm{Tl}^+]$ debe elevarse al cuadrado debido a su coeficiente estequiométrico en la reacción balanceada.
+    $$ Q = \frac{[\mathrm{Tl}^+]^2}{[\mathrm{Hg}^{2+}]} $$
+    $$ Q = \frac{(0.93)^2}{0.15} = \frac{0.8649}{0.15} = 5.766 $$
+
+\vspace{0.2cm}
+    \item \textbf{Reemplazo en la Ecuación de Nernst:}
+    Se insertan los datos en la fórmula estándar a $25^\circ\text{C}$:
+    $$ E_{\text{celda}} = E^\circ - \frac{0.0592}{n} \log(Q) $$
+    $$ E_{\text{celda}} = 1.20 - \frac{0.0592}{2} \log(5.766) $$
+
+\vspace{0.2cm}
+    \item \textbf{Resolución matemática:}
+    Se resuelve la división de la constante y el logaritmo antes de restar:
+    $$ E_{\text{celda}} = 1.20 - (0.0296 \cdot 0.7608) $$
+    $$ E_{\text{celda}} = 1.20 - 0.0225 $$
+    $$ \mathbf{E_{\text{celda}} \approx +1.18\ \text{V}} $$
+\end{enumerate}
+
+% ============================================================
+% TERMODINÁMICA Y ESPONTANEIDAD
+% ============================================================
+\section*{Termodinámica y Espontaneidad ($\Delta G$)}
+
+Mientras que $E^\circ$ indica cuánta fuerza eléctrica tiene una celda, la \textbf{Energía Libre de Gibbs} ($\Delta G$) es la variable termodinámica que dicta si la reacción tiene la capacidad real de ocurrir por sí sola.
+
+\begin{formulabox}{Energía Libre de Gibbs y Espontaneidad}
+    \[ \Delta G^\circ = -nFE^\circ \]
+    \begin{itemize}[leftmargin=15pt, topsep=2pt, itemsep=0pt]
+        \item $\Delta G^\circ$: energía libre de Gibbs (J). \vspace{0.2cm}
+        \item $n$: moles de $e^-$ transferidos al balancear las semirreacciones. \vspace{0.2cm}
+        \item $F$: constante de Faraday ($96{,}485\ \text{C/mol}\ e^-$).\vspace{0.2cm}
+        \item $E^\circ$: potencial estándar de la celda (V).
+    \end{itemize}
+    \vspace{0.2cm}
+    \begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{ll}
+        \toprule
+        \textbf{Criterio} & \textbf{Significado} \\
+        \midrule
+        $\Delta G < 0$ \quad ($E^\circ > 0$) & Espontánea — Celda Galvánica \\
+        $\Delta G > 0$ \quad ($E^\circ < 0$) & No espontánea — Celda Electrolítica \\
+        $\Delta G = 0$ \quad ($E^\circ = 0$) & Equilibrio — batería agotada \\
+        \bottomrule
+    \end{tabular}
+    \end{center}
+\end{formulabox}
+
+\subsection*{Ejemplo Cotidiano: La Batería del Automóvil}
+Cuando la batería de un auto "muere", su sistema ha llegado a $\Delta G = 0$. Al conectar cables para hacer puente con otro vehículo, se fuerza una reacción electrolítica no espontánea ($\Delta G > 0$) mediante energía externa, regenerando los reactivos originales para que la batería vuelva a funcionar como celda galvánica espontánea ($\Delta G < 0$) al encender el motor.
+\newpage
+\section*{Electrólisis y Leyes de Faraday}
+
+La electrólisis utiliza energía eléctrica externa para forzar reacciones redox no espontáneas. La cantidad de masa depositada o disuelta depende de la corriente y el tiempo:
+
+\begin{formulabox}{Ley de Faraday}
+    \[ m = \frac{M \cdot I \cdot t}{n \cdot F} \]
+    \begin{itemize}
+        \item $M$: masa molar del elemento (g/mol).
+        \item $I$: intensidad de corriente (A).
+        \item $t$: tiempo (s).
+        \item $n$: moles de $e^-$ en la semirreacción.
+        \item $F = 96{,}485\ \text{C/mol } e^-$.
+    \end{itemize}
+\end{formulabox}
+
+\vspace{0.3cm}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Característica} & \textbf{Celda Galvánica} & \textbf{Celda Electrolítica} \\
+\midrule
+Espontaneidad & Espontánea ($E^\circ > 0$) & No espontánea ($E^\circ < 0$) \\
+Flujo de energía & Química $\rightarrow$ Eléctrica & Eléctrica $\rightarrow$ Química \\
+Energía de Gibbs & $\Delta G < 0$ & $\Delta G > 0$ \\
+Fuente externa & No requiere & Requiere fuente de poder \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\newpage
+\thispagestyle{fancy}
+\vspace*{0.2cm}
+
+% ============================================================
+% EJERCICIOS
+% ============================================================
+\MarcaAgua
+
+\section*{Ejercicios}
+\thispagestyle{fancy}
+
+\subsection*{I. Fundamentos Redox — Oxidación, Reducción y Agentes}
+
+\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=2.5em, leftmargin=*]
+
+\item Identifica qué especie se oxida y cuál se reduce en la siguiente reacción, e indica el agente oxidante y el agente reductor:
+\[ Zn_{(s)} + CuSO_{4(ac)} \rightarrow ZnSO_{4(ac)} + Cu_{(s)} \]
+
+\item Determina el estado de oxidación del manganeso en cada uno de los siguientes compuestos: $MnO_2$, $KMnO_4$ y $MnCl_2$.
+
+\item En la siguiente reacción de corrosión, señala cuál elemento se oxida, cuál se reduce y escribe las semirreacciones correspondientes:
+\[ 4Fe_{(s)} + 3O_{2(g)} \rightarrow 2Fe_2O_{3(s)} \]
+
+\item Se tienen los siguientes pares redox con sus potenciales estándar de reducción: $F_2/F^-$ ($E^\circ = +2.87\ \text{V}$), $Cl_2/Cl^-$ ($E^\circ = +1.36\ \text{V}$) y $Li^+/Li$ ($E^\circ = -3.04\ \text{V}$). Indica cuál es el mejor agente oxidante y cuál es el mejor agente reductor. Justifica tu respuesta.
+
+\item El permanganato de potasio ($KMnO_4$) reacciona con peróxido de hidrógeno ($H_2O_2$) en medio ácido. Indica qué compuesto actúa como agente oxidante y cuál como agente reductor, analizando los cambios en el estado de oxidación del Mn y del O.
+
+\end{enumerate}
+\newpage
+\subsection*{II. Balanceo por el Método Ion-Electrón — Medio Ácido}
+
+\begin{enumerate}[label=\textbf{\arabic*.}, start=6, itemsep=2.5em, leftmargin=*]
+
+\item Balancea la siguiente ecuación en medio ácido:
+\[ Cr_2O_7^{2-} + Cl^- \rightarrow Cr^{3+} + Cl_2 \]
+
+\item Balancea en medio ácido:
+\[ MnO_4^- + Fe^{2+} \rightarrow Mn^{2+} + Fe^{3+} \]
+
+\item Balancea en medio ácido:
+\[ H_2O_2 + MnO_4^- \rightarrow O_2 + Mn^{2+} \]
+
+\item Balancea en medio ácido:
+\[ Cu + HNO_3 \rightarrow Cu^{2+} + NO_2 \]
+
+\item Balancea en medio ácido:
+\[ Zn + NO_3^- \rightarrow Zn^{2+} + NH_4^+ \]
+
+\end{enumerate}
+
+\subsection*{III. Balanceo por el Método Ion-Electrón — Medio Básico}
+
+\begin{enumerate}[label=\textbf{\arabic*.}, start=11, itemsep=2.5em, leftmargin=*]
+
+\item Balancea la siguiente ecuación en medio básico:
+\[ SO_3^{2-} + MnO_4^- \rightarrow SO_4^{2-} + MnO_2 \]
+
+\item Balancea en medio básico:
+\[ Cl_2 \rightarrow Cl^- + ClO_3^- \]
+
+\item Balancea en medio básico:
+\[ Al + OH^- \rightarrow Al(OH)_4^- + H_2 \]
+
+\end{enumerate}
+\newpage
+\subsection*{IV. Celdas Galvánicas, Potencial Estándar y Ecuación de Nernst}
+
+\begin{enumerate}[label=\textbf{\arabic*.}, start=14, itemsep=2.5em, leftmargin=*]
+
+\item Considera la celda de la pila Daniell:
+\[ Zn_{(s)} \mid Zn^{2+}_{(ac)}\ (0.10\ \text{M}) \parallel Cu^{2+}_{(ac)}\ (1.0\ \text{M}) \mid Cu_{(s)} \]
+Con $E^\circ_{Zn} = -0.76\ \text{V}$ y $E^\circ_{Cu} = +0.34\ \text{V}$, determina el potencial estándar de la celda y calcula la constante de equilibrio ($K$) a $25^\circ\text{C}$ usando $\log K = \dfrac{n \cdot E^\circ}{0.0592}$.
+
+\item Se construye una celda galvánica con semiceldas de plata ($Ag^+/Ag$, $E^\circ = +0.80\ \text{V}$) y hierro ($Fe^{2+}/Fe$, $E^\circ = -0.44\ \text{V}$) en condiciones estándar. Establece la FEM, indica qué metal actúa como ánodo y escribe la notación de celda.
+
+\item Calcula el potencial de una celda formada por aluminio y hierro con los siguientes datos: $E^\circ_{Al^{3+}/Al} = -1.676\ \text{V}$, $E^\circ_{Fe^{2+}/Fe} = -0.440\ \text{V}$, $[Al^{3+}] = 0.18\ \text{M}$ y $[Fe^{2+}] = 0.85\ \text{M}$. La transferencia es de $n = 6\ e^-$.
+
+\item Una celda galvánica opera con $E^\circ_{\text{celda}} = +0.50\ \text{V}$ y transfiere $n = 2\ e^-$. Si la concentración del producto aumenta hasta que $Q = 100$, calcula el potencial real usando la ecuación de Nernst a 298 K.
+
+\end{enumerate}
+
+\subsection*{V. Termodinámica: $\Delta G$ y Espontaneidad}
+
+\begin{enumerate}[label=\textbf{\arabic*.}, start=18, itemsep=2.5em, leftmargin=*]
+
+\item Calcula $\Delta G^\circ$ para la pila Daniell ($E^\circ = +1.10\ \text{V}$, $n = 2$). ¿Es espontánea la reacción? ¿Qué significa físicamente que $\Delta G < 0$ en este contexto?
+
+\item Para una celda con $E^\circ_{\text{celda}} = -0.45\ \text{V}$ y $n = 3$, calcula $\Delta G^\circ$ e indica si la reacción es espontánea o requiere de electrólisis.
+
+\item Una batería se considera ``agotada'' cuando su voltaje cae a cero. Explica en términos de $\Delta G$ y del cociente de reacción $Q$ qué ocurre termodinámicamente en ese momento.
+
+\end{enumerate}
+\newpage
+\subsection*{VI. Electrólisis y Leyes de Faraday}
+
+\begin{enumerate}[label=\textbf{\arabic*.}, start=21, itemsep=2.5em, leftmargin=*]
+
+\item Se inyectan $2.00\ \text{A}$ durante $20.0\ \text{min}$ a través de una solución de $CuSO_4$. Calcula la masa de cobre depositada en el cátodo. ($M_{Cu} = 63.55\ \text{g/mol}$, $n = 2$).
+
+\item ¿Cuánto tiempo (en minutos) se debe aplicar una corriente de $5.00\ \text{A}$ para depositar $10.0\ \text{g}$ de plata desde una solución de $AgNO_3$? ($M_{Ag} = 107.87\ \text{g/mol}$, $n = 1$).
+
+\item En una celda electrolítica se aplica una corriente de $3.00\ \text{A}$ durante $2.00\ \text{h}$ a una solución de $ZnSO_4$. Calcula la masa de zinc depositada. ($M_{Zn} = 65.38\ \text{g/mol}$, $n = 2$).
+
+\end{enumerate}
+
+\vspace{1cm}
+\newpage
+\thispagestyle{fancy}
+\vspace*{0.2cm}
+% --- DESAFÍO 1 ---
+\begin{desafiobox}{DESAFÍO 2 — Balance de Redox}
+{Balancee mediante el método ion-electrón, en medio básico:}
+
+\vspace{0.2cm}
+\begin{center}
+    Tetrafósforo + Hidróxido de sodio + Agua $\rightarrow$ Trihidruro de fósforo + Hipofosfito de sodio
+\end{center}
+\vspace{0.2cm}
+
+Responda las siguientes preguntas, desarrollando claramente cada procedimiento.
+\vspace{0.25cm}
+
+\begin{enumerate}[label=\textbf{\alph*.}, leftmargin=15pt, itemsep=0.4em]
+    \item \textbf{Estados de oxidación (1,0 punto)}
+    \item \textbf{Semirreacción de oxidación (1,0 puntos)}
+    
+    \item \textbf{Semirreacción de reducción (1,0 puntos)}
+    
+    \item \textbf{Ajuste del número de electrones (1,0 puntos)}
+    
+    \item \textbf{Ecuación iónica global (1,0 punto)}
+    
+    \item \textbf{Ecuación molecular balanceada (1,0 puntos)}
+\end{enumerate}
+\end{desafiobox}
+
+\vspace{2cm}
+% --- DESAFÍO 2 ---
+\begin{desafiobox}{Desafío 2 — Celda de Concentración}
+\textbf{1.} Se construye una celda galvánica de concentración a $25^\circ\text{C}$, formada por dos electrodos de plata:
+
+\vspace{0.2cm}
+\begin{center}
+    $\mathrm{E}^\circ(\mathrm{Ag}^+/\mathrm{Ag}) = +0,80\ \text{V} \qquad \mathrm{Ag}_{(s)} \mid \mathrm{Ag}^+(0,010\ \text{M}) \parallel \mathrm{Ag}^+(1,0\ \text{M}) \mid \mathrm{Ag}_{(s)}$
+\end{center}
+\vspace{0.2cm}
+
+\begin{enumerate}[label=\textbf{\alph*)}, leftmargin=15pt, itemsep=0.4em]
+    \item Explique por qué esta celda corresponde a una celda de concentración e identifique ánodo y cátodo. \textbf{(1.5 pts)}
+    \item Escriba las semirreacciones de oxidación y reducción, e indique la reacción global de la celda. \textbf{(1.5 pts)}
+    \item Calcule la fuerza electromotriz (FEM) de la celda utilizando la ecuación de Nernst. (Considere $\mathrm{T} = 25^\circ\mathrm{C}$). \textbf{(1.5 pts)}
+    \item Explique qué ocurre con la FEM y con $\Delta\mathrm{G}$ cuando las concentraciones iónicas se igualan y el sistema alcanza el equilibrio electroquímico. \textbf{(1.5 pts)}
+\end{enumerate}
+\end{desafiobox}
+\thispagestyle{fancy}
+
+% ============================================================
+% SOLUCIONARIO
+% ============================================================
+\thispagestyle{fancy}
+\begin{soluciones}
+
+\begin{solbox}{I. Soluciones — Fundamentos Redox (Ejercicios 1–5)}
+\begin{enumerate}[label=\color{rojoMedio}\bfseries\arabic*., leftmargin=*, itemsep=0.4em]
+    \item El Zn se oxida ($Zn^0 \rightarrow Zn^{2+}$, agente reductor); el $Cu^{2+}$ se reduce ($Cu^{2+} \rightarrow Cu^0$, agente oxidante).
+    \item $MnO_2$: $Mn^{+4}$;\quad $KMnO_4$: $Mn^{+7}$;\quad $MnCl_2$: $Mn^{+2}$.
+    \item El Fe se oxida ($Fe^0 \rightarrow Fe^{+3}$); el $O_2$ se reduce ($O^0 \rightarrow O^{-2}$). Semirreacciones: $Fe \rightarrow Fe^{3+} + 3e^-$;\quad $O_2 + 4e^- \rightarrow 2O^{2-}$.
+    \item Mejor agente oxidante: $F_2$ ($E^\circ$ más positivo, mayor tendencia a ganar $e^-$). Mejor agente reductor: $Li$ ($E^\circ$ más negativo, mayor tendencia a perder $e^-$).
+    \item Agente oxidante: $KMnO_4$ (el Mn pasa de $+7$ a $+2$, se reduce). Agente reductor: $H_2O_2$ (el O pasa de $-1$ a $0$ en $O_2$, se oxida).
+\end{enumerate}
+\end{solbox}
+
+\begin{solbox}{II. Soluciones — Balanceo Medio Ácido (Ejercicios 6–10)}
+\begin{enumerate}[label=\color{rojoMedio}\bfseries\arabic*., start=6, leftmargin=*, itemsep=0.5em]
+    \item \textbf{Oxidación} ($\times 3$): $2Cl^- \rightarrow Cl_2 + 2e^-$\quad\textbf{Reducción} ($\times 1$): $Cr_2O_7^{2-} + 14H^+ + 6e^- \rightarrow 2Cr^{3+} + 7H_2O$\\
+    \textbf{Global:} $Cr_2O_7^{2-} + 6Cl^- + 14H^+ \rightarrow 2Cr^{3+} + 3Cl_2 + 7H_2O$
+
+    \item \textbf{Oxidación} ($\times 5$): $Fe^{2+} \rightarrow Fe^{3+} + e^-$\quad\textbf{Reducción} ($\times 1$): $MnO_4^- + 8H^+ + 5e^- \rightarrow Mn^{2+} + 4H_2O$\\
+    \textbf{Global:} $MnO_4^- + 5Fe^{2+} + 8H^+ \rightarrow Mn^{2+} + 5Fe^{3+} + 4H_2O$
+
+    \item \textbf{Oxidación} ($\times 5$): $H_2O_2 \rightarrow O_2 + 2H^+ + 2e^-$\quad\textbf{Reducción} ($\times 2$): $MnO_4^- + 8H^+ + 5e^- \rightarrow Mn^{2+} + 4H_2O$\\
+    \textbf{Global:} $2MnO_4^- + 5H_2O_2 + 6H^+ \rightarrow 2Mn^{2+} + 5O_2 + 8H_2O$
+
+    \item \textbf{Oxidación:} $Cu \rightarrow Cu^{2+} + 2e^-$\quad\textbf{Reducción:} $NO_3^- + 2H^+ + e^- \rightarrow NO_2 + H_2O$\\
+    \textbf{Global:} $Cu + 2NO_3^- + 4H^+ \rightarrow Cu^{2+} + 2NO_2 + 2H_2O$
+
+    \item \textbf{Oxidación:} $Zn \rightarrow Zn^{2+} + 2e^-$\quad\textbf{Reducción:} $NO_3^- + 10H^+ + 8e^- \rightarrow NH_4^+ + 3H_2O$\\
+    \textbf{Global:} $4Zn + NO_3^- + 10H^+ \rightarrow 4Zn^{2+} + NH_4^+ + 3H_2O$
+\end{enumerate}
+\end{solbox}
+
+\begin{solbox}{III. Soluciones — Balanceo Medio Básico (Ejercicios 11–13)}
+\begin{enumerate}[label=\color{rojoMedio}\bfseries\arabic*., start=11, leftmargin=*, itemsep=0.5em]
+    \item \textbf{Ox.} ($\times 3$): $SO_3^{2-} + 2OH^- \rightarrow SO_4^{2-} + H_2O + 2e^-$\quad\textbf{Red.} ($\times 2$): $MnO_4^- + 2H_2O + 3e^- \rightarrow MnO_2 + 4OH^-$\\
+    \textbf{Global:} $3SO_3^{2-} + 2MnO_4^- + H_2O \rightarrow 3SO_4^{2-} + 2MnO_2 + 2OH^-$
+
+    \item \textbf{Ox.:} $Cl_2 + 12OH^- \rightarrow 2ClO_3^- + 6H_2O + 10e^-$\quad\textbf{Red.:} $Cl_2 + 2e^- \rightarrow 2Cl^-$\\
+    \textbf{Global:} $3Cl_2 + 6OH^- \rightarrow ClO_3^- + 5Cl^- + 3H_2O$
+
+    \item \textbf{Ox.:} $Al + 4OH^- \rightarrow Al(OH)_4^- + 3e^-$\quad\textbf{Red.:} $2H_2O + 2e^- \rightarrow H_2 + 2OH^-$\\
+    \textbf{Global:} $2Al + 2OH^- + 6H_2O \rightarrow 2Al(OH)_4^- + 3H_2$
+\end{enumerate}
+\end{solbox}
+
+\thispagestyle{fancy}
+\begin{solbox}{IV. Soluciones — Celdas Galvánicas y Nernst (Ejercicios 14–17)}
+\begin{enumerate}[label=\color{rojoMedio}\bfseries\arabic*., start=14, leftmargin=*, itemsep=0.4em]
+    \item $E^\circ_{\text{celda}} = 0.34 - (-0.76) = \mathbf{+1.10\ \text{V}}$;\quad $\log K = \dfrac{2 \times 1.10}{0.0592} = 37.16 \implies K = \mathbf{10^{37.16}}$
+
+    \item Ánodo: Fe ($E^\circ$ más negativo se oxida). $E^\circ_{\text{celda}} = 0.80 - (-0.44) = \mathbf{+1.24\ \text{V}}$. Notación: $Fe_{(s)} \mid Fe^{2+}_{(ac)} \parallel Ag^+_{(ac)} \mid Ag_{(s)}$
+
+    \item $E^\circ_{\text{celda}} = -0.440 - (-1.676) = +1.236\ \text{V}$;\quad $Q = \dfrac{(0.18)^2}{(0.85)^3} = 0.0528$;\quad $E = 1.236 - \dfrac{0.0592}{6}\log(0.0528) = \mathbf{+1.249\ \text{V}} \approx \mathbf{+1.25\ \text{V}}$
+
+    \item $E = 0.50 - \dfrac{0.0592}{2}\log(100) = 0.50 - 0.0592 = \mathbf{+0.441\ \text{V}}$
+\end{enumerate}
+\end{solbox}
+
+\begin{solbox}{V. Soluciones — Termodinámica (Ejercicios 18–20)}
+\begin{enumerate}[label=\color{rojoMedio}\bfseries\arabic*., start=18, leftmargin=*, itemsep=0.4em]
+    \item $\Delta G^\circ = -2 \times 96{,}485 \times 1.10 = \mathbf{-212{,}267\ \text{J}} \approx -212.3\ \text{kJ}$. La reacción es espontánea. Significa que el sistema libera trabajo eléctrico útil hacia el circuito externo.
+
+    \item $\Delta G^\circ = -3 \times 96{,}485 \times (-0.45) = \mathbf{+130{,}255\ \text{J}} \approx +130.3\ \text{kJ}$. No es espontánea; requiere electrólisis (energía externa).
+
+    \item Cuando la batería se agota, $Q = K$ y $E = 0\ \text{V}$, por lo tanto $\Delta G = 0$. El sistema ha alcanzado el equilibrio termodinámico y ya no puede realizar trabajo eléctrico útil.
+\end{enumerate}
+\end{solbox}
+
+\begin{solbox}{VI. Soluciones — Electrólisis y Faraday (Ejercicios 21–23)}
+\begin{enumerate}[label=\color{rojoMedio}\bfseries\arabic*., start=21, leftmargin=*, itemsep=0.4em]
+    \item $t = 20.0 \times 60 = 1200\ \text{s}$;\quad $m = \dfrac{63.55 \times 2.00 \times 1200}{2 \times 96{,}485} = \mathbf{0.790\ \text{g de Cu}}$
+
+    \item Despejando: $t = \dfrac{m \cdot n \cdot F}{M \cdot I} = \dfrac{10.0 \times 1 \times 96{,}485}{107.87 \times 5.00} = 1789\ \text{s} = \mathbf{29.8\ \text{min}}$
+
+    \item $t = 2.00 \times 3600 = 7200\ \text{s}$;\quad $m = \dfrac{65.38 \times 3.00 \times 7200}{2 \times 96{,}485} = \mathbf{7.32\ \text{g de Zn}}$
+\end{enumerate}
+\end{solbox}
+
+\begin{formulabox}{Respuestas — Desafío 1}
+\begin{enumerate}[label=\textbf{\alph*.}, leftmargin=15pt, itemsep=0.4em]
+    \item \textbf{Estados de oxidación:}\\
+    \textit{Reactivos:} $\mathrm{P}$ en $\mathrm{P}_4 = 0$ \quad \big| \quad $\mathrm{Na} = +1$, $\mathrm{O} = -2$, $\mathrm{H} = +1$ (en $\mathrm{NaOH}$ y $\mathrm{H}_2\mathrm{O}$).\\
+    \textit{Productos:} $\mathrm{P}$ en $\mathrm{PH}_3 = -3$ \quad \big| \quad $\mathrm{P}$ en $\mathrm{NaH}_2\mathrm{PO}_2 = +1$ (con $\mathrm{Na} = +1$, $\mathrm{H} = +1$, $\mathrm{O} = -2$).
+    
+    \item \textbf{Semirreacción de oxidación:}\\
+    $\mathrm{P}_4 + 8\mathrm{OH}^- \rightarrow 4\mathrm{H}_2\mathrm{PO}_2^- + 4e^-$
+    
+    \item \textbf{Semirreacción de reducción:}\\
+    $\mathrm{P}_4 + 12\mathrm{H}_2\mathrm{O} + 12e^- \rightarrow 4\mathrm{PH}_3 + 12\mathrm{OH}^-$
+    
+    \item \textbf{Ajuste del número de electrones:}\\
+    \textit{Oxidación ($\times 3$):} $3\mathrm{P}_4 + 24\mathrm{OH}^- \rightarrow 12\mathrm{H}_2\mathrm{PO}_2^- + 12e^-$\\
+    \textit{Reducción ($\times 1$):} $\mathrm{P}_4 + 12\mathrm{H}_2\mathrm{O} + 12e^- \rightarrow 4\mathrm{PH}_3 + 12\mathrm{OH}^-$
+    
+    \item \textbf{Ecuación iónica global (simplificada dividiendo por 4):}\\
+    $\mathrm{P}_4 + 3\mathrm{H}_2\mathrm{O} + 3\mathrm{OH}^- \rightarrow 3\mathrm{H}_2\mathrm{PO}_2^- + \mathrm{PH}_3$
+    
+    \item \textbf{Ecuación molecular balanceada:}\\
+    $\mathrm{P}_4 + 3\mathrm{H}_2\mathrm{O} + 3\mathrm{NaOH} \rightarrow 3\mathrm{NaH}_2\mathrm{PO}_2 + \mathrm{PH}_3$
+\end{enumerate}
+\end{formulabox}
+
+\thispagestyle{fancy}
+\newpage
+\thispagestyle{fancy}
+\vspace*{0.2cm}
+\begin{formulabox}{Respuestas — Celda de Concentración}
+\begin{enumerate}[label=\textbf{\alph*)}, leftmargin=15pt, itemsep=0.4em]
+    \item \textbf{Justificación e Identificación:}\\
+    Corresponde a una celda de concentración porque ambos electrodos están fabricados del mismo elemento (Plata, $\mathrm{Ag}$). El flujo de electrones se genera exclusivamente por la diferencia de concentraciones iónicas para buscar el equilibrio.
+    \begin{itemize}[leftmargin=15pt, topsep=2pt, itemsep=0pt]
+        \item \textbf{Ánodo (Oxidación):} Siempre es el compartimiento menos concentrado, ya que necesita oxidarse para generar más iones. Corresponde a $\mathrm{Ag}^+(0,010\ \text{M})$.
+        \item \textbf{Cátodo (Reducción):} Siempre es el compartimiento más concentrado, ya que necesita reducirse para consumir iones. Corresponde a $\mathrm{Ag}^+(1,0\ \text{M})$.
+    \end{itemize}
+
+    \item \textbf{Semirreacciones y Reacción Global:}\\
+    \textit{Oxidación (Ánodo):} $\mathrm{Ag}_{(s)} \rightarrow \mathrm{Ag}^+_{(ac)}\ (0,010\ \text{M}) + 1e^-$\\
+    \textit{Reducción (Cátodo):} $\mathrm{Ag}^+_{(ac)}\ (1,0\ \text{M}) + 1e^- \rightarrow \mathrm{Ag}_{(s)}$\\
+    \textit{Reacción Global:} $\mathrm{Ag}^+_{(ac)}\ (1,0\ \text{M}) \rightarrow \mathrm{Ag}^+_{(ac)}\ (0,010\ \text{M})$
+
+    \item \textbf{Cálculo de la FEM (Nernst):}\\
+    Al ser del mismo material, el potencial estándar se anula ($E^\circ = 0,80\ \text{V} - 0,80\ \text{V} = 0\ \text{V}$) y se transfiere $n=1$ electrón.\\
+    $Q = \frac{[\text{Productos}]}{[\text{Reactivos}]} = \frac{[\text{Ánodo}]}{[\text{Cátodo}]} = \frac{0,010}{1,0} = 0,010$\\
+    $E = E^\circ - \frac{0,0592}{n} \log(Q)$\\
+    $E = 0 - \frac{0,0592}{1} \log(0,010)$\\
+    $E = -0,0592 \cdot (-2) = \mathbf{+0,1184\ \text{V}}$
+
+    \item \textbf{Equilibrio Electroquímico:}\\
+    Cuando las concentraciones iónicas se igualan, el sistema llega al equilibrio y el cociente de reacción se vuelve $Q = 1$. Puesto que el $\log(1) = 0$, la fuerza electromotriz se vuelve cero ($\mathbf{\mathrm{FEM} = 0\ \text{V}}$), indicando que la celda se descargó por completo. Como ya no hay energía eléctrica disponible para realizar trabajo útil, la variación de la energía libre de Gibbs también se hace nula ($\mathbf{\Delta\mathrm{G} = 0}$).
+\end{enumerate}
+\end{formulabox}
+
+\vspace{0.8cm}
+\begin{center}
+    \small\textbf{Usach Premium} — ¡Nos vemos en la ayudantía! \\
+    \textit{``Por y para estudiantes.''}
+\end{center}
+
+\end{soluciones}
+
+\end{document}

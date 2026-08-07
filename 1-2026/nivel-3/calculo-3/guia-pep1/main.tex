@@ -1,0 +1,2030 @@
+% ============================================================
+%  GUÍA DE PREPARACIÓN PEP 1 -- CÁLCULO III
+%  Usach Premium
+%  Contenido preservado desde ../GUIA PEP 1.tex
+% ============================================================
+
+\documentclass[letterpaper, 12pt]{article}
+
+% ============================================================
+% PAQUETES
+% ============================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{needspace}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{eso-pic}
+\usepackage{tikz}
+\tcbuselibrary{skins, breakable}
+
+% ============================================================
+% GEOMETRÍA
+% ============================================================
+\geometry{letterpaper, margin=1.5cm, top=3cm, bottom=2.5cm, headheight=2cm}
+
+% ============================================================
+% COLORES INSTITUCIONALES
+% ============================================================
+\definecolor{celesteSuave}{HTML}{F0F7FF}
+\definecolor{azulFuerte}{HTML}{1A5276}
+\definecolor{turquesaUsach}{HTML}{33CCCC}
+\definecolor{enlace}{HTML}{1A5276}
+
+% ============================================================
+% RUTAS DE IMÁGENES
+% ============================================================
+\newcommand{\logoup}{./images/logo_up.png}
+\newcommand{\logousach}{./images/logo_usach.png}
+\newcommand{\logofondo}{./images/logo_up.png}
+
+% ============================================================
+% INFORMACIÓN DE LA GUÍA
+% ============================================================
+\newcommand{\institucion}{Usach Premium}
+\newcommand{\curso}{Cálculo III}
+\newcommand{\guiasnumero}{Guía de Preparación PEP 1}
+\newcommand{\semestre}{1er. Semestre de 2026}
+\newcommand{\preparadopor}{Usach Premium}
+\newcommand{\webinstitucion}{www.usachpremium.cl}
+\newcommand{\instagraminstitucion}{https://www.instagram.com/usach.premium}
+\newcommand{\transparencia}{0.05}
+\newcommand{\fraseportada}{``Por y para estudiantes''}
+
+\newcommand{\listacontenidos}{
+    \item[\color{azulFuerte}$\Rightarrow$] Límites, continuidad y diferenciabilidad
+    \item[\color{azulFuerte}$\Rightarrow$] Dirección y tasa de crecimiento máximo
+    \item[\color{azulFuerte}$\Rightarrow$] Derivada direccional
+    \item[\color{azulFuerte}$\Rightarrow$] Plano y recta tangente
+    \item[\color{azulFuerte}$\Rightarrow$] Regla de la cadena
+    \item[\color{azulFuerte}$\Rightarrow$] Teoremas de la función implícita e inversa
+    \item[\color{azulFuerte}$\Rightarrow$] Máximos y mínimos libres
+    \item[\color{azulFuerte}$\Rightarrow$] Multiplicadores de Lagrange y condiciones KKT
+}
+
+% ============================================================
+% HYPERREF
+% ============================================================
+\hypersetup{
+    colorlinks=true,
+    linkcolor=enlace,
+    urlcolor=enlace,
+    citecolor=enlace,
+    pdfborder={0 0 0},
+    pdftitle={Guía de Preparación PEP 1 -- Cálculo III},
+    pdfauthor={Usach Premium}
+}
+\pdfstringdefDisableCommands{\def\mathbb#1{#1}}
+
+% ============================================================
+% ENCABEZADO Y PIE
+% ============================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\includegraphics[height=1.2cm]{\logoup}}
+\fancyhead[R]{%
+    \begin{minipage}[b]{0.42\textwidth}
+        \raggedleft
+        \fontsize{9pt}{11pt}\selectfont
+        \textbf{\color{azulFuerte}\institucion} \\
+        \curso\ -- \guiasnumero \\
+        \textit{\color{gray}@usach.premium}
+    \end{minipage}\hspace{0.1cm}%
+    \includegraphics[height=1.2cm]{\logousach}%
+}
+\fancyfoot[L]{\fontsize{9pt}{11pt}\selectfont \textit{\fraseportada}}
+\fancyfoot[R]{\fontsize{9pt}{11pt}\selectfont Página \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+
+% ============================================================
+% MARCA DE AGUA
+% ============================================================
+\newcommand{\MarcaAgua}{
+    \AddToShipoutPicture{
+        \AtPageCenter{
+            \begin{tikzpicture}[remember picture, overlay]
+                \node[opacity=\transparencia] at (0,0)
+                    {\includegraphics[width=0.7\textwidth]{\logofondo}};
+            \end{tikzpicture}%
+        }
+    }
+}
+
+% ============================================================
+% CAJAS Y ENTORNOS
+% ============================================================
+\newtcolorbox{ejerciciobox}[1]{
+    enhanced,
+    breakable,
+    colback=white,
+    colframe=azulFuerte,
+    colbacktitle=azulFuerte,
+    coltitle=white,
+    title=\textbf{#1},
+    fonttitle=\small\sffamily,
+    boxrule=1pt,
+    arc=5pt,
+    before skip=3mm,
+    after skip=3mm,
+    drop shadow={black!8}
+}
+
+\newtcolorbox{desafiobox}[1]{
+    enhanced,
+    breakable,
+    colback=white,
+    colframe=azulFuerte,
+    colbacktitle=azulFuerte,
+    coltitle=white,
+    title=\textbf{#1},
+    fonttitle=\small\sffamily,
+    boxrule=1.1pt,
+    arc=5pt,
+    before skip=3mm,
+    after skip=3mm,
+    drop shadow={black!8}
+}
+
+\newenvironment{solbox}[1]{%
+    \begin{tcolorbox}[
+        enhanced,
+        breakable,
+        colback=celesteSuave,
+        colframe=azulFuerte,
+        title=\textbf{#1},
+        fonttitle=\bfseries,
+        arc=5pt,
+        before skip=3mm,
+        after skip=3mm]
+}{%
+    \end{tcolorbox}
+}
+
+\newenvironment{ejercicios}{\MarcaAgua}{}
+
+\newenvironment{soluciones}{%
+    \newpage
+    \begin{center}
+        \begin{tcolorbox}[
+            colback=azulFuerte,
+            colframe=azulFuerte,
+            colupper=white,
+            width=0.8\textwidth,
+            center,
+            arc=10pt]
+            \centering\Large\textbf{SOLUCIONARIO}
+        \end{tcolorbox}
+    \end{center}
+    \MarcaAgua
+    \small
+}{}
+
+% ============================================================
+\begin{document}
+\thispagestyle{plain}
+
+% ============================================================
+% PORTADA
+% ============================================================
+\AddToShipoutPicture*{%
+    \put(54, 700){\includegraphics[width=2cm]{\logoup}}
+    \put(420, 706){\includegraphics[width=5cm]{\logousach}}
+}
+
+\vspace*{0.5cm}
+
+\begin{center}
+    \color{azulFuerte}
+    {\huge \textbf{GUÍA DE EJERCICIOS}} \\[0.5cm]
+    {\Huge \textbf{\curso}} \\[0.3cm]
+    {\Large \guiasnumero} \\[1.2cm]
+
+    \begin{tcolorbox}[
+        colback=celesteSuave,
+        colframe=azulFuerte,
+        arc=10pt,
+        width=0.85\textwidth,
+        center,
+        boxrule=1.5pt]
+        \centering
+        \vspace{0.2cm}
+        {\Large \textbf{Contenidos PEP 1}}
+        \vspace{0.3cm}
+        \color{black}
+        \begin{itemize}[leftmargin=2.2cm, itemsep=0.1cm]
+            \listacontenidos
+        \end{itemize}
+        \vspace{0.2cm}
+    \end{tcolorbox}
+\end{center}
+
+\vspace{1.2cm}
+
+\begin{center}
+    {\Large \textbf{\semestre}} \\[0.8cm]
+    {\large \textbf{Preparado por: \preparadopor}}
+\end{center}
+
+\vspace{1.8cm}
+
+\begin{center}
+    {\color{azulFuerte}\hrule height 0.5pt}
+    \vspace{0.3cm}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \textbf{Instagram:} \\
+        \small\href{\instagraminstitucion}{@usach.premium}
+    \end{minipage}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \textbf{Web:} \\
+        \small\href{http://\webinstitucion}{\webinstitucion}
+    \end{minipage}
+\end{center}
+
+\pagenumbering{arabic}
+\newpage
+
+% ============================================================
+% EJERCICIOS (contenido original)
+% ============================================================
+\begin{ejercicios}
+\section{Límites, Continuidad y Diferenciabilidad en \texorpdfstring{$\mathbb{R}^n$}{Rn}}
+
+% --- EJERCICIO 1 ---
+\begin{ejerciciobox}{Ejercicio 1.1: Límites por Trayectorias Parabólicas}
+    Determine la existencia del siguiente límite:
+    \[ \lim_{(x,y) \to (0,0)} \frac{x^3 y}{x^6 + y^2} \]
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 1.2 ---
+\begin{ejerciciobox}{Ejercicio 1.2: Coordenadas Polares y Acotamiento}
+    Calcule el siguiente límite o demuestre que no existe:
+    \[ \lim_{(x,y) \to (0,0)} \frac{x^3 + y^3}{x^2 + y^2} \]
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 1.3 ---
+\begin{ejerciciobox}{Ejercicio 1.3: Continuidad por Tramos}
+    Estudie la continuidad en el origen de la función:
+    \[ f(x,y) = \begin{cases} \frac{\sin(xy)}{x^2 + y^2} & \text{si } (x,y) \neq (0,0) \\ 0 & \text{si } (x,y) = (0,0) \end{cases} \]
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 1.4 ---
+\begin{ejerciciobox}{Ejercicio 1.4: Diferenciabilidad y Definición Estricta}
+    Demuestre que la función $f(x,y) = \sqrt[3]{x^3 + y^3}$ no es diferenciable en $(0,0)$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 1.5 ---
+\begin{ejerciciobox}{Ejercicio 1.5: Teorema del Sándwich Complejo}
+    Calcule: $\lim_{(x,y) \to (0,0)} \frac{x^2 y^2 \ln(x^2+y^2+1)}{x^2 + y^2}$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 1.6 ---
+\begin{ejerciciobox}{Ejercicio 1.6: Continuidad de Funciones Racionales}
+    Analice el límite $\lim_{(x,y) \to (0,0)} \frac{x^4 - 4y^2}{x^4 + 2y^2}$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 1.7 ---
+\begin{ejerciciobox}{Ejercicio 1.7: Diferenciabilidad con Parciales Continuas}
+    Pruebe que $f(x,y) = x^2 \sin(y)$ es diferenciable en todo $\mathbb{R}^2$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 1.8 ---
+\begin{ejerciciobox}{Ejercicio 1.8: Límites con Exponenciales}
+    Determine el valor de $\lim_{(x,y) \to (0,0)} \frac{1 - e^{x^2+y^2}}{x^2 + y^2}$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 1.9 ---
+\begin{ejerciciobox}{Ejercicio 1.9: Trayectorias Cúbicas}
+    Pruebe que no existe el límite de $f(x,y) = \frac{x^2 y}{x^4 + y^2}$ en el origen.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 1.10 ---
+\begin{ejerciciobox}{Ejercicio 1.10: Demostración formal $\epsilon-\delta$}
+    Demuestre formalmente por definición que $\lim_{(x,y)\to(1,2)} (3x + 2y) = 7$.
+\end{ejerciciobox}
+% =========================================================================
+% TEMA 2: DIRECCIÓN Y TASA DE CRECIMIENTO MÁXIMO (10 EJERCICIOS)
+% =========================================================================
+\section{Dirección y Tasa de Crecimiento Máximo}
+
+% --- EJERCICIO 2.1 ---
+\begin{ejerciciobox}{Ejercicio 2.1: Distribución Térmica en Placas}
+    La temperatura en una región del plano viene dada por $T(x,y) = 100 - 3x^2 - 2y^2$. Un objeto se encuentra en el punto $P(1,2)$. Determine la dirección unitaria en la cual la temperatura disminuye más rápidamente y la tasa de dicha disminución.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 2.2 ---
+\begin{ejerciciobox}{Ejercicio 2.2: Potencial Eléctrico Tridimensional}
+    El potencial eléctrico en el espacio está modelado por $V(x,y,z) = \ln(x^2 + y^2 + z^2)$. Un electrón se ubica en $P(1,-1,2)$. Encuentre la tasa de variación máxima del potencial en dicho punto y la dirección en la que ocurre.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 2.3 ---
+\begin{ejerciciobox}{Ejercicio 2.3: Trayectoria de Máxima Pendiente (Topografía)}
+    La altura de una montaña está modelada por $z = 2000 - 0.02x^2 - 0.04y^2$. Si un escalador está en la posición $(10, 20)$, ¿hacia qué coordenadas del plano $xy$ debe dar su primer paso para ascender por el camino más empinado?
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 2.4 ---
+\begin{ejerciciobox}{Ejercicio 2.4: Propiedad Algebraica del Gradiente}
+    Demuestre detalladamente que para cualquier función diferenciable $f: \mathbb{R}^n \to \mathbb{R}$, el valor máximo de la derivada direccional en un punto dado $P_0$ es exactamente $\|\nabla f(P_0)\|$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 2.5 ---
+\begin{ejerciciobox}{Ejercicio 2.5: Dirección Ortogonal y Cambio Nulo}
+    Dada la función $f(x,y) = x^2 y - 4xy$, encuentre todas las direcciones unitarias en el punto $(1,2)$ tales que la tasa de variación sea igual a cero.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 2.6 ---
+\begin{ejerciciobox}{Ejercicio 2.6: Tasa en Superficies Cuádricas}
+    Considere $f(x,y,z) = x^2 + 2y^2 + 3z^2$. Determine el punto sobre la superficie de la esfera $x^2 + y^2 + z^2 = 1$ donde la función presenta la máxima tasa de crecimiento en dirección al eje $z$ positivo.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 2.7 ---
+\begin{ejerciciobox}{Ejercicio 2.7: Máxima Variación Inversa}
+    Sea $f(x,y) = \exp(x^2 - y^2)$. Determine en qué puntos del plano la tasa de variación máxima de $f$ es igual a cero.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 2.8 ---
+\begin{ejerciciobox}{Ejercicio 2.8: Campo Escalar Combinado}
+    Calcule la máxima dirección de incremento de $g(x,y) = x \sin(xy)$ en el punto $\left(1, \frac{\pi}{2}\right)$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 2.9 ---
+\begin{ejerciciobox}{Ejercicio 2.9: Aplicación Física de Flujo}
+    La densidad de un fluido viene dada por $\rho(x,y,z) = \frac{10}{1 + x^2 + y^2 + z^2}$. Determine la tasa de variación en el punto $(1,1,1)$ en la dirección de máximo decrecimiento.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 2.10 ---
+\begin{ejerciciobox}{Ejercicio 2.10: Deducción Geométrica de la Tasa}
+    Si la tasa de variación máxima de $f(x,y)$ en el punto $(2,3)$ es $2\sqrt{5}$ y ocurre en la dirección del vector $(1,2)$, determine analíticamente el vector gradiente $\nabla f(2,3)$.
+\end{ejerciciobox}
+
+\vspace{5mm}
+
+% =========================================================================
+% TEMA 3: DERIVADA DIRECCIONAL (10 EJERCICIOS)
+% =========================================================================
+\section{Derivada Direccional}
+
+% --- EJERCICIO 3.1 ---
+\begin{ejerciciobox}{Ejercicio 3.1: Derivada Direccional Clásica}
+    Calcule la derivada direccional de $f(x,y) = x^2 y + 3y^2$ en el punto $(1,-2)$ en la dirección que apunta hacia el punto $(4,2)$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 3.2 ---
+\begin{ejerciciobox}{Ejercicio 3.2: Uso Obligatorio de la Definición por Límite}
+    Dada la función no diferenciable en el origen:
+    \[ f(x,y) = \begin{cases} \frac{x^2 y}{x^2 + y^2} & \text{si } (x,y) \neq (0,0) \\ 0 & \text{si } (x,y) = (0,0) \end{cases} \]
+    Calcule la derivada direccional de $f$ en $(0,0)$ en la dirección del vector unitario $\hat{u} = (a,b)$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 3.3 ---
+\begin{ejerciciobox}{Ejercicio 3.3: Dirección con Ángulo Especial}
+    Calcule la derivada direccional de $f(x,y) = 2x^2 - 3xy + 5y^2$ en el punto $(1,1)$ en la dirección que forma un ángulo de $\theta = \frac{\pi}{6}$ con el eje $x$ positivo.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 3.4 ---
+\begin{ejerciciobox}{Ejercicio 3.4: Espacio Tridimensional}
+    Calcule la derivada direccional de $f(x,y,z) = x y^2 z^3$ en el punto $(2,1,1)$ en la dirección del vector $\vec{v} = (1, 2, 2)$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 3.5 ---
+\begin{ejerciciobox}{Ejercicio 3.5: Ecuaciones Simultáneas con Derivadas}
+    Suponga que la derivada direccional de $f(x,y)$ en $P(0,0)$ en la dirección hacia el punto $(1,1)$ vale $2\sqrt{2}$, y en dirección hacia $(0,2)$ vale $3$. Determine el gradiente en el origen.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 3.6 ---
+\begin{ejerciciobox}{Ejercicio 3.6: Derivada Direccional de Funciones Compuestas}
+    Sea $f(x,y) = g(x^2+y^2)$ con $g'(5) = 3$. Calcule la derivada direccional de $f$ en el punto $(1,2)$ en la dirección de $\hat{u} = \left(\frac{\sqrt{2}}{2}, \frac{\sqrt{2}}{2}\right)$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 3.7 ---
+\begin{ejerciciobox}{Ejercicio 3.7: Derivada Direccional Nula en Logaritmos}
+    Encuentre todas las direcciones unitarias en las que la derivada direccional de $f(x,y) = \ln(xy)$ en el punto $(1,1)$ sea nula.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 3.8 ---
+\begin{ejerciciobox}{Ejercicio 3.8: Función Exponencial Compleja}
+    Determine la derivada direccional de $f(x,y) = e^{xy} + x^2$ en el punto $(0,2)$ en la dirección del vector unitario que forma un ángulo de $\pi$ radianes con el eje $x$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 3.9 ---
+\begin{ejerciciobox}{Ejercicio 3.9: Interpretación Geométrica Directa}
+    Se sabe que $D_{\hat{u}}f(a,b) = 5$ cuando $\hat{u}$ es la dirección del gradiente. ¿Cuánto vale $D_{-\hat{u}}f(a,b)$? Justifique su respuesta basándose en propiedades de linealidad espacial.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 3.10 ---
+\begin{ejerciciobox}{Ejercicio 3.10: Variación Máxima Combinada}
+    Dada la superficie definida por $f(x,y) = \sqrt{25 - x^2 - y^2}$, calcule la tasa de cambio en el punto $(3,0)$ siguiendo la dirección de la recta tangente a la circunferencia $x^2 + y^2 = 9$ en ese mismo punto.
+\end{ejerciciobox}
+
+% =========================================================================
+% TEMA 4: PLANO Y RECTA TANGENTE (10 EJERCICIOS)
+% =========================================================================
+\section{Plano y Recta Tangente}
+
+% --- EJERCICIO 4.1 ---
+\begin{ejerciciobox}{Ejercicio 4.1: Plano Tangente a Superficie Explícita}
+    Encuentre la ecuación del plano tangente a la superficie $z = 2x^2 + y^2$ en el punto $P(1, 2, 6)$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 4.2 ---
+\begin{ejerciciobox}{Ejercicio 4.2: Superficie Implícita Compleja}
+    Determine la ecuación del plano tangente y la recta normal al elipsoide de ecuación implícita $x^2 + 2y^2 + 3z^2 = 9$ en el punto $P(2, 1, 1)$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 4.3 ---
+\begin{ejerciciobox}{Ejercicio 4.3: Plano Tangente Horizontal}
+    Determine los puntos sobre la superficie hiperbólica $z = x^2 - xy + y^2 - 2x + 4y$ donde el plano tangente es completamente horizontal.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 4.4 ---
+\begin{ejerciciobox}{Ejercicio 4.4: Recta Tangente a la Curva de Intersección}
+    Determine las ecuaciones paramétricas de la recta tangente a la curva de intersección entre el cilindro $x^2 + y^2 = 5$ y el paraboloide $z = x^2 + y^2$ en el punto $P(1, 2, 5)$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 4.5 ---
+\begin{ejerciciobox}{Ejercicio 4.5: Planos Tangentes Paralelos}
+    Encuentre los puntos sobre la superficie esférica $x^2 + y^2 + z^2 = 4$ donde el plano tangente es paralelo al plano de ecuación conocida $2x + y + 2z = 10$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 4.6 ---
+\begin{ejerciciobox}{Ejercicio 4.6: Plano Tangente a partir de Datos Gráficos}
+    Determine la ecuación del plano tangente a una superficie $z = f(x,y)$ en el punto $(3,4,5)$, sabiendo que la derivada direccional en la dirección $(1,0)$ vale $2$ y en la dirección $(0,1)$ vale $-1$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 4.7 ---
+\begin{ejerciciobox}{Ejercicio 4.7: Demostración del Cono}
+    Demuestre analíticamente que el plano tangente a cualquier punto de la superficie cónica $z^2 = x^2 + y^2$ (excepto en el origen) siempre pasa por el origen de coordenadas $(0,0,0)$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 4.8 ---
+\begin{ejerciciobox}{Ejercicio 4.8: Ángulo entre Superficies}
+    Determine el ángulo agudo de intersección entre las superficies $x^2 + y^2 + z^2 = 9$ y $z = x^2 + y^2 - 3$ en el punto común $P(2, 0, 1)$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 4.9 ---
+\begin{ejerciciobox}{Ejercicio 4.9: Recta Tangente a una Curva Paramétrica}
+    Una curva en el espacio está descrita por $\vec{r}(t) = (t^2, \ln(t), t e^t)$. Encuentre la ecuación paramétrica de la recta tangente a la trayectoria en el punto correspondiente a $t = 1$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 4.10 ---
+\begin{ejerciciobox}{Ejercicio 4.10: Aproximación Lineal Mediante Plano Tangente}
+    Utilice la aproximación lineal (plano tangente) de $f(x,y) = \sqrt{x^2 + y^2}$ en el punto $(3,4)$ para estimar numéricamente el valor de $\sqrt{(3.02)^2 + (3.97)^2}$.
+\end{ejerciciobox}
+
+\vspace{5mm}
+
+% =========================================================================
+% TEMA 5: REGLA DE LA CADENA (10 EJERCICIOS)
+% =========================================================================
+\section{Regla de la Cadena}
+
+% --- EJERCICIO 5.1 ---
+\begin{ejerciciobox}{Ejercicio 5.1: Regla de la Cadena Estándar}
+    Sea $z = x^2 y - y^2$, donde $x = t^2$ e $y = e^t$. Calcule de forma directa la derivada total $\frac{dz}{dt}$ utilizando la regla de la cadena multivariable.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 5.2 ---
+\begin{ejerciciobox}{Ejercicio 5.2: Variables Intermedias Múltiples}
+    Sea $w = f(x,y) = x^2 + y^2$, donde las variables interiores se definen mediante coordenadas polares $x = r\cos(\theta)$ e $y = r\sin(\theta)$. Calcule explícitamente las derivadas parciales compuestas $\frac{\partial w}{\partial r}$ y $\frac{\partial w}{\partial \theta}$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 5.3 ---
+\begin{ejerciciobox}{Ejercicio 5.3: Derivación de una Función Desconocida}
+    Sea $z = f(x - y, y - x)$. Demuestre de forma rigurosa que la función cumple la ecuación diferencial parcial $\frac{\partial z}{\partial x} + \frac{\partial z}{\partial y} = 0$ para cualquier función $f$ diferenciable.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 5.4 ---
+\begin{ejerciciobox}{Ejercicio 5.4: Derivada de Segundo Orden}
+    Sea $z = f(x,y)$ con segundas derivadas parciales continuas, donde $x = 2u + v$ e $y = u - v$. Calcule la expresión analítica para la derivada de segundo orden $\frac{\partial^2 z}{\partial u^2}$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 5.5 ---
+\begin{ejerciciobox}{Ejercicio 5.5: Aplicación en Termodinámica}
+    La presión $P$, el volumen $V$ y la temperatura $T$ de un gas ideal se relacionan mediante $PV = nRT$. Si el volumen aumenta a una tasa de $2\,\text{L/min}$ y la temperatura aumenta a $1\,\text{K/min}$, calcule la tasa de cambio de la presión cuando $V=10\,\text{L}$, $T=300\,\text{K}$ y $nR=8.31$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 5.6 ---
+\begin{ejerciciobox}{Ejercicio 5.6: Cambios de Variable Simétricos}
+    Muestre que si $u = f(x/y)$, entonces satisface la ecuación lineal de derivadas parciales: $x\frac{\partial u}{\partial x} + y\frac{\partial u}{\partial y} = 0$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 5.7 ---
+\begin{ejerciciobox}{Ejercicio 5.7: Matriz Jacobiana de Composición}
+    Sean las funciones $f(u,v) = (u^2 - v^2, 2uv)$ y $g(x,y) = (x\cos y, x\sin y)$. Calcule la matriz jacobiana de la composición $(f \circ g)$ en el punto $(1, 0)$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 5.8 ---
+\begin{ejerciciobox}{Ejercicio 5.8: Derivada en una Trayectoria Cúbica}
+    Sea $f(x,y) = \ln(x^2 + y^2)$. Calcule la derivada de la función a lo largo de la curva paramétrica dada por $\vec{r}(t) = (t, t^3)$ evaluada en el instante $t = 1$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 5.9 ---
+\begin{ejerciciobox}{Ejercicio 5.9: Identidad de Euler para Funciones Homogéneas}
+    Una función es homogénea de grado $n$ si $f(tx, ty) = t^n f(x,y)$. Utilice la regla de la cadena derivando respecto a $t$ para demostrar la identidad de Euler: $x f_x + y f_y = n f(x,y)$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 5.10 ---
+\begin{ejerciciobox}{Ejercicio 5.10: Composición con Funciones Trigonométricas}
+    Sea $u = f(x,y)$, donde $x = s\cos t$ y $y = s\sin t$. Si se sabe que $f_x(0,1) = 3$ y $f_y(0,1) = 2$, calcule el valor de $\frac{\partial u}{\partial t}$ en el punto coordenado $(s,t) = (1, \frac{\pi}{2})$.
+\end{ejerciciobox}
+% =========================================================================
+% TEMA 6: TEOREMA DE LA FUNCIÓN IMPLÍCITA (10 EJERCICIOS)
+% =========================================================================
+\section{Teorema de la Función Implícita}
+
+% --- EJERCICIO 6.1 ---
+\begin{ejerciciobox}{Ejercicio 6.1: Verificación de Existencia y Derivación}
+    Demuestre que la ecuación $x^3 + y^3 + z^3 - 3xyz = 4$ define implícitamente a $z$ como una función diferenciable $z = g(x,y)$ en un entorno del punto $P(1,1,2)$. Calcule además $\frac{\partial z}{\partial x}(1,1)$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 6.2 ---
+\begin{ejerciciobox}{Ejercicio 6.2: Plano Tangente mediante Derivación Implícita}
+    Considere la superficie definida por $\ln(x+z) + e^{y z} = 1$. Encuentre la ecuación del plano tangente a dicha superficie en el punto coordenado $(1, 0, 0)$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 6.3 ---
+\begin{ejerciciobox}{Ejercicio 6.3: Derivada de Segundo Orden Implícita}
+    Sea $x^2 + y^2 + z^2 = 1$. Calcule la expresión analítica para la segunda derivada parcial $\frac{\partial^2 z}{\partial x^2}$ suponiendo la existencia local de $z = f(x,y)$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 6.4 ---
+\begin{ejerciciobox}{Ejercicio 6.4: Sistema de Funciones Implícitas}
+    Demuestre que el sistema de ecuaciones:
+    \[ \begin{cases} u^2 + v^2 - x^2 - y = 0 \\ u^3 + v^3 - x - y^3 = 0 \end{cases} \]
+    define de forma única a $u$ y $v$ como funciones diferenciables de $x$ e $y$ en un entorno del punto $(x,y,u,v) = (1, 0, 1, 0)$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 6.5 ---
+\begin{ejerciciobox}{Ejercicio 6.5: Derivación en un Sistema Válido}
+    Considere el sistema: $u + v = x + y$, y $xu + yv = 1$. Calcule $\frac{\partial u}{\partial x}$ suponiendo que el determinante jacobiano no es nulo.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 6.6 ---
+\begin{ejerciciobox}{Ejercicio 6.6: Ecuación Trigonométrica Compleja}
+    Dada la relación $\sin(x+y) + \cos(y+z) = 1$, determine analíticamente la expresión para $\frac{\partial z}{\partial y}$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 6.7 ---
+\begin{ejerciciobox}{Ejercicio 6.7: Relación de Tres Variables}
+    Si $f(x,y,z) = 0$, demuestre analíticamente la identidad cíclica fundamental de la termodinámica: $\frac{\partial x}{\partial y} \cdot \frac{\partial y}{\partial z} \cdot \frac{\partial z}{\partial x} = -1$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 6.8 ---
+\begin{ejerciciobox}{Ejercicio 6.8: Superficie Exponencial}
+    Pruebe que la ecuación $x e^y + y e^z + z e^x = 0$ define a $z(x,y)$ en el origen $(0,0,0)$ y determine el valor de su gradiente bidimensional $\nabla z(0,0)$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 6.9 ---
+\begin{ejerciciobox}{Ejercicio 6.9: Intersección y Linealidad}
+    Determine la pendiente $\frac{dy}{dx}$ en el punto $(1,1)$ de la curva de nivel definida por la ecuación implícita $x^2 + x y + y^2 = 3$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 6.10 ---
+\begin{ejerciciobox}{Ejercicio 6.10: Función Implícita de Argumento Compuesto}
+    Suponga que la ecuación $f(x^2 - y^2, z) = 0$ define a $z$ como función de $x$ e $y$. Muestre que se cumple la relación: $y \frac{\partial z}{\partial x} + x \frac{\partial z}{\partial y} = 0$.
+\end{ejerciciobox}
+
+\vspace{5mm}
+
+% =========================================================================
+% TEMA 7: TEOREMA DE LA FUNCIÓN INVERSA (10 EJERCICIOS)
+% =========================================================================
+\section{Teorema de la Función Inversa}
+
+% --- EJERCICIO 7.1 ---
+\begin{ejerciciobox}{Ejercicio 7.1: Invertibilidad Local y Jacobiano}
+    Sea $f: \mathbb{R}^2 \to \mathbb{R}^2$ definida por $f(x,y) = (x^2 - y^2, 2xy)$. Demuestre que $f$ admite una inversa local diferenciable en todo punto diferente del origen $(0,0)$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 7.2 ---
+\begin{ejerciciobox}{Ejercicio 7.2: Derivada de la Inversa en un Punto}
+    Para la función del ejercicio anterior, si $P(1,2) \implies f(1,2) = (-3, 4)$, calcule de forma exacta la matriz jacobiana de la función inversa $J_{f^{-1}}(-3, 4)$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 7.3 ---
+\begin{ejerciciobox}{Ejercicio 7.3: Transformación Polar}
+    Considere la transformación de coordenadas polares a cartesianas: $x = r\cos\theta, \ y = r\sin\theta$. Determine en qué puntos del dominio la transformación es localmente invertible de forma diferenciable.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 7.4 ---
+\begin{ejerciciobox}{Ejercicio 7.4: Invertibilidad Local de Campo Exponencial}
+    Sea $f(x,y) = (e^x \cos y, \ e^x \sin y)$. Demuestre que $f$ es localmente invertible en todo su dominio, pero no posee una inversa global en todo $\mathbb{R}^2$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 7.5 ---
+\begin{ejerciciobox}{Ejercicio 7.5: Invertibilidad en Tres Dimensiones}
+    Determine si el campo tridimensional $f(x,y,z) = (x+y+z, \ y+z, \ z^3)$ admite inversa local en un entorno del punto $P(1, 1, 1)$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 7.6 ---
+\begin{ejerciciobox}{Ejercicio 7.6: Relación Lineal Inversa}
+    Sea $f(x,y) = (3x - y, \ x + 2y)$. Calcule directamente su matriz jacobiana y verifique que coincide con la obtenida al invertir la matriz del sistema lineal.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 7.7 ---
+\begin{ejerciciobox}{Ejercicio 7.7: Puntos Singulares de una Transformación}
+    Encuentre todos los puntos de falla de invertibilidad local (puntos singulares) para la función definida por $f(x,y) = (x^2 + y, \ y^2 + x)$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 7.8 ---
+\begin{ejerciciobox}{Ejercicio 7.8: Invertibilidad con Funciones Trigonométricas}
+    Considere la función $f(x,y) = (x\cos y, \ \sin x)$. Determine si es invertible localmente en el origen $(0,0)$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 7.9 ---
+\begin{ejerciciobox}{Ejercicio 7.9: Jacobiano de una Composición Inversa}
+    Si $f$ y $g$ son dos transformaciones invertibles localmente con $J_f(P) = A$ y $J_g(f(P)) = B$, exprese analíticamente la matriz jacobiana de la inversa de la composición, esto es, $J_{(g \circ f)^{-1}}$.
+\end{ejerciciobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 7.10 ---
+\begin{ejerciciobox}{Ejercicio 7.10: Transformación Cúbica Pura}
+    Sea $f(x,y) = (x^3, y^3)$. Demuestre que es biyectiva global en todo el plano $\mathbb{R}^2$, pero analice por qué el Teorema de la Función Inversa falla en el origen $(0,0)$.
+\end{ejerciciobox}
+% =========================================================================
+% TEMA 8: MÁXIMOS Y MÍNIMOS SIN RESTRICCIONES (10 EJERCICIOS)
+% =========================================================================
+\section{Máximos y Mínimos Libres (Sin Restricciones)}
+
+% --- EJERCICIO 8.1 ---
+\begin{desafiobox}{Ejercicio 8.1: Clasificación Clásica de Puntos Críticos}
+    Encuentre y clasifique todos los puntos críticos de la función:
+    \[ f(x,y) = x^3 + y^3 - 3x - 12y + 20 \]
+\end{desafiobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 8.2 ---
+\begin{desafiobox}{Ejercicio 8.2: Función con Criterio de Hessiano Nulo}
+    Analice los puntos críticos de $f(x,y) = x^4 + y^4$. Muestre que el determinante hessiano es nulo en el origen y clasifíquelo por análisis directo de entorno.
+\end{desafiobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 8.3 ---
+\begin{desafiobox}{Ejercicio 8.3: Optimización en Diseño de Contenedores}
+    Determine las dimensiones del contenedor rectangular sin tapa de mayor volumen posible que se puede construir utilizando exactamente $12\,\text{m}^2$ de material metálico.
+\end{desafiobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 8.4 ---
+\begin{desafiobox}{Ejercicio 8.4: Punto Crítico Único en Función Exponencial}
+    Clasifique los puntos extremos del campo escalar definido por $f(x,y) = (x^2 + y^2)e^{-(x^2+y^2)}$.
+\end{desafiobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 8.5 ---
+\begin{desafiobox}{Ejercicio 8.5: Extremos Absolutos en una Región Cerrada}
+    Determine los valores máximo y mínimo absolutos de la función $f(x,y) = x^2 - 2xy + 2y$ sobre la región triangular cerrada $R$ con vértices en $(0,0)$, $(3,0)$ y $(0,3)$.
+\end{desafiobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 8.6 ---
+\begin{desafiobox}{Ejercicio 8.6: Punto de Silla Asimétrico}
+    Muestre analíticamente que la función $f(x,y) = x^2 - y^3$ no posee mínimos ni máximos absolutos en todo el plano $\mathbb{R}^2$.
+\end{desafiobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 8.7 ---
+\begin{desafiobox}{Ejercicio 8.7: Minimización de Distancia en el Espacio}
+    Determine el punto sobre el plano de ecuación espacial $2x - y + z = 6$ que se encuentra más cercano al origen de coordenadas $(0,0,0)$.
+\end{desafiobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 8.8 ---
+\begin{desafiobox}{Ejercicio 8.8: Modelo de Utilidad Comercial}
+    La utilidad de una empresa pequeña que fabrica dos productos está modelada por $U(x,y) = 40x + 50y - x^2 - y^2 - xy$. Determine la producción óptima para maximizar los beneficios económicos.
+\end{desafiobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 8.9 ---
+\begin{desafiobox}{Ejercicio 8.9: Extremos en Polinomial Cuártico}
+    Clasifique los puntos críticos de la función de dos variables $f(x,y) = x^4 - 2x^2 + y^2$.
+\end{desafiobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 8.10 ---
+\begin{desafiobox}{Ejercicio 8.10: Función de Regresión y Mínimos Cuadrados}
+    Dada la colección de puntos muestrales $(1,2)$, $(2,2)$ y $(3,4)$, determine analíticamente la recta $y = mx$ que minimice la suma de los errores cuadráticos ordinarios.
+\end{desafiobox}
+
+\vspace{5mm}
+
+% =========================================================================
+% TEMA 9: MULTIPLICADORES DE LAGRANGE (10 EJERCICIOS)
+% =========================================================================
+\section{Multiplicadores de Lagrange}
+
+% --- EJERCICIO 9.1 ---
+\begin{desafiobox}{Ejercicio 9.1: Extremos en Elipse Convencional}
+    Determine los valores máximo y mínimo de la función objetivo $f(x,y) = xy$ sujeta a la restricción geométrica lineal del elipsoide $x^2 + 4y^2 = 8$.
+\end{desafiobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 9.2 ---
+\begin{desafiobox}{Ejercicio 9.2: Maximización de Utilidades bajo Restricción Presupuestaria}
+    Un consumidor busca maximizar su función de utilidad dada por $U(x,y) = x^{0.5} y^{0.5}$. Si los costos unitarios son $p_x = 2$, $p_y = 5$ y el presupuesto total es de $100$, determine el punto de equilibrio óptimo.
+\end{desafiobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 9.3 ---
+\begin{desafiobox}{Ejercicio 9.3: Dos Restricciones Simultáneas en el Espacio}
+    Determine el valor máximo de la función lineal de tres variables $f(x,y,z) = x + 2y + 3z$ sujeta simultáneamente a las restricciones: $x - y + z = 1$ y $x^2 + y^2 = 1$.
+\end{desafiobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 9.4 ---
+\begin{desafiobox}{Ejercicio 9.4: Extremos de una Forma Cuadrática en la Esfera}
+    Determine el máximo valor absoluto de $f(x,y,z) = x^2 + 2y^2 + 3z^2$ sujeta a la restricción de la esfera unitaria $x^2 + y^2 + z^2 = 1$.
+\end{desafiobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 9.5 ---
+\begin{desafiobox}{Ejercicio 9.5: Distancia Mínima a una Parábola}
+    Utilice multiplicadores de Lagrange para encontrar la distancia mínima desde el origen de coordenadas al gráfico de la parábola plana $y = x^2 + 1$.
+\end{desafiobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 9.6 ---
+\begin{desafiobox}{Ejercicio 9.6: Interpretación Económica del Multiplicador}
+    Demuestre detalladamente en el contexto del ejercicio 9.2 que el valor óptimo del multiplicador de Lagrange $\lambda$ equivale exactamente a la tasa marginal de variación del valor máximo de la utilidad respecto al presupuesto disponible ($\partial U^* / \partial I$).
+\end{desafiobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 9.7 ---
+\begin{desafiobox}{Ejercicio 9.7: Rectángulo de Mayor Área Inscrito en Elipse}
+    Determine el área máxima que puede tener un rectángulo cuyos lados son paralelos a los ejes coordenados e inscrito en la elipse de ecuación $\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$.
+\end{desafiobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 9.8 ---
+\begin{desafiobox}{Ejercicio 9.8: Minimización de Costos de Producción}
+    Una planta industrial requiere fabricar $100$ unidades de un producto químico compuesto. El costo de combinar los insumos viene dado por $C(x,y) = 2x^2 + y^2$. Si la restricción de producción es $x + y = 100$, determine la combinación que minimiza los costos.
+\end{desafiobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 9.9 ---
+\begin{desafiobox}{Ejercicio 9.9: Extremos sobre una Traza Hiperbólica}
+    Encuentre los puntos sobre la curva de nivel del plano definida por $xy = 1$ que se encuentren a la menor distancia posible del punto fijo exterior $P(0,0)$.
+\end{desafiobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 9.10 ---
+\begin{desafiobox}{Ejercicio 9.10: Máximo de Producto Triple en la Esfera}
+    Determine el valor máximo de $f(x,y,z) = xyz$ en el primer octante ($x,y,z > 0$) sujeta a la restricción esférica normalizada $x^2 + y^2 + z^2 = 3$.
+\end{desafiobox}
+
+\vspace{5mm}
+
+% =========================================================================
+% TEMA 10: CONDICIONES DE KARUSH-KUHN-TUCKER (KKT) (10 EJERCICIOS)
+% =========================================================================
+\section{Condiciones de Karush-Kuhn-Tucker (KKT)}
+
+% --- EJERCICIO 10.1 ---
+\begin{desafiobox}{Ejercicio 10.1: Optimización con Restricción de Desigualdad}
+    Maximice la función de utilidad espacial $f(x,y) = xy$ sujeta a la restricción de capacidad regional en forma de desigualdad: $x^2 + y^2 \le 2$.
+\end{desafiobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 10.2 ---
+\begin{desafiobox}{Ejercicio 10.2: Minimización con Restricción Lineal Inferior}
+    Minimice la función convexa de dos variables $f(x,y) = (x-3)^2 + (y-3)^2$ sujeta a la restricción de frontera lineal inferior: $x + y \le 4$.
+\end{desafiobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 10.3 ---
+\begin{desafiobox}{Ejercicio 10.3: Restricción de Caja Cuadrática}
+    Minimice la función cuadrática pura $f(x,y) = x^2 + y^2$ sujeta a la restricción lateral de desplazamiento: $x + 2y \ge 5$.
+\end{desafiobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 10.4 ---
+\begin{desafiobox}{Ejercicio 10.4: KKT con Múltiples Inecuaciones}
+    Determine el punto óptimo que maximiza la función objetivo $f(x,y) = 3x + y$ sujeto al cumplimiento simultáneo de las restricciones: $x + y \le 2$ y $x \ge 0, y \ge 0$.
+\end{desafiobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 10.5 ---
+\begin{desafiobox}{Ejercicio 10.5: Maximización de Producción Industrial}
+    Un proceso metalúrgico maximiza su rendimiento mediante $f(x,y) = 100 - x^2 - y^2$. Si las regulaciones ambientales imponen que la combinación de residuos cumpla la condición $x + 2y \ge 4$, determine el punto de operación óptimo.
+\end{desafiobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 10.6 ---
+\begin{desafiobox}{Ejercicio 10.6: Punto Crítico Interior Válido}
+    Resuelva mediante KKT el problema de maximizar $f(x,y) = 4 - x^2 - y^2$ sujeto a la condición de contorno circular $x^2 + y^2 \le 1$.
+\end{desafiobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 10.7 ---
+\begin{desafiobox}{Ejercicio 10.7: Minimización en un Semicilindro Convejo}
+    Determine el mínimo de la función $f(x,y) = x^2 + y$ sujeta a la restricción parabólica de desigualdad $y \ge x^2$.
+\end{desafiobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 10.8 ---
+\begin{desafiobox}{Ejercicio 10.8: Maximización con Restricción Hiperbólica}
+    Aplique el teorema KKT para resolver el problema de maximizar $f(x,y) = x + y$ sujeto a la condición de contorno $xy \ge 1$ en el primer cuadrante abierto.
+\end{desafiobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 10.9 ---
+\begin{desafiobox}{Ejercicio 10.9: Punto de Tangencia Óptimo}
+    Minimice la función de distancia $f(x,y) = x^2 + y^2$ sujeta a la restricción lineal desplazada $x + y \ge 2$.
+\end{desafiobox}
+
+\vspace{3mm}
+
+% --- EJERCICIO 10.10 ---
+\begin{desafiobox}{Ejercicio 10.10: KKT en una Región Cúbica Cerrada}
+    Maximice la función lineal $f(x,y) = x + y$ sujeta a las restricciones de caja dadas por $0 \le x \le 1$ y $0 \le y \le 1$.
+\end{desafiobox}
+
+
+\end{ejercicios}
+
+% ============================================================
+% SOLUCIONARIO (reubicado al final)
+% ============================================================
+\begin{soluciones}
+
+\section*{Límites, Continuidad y Diferenciabilidad en \texorpdfstring{$\mathbb{R}^n$}{Rn}}
+
+\begin{solbox}{Solución Ejercicio 1.1}
+    Probamos con la familia de trayectorias $y = mx^3$. Al sustituir en el límite:
+    \[ \lim_{x \to 0} \frac{x^3(mx^3)}{x^6 + (mx^3)^2} = \lim_{x \to 0} \frac{mx^6}{x^6(1+m^2)} = \frac{m}{1+m^2} \]
+    Como el resultado depende de $m$, por el teorema de unicidad, el límite \textbf{no existe}.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 1.2}
+    Pasamos a coordenadas polares $x = r\cos\theta, y = r\sin\theta$:
+    \[ \lim_{r \to 0^+} \frac{r^3\cos^3\theta + r^3\sin^3\theta}{r^2} = \lim_{r \to 0^+} r(\cos^3\theta + \sin^3\theta) = 0 \]
+    Dado que $|\cos^3\theta + \sin^3\theta| \le 2$ (función acotada), por el teorema del sándwich el límite \textbf{es 0}.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 1.3}
+    Evaluamos por la recta $y = mx$:
+    \[ \lim_{x \to 0} \frac{\sin(mx^2)}{x^2(1+m^2)} = \lim_{x \to 0} \frac{\sin(mx^2)}{mx^2} \cdot \frac{m}{1+m^2} = 1 \cdot \frac{m}{1+m^2} \]
+    Depende de $m$, por lo que el límite no existe y la función es \textbf{discontinua} en $(0,0)$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 1.4}
+    Calculamos las parciales en el origen:
+    \[ \frac{\partial f}{\partial x}(0,0) = \lim_{h \to 0} \frac{\sqrt[3]{h^3}-0}{h} = 1, \quad \frac{\partial f}{\partial y}(0,0) = 1 \]
+    Aplicamos el límite de diferenciabilidad:
+    \[ \lim_{(h,k)\to(0,0)} \frac{\sqrt[3]{h^3+k^3} - h - k}{\sqrt{h^2+k^2}} \]
+    Por la trayectoria $h=k$, queda $\lim_{h\to0^+} \frac{\sqrt[3]{2h^3}-2h}{\sqrt{2h^2}} = \frac{\sqrt[3]{2}-2}{\sqrt{2}} \neq 0$. \textbf{No es diferenciable}.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 1.5}
+    Sabemos que $\ln(u+1) \le u$ para $u \ge 0$. Sea $u = x^2+y^2$:
+    \[ 0 \le \left|\frac{x^2 y^2 \ln(x^2+y^2+1)}{x^2 + y^2}\right| \le \frac{(x^2+y^2)^2 (x^2+y^2)}{x^2+y^2} = (x^2+y^2)^2 \]
+    Como $\lim_{(x,y)\to(0,0)} (x^2+y^2)^2 = 0$, por acotamiento el límite \textbf{es 0}.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 1.6}
+    Probamos con $y = 0$: $\lim_{x\to0} \frac{x^4}{x^4} = 1$. \\
+    Probamos con $x = 0$: $\lim_{y\to0} \frac{-4y^2}{2y^2} = -2$. \\
+    Al dar valores distintos, el límite \textbf{no existe}.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 1.7}
+    Calculamos sus derivadas parciales: $\frac{\partial f}{\partial x} = 2x\sin(y)$ y $\frac{\partial f}{\partial y} = x^2\cos(y)$. \\
+    Ambas funciones son combinaciones elementales de polinomios y funciones trigonométricas, por lo tanto son continuas en todo $\mathbb{R}^2$. Por el teorema de la condición suficiente, $f$ \textbf{es diferenciable}.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 1.8}
+    Hacemos cambio de variable por sustitución directa radial $u = x^2 + y^2$. Si $(x,y) \to (0,0)$, entonces $u \to 0$:
+    \[ \lim_{u \to 0} \frac{1 - e^u}{u} = -\lim_{u \to 0} \frac{e^u - 1}{u} = -1 \]
+    El límite existe y \textbf{vale -1}.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 1.9}
+    Usamos la familia de trayectorias parabólicas $y = mx^2$:
+    \[ \lim_{x \to 0} \frac{x^2(mx^2)}{x^4 + (mx^2)^2} = \lim_{x \to 0} \frac{mx^4}{x^4(1+m^2)} = \frac{m}{1+m^2} \]
+    Al depender directamente de la pendiente de aproximación $m$, el límite \textbf{no existe}.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 1.10}
+    Queremos ver que $\forall \epsilon > 0, \exists \delta > 0$ tal que si $0 < \sqrt{(x-1)^2 + (y-2)^2} < \delta \implies |3x+2y-7| < \epsilon$. \\
+    Acotamos el término: $|3(x-1) + 2(y-2)| \le 3|x-1| + 2|y-2|$. \\
+    Como $|x-1| \le \sqrt{(x-1)^2+(y-2)^2} < \delta$ y $|y-2| < \delta$, entonces:
+    \[ 3|x-1| + 2|y-2| < 3\delta + 2\delta = 5\delta \]
+    Eligiendo $\delta = \frac{\epsilon}{5}$, se cumple estrictamente la definición.
+\end{solbox}
+
+\section*{Dirección y Tasa de Crecimiento Máximo}
+
+\begin{solbox}{Solución Ejercicio 2.1}
+    Calculamos el gradiente de la función: $\nabla T(x,y) = (-6x, -4y)$. \\
+    Evaluamos en $P(1,2)$: $\nabla T(1,2) = (-6, -8)$. \\
+    El máximo decrecimiento ocurre en la dirección opuesta al gradiente: $-\nabla T(1,2) = (6, 8)$. \\
+    Normalizando el vector para obtener la dirección unitaria:
+    \[ \hat{u} = \frac{(6,8)}{\sqrt{6^2+8^2}} = \left(\frac{3}{5}, \frac{4}{5}\right) \]
+    En esa dirección, la derivada direccional es
+    \[ D_{\hat{u}}T(1,2)=\nabla T(1,2)\cdot\hat{u}=-10. \]
+    Por lo tanto, la tasa firmada es $-10$ y la magnitud de la disminución es $10$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 2.2}
+    El gradiente de la función potencial es:
+    \[ \nabla V(x,y,z) = \left( \frac{2x}{x^2+y^2+z^2}, \frac{2y}{x^2+y^2+z^2}, \frac{2z}{x^2+y^2+z^2} \right) \]
+    Evaluando en $P(1,-1,2)$, con $x^2+y^2+z^2 = 1+1+4 = 6$:
+    \[ \nabla V(1,-1,2) = \left(\frac{2}{6}, \frac{-2}{6}, \frac{4}{6}\right) = \left(\frac{1}{3}, -\frac{1}{3}, \frac{2}{3}\right) \]
+    La dirección de máximo crecimiento es $\hat{u} = \frac{\nabla V}{\|\nabla V\|}$. Calculamos la norma:
+    \[ \|\nabla V\| = \sqrt{\left(\frac{1}{3}\right)^2 + \left(-\frac{1}{3}\right)^2 + \left(\frac{2}{3}\right)^2} = \sqrt{\frac{6}{9}} = \frac{\sqrt{6}}{3} \]
+    Dirección unitaria de máximo incremento: $\hat{u} = \left(\frac{1}{\sqrt{6}}, -\frac{1}{\sqrt{6}}, \frac{2}{\sqrt{6}}\right)$. La tasa máxima es $\frac{\sqrt{6}}{3}$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 2.3}
+    Definimos $h(x,y) = 2000 - 0.02x^2 - 0.04y^2$. El gradiente indica el máximo crecimiento:
+    \[ \nabla h(x,y) = (-0.04x, -0.08y) \]
+    Evaluando en el punto $(10,20)$:
+    \[ \nabla h(10,20) = (-0.04(10), -0.08(20)) = (-0.4, -1.6) \]
+    Por lo tanto, la dirección del vector en el plano $xy$ que debe seguir el escalador es la dada por el vector $(-0.4, -1.6)$, o equivalentemente en términos unitarios: $\hat{u} = \left(-\frac{1}{\sqrt{17}}, -\frac{4}{\sqrt{17}}\right)$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 2.4}
+    Por definición, si $f$ es diferenciable, la derivada direccional en la dirección unitaria $\hat{u}$ es:
+    \[ D_{\hat{u}}f(P_0) = \nabla f(P_0) \cdot \hat{u} \]
+    Aplicando la definición del producto escalar geométrico, tenemos:
+    \[ \nabla f(P_0) \cdot \hat{u} = \|\nabla f(P_0)\| \|\hat{u}\| \cos(\theta) \]
+    Como el vector es unitario, $\|\hat{u}\| = 1$, reduciéndose a $\|\nabla f(P_0)\| \cos(\theta)$. \\
+    El valor máximo de la función coseno es $1$, lo cual ocurre cuando $\theta = 0$ (es decir, cuando $\hat{u}$ y $\nabla f(P_0)$ tienen exactamente la misma dirección y sentido). Por lo tanto, el valor máximo es $\|\nabla f(P_0)\|$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 2.5}
+    La tasa de variación es nula en las direcciones ortogonales al vector gradiente. \\
+    Calculamos el gradiente: $\nabla f(x,y) = (2xy - 4y, x^2 - 4x)$. \\
+    Evaluando en $(1,2)$: $\nabla f(1,2) = (2(1)(2) - 4(2), 1^2 - 4(1)) = (4 - 8, 1 - 4) = (-4, -3)$. \\
+    Buscamos un vector $\hat{u} = (u_1, u_2)$ tal que $\nabla f(1,2) \cdot \hat{u} = 0 \implies -4u_1 - 3u_2 = 0 \implies u_2 = -\frac{4}{3}u_1$. \\
+    Dado que debe ser unitario ($u_1^2 + u_2^2 = 1$):
+    \[ u_1^2 + \left(-\frac{4}{3}u_1\right)^2 = 1 \implies \frac{25}{9}u_1^2 = 1 \implies u_1 = \pm \frac{3}{5} \]
+    Por ende, las dos direcciones posibles son $\hat{u}_1 = \left(\frac{3}{5}, -\frac{4}{5}\right)$ y $\hat{u}_2 = \left(-\frac{3}{5}, \frac{4}{5}\right)$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 2.6}
+    El cambio está dado por $\nabla f(x,y,z) = (2x, 4y, 6z)$. \\
+    La tasa en la dirección del eje $z$ positivo, $\hat{k}=(0,0,1)$, es
+    \[ D_{\hat{k}}f(x,y,z)=\nabla f(x,y,z)\cdot\hat{k}=6z. \]
+    Sobre la esfera unitaria se cumple $-1\le z\le1$, de modo que esta tasa se maximiza cuando $z=1$. La restricción obliga entonces a $x=y=0$. Por lo tanto, el punto es $P(0,0,1)$ y la tasa máxima vale $6$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 2.7}
+    La tasa de variación máxima es la norma del gradiente $\|\nabla f(x,y)\|$. Para que sea 0, el gradiente debe ser el vector nulo.
+    \[ \nabla f(x,y) = (2x e^{x^2-y^2}, -2y e^{x^2-y^2}) = (0,0) \]
+    Dado que $e^{x^2-y^2} \neq 0$ para todo $(x,y)$, la única solución es $2x = 0$ y $-2y = 0$. \\
+    Por lo tanto, el único punto con tasa de variación máxima nula es el origen $(0,0)$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 2.8}
+    Calculamos las parciales de $g(x,y)$:
+    \[ \frac{\partial g}{\partial x} = \sin(xy) + xy\cos(xy), \quad \frac{\partial g}{\partial y} = x^2\cos(xy) \]
+    Evaluamos en $\left(1, \frac{\pi}{2}\right)$:
+    \[ \frac{\partial g}{\partial x}\left(1, \frac{\pi}{2}\right) = \sin\left(\frac{\pi}{2}\right) + \frac{\pi}{2}\cos\left(\frac{\pi}{2}\right) = 1 + 0 = 1 \]
+    \[ \frac{\partial g}{\partial y}\left(1, \frac{\pi}{2}\right) = 1^2 \cdot \cos\left(\frac{\pi}{2}\right) = 0 \]
+    El gradiente es $\nabla g\left(1, \frac{\pi}{2}\right) = (1, 0)$. La dirección unitaria es el mismo vector $\hat{u} = (1,0)$, que apunta en el sentido positivo del eje $x$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 2.9}
+    Reescribimos la función como $\rho = 10(1+x^2+y^2+z^2)^{-1}$. Su gradiente es:
+    \[ \nabla \rho = -10(1+x^2+y^2+z^2)^{-2} \cdot (2x, 2y, 2z) = \frac{-20}{(1+x^2+y^2+z^2)^2}(x, y, z) \]
+    Evaluando en $(1,1,1)$, donde el denominador es $(1+1+1+1)^2 = 16$:
+    \[ \nabla \rho(1,1,1) = \frac{-20}{16}(1,1,1) = -\frac{5}{4}(1,1,1) = \left(-\frac{5}{4}, -\frac{5}{4}, -\frac{5}{4}\right) \]
+    La tasa de máximo decrecimiento es $-\|\nabla \rho\| = -\sqrt{3 \cdot \left(\frac{5}{4}\right)^2} = -\frac{5\sqrt{3}}{4}$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 2.10}
+    Sabemos que la dirección del gradiente coincide con la dirección del vector dado normalizado:
+    \[ \hat{u} = \frac{(1,2)}{\sqrt{1^2+2^2}} = \left(\frac{1}{\sqrt{5}}, \frac{2}{\sqrt{5}}\right) \]
+    También sabemos que la magnitud del gradiente es igual a la tasa máxima: $\|\nabla f(2,3)\| = 2\sqrt{5}$. \\
+    Por lo tanto, multiplicamos la magnitud por su dirección unitaria:
+    \[ \nabla f(2,3) = \|\nabla f(2,3)\| \cdot \hat{u} = 2\sqrt{5} \cdot \left(\frac{1}{\sqrt{5}}, \frac{2}{\sqrt{5}}\right) = (2, 4) \]
+\end{solbox}
+
+\section*{Derivada Direccional}
+
+\begin{solbox}{Solución Ejercicio 3.1}
+    Primero obtenemos el vector dirección que une $P(1,-2)$ con $Q(4,2)$: $\vec{v} = Q - P = (4-1, 2 - (-2)) = (3, 4)$. \\
+    Normalizamos el vector: $\hat{u} = \frac{(3,4)}{\sqrt{3^2+4^2}} = \left(\frac{3}{5}, \frac{4}{5}\right)$. \\
+    Calculamos el gradiente de $f$: $\nabla f(x,y) = (2xy, x^2 + 6y)$. \\
+    Evaluamos en el punto inicial $(1,-2)$: $\nabla f(1,-2) = (2(1)(-2), 1^2 + 6(-2)) = (-4, -11)$. \\
+    La derivada direccional es el producto punto:
+    \[ D_{\hat{u}}f(1,-2) = (-4, -11) \cdot \left(\frac{3}{5}, \frac{4}{5}\right) = -\frac{12}{5} - \frac{44}{5} = -\frac{56}{5} \]
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 3.2}
+    Como la función no es diferenciable en el origen, \textbf{no se puede utilizar el gradiente}. Debemos aplicar la definición formal por límite:
+    \[ D_{\hat{u}}f(0,0) = \lim_{t \to 0} \frac{f(0 + ta, 0 + tb) - f(0,0)}{t} \]
+    Sustituyendo el tramo correspondiente en el límite:
+    \[ D_{\hat{u}}f(0,0) = \lim_{t \to 0} \frac{\frac{(ta)^2 (tb)}{(ta)^2 + (tb)^2} - 0}{t} = \lim_{t \to 0} \frac{\frac{t^3 a^2 b}{t^2(a^2+b^2)}}{t} \]
+    Como $\hat{u}$ es unitario, $a^2 + b^2 = 1$. Simplificando los términos algebraicos:
+    \[ D_{\hat{u}}f(0,0) = \lim_{t \to 0} \frac{t^3 a^2 b}{t^3} = a^2 b \]
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 3.3}
+    El vector unitario correspondiente al ángulo dado viene dado por trigonometría elemental:
+    \[ \hat{u} = (\cos(\pi/6), \sin(\pi/6)) = \left(\frac{\sqrt{3}}{2}, \frac{1}{2}\right) \]
+    Calculamos el gradiente: $\nabla f(x,y) = (4x - 3y, -3x + 10y)$. \\
+    Evaluamos en $(1,1)$: $\nabla f(1,1) = (4(1)-3(1), -3(1)+10(1)) = (1, 7)$. \\
+    Efectuamos el producto escalar final:
+    \[ D_{\hat{u}}f(1,1) = (1, 7) \cdot \left(\frac{\sqrt{3}}{2}, \frac{1}{2}\right) = \frac{\sqrt{3}}{2} + \frac{7}{2} = \frac{\sqrt{3}+7}{2} \]
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 3.4}
+    Normalizamos el vector tridimensional: $\|\vec{v}\| = \sqrt{1^2+2^2+2^2} = 3 \implies \hat{u} = \left(\frac{1}{3}, \frac{2}{3}, \frac{2}{3}\right)$. \\
+    Calculamos las parciales de la función: $\nabla f = (y^2 z^3, 2xyz^3, 3xy^2 z^2)$. \\
+    Evaluamos el gradiente en el punto $(2,1,1)$:
+    \[ \nabla f(2,1,1) = (1^2 \cdot 1^3, 2(2)(1)(1^3), 3(2)(1^2)(1^2)) = (1, 4, 6) \]
+    Efectuamos el producto punto de componentes:
+    \[ D_{\hat{u}}f(2,1,1) = (1, 4, 6) \cdot \left(\frac{1}{3}, \frac{2}{3}, \frac{2}{3}\right) = \frac{1}{3} + \frac{8}{3} + \frac{12}{3} = \frac{21}{3} = 7 \]
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 3.5}
+    Sea $\nabla f(0,0) = (g_1, g_2)$. \\
+    La primera dirección es hacia $(1,1)$, unitario $\hat{u}_1 = \left(\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}\right)$:
+    \[ (g_1, g_2) \cdot \left(\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}\right) = 2\sqrt{2} \implies \frac{g_1 + g_2}{\sqrt{2}} = 2\sqrt{2} \implies g_1 + g_2 = 4 \]
+    La segunda dirección es hacia $(0,2)$, unitario $\hat{u}_2 = (0,1)$:
+    \[ (g_1, g_2) \cdot (0,1) = 3 \implies g_2 = 3 \]
+    Sustituyendo $g_2 = 3$ en la primera relación: $g_1 + 3 = 4 \implies g_1 = 1$. \\
+    Por lo tanto, el vector gradiente en el origen es $\nabla f(0,0) = (1, 3)$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 3.6}
+    Por la regla de la cadena, determinamos las parciales de la función compuesta:
+    \[ \frac{\partial f}{\partial x} = g'(x^2+y^2)\cdot 2x, \quad \frac{\partial f}{\partial y} = g'(x^2+y^2)\cdot 2y \]
+    Evaluando en el punto $(1,2)$, notando que la expresión interna es $1^2+2^2 = 5$:
+    \[ \frac{\partial f}{\partial x}(1,2) = g'(5)\cdot 2(1) = 3 \cdot 2 = 6 \]
+    \[ \frac{\partial f}{\partial y}(1,2) = g'(5)\cdot 2(2) = 3 \cdot 4 = 12 \]
+    Por lo tanto, $\nabla f(1,2) = (6, 12)$. Operamos la derivada direccional:
+    \[ D_{\hat{u}}f(1,2) = (6, 12) \cdot \left(\frac{\sqrt{2}}{2}, \frac{\sqrt{2}}{2}\right) = 3\sqrt{2} + 6\sqrt{2} = 9\sqrt{2} \]
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 3.7}
+    Calculamos el gradiente de la expresión logarítmica: $\nabla f(x,y) = \left(\frac{1}{x}, \frac{1}{y}\right)$. \\
+    Evaluamos en $P(1,1)$: $\nabla f(1,1) = (1, 1)$. \\
+    Buscamos vectores unitarios $\hat{u} = (u_1, u_2)$ tales que $(1,1) \cdot (u_1, u_2) = 0 \implies u_1 + u_2 = 0 \implies u_2 = -u_1$. \\
+    Dado que $u_1^2 + u_2^2 = 1 \implies 2u_1^2 = 1 \implies u_1 = \pm \frac{1}{\sqrt{2}}$. \\
+    Las direcciones unitarias son $\hat{u}_1 = \left(\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}}\right)$ y $\hat{u}_2 = \left(-\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}\right)$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 3.8}
+    El ángulo $\pi$ determina el vector unitario $\hat{u} = (\cos\pi, \sin\pi) = (-1, 0)$. \\
+    Calculamos el gradiente: $\nabla f(x,y) = (ye^{xy} + 2x, xe^{xy})$. \\
+    Evaluando en $(0,2)$: $\nabla f(0,2) = (2e^0 + 0, 0) = (2, 0)$. \\
+    Multiplicamos escalarmente: $D_{\hat{u}}f(0,2) = (2,0) \cdot (-1,0) = -2$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 3.9}
+    Si $\hat{u}$ es la dirección del gradiente, entonces $D_{\hat{u}}f(a,b) = \|\nabla f(a,b)\| = 5$. \\
+    Por propiedades del producto punto, la derivada direccional en el sentido opuesto $-\hat{u}$ cumple con:
+    \[ D_{-\hat{u}}f(a,b) = \nabla f(a,b) \cdot (-\hat{u}) = -(\nabla f(a,b) \cdot \hat{u}) = -D_{\hat{u}}f(a,b) \]
+    Por lo tanto, el valor de la derivada direccional es exactamente $-5$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 3.10}
+    La circunferencia en $(3,0)$ tiene vector tangente vertical (paralelo al eje $y$), representado por el vector unitario $\hat{u} = (0,1)$. \\
+    Calculamos el gradiente de $f$:
+    \[ \nabla f(x,y) = \left( \frac{-x}{\sqrt{25-x^2-y^2}}, \frac{-y}{\sqrt{25-x^2-y^2}} \right) \]
+    Evaluando en $(3,0)$: $\nabla f(3,0) = \left( \frac{-3}{\sqrt{25-9}}, 0 \right) = \left(-\frac{3}{4}, 0\right)$. \\
+    Calculamos el producto escalar final:
+    \[ D_{\hat{u}}f(3,0) = \left(-\frac{3}{4}, 0\right) \cdot (0,1) = 0 \]
+\end{solbox}
+
+\section*{Plano y Recta Tangente}
+
+\begin{solbox}{Solución Ejercicio 4.1}
+    Definimos la función de forma explícita $z = f(x,y) = 2x^2 + y^2$.
+    Calculamos las derivadas parciales correspondientes:
+    \[ \frac{\partial f}{\partial x} = 4x, \quad \frac{\partial f}{\partial y} = 2y \]
+    Evaluamos las parciales en las coordenadas del punto de tangencia $(1,2)$:
+    \[ f_x(1,2) = 4(1) = 4, \quad f_y(1,2) = 2(2) = 4 \]
+    La ecuación general del plano tangente viene dada por el desarrollo analítico:
+    \[ z - z_0 = f_x(x_0,y_0)(x - x_0) + f_y(x_0,y_0)(y - y_0) \]
+    Sustituyendo los valores numéricos obtenidos:
+    \[ z - 6 = 4(x - 1) + 4(y - 2) \implies z - 6 = 4x - 4 + 4y - 8 \]
+    Reordenando en la ecuación general lineal: $4x + 4y - z - 6 = 0$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 4.2}
+    Definimos la superficie de nivel cero como: $F(x,y,z) = x^2 + 2y^2 + 3z^2 - 9 = 0$.
+    El vector normal a la superficie está dado por el gradiente tridimensional:
+    \[ \nabla F(x,y,z) = (2x, 4y, 6z) \implies \nabla F(2,1,1) = (4, 4, 6) \]
+    \textbf{1. Plano Tangente:} Usamos el gradiente como el vector normal $\vec{n} = (4,4,6)$:
+    \[ 4(x - 2) + 4(y - 1) + 6(z - 1) = 0 \implies 4x - 8 + 4y - 4 + 6z - 6 = 0 \]
+    Simplificando la expresión: $4x + 4y + 6z = 18 \implies 2x + 2y + 3z = 9$.
+    
+    \textbf{2. Recta Normal:} Utiliza la dirección del gradiente y pasa por $P(2,1,1)$:
+    \[ \frac{x - 2}{4} = \frac{y - 1}{4} = \frac{z - 1}{6} \quad \text{o en forma paramétrica:} \quad \begin{cases} x = 2 + 4t \\ y = 1 + 4t \\ z = 1 + 6t \end{cases} \]
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 4.3}
+    Para que un plano sea horizontal, su vector normal debe ser paralelo al eje $z$, lo que implica que las derivadas parciales de primer orden con respecto a $x$ e $y$ deben ser simultáneamente iguales a cero:
+    \[ \frac{\partial z}{\partial x} = 2x - y - 2 = 0, \quad \frac{\partial z}{\partial y} = -x + 2y + 4 = 0 \]
+    Resolvemos el sistema de ecuaciones lineales $2 \times 2$:
+    De la primera ecuación: $y = 2x - 2$. Sustituyendo en la segunda:
+    \[ -x + 2(2x - 2) + 4 = 0 \implies -x + 4x - 4 + 4 = 0 \implies 3x = 0 \implies x = 0 \]
+    Si $x = 0$, entonces $y = 2(0) - 2 = -2$. \\
+    Calculamos el valor de la coordenada $z$ sustituyendo en la función original:
+    \[ z = 0^2 - 0(-2) + (-2)^2 - 2(0) + 4(-2) = 4 - 8 = -4 \]
+    Por lo tanto, el único punto con plano tangente horizontal es el punto $P(0, -2, -4)$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 4.4}
+    La curva está definida por la intersección de dos superficies de nivel. El vector director de la recta tangente es ortogonal a ambos gradientes en el punto de intersección:
+    \[ F_1(x,y,z) = x^2 + y^2 - 5 = 0 \implies \nabla F_1(x,y,z) = (2x, 2y, 0) \implies \nabla F_1(1,2,5) = (2, 4, 0) \]
+    \[ F_2(x,y,z) = x^2 + y^2 - z = 0 \implies \nabla F_2(x,y,z) = (2x, 2y, -1) \implies \nabla F_2(1,2,5) = (2, 4, -1) \]
+    El vector director $\vec{v}$ se obtiene mediante el producto cruz de ambos vectores normales:
+    \[ \vec{v} = \nabla F_1 \times \nabla F_2 = \begin{vmatrix} \hat{i} & \hat{j} & \hat{k} \\ 2 & 4 & 0 \\ 2 & 4 & -1 \end{vmatrix} = (-4)\hat{i} - (-2)\hat{j} + (0)\hat{k} = (-4, 2, 0) \]
+    Las ecuaciones paramétricas de la recta que pasa por $P(1,2,5)$ son:
+    \[ x = 1 - 4t, \quad y = 2 + 2t, \quad z = 5 \]
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 4.5}
+    El plano dado tiene vector normal $\vec{n}_0 = (2, 1, 2)$. El plano tangente a la esfera en cualquier punto $(x,y,z)$ tiene vector normal proporcional al gradiente de $F(x,y,z) = x^2 + y^2 + z^2 - 4$:
+    \[ \nabla F(x,y,z) = (2x, 2y, 2z) \]
+    Para que sean paralelos, debe cumplirse que $\nabla F = k \cdot \vec{n}_0$:
+    \[ (2x, 2y, 2z) = k(2, 1, 2) \implies 2x = 2k, \ 2y = k, \ 2z = 2k \implies x = k, \ y = \frac{k}{2}, \ z = k \]
+    Sustituimos estas relaciones en la ecuación de la restricción geométrica de la esfera:
+    \[ k^2 + \left(\frac{k}{2}\right)^2 + k^2 = 4 \implies 2k^2 + \frac{k^2}{4} = 4 \implies \frac{9k^2}{4} = 4 \implies k^2 = \frac{16}{9} \implies k = \pm \frac{4}{3} \]
+    Por lo tanto, obtenemos dos soluciones espaciales:
+    Para $k = \frac{4}{3}$: $P_1\left(\frac{4}{3}, \frac{2}{3}, \frac{4}{3}\right)$. Para $k = -\frac{4}{3}$: $P_2\left(-\frac{4}{3}, -\frac{2}{3}, -\frac{4}{3}\right)$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 4.6}
+    Las derivadas direccionales dadas corresponden exactamente a las direcciones de los vectores canónicos de los ejes de coordenadas. Por lo tanto, representan los valores de las derivadas parciales de primer orden en el punto dado:
+    \[ f_x(3,4) = 2, \quad f_y(3,4) = -1 \]
+    Aplicamos directamente la ecuación del plano tangente explícito:
+    \[ z - 5 = 2(x - 3) - 1(y - 4) \implies z - 5 = 2x - 6 - y + 4 \]
+    Reordenando los términos algebraicos, obtenemos la ecuación canónica: $2x - y - z + 3 = 0$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 4.7}
+    Reescribimos la ecuación implícitamente: $F(x,y,z) = x^2 + y^2 - z^2 = 0$.
+    Calculamos el gradiente en un punto cualquiera $P_0(x_0, y_0, z_0)$:
+    \[ \nabla F(x_0, y_0, z_0) = (2x_0, 2y_0, -2z_0) \]
+    La ecuación del plano tangente es:
+    \[ 2x_0(x - x_0) + 2y_0(y - y_0) - 2z_0(z - z_0) = 0 \implies x_0 x + y_0 y - z_0 z - (x_0^2 + y_0^2 - z_0^2) = 0 \]
+    Dado que el punto original pertenece obligatoriamente al cono, se cumple que $x_0^2 + y_0^2 - z_0^2 = 0$, reduciendo la expresión del plano a:
+    \[ x_0 x + y_0 y - z_0 z = 0 \]
+    Evaluando el punto $(x,y,z) = (0,0,0)$, la ecuación se cumple idénticamente ($0 = 0$), demostrando que el origen siempre pertenece al plano.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 4.8}
+    Primero se debe verificar que el punto indicado pertenezca a ambas superficies. Para la esfera,
+    \[ 2^2+0^2+1^2=5\neq9. \]
+    Aunque $P(2,0,1)$ sí pertenece al paraboloide porque $1=2^2+0^2-3$, no pertenece a la esfera. Por consiguiente, las superficies \textbf{no se intersectan en el punto dado} y el ángulo de intersección solicitado no está definido con los datos del enunciado.
+
+    Si el lado derecho de la ecuación de la esfera fuese $5$ en vez de $9$, entonces el cálculo formal con los normales $(4,0,2)$ y $(4,0,-1)$ daría
+    \[ \theta=\arccos\left(\frac{14}{\sqrt{340}}\right). \]
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 4.9}
+    Evaluamos la posición inicial en $t=1$: $\vec{r}(1) = (1^2, \ln(1), 1 e^1) = (1, 0, e)$.
+    Calculamos la derivada del vector de posición para obtener la velocidad tangencial:
+    \[ \vec{r}'(t) = \left(2t, \frac{1}{t}, e^t + t e^t\right) \implies \vec{r}'(1) = (2(1), 1, e^1 + 1e^1) = (2, 1, 2e) \]
+    Las ecuaciones paramétricas de la recta que pasa por $(1,0,e)$ con vector director $(2,1,2e)$ son:
+    \[ x = 1 + 2s, \quad y = s, \quad z = e + 2es \]
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 4.10}
+    Evaluamos la función en el punto base: $f(3,4) = \sqrt{3^2+4^2} = 5$.
+    Calculamos las derivadas parciales correspondientes:
+    \[ f_x = \frac{x}{\sqrt{x^2+y^2}} \implies f_x(3,4) = \frac{3}{5}, \quad f_y = \frac{y}{\sqrt{x^2+y^2}} \implies f_y(3,4) = \frac{4}{5} \]
+    Construimos la linealización estándar $L(x,y)$:
+    \[ L(x,y) = 5 + \frac{3}{5}(x - 3) + \frac{4}{5}(y - 4) \]
+    Evaluamos en los valores cercanos requeridos $x = 3.02$ y $y = 3.97$:
+    \[ L(3.02, 3.97) = 5 + \frac{3}{5}(0.02) + \frac{4}{5}(-0.03) = 5 + 0.012 - 0.024 = 4.988 \]
+\end{solbox}
+
+\section*{Regla de la Cadena}
+
+\begin{solbox}{Solución Ejercicio 5.1}
+    Por el teorema clásico de la regla de la cadena para variables intermedias:
+    \[ \frac{dz}{dt} = \frac{\partial z}{\partial x}\frac{dx}{dt} + \frac{\partial z}{\partial y}\frac{dy}{dt} \]
+    Calculamos los componentes derivados individuales de forma independiente:
+    \[ \frac{\partial z}{\partial x} = 2xy, \quad \frac{\partial z}{\partial y} = x^2 - 2y, \quad \frac{dx}{dt} = 2t, \quad \frac{dy}{dt} = e^t \]
+    Sustituyendo los elementos en el desarrollo de la expresión:
+    \[ \frac{dz}{dt} = (2xy)(2t) + (x^2 - 2y)(e^t) = 4xyt + (x^2 - 2y)e^t \]
+    Sustituyendo $x$ e $y$ en función de $t$ para obtener el resultado final puro:
+    \[ \frac{dz}{dt} = 4(t^2)(e^t)t + ((t^2)^2 - 2e^t)e^t = 4t^3 e^t + t^4 e^t - 2e^{2t} \]
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 5.2}
+    Aplicamos las extensiones algebraicas de la regla de la cadena:
+    \[ \frac{\partial w}{\partial r} = \frac{\partial w}{\partial x}\frac{\partial x}{\partial r} + \frac{\partial w}{\partial y}\frac{\partial y}{\partial r} = (2x)(\cos\theta) + (2y)(\sin\theta) \]
+    Sustituyendo las relaciones de $x$ e $y$:
+    \[ \frac{\partial w}{\partial r} = 2(r\cos\theta)\cos\theta + 2(r\sin\theta)\sin\theta = 2r(\cos^2\theta + \sin^2\theta) = 2r \]
+    Para el parámetro angular $\theta$:
+    \[ \frac{\partial w}{\partial \theta} = \frac{\partial w}{\partial x}\frac{\partial x}{\partial \theta} + \frac{\partial w}{\partial y}\frac{\partial y}{\partial \theta} = (2x)(-r\sin\theta) + (2y)(r\cos\theta) \]
+    Sustituyendo los valores trigonométricos:
+    \[ \frac{\partial w}{\partial \theta} = 2(r\cos\theta)(-r\sin\theta) + 2(r\sin\theta)(r\cos\theta) = -2r^2\cos\theta\sin\theta + 2r^2\sin\theta\cos\theta = 0 \]
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 5.3}
+    Definimos variables auxiliares intermedias para los argumentos internos de la función: $u = x - y$ y $v = y - x$.
+    Así, la función se reescribe como $z = f(u, v)$.
+    Calculamos las derivadas parciales de $z$ con respecto a $x$ e $y$:
+    \[ \frac{\partial z}{\partial x} = \frac{\partial f}{\partial u}\frac{\partial u}{\partial x} + \frac{\partial f}{\partial v}\frac{\partial v}{\partial x} = \frac{\partial f}{\partial u}(1) + \frac{\partial f}{\partial v}(-1) = f_u - f_v \]
+    \[ \frac{\partial z}{\partial y} = \frac{\partial f}{\partial u}\frac{\partial u}{\partial y} + \frac{\partial f}{\partial v}\frac{\partial v}{\partial y} = \frac{\partial f}{\partial u}(-1) + \frac{\partial f}{\partial v}(1) = -f_u + f_v \]
+    Sumamos algebraicamente ambas expresiones parciales:
+    \[ \frac{\partial z}{\partial x} + \frac{\partial z}{\partial y} = (f_u - f_v) + (-f_u + f_v) = 0 \]
+    Queda demostrada la identidad matemática de forma general.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 5.4}
+    Calculamos primero la derivada parcial de primer orden utilizando la regla de la cadena lineal:
+    \[ \frac{\partial z}{\partial u} = \frac{\partial z}{\partial x}\frac{\partial x}{\partial u} + \frac{\partial z}{\partial y}\frac{\partial y}{\partial u} = 2\frac{\partial z}{\partial x} + \frac{\partial z}{\partial y} \]
+    Para calcular la segunda derivada, aplicamos el operador diferencial obtenido sobre sí mismo:
+    \[ \frac{\partial^2 z}{\partial u^2} = \frac{\partial}{\partial u}\left( 2\frac{\partial z}{\partial x} + \frac{\partial z}{\partial y} \right) = 2\frac{\partial}{\partial u}\left(\frac{\partial z}{\partial x}\right) + \frac{\partial}{\partial u}\left(\frac{\partial z}{\partial y}\right) \]
+    Desarrollando los términos interiores mediante la misma regla general:
+    \[ \frac{\partial}{\partial u}\left(\frac{\partial z}{\partial x}\right) = \frac{\partial^2 z}{\partial x^2}(2) + \frac{\partial^2 z}{\partial y \partial x}(1) \]
+    \[ \frac{\partial}{\partial u}\left(\frac{\partial z}{\partial y}\right) = \frac{\partial^2 z}{\partial x \partial y}(2) + \frac{\partial^2 z}{\partial y^2}(1) \]
+    Sustituyendo y agrupando usando el Teorema de Clairaut ($z_{xy} = z_{yx}$):
+    \[ \frac{\partial^2 z}{\partial u^2} = 2\left(2z_{xx} + z_{xy}\right) + \left(2z_{xy} + z_{yy}\right) = 4z_{xx} + 4z_{xy} + z_{yy} \]
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 5.5}
+    Despejamos la variable de interés: $P(V,T) = \frac{nRT}{V}$.
+    Por la regla de la cadena con respecto al parámetro temporal $t$:
+    \[ \frac{dP}{dt} = \frac{\partial P}{\partial V}\frac{dV}{dt} + \frac{\partial P}{\partial T}\frac{dT}{dt} = \left(-\frac{nRT}{V^2}\right)\frac{dV}{dt} + \left(\frac{nR}{V}\right)\frac{dT}{dt} \]
+    Sustituimos los valores numéricos del problema:
+    \[ \frac{dP}{dt} = \left(-\frac{8.31 \cdot 300}{10^2}\right)(2) + \left(\frac{8.31}{10}\right)(1) \]
+    \[ \frac{dP}{dt} = \left(-\frac{2493}{100}\right)(2) + 0.831 = -49.86 + 0.831 = -49.029\,\text{atm/min} \]
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 5.6}
+    Definimos la variable interna $w = \frac{x}{y}$, de modo que $u = f(w)$.
+    Derivamos parcialmente empleando la regla de la cadena simple:
+    \[ \frac{\partial u}{\partial x} = f'(w)\frac{\partial w}{\partial x} = f'(w)\left(\frac{1}{y}\right) \]
+    \[ \frac{\partial u}{\partial y} = f'(w)\frac{\partial w}{\partial y} = f'(w)\left(-\frac{x}{y^2}\right) \]
+    Multiplicamos por las variables espaciales correspondientes:
+    \[ x\frac{\partial u}{\partial x} = f'(w)\left(\frac{x}{y}\right), \quad y\frac{\partial u}{\partial y} = f'(w)\left(-\frac{x}{y}\right) \]
+    Sumando los dos resultados de forma directa:
+    \[ x\frac{\partial u}{\partial x} + y\frac{\partial u}{\partial y} = f'(w)\left(\frac{x}{y}\right) - f'(w)\left(\frac{x}{y}\right) = 0 \]
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 5.7}
+    Por la regla de la cadena matricial: $J(f \circ g)(1,0) = J_f(g(1,0)) \cdot J_g(1,0)$.
+    Evaluamos $g(1,0) = (1\cos 0, 1\sin 0) = (1, 0) \implies u=1, v=0$.
+    Calculamos las matrices de derivadas parciales individuales:
+    \[ J_f(u,v) = \begin{pmatrix} 2u & -2v \\ 2v & 2u \end{pmatrix} \implies J_f(1,0) = \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix} \]
+    \[ J_g(x,y) = \begin{pmatrix} \cos y & -x\sin y \\ \sin y & x\cos y \end{pmatrix} \implies J_g(1,0) = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} \]
+    Multiplicando las matrices cuadradas obtenidas:
+    \[ J(f \circ g)(1,0) = \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix} \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} = \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix} \]
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 5.8}
+    En $t=1$, el punto en el plano es $(x,y) = (1, 1^3) = (1,1)$.
+    Calculamos el gradiente de la función logarítmica básica:
+    \[ \nabla f(x,y) = \left(\frac{2x}{x^2+y^2}, \frac{2y}{x^2+y^2}\right) \implies \nabla f(1,1) = \left(\frac{2}{2}, \frac{2}{2}\right) = (1, 1) \]
+    Calculamos el vector velocidad de la curva paramétrica:
+    \[ \vec{r}'(t) = (1, 3t^2) \implies \vec{r}'(1) = (1, 3) \]
+    La tasa de cambio temporal por regla de la cadena es el producto punto:
+    \[ \frac{df(\vec{r}(t))}{dt}\Big|_{t=1} = \nabla f(1,1) \cdot \vec{r}'(1) = (1, 1) \cdot (1, 3) = 1 + 3 = 4 \]
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 5.9}
+    Derivamos ambos lados de la ecuación de definición respecto a la variable independiente $t$:
+    Lado izquierdo (aplicando la regla de la cadena multivariable con argumentos $u=tx$ y $v=ty$):
+    \[ \frac{\partial}{\partial t}[f(tx, ty)] = \frac{\partial f}{\partial u}\frac{\partial u}{\partial t} + \frac{\partial f}{\partial v}\frac{\partial v}{\partial t} = f_x(tx,ty)\cdot x + f_y(tx,ty)\cdot y \]
+    Lado derecho (derivando la potencia simple):
+    \[ \frac{\partial}{\partial t}[t^n f(x,y)] = n t^{n-1} f(x,y) \]
+    Igualando ambas derivadas y evaluando en el valor unitario $t = 1$:
+    \[ f_x(x,y)\cdot x + f_y(x,y)\cdot y = n (1)^{n-1} f(x,y) \implies x f_x + y f_y = n f(x,y) \]
+    Queda demostrada la identidad matemática estructural.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 5.10}
+    Evaluamos las variables intermedias en el punto $(s,t) = (1, \frac{\pi}{2})$:
+    \[ x = 1\cdot\cos(\pi/2) = 0, \quad y = 1\cdot\sin(\pi/2) = 1 \implies (x,y) = (0,1) \]
+    Aplicamos la ecuación de la regla de la cadena para el parámetro $t$:
+    \[ \frac{\partial u}{\partial t} = \frac{\partial f}{\partial x}\frac{\partial x}{\partial t} + \frac{\partial f}{\partial y}\frac{\partial y}{\partial t} = f_x(-s\sin t) + f_y(s\cos t) \]
+    Sustituyendo los valores numéricos correspondientes:
+    \[ \frac{\partial u}{\partial t} = 3 \cdot (-1\cdot\sin(\pi/2)) + 2 \cdot (1\cdot\cos(\pi/2)) = 3(-1) + 2(0) = -3 \]
+\end{solbox}
+
+\section*{Teorema de la Función Implícita}
+
+\begin{solbox}{Solución Ejercicio 6.1}
+    Definimos la función auxiliar tridimensional de nivel: $F(x,y,z) = x^3 + y^3 + z^3 - 3xyz - 4$.
+    
+    \textbf{1. Verificación de Hipótesis:}
+    \begin{itemize}
+        \item $F$ es continua y de clase $\mathcal{C}^\infty$ en todo $\mathbb{R}^3$ por ser un polinomio.
+        \item Evaluamos en el punto $P(1,1,2)$: $F(1,1,2) = 1^3 + 1^3 + 2^3 - 3(1)(1)(2) - 4 = 1 + 1 + 8 - 6 - 4 = 0$.
+        \item Calculamos la derivada parcial con respecto a la variable dependiente $z$:
+        \[ \frac{\partial F}{\partial z} = 3z^2 - 3xy \implies \frac{\partial F}{\partial z}(1,1,2) = 3(2)^2 - 3(1)(1) = 12 - 3 = 9 \neq 0 \]
+    \end{itemize}
+    Como se cumplen todas las condiciones del teorema, queda demostrada la existencia local de $z = g(x,y)$.
+    
+    \textbf{2. Cálculo de la derivada parcial:}
+    Calculamos $\frac{\partial F}{\partial x} = 3x^2 - 3yz \implies \frac{\partial F}{\partial x}(1,1,2) = 3(1)^2 - 3(1)(2) = 3 - 6 = -3$.
+    \[ \frac{\partial z}{\partial x}(1,1) = -\frac{\frac{\partial F}{\partial x}(1,1,2)}{\frac{\partial F}{\partial z}(1,1,2)} = -\frac{-3}{9} = \frac{1}{3} \]
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 6.2}
+    Definimos la función implícita de nivel cero: $F(x,y,z) = \ln(x+z) + e^{yz} - 1 = 0$.
+    Calculamos el vector normal evaluando el gradiente en el punto $(1,0,0)$:
+    \[ \frac{\partial F}{\partial x} = \frac{1}{x+z} \implies \frac{\partial F}{\partial x}(1,0,0) = \frac{1}{1+0} = 1 \]
+    \[ \frac{\partial F}{\partial y} = z e^{yz} \implies \frac{\partial F}{\partial y}(1,0,0) = 0 \cdot e^0 = 0 \]
+    \[ \frac{\partial F}{\partial z} = \frac{1}{x+z} + y e^{yz} \implies \frac{\partial F}{\partial z}(1,0,0) = \frac{1}{1+0} + 0 \cdot e^0 = 1 \]
+    El vector normal es $\vec{n} = (1, 0, 1)$. La ecuación del plano tangente que pasa por $(1,0,0)$ es:
+    \[ 1(x - 1) + 0(y - 0) + 1(z - 0) = 0 \implies x + z - 1 = 0 \]
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 6.3}
+    Derivamos de forma implícita con respecto a la variable $x$ a ambos lados de la ecuación original:
+    \[ 2x + 2z \frac{\partial z}{\partial x} = 0 \implies \frac{\partial z}{\partial x} = -\frac{x}{z} \]
+    Para calcular la segunda derivada parcial, aplicamos la regla del cociente combinada con la regla de la cadena:
+    \[ \frac{\partial^2 z}{\partial x^2} = \frac{\partial}{\partial x}\left( -\frac{x}{z} \right) = -\frac{(1 \cdot z) - \left(x \cdot \frac{\partial z}{\partial x}\right)}{z^2} \]
+    Sustituimos la primera derivada $\frac{\partial z}{\partial x} = -\frac{x}{z}$ en el numerador obtenido:
+    \[ \frac{\partial^2 z}{\partial x^2} = -\frac{z - x\left(-\frac{x}{z}\right)}{z^2} = -\frac{z + \frac{x^2}{z}}{z^2} = -\frac{z^2 + x^2}{z^3} \]
+    Utilizando la restricción geométrica inicial $x^2 + y^2 + z^2 = 1 \implies x^2 + z^2 = 1 - y^2$:
+    \[ \frac{\partial^2 z}{\partial x^2} = \frac{y^2 - 1}{z^3} \]
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 6.4}
+    Definimos el sistema vectorial $\vec{F}(x,y,u,v) = (F_1, F_2) = (u^2 + v^2 - x^2 - y, \ u^3 + v^3 - x - y^3)$.
+    Evaluamos el punto: $\vec{F}(1,0,1,0) = (1+0-1-0, \ 1+0-1-0) = (0,0)$.
+    Calculamos la matriz jacobiana con respecto a las variables dependientes elegidas $(u,v)$:
+    \[ \frac{\partial(F_1, F_2)}{\partial(u,v)} = \begin{pmatrix} 2u & 2v \\ 3u^2 & 3v^2 \end{pmatrix} \]
+    Evaluando en el punto dado $(x,y,u,v) = (1,0,1,0)$:
+    \[ \det\left(\frac{\partial(F_1, F_2)}{\partial(u,v)}\right)\Bigg|_{(1,0,1,0)} = \begin{vmatrix} 2(1) & 2(0) \\ 3(1)^2 & 3(0)^2 \end{vmatrix} = \begin{vmatrix} 2 & 0 \\ 3 & 0 \end{vmatrix} = 0 \]
+    El determinante nulo ya impide aplicar el Teorema de la Función Implícita. Además, la afirmación del enunciado es falsa: si existieran funciones diferenciables $u(x,y)$ y $v(x,y)$, al derivar ambas ecuaciones respecto de $y$ y evaluar en $(x,y,u,v)=(1,0,1,0)$ se obtendría
+    \[ 2u_y=1 \implies u_y=\frac12, \qquad 3u_y=0 \implies u_y=0, \]
+    lo que es una contradicción. Por lo tanto, el sistema \textbf{no define a $u$ y $v$ como funciones diferenciables de $(x,y)$} en un entorno del punto indicado.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 6.5}
+    Definimos las funciones $F_1 = u + v - x - y = 0$ y $F_2 = xu + yv - 1 = 0$.
+    Derivamos el sistema completo con respecto a la variable independiente $x$, considerando que $u = u(x,y)$ y $v = v(x,y)$:
+    \[ \begin{cases} \frac{\partial u}{\partial x} + \frac{\partial v}{\partial x} - 1 = 0 \implies \frac{\partial u}{\partial x} + \frac{\partial v}{\partial x} = 1 \\ u + x\frac{\partial u}{\partial x} + y\frac{\partial v}{\partial x} = 0 \implies x\frac{\partial u}{\partial x} + y\frac{\partial v}{\partial x} = -u \end{cases} \]
+    Resolvemos el sistema lineal para la incógnita $\frac{\partial u}{\partial x}$ utilizando la regla de Cramer:
+    \[ \frac{\partial u}{\partial x} = \frac{\begin{vmatrix} 1 & 1 \\ -u & y \end{vmatrix}}{\begin{vmatrix} 1 & 1 \\ x & y \end{vmatrix}} = \frac{y - (-u)}{y - x} = \frac{y + u}{y - x} \]
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 6.6}
+    Sea $F(x,y,z) = \sin(x+y) + \cos(y+z) - 1 = 0$.
+    Calculamos las derivadas parciales correspondientes a los componentes requeridos:
+    \[ \frac{\partial F}{\partial y} = \cos(x+y) - \sin(y+z) \]
+    \[ \frac{\partial F}{\partial z} = -\sin(y+z) \]
+    Siempre que $F_z=-\sin(y+z)\neq0$, es decir, cuando $\sin(y+z)\neq0$, aplicamos la fórmula del teorema de la función implícita:
+    \[ \frac{\partial z}{\partial y} = -\frac{\frac{\partial F}{\partial y}}{\frac{\partial F}{\partial z}} = -\frac{\cos(x+y) - \sin(y+z)}{-\sin(y+z)} = \frac{\cos(x+y) - \sin(y+z)}{\sin(y+z)} = \frac{\cos(x+y)}{\sin(y+z)} - 1 \]
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 6.7}
+    Aplicamos de forma sucesiva el teorema de la función implícita para cada una de las variables despejadas localmente:
+    \[ \frac{\partial x}{\partial y} = -\frac{f_y}{f_x}, \quad \frac{\partial y}{\partial z} = -\frac{f_z}{f_y}, \quad \frac{\partial z}{\partial x} = -\frac{f_x}{f_z} \]
+    Multiplicamos término a término las tres derivadas parciales obtenidas:
+    \[ \left(-\frac{f_y}{f_x}\right) \cdot \left(-\frac{f_z}{f_y}\right) \cdot \left(-\frac{f_x}{f_z}\right) = (-1)^3 \cdot \frac{f_y \cdot f_z \cdot f_x}{f_x \cdot f_y \cdot f_z} = -1 \cdot 1 = -1 \]
+    Queda demostrada la identidad estructural.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 6.8}
+    Definimos $F(x,y,z) = x e^y + y e^z + z e^x = 0$. Evaluando, $F(0,0,0) = 0$.
+    Calculamos las derivadas del campo vectorial:
+    \[ F_x = e^y + z e^x \implies F_x(0,0,0) = 1 + 0 = 1 \]
+    \[ F_y = x e^y + e^z \implies F_y(0,0,0) = 0 + 1 = 1 \]
+    \[ F_z = y e^z + e^x \implies F_z(0,0,0) = 0 + 1 = 1 \neq 0 \]
+    Como $F_z \neq 0$, la función existe. Calculamos sus derivadas espaciales:
+    \[ z_x(0,0) = -\frac{F_x}{F_z} = -\frac{1}{1} = -1, \quad z_y(0,0) = -\frac{F_y}{F_z} = -\frac{1}{1} = -1 \]
+    Por lo tanto, el vector gradiente es $\nabla z(0,0) = (-1, -1)$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 6.9}
+    Definimos la función bidimensional: $F(x,y) = x^2 + x y + y^2 - 3 = 0$.
+    Sustituyendo el punto $(1,1)$: $F(1,1) = 1 + 1 + 1 - 3 = 0$.
+    Calculamos las derivadas respecto a los ejes principales:
+    \[ F_x = 2x + y \implies F_x(1,1) = 2(1) + 1 = 3 \]
+    \[ F_y = x + 2y \implies F_y(1,1) = 1 + 2(1) = 3 \]
+    Por la fórmula implícita en dos dimensiones:
+    \[ \frac{dy}{dx} = -\frac{F_x}{F_y} = -\frac{3}{3} = -1 \]
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 6.10}
+    Definimos variables temporales $u = x^2 - y^2$ y $v = z$. Así $f(u,v) = 0$.
+    Aplicamos el teorema de derivadas parciales:
+    \[ \frac{\partial z}{\partial x} = -\frac{\frac{\partial f}{\partial x}}{\frac{\partial f}{\partial z}} = -\frac{\frac{\partial f}{\partial u}\frac{\partial u}{\partial x}}{\frac{\partial f}{\partial z}} = -\frac{f_u \cdot 2x}{f_z} \]
+    \[ \frac{\partial z}{\partial y} = -\frac{\frac{\partial f}{\partial y}}{\frac{\partial f}{\partial z}} = -\frac{\frac{\partial f}{\partial u}\frac{\partial u}{\partial y}}{\frac{\partial f}{\partial z}} = -\frac{f_u \cdot (-2y)}{f_z} = \frac{f_u \cdot 2y}{f_z} \]
+    Multiplicamos y sumamos según el enunciado pedido:
+    \[ y\left(-\frac{2xf_u}{f_z}\right) + x\left(\frac{2yf_u}{f_z}\right) = -\frac{2xyf_u}{f_z} + \frac{2xyf_u}{f_z} = 0 \]
+\end{solbox}
+
+\section*{Teorema de la Función Inversa}
+
+\begin{solbox}{Solución Ejercicio 7.1}
+    Calculamos la matriz jacobiana del campo vectorial:
+    \[ J_f(x,y) = \begin{pmatrix} 2x & -2y \\ 2y & 2x \end{pmatrix} \]
+    Calculamos el determinante de la matriz jacobiana:
+    \[ \det(J_f(x,y)) = (2x)(2x) - (-2y)(2y) = 4x^2 + 4y^2 = 4(x^2 + y^2) \]
+    El Teorema de la Función Inversa exige que el determinante sea distinto de cero para asegurar la invertibilidad local diferenciable. \\
+    Notamos que $4(x^2 + y^2) = 0$ si y solo si $x = 0$ e $y = 0$. \\
+    Por lo tanto, $\det(J_f(x,y)) \neq 0$ para todo $(x,y) \neq (0,0)$, asegurando el resultado.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 7.2}
+    Por el teorema de la función inversa, la matriz jacobiana de la inversa es la inversa algebraica de la matriz jacobiana original evaluada en el punto de preimagen:
+    \[ J_{f^{-1}}(f(1,2)) = [J_f(1,2)]^{-1} \]
+    Calculamos la matriz directa en dicho punto:
+    \[ J_f(1,2) = \begin{pmatrix} 2(1) & -2(2) \\ 2(2) & 2(1) \end{pmatrix} = \begin{pmatrix} 2 & -4 \\ 4 & 2 \end{pmatrix} \]
+    El determinante de esta matriz es $\det = 2(2) - (-4)(4) = 4 + 16 = 20$. \\
+    Calculamos la inversa de la matriz $2 \times 2$:
+    \[ [J_f(1,2)]^{-1} = \frac{1}{20} \begin{pmatrix} 2 & 4 \\ -4 & 2 \end{pmatrix} = \begin{pmatrix} \frac{1}{10} & \frac{1}{5} \\ -\frac{1}{5} & \frac{1}{10} \end{pmatrix} \]
+    Por lo tanto, $J_{f^{-1}}(-3,4) = \begin{pmatrix} 1/10 & 1/5 \\ -1/5 & 1/10 \end{pmatrix}$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 7.3}
+    Definimos el operador $T(r,\theta) = (r\cos\theta, r\sin\theta)$. Calculamos su matriz jacobiana:
+    \[ J_T(r,\theta) = \begin{pmatrix} \cos\theta & -r\sin\theta \\ \sin\theta & r\cos\theta \end{pmatrix} \]
+    Calculamos el determinante jacobiano estructural:
+    \[ \det(J_T) = r\cos^2\theta - (-r\sin^2\theta) = r(\cos^2\theta + \sin^2\theta) = r \]
+    Para que sea invertible de forma local, el determinante debe ser distinto de cero ($\det \neq 0$). \\
+    Consecuentemente, el teorema asegura la invertibilidad en todos los puntos donde $r \neq 0$ (es decir, en todo el plano excluyendo el origen coordenado).
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 7.4}
+    \textbf{1. Invertibilidad Local:} Calculamos la matriz jacobiana asociada:
+    \[ J_f(x,y) = \begin{pmatrix} e^x\cos y & -e^x\sin y \\ e^x\sin y & e^x\cos y \end{pmatrix} \implies \det(J_f) = e^{2x}\cos^2 y + e^{2x}\sin^2 y = e^{2x} \]
+    Como $e^{2x} > 0$ para todo $x \in \mathbb{R}$, el determinante nunca es cero, lo que garantiza la invertibilidad local en cada punto por el teorema.
+    
+    \textbf{2. Inversión Global:} Observamos que $f(x, y + 2\pi) = (e^x\cos(y+2\pi), e^x\sin(y+2\pi)) = (e^x\cos y, e^x\sin y) = f(x,y)$. La función es periódica, lo que significa que no es inyectiva en todo su dominio. Al no ser inyectiva globalmente, \textbf{no existe una inversa global}.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 7.5}
+    Calculamos la matriz jacobiana de tamaño $3 \times 3$:
+    \[ J_f(x,y,z) = \begin{pmatrix} 1 & 1 & 1 \\ 0 & 1 & 1 \\ 0 & 0 & 3z^2 \end{pmatrix} \]
+    Evaluamos la matriz en el punto $P(1,1,1)$:
+    \[ J_f(1,1,1) = \begin{pmatrix} 1 & 1 & 1 \\ 0 & 1 & 1 \\ 0 & 0 & 3 \end{pmatrix} \]
+    Dado que es una matriz triangular superior, su determinante es simplemente el producto de los elementos de la diagonal principal:
+    \[ \det(J_f(1,1,1)) = 1 \cdot 1 \cdot 3 = 3 \]
+    Como el determinante es $3 \neq 0$, por el teorema de la función inversa se concluye que la función \textbf{sí admite inversa local} en dicho entorno.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 7.6}
+    La transformación es puramente lineal y puede ser representada por la matriz fija:
+    \[ J_f = \begin{pmatrix} 3 & -1 \\ 1 & 2 \end{pmatrix} \implies \det(J_f) = 3(2) - (-1)(1) = 6 + 1 = 7 \]
+    La matriz inversa del operador lineal se calcula directamente:
+    \[ [J_f]^{-1} = \frac{1}{7} \begin{pmatrix} 2 & 1 \\ -1 & 3 \end{pmatrix} = \begin{pmatrix} \frac{2}{7} & \frac{1}{7} \\ -\frac{1}{7} & \frac{3}{7} \end{pmatrix} \]
+    Si despejamos directamente el sistema lineal para obtener las variables en el orden inverso, la matriz de coeficientes coincide exactamente con la calculada mediante el teorema.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 7.7}
+    Construimos el operador jacobiano:
+    \[ J_f(x,y) = \begin{pmatrix} 2x & 1 \\ 1 & 2y \end{pmatrix} \]
+    Calculamos su determinante general: $\det(J_f) = 4xy - 1$.
+    Los puntos singulares ocurren donde el determinante jacobiano es igual a cero:
+    \[ 4xy - 1 = 0 \implies xy = \frac{1}{4} \]
+    Por lo tanto, la función no admite inversa local en ningún punto que pertenezca a la hipérbola del plano definida por la ecuación $y = \frac{1}{4x}$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 7.8}
+    Calculamos los componentes de la matriz jacobiana:
+    \[ J_f(x,y) = \begin{pmatrix} \cos y & -x\sin y \\ \cos x & 0 \end{pmatrix} \]
+    Evaluamos los valores angulares en el origen $(0,0)$:
+    \[ J_f(0,0) = \begin{pmatrix} \cos(0) & -0\cdot\sin(0) \\ \cos(0) & 0 \end{pmatrix} = \begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix} \]
+    Calculamos el determinante de la matriz resultante: $\det = 1(0) - 0(1) = 0$. Esto por sí solo indica que el teorema no es aplicable. \\
+    En este caso se puede concluir más: para todo $y$ cercano a $0$,
+    \[ f(0,y)=(0\cos y,\sin0)=(0,0). \]
+    Por lo tanto, cualquier entorno del origen contiene distintos puntos con la misma imagen. La función no es localmente inyectiva y, en consecuencia, \textbf{no es localmente invertible en $(0,0)$}.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 7.9}
+    Por propiedades algebraicas de las funciones compuestas, sabemos que: $(g \circ f)^{-1} = f^{-1} \circ g^{-1}$.
+    Aplicando la regla de la cadena para operadores inversos:
+    \[ J_{(g \circ f)^{-1}} = [J_{(g \circ f)}]^{-1} \]
+    Por la regla de la cadena directa: $J_{(g \circ f)} = J_g \cdot J_f = B \cdot A$.
+    Sustituyendo esta relación matricial, obtenemos el resultado:
+    \[ J_{(g \circ f)^{-1}} = (B \cdot A)^{-1} = A^{-1} \cdot B^{-1} \]
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 7.10}
+    \textbf{1. Biyectividad Global:} La función posee una inversa analítica global evidente definida por radicales: $f^{-1}(u,v) = (\sqrt[3]{u}, \sqrt[3]{v})$, la cual está bien definida para cualquier valor real en todo $\mathbb{R}^2$.
+    
+    \textbf{2. Falla del Teorema:} Calculamos la matriz jacobiana del campo:
+    \[ J_f(x,y) = \begin{pmatrix} 3x^2 & 0 \\ 0 & 3y^2 \end{pmatrix} \implies J_f(0,0) = \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix} \implies \det(J_f(0,0)) = 0 \]
+    El teorema falla porque el determinante es cero, lo que impide garantizar que la inversa sea diferenciable en ese punto. De hecho, las derivadas de la función raíz cúbica tienden a infinito en el origen.
+\end{solbox}
+
+\section*{Máximos y Mínimos Libres (Sin Restricciones)}
+
+\begin{solbox}{Solución Ejercicio 8.1}
+    Calculamos las derivadas parciales de primer orden y las igualamos a cero:
+    \[ f_x = 3x^2 - 3 = 0 \implies x^2 = 1 \implies x = \pm 1 \]
+    \[ f_y = 3y^2 - 12 = 0 \implies y^2 = 4 \implies y = \pm 2 \]
+    Combinando las soluciones, obtenemos cuatro puntos críticos: $P_1(1,2)$, $P_2(1,-2)$, $P_3(-1,2)$ y $P_4(-1,-2)$.
+    
+    Construimos la matriz Hessiana calculando las derivadas de segundo orden:
+    \[ f_{xx} = 6x, \quad f_{yy} = 6y, \quad f_{xy} = 0 \implies H(x,y) = \begin{pmatrix} 6x & 0 \\ 0 & 6y \end{pmatrix} \]
+    El discriminante hessiano es $D(x,y) = \det(H) = 36xy$. Clasificamos cada punto:
+    \begin{itemize}
+        \item \textbf{Para $P_1(1,2)$:} $D = 36(1)(2) = 72 > 0$ y $f_{xx} = 6 > 0 \implies$ \textbf{Mínimo local}.
+        \item \textbf{Para $P_2(1,-2)$:} $D = 36(1)(-2) = -72 < 0 \implies$ \textbf{Punto de silla}.
+        \item \textbf{Para $P_3(-1,2)$:} $D = 36(-1)(2) = -72 < 0 \implies$ \textbf{Punto de silla}.
+        \item \textbf{Para $P_4(-1,-2)$:} $D = 36(-1)(-2) = 72 > 0$ y $f_{xx} = -6 < 0 \implies$ \textbf{Máximo local}.
+    \end{itemize}
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 8.2}
+    Calculamos el gradiente: $\nabla f(x,y) = (4x^3, 4y^3) = (0,0) \implies P(0,0)$ es el único punto crítico.
+    La matriz Hessiana general es:
+    \[ H(x,y) = \begin{pmatrix} 12x^2 & 0 \\ 0 & 12y^2 \end{pmatrix} \implies H(0,0) = \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix} \implies D = 0 \]
+    Como el criterio del Hessiano no concluye ($D=0$), recurrimos a la definición de extremo. Observamos que $f(0,0) = 0$. Dado que para cualquier $(x,y) \neq (0,0)$ se cumple estrictamente que $x^4 + y^4 > 0$, concluimos que $f(x,y) \ge f(0,0)$ en todo entorno del origen. Por lo tanto, el punto $(0,0)$ corresponde a un \textbf{mínimo local absoluto}.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 8.3}
+    Sean $x, y, z$ el ancho, largo y alto del contenedor respectivamente.
+    El volumen es $V(x,y,z) = xyz$. La superficie del material es $S = xy + 2xz + 2yz = 12$. \\
+    Despejamos la altura de la ecuación del material: $z = \frac{12 - xy}{2(x + y)}$. \\
+    Sustituimos en la función volumen para modelarla sin restricciones en 2 variables:
+    \[ V(x,y) = xy \left[ \frac{12 - xy}{2(x + y)} \right] = \frac{12xy - x^2 y^2}{2(x + y)} \]
+    Derivando parcialmente e igualando a cero ($V_x = 0$, $V_y = 0$), se obtiene por simetría geométrica el sistema balanceado $y(12 - 2xy - x^2) = 0$ y $x(12 - 2xy - y^2) = 0$. \\
+    Restando las ecuaciones válidas ($x,y > 0$) llegamos a $x^2 = y^2 \implies x = y$. \\
+    Sustituyendo $x=y$ en $12 - 3x^2 = 0 \implies x^2 = 4 \implies x = 2\,\text{m}$. \\
+    Por tanto, $y = 2\,\text{m}$ y $z = \frac{12 - 4}{2(4)} = 1\,\text{m}$. Las dimensiones óptimas son $2\times2\times1$ metros.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 8.4}
+    Haciendo un cambio radial provisional $u = x^2 + y^2 \ge 0$, analizamos $g(u) = ue^{-u}$.
+    Derivando respecto a la variable radial: $g'(u) = e^{-u}(1 - u) = 0 \implies u = 1$, y en $u=0$ hay un punto crítico obvio.
+    \begin{itemize}
+        \item Para $u=0$, se genera el punto en el origen $(0,0)$ donde la función toma su valor mínimo absoluto $f(0,0)=0$.
+        \item Para $u=1$, se genera toda la circunferencia infinita de puntos críticos $x^2 + y^2 = 1$. Dado que $g''(1) = -e^{-1} < 0$, todos los puntos sobre este anillo corresponden a \textbf{máximos locales} con valor $1/e$.
+    \end{itemize}
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 8.5}
+    \textbf{1. Puntos Críticos Interiores:} $f_x = 2x - 2y = 0 \implies x = y$. $f_y = -2x + 2 = 0 \implies x = 1$. El punto crítico es $P(1,1)$, que está dentro del triángulo. Evaluamos: $f(1,1) = 1 - 2 + 2 = 1$.
+    
+    \textbf{2. Fronteras:}
+    \begin{itemize}
+        \item \textbf{Frontera $y=0$ ($0 \le x \le 3$):} $f(x,0) = x^2$. Puntos críticos en extremos: $f(0,0) = 0$, $f(3,0) = 9$.
+        \item \textbf{Frontera $x=0$ ($0 \le y \le 3$):} $f(0,y) = 2y$. Extremos evaluados: $f(0,3) = 6$.
+        \item \textbf{Frontera $y=3-x$ ($0 \le x \le 3$):} $f(x, 3-x) = x^2 - 2x(3-x) + 2(3-x) = 3x^2 - 8x + 6$. \\
+        Derivando respecto a $x$: $6x - 8 = 0 \implies x = 4/3 \implies y = 5/3$. Evaluamos: $f(4/3, 5/3) = 3(16/9) - 8(4/3) + 6 = 2/3$.
+    \end{itemize}
+    Comparando todos los valores recopilados $\{1, 0, 9, 6, 2/3\}$, concluimos que el \textbf{máximo absoluto es 9} en $(3,0)$ y el \textbf{mínimo absoluto es 0} en $(0,0)$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 8.6}
+    Calculamos las derivadas parciales de primer orden: $f_x = 2x = 0 \implies x = 0$; $f_y = -3y^2 = 0 \implies y = 0$. El origen $(0,0)$ es el único candidato. \\
+    Evaluando los límites direccionales globales a lo largo del eje $y$ ($x=0$):
+    \[ \lim_{y \to +\infty} f(0,y) = \lim_{y \to +\infty} (-y^3) = -\infty \]
+    \[ \lim_{y \to -\infty} f(0,y) = \lim_{y \to -\infty} (-y^3) = +\infty \]
+    Dado que el rango de la función se extiende desde $-\infty$ hasta $+\infty$, queda demostrado que la función no está acotada y, por lo tanto, no puede poseer extremos absolutos globales.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 8.7}
+    Minimizar la distancia equivale a minimizar el cuadrado de la misma: $f(x,y,z) = x^2 + y^2 + z^2$.
+    Sustituimos la restricción del plano despejando $z = 6 - 2x + y$:
+    \[ f(x,y) = x^2 + y^2 + (6 - 2x + y)^2 \]
+    Derivamos parcialmente e igualamos a cero para hallar los puntos de inflexión mínimos:
+    \[ f_x = 2x + 2(6 - 2x + y)(-2) = 10x - 4y - 24 = 0 \implies 5x - 2y = 12 \]
+    \[ f_y = 2y + 2(6 - 2x + y)(1) = -4x + 4y + 12 = 0 \implies -2x + 2y = -6 \]
+    Sumando ambas ecuaciones lineales: $3x = 6 \implies x = 2$. \\
+    Sustituyendo $x=2$: $-2(2) + 2y = -6 \implies 2y = -2 \implies y = -1$. \\
+    Calculamos la altura correspondiente: $z = 6 - 2(2) + (-1) = 1$. \\
+    El punto óptimo más cercano es $P(2, -1, 1)$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 8.8}
+    Calculamos las derivadas de primer orden e igualamos a cero:
+    \[ U_x = 40 - 2x - y = 0 \implies 2x + y = 40 \]
+    \[ U_y = 50 - 2y - x = 0 \implies x + 2y = 50 \]
+    Resolvemos el sistema de ecuaciones simultáneas: de la primera ecuación $y = 40 - 2x$, sustituyendo en la segunda:
+    \[ x + 2(40 - 2x) = 50 \implies x + 80 - 4x = 50 \implies 3x = 30 \implies x = 10 \]
+    Si $x = 10$, entonces $y = 40 - 2(10) = 20$. \\
+    Clasificamos mediante la matriz Hessiana: $U_{xx} = -2$, $U_{yy} = -2$, $U_{xy} = -1$.
+    \[ D = (-2)(-2) - (-1)^2 = 4 - 1 = 3 > 0 \]
+    Como $D > 0$ y $U_{xx} = -2 < 0$, confirmamos que la combinación óptima de producción es $x=10$ e $y=20$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 8.9}
+    Derivadas parciales: $f_x = 4x^3 - 4x = 4x(x^2 - 1) = 0 \implies x = 0, x = 1, x = -1$. \\
+    $f_y = 2y = 0 \implies y = 0$. Puntos críticos: $P_1(0,0)$, $P_2(1,0)$, $P_3(-1,0)$. \\
+    Componentes Hessianos: $f_{xx} = 12x^2 - 4$, $f_{yy} = 2$, $f_{xy} = 0$.
+    \begin{itemize}
+        \item \textbf{Para $P_1(0,0)$:} $f_{xx} = -4 \implies D = (-4)(2) - 0 = -8 < 0 \implies$ \textbf{Punto de silla}.
+        \item \textbf{Para $P_2(1,0)$:} $f_{xx} = 8 \implies D = (8)(2) - 0 = 16 > 0$ con $f_{xx} > 0 \implies$ \textbf{Mínimo local}.
+        \item \textbf{Para $P_3(-1,0)$:} $f_{xx} = 8 \implies D = (8)(2) - 0 = 16 > 0$ con $f_{xx} > 0 \implies$ \textbf{Mínimo local}.
+    \end{itemize}
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 8.10}
+    La función de costo del error cuadrático total en base al parámetro de la pendiente $m$ viene dada por:
+    \[ E(m) = (m(1) - 2)^2 + (m(2) - 2)^2 + (m(3) - 4)^2 \]
+    Desarrollamos los cuadrados algebraicos para simplificar la función objetivo:
+    \[ E(m) = (m^2 - 4m + 4) + (4m^2 - 8m + 4) + (9m^2 - 24m + 16) = 14m^2 - 36m + 24 \]
+    Derivamos respecto a $m$ para ubicar el punto mínimo del error:
+    \[ E'(m) = 28m - 36 = 0 \implies m = \frac{36}{28} = \frac{9}{7} \]
+    Dado que $E''(m) = 28 > 0$, la pendiente óptima por mínimos cuadrados es exactamente $m = 9/7$.
+\end{solbox}
+
+\section*{Multiplicadores de Lagrange}
+
+\begin{solbox}{Solución Ejercicio 9.1}
+    Definimos la restricción del problema como $g(x,y) = x^2 + 4y^2 - 8 = 0$.
+    Planteamos el sistema vectorial de ecuaciones de Lagrange $\nabla f = \lambda \nabla g$:
+    \[ (y, x) = \lambda (2x, 8y) \implies \begin{cases} y = 2\lambda x \quad \text{--- (1)} \\ x = 8\lambda y \quad \text{--- (2)} \\ x^2 + 4y^2 = 8 \quad \text{--- (3)} \end{cases} \]
+    Multiplicamos la ecuación (1) por $x$ y la ecuación (2) por $y$:
+    \[ xy = 2\lambda x^2, \quad xy = 8\lambda y^2 \implies 2\lambda x^2 = 8\lambda y^2 \]
+    Asumiendo que $\lambda \neq 0$ (si $\lambda = 0 \implies x=y=0$, lo cual viola la restricción (3)):
+    \[ x^2 = 4y^2 \]
+    Sustituimos esta igualdad directa en la ecuación de la restricción (3):
+    \[ 4y^2 + 4y^2 = 8 \implies 8y^2 = 8 \implies y^2 = 1 \implies y = \pm 1 \]
+    Si $y^2 = 1 \implies x^2 = 4 \implies x = \pm 2$. Evaluamos las combinaciones en la función original:
+    \begin{itemize}
+        \item $f(2,1) = 2$, \ $f(-2,-1) = 2 \implies$ \textbf{Valor Máximo}.
+        \item $f(2,-1) = -2$, \ $f(-2,1) = -2 \implies$ \textbf{Valor Mínimo}.
+    \end{itemize}
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 9.2}
+    La restricción de presupuesto viene dada por la ecuación: $g(x,y) = 2x + 5y - 100 = 0$.
+    Planteamos las ecuaciones de Lagrange correspondientes:
+    \[ \frac{\partial U}{\partial x} = \lambda \frac{\partial g}{\partial x} \implies 0.5 x^{-0.5} y^{0.5} = 2\lambda \]
+    \[ \frac{\partial U}{\partial y} = \lambda \frac{\partial g}{\partial y} \implies 0.5 x^{0.5} y^{-0.5} = 5\lambda \]
+    Dividiendo la primera ecuación del sistema entre la segunda para eliminar el parámetro $\lambda$:
+    \[ \frac{0.5 x^{-0.5} y^{0.5}}{0.5 x^{0.5} y^{-0.5}} = \frac{2\lambda}{5\lambda} \implies \frac{y}{x} = \frac{2}{5} \implies 5y = 2x \implies x = 2.5y \]
+    Sustituyendo el valor despejado en la ecuación presupuestaria original:
+    \[ 2(2.5y) + 5y = 100 \implies 5y + 5y = 100 \implies 10y = 100 \implies y = 10 \]
+    Por consiguiente, el valor óptimo para la variable $x$ es: $x = 2.5(10) = 25$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 9.3}
+    Planteamos el método con dos multiplicadores independientes $\lambda$ y $\mu$: $\nabla f = \lambda \nabla g_1 + \mu \nabla g_2$.
+    \[ (1, 2, 3) = \lambda (1, -1, 1) + \mu (2x, 2y, 0) \]
+    Separamos las componentes del sistema resultante:
+    \begin{align*}
+        1 &= \lambda + 2\mu x \quad \text{--- (1)} \\
+        2 &= -\lambda + 2\mu y \quad \text{--- (2)} \\
+        3 &= \lambda \quad \text{--- (3)}
+    \end{align*}
+    De la ecuación (3) obtenemos directamente $\lambda = 3$. Sustituyendo en (1) y (2):
+    \[ 1 = 3 + 2\mu x \implies 2\mu x = -2 \implies \mu x = -1 \]
+    \[ 2 = -3 + 2\mu y \implies 2\mu y = 5 \implies \mu y = 2.5 \]
+    Dividiendo las expresiones para cancelar $\mu$: $\frac{y}{x} = \frac{2.5}{-1} = -2.5 \implies y = -2.5x$. \\
+    Sustituimos en la segunda restricción cuadrática:
+    \[ x^2 + (-2.5x)^2 = 1 \implies x^2 + 6.25x^2 = 1 \implies 7.25x^2 = 1 \implies x^2 = \frac{4}{29} \implies x = \pm \frac{2}{\sqrt{29}} \]
+    Los dos candidatos son
+    \[ (x,y)=\left(-\frac{2}{\sqrt{29}},\frac{5}{\sqrt{29}}\right)
+       \quad\text{y}\quad
+       (x,y)=\left(\frac{2}{\sqrt{29}},-\frac{5}{\sqrt{29}}\right). \]
+    De $x-y+z=1$ resulta $z=1-x+y$. El máximo corresponde al primer candidato:
+    \[ P_{\max}=\left(-\frac{2}{\sqrt{29}},\frac{5}{\sqrt{29}},1+\frac{7}{\sqrt{29}}\right), \]
+    y su valor es
+    \[ f(P_{\max})=3+\sqrt{29}. \]
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 9.4}
+    Restricción: $g(x,y,z) = x^2 + y^2 + z^2 - 1 = 0$. Ecuaciones algebraicas de Lagrange:
+    \[ (2x, 4y, 6z) = \lambda (2x, 2y, 2z) \implies 2x(1-\lambda)=0, \ 2y(2-\lambda)=0, \ 2z(3-\lambda)=0 \]
+    Esto nos genera tres casos mutuamente excluyentes según los valores del multiplicador:
+    \begin{itemize}
+        \item Si $\lambda = 1 \implies y=0, z=0 \implies x^2 = 1 \implies P(\pm 1, 0, 0)$, con valor $f = 1$.
+        \item Si $\lambda = 2 \implies x=0, z=0 \implies y^2 = 1 \implies P(0, \pm 1, 0)$, con valor $f = 2$.
+        \item Si $\lambda = 3 \implies x=0, y=0 \implies z^2 = 1 \implies P(0, 0, \pm 1)$, con valor $f = 3$.
+    \end{itemize}
+    El \textbf{valor máximo absoluto es 3} y ocurre en los polos $(0,0,\pm 1)$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 9.5}
+    Minimizamos la distancia al cuadrado: $f(x,y) = x^2 + y^2$. Restricción: $g(x,y) = x^2 - y + 1 = 0$.
+    \[ (2x, 2y) = \lambda (2x, -1) \implies \begin{cases} 2x = 2\lambda x \implies 2x(1-\lambda) = 0 \\ 2y = -\lambda \end{cases} \]
+    De la primera relación se desprenden dos ramas de análisis:
+    \begin{itemize}
+        \item \textbf{Rama $x=0$:} Sustituyendo en la restricción obtenemos $0^2 - y + 1 = 0 \implies y = 1$. Punto crítico $P_1(0,1)$, con valor de distancia al cuadrado $f(0,1) = 1$.
+        \item \textbf{Rama $\lambda=1$:} Si $\lambda = 1 \implies 2y = -1 \implies y = -1/2$. Sustituyendo en la restricción: $x^2 - (-1/2) + 1 = 0 \implies x^2 + 1.5 = 0$. Esta ecuación no posee soluciones reales.
+    \end{itemize}
+    Por lo tanto, el único punto real mínimo es $(0,1)$, y la distancia mínima es $\sqrt{1} = 1$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 9.6}
+    El presupuesto genérico es $2x + 5y = I$. Como los exponentes de la utilidad Cobb--Douglas son iguales, la solución destina la mitad del presupuesto a cada bien:
+    \[ 2x=\frac{I}{2}, \qquad 5y=\frac{I}{2}, \qquad x=\frac{I}{4}, \qquad y=\frac{I}{10}. \]
+    Sustituyendo estas demandas óptimas en la función de utilidad indirecta:
+    \[ U^*(I) = \left(\frac{I}{4}\right)^{0.5} \left(\frac{I}{10}\right)^{0.5} = \frac{I}{\sqrt{40}} \]
+    Derivando la utilidad máxima con respecto al parámetro presupuestario $I$:
+    \[ \frac{\partial U^*}{\partial I} = \frac{1}{\sqrt{40}} \]
+    Por otra parte, al evaluar las ecuaciones de Lagrange en las demandas óptimas se obtiene $\lambda=1/\sqrt{40}$. Así,
+    \[ \lambda=\frac{\partial U^*}{\partial I}, \]
+    que es la interpretación del multiplicador como precio sombra del presupuesto.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 9.7}
+    Un vértice del rectángulo en el primer cuadrante tiene coordenadas $(x,y)$. El área total es $A(x,y) = 4xy$.
+    Restricción: $g(x,y) = \frac{x^2}{a^2} + \frac{y^2}{b^2} - 1 = 0$. Planteamos Lagrange:
+    \[ (4y, 4x) = \lambda \left( \frac{2x}{a^2}, \frac{2y}{b^2} \right) \implies 4xy = \frac{2\lambda x^2}{a^2} = \frac{2\lambda y^2}{b^2} \implies \frac{x^2}{a^2} = \frac{y^2}{b^2} \]
+    Sustituyendo en la elipse original:
+    \[ \frac{x^2}{a^2} + \frac{x^2}{a^2} = 1 \implies \frac{2x^2}{a^2} = 1 \implies x = \frac{a}{\sqrt{2}}, \quad y = \frac{b}{\sqrt{2}} \]
+    El valor máximo del área inscrito es: $A_{max} = 4 \left(\frac{a}{\sqrt{2}}\right)\left(\frac{b}{\sqrt{2}}\right) = 2ab$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 9.8}
+    Planteamos el gradiente con la restricción lineal $g(x,y) = x + y - 100 = 0$:
+    \[ (4x, 2y) = \lambda (1, 1) \implies 4x = \lambda, \ 2y = \lambda \implies 4x = 2y \implies y = 2x \]
+    Sustituimos directamente en la ecuación de conservación de la masa del proceso:
+    \[ x + 2x = 100 \implies 3x = 100 \implies x = \frac{100}{3} \]
+    Calculamos la cantidad necesaria del segundo insumo químico: $y = 2\left(\frac{100}{3}\right) = \frac{200}{3}$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 9.9}
+    Minimizamos $f(x,y) = x^2 + y^2$ sujeto a la condición de contorno hiperbólica $xy - 1 = 0$.
+    \[ (2x, 2y) = \lambda (y, x) \implies 2x = \lambda y, \ 2y = \lambda x \implies 2x^2 = \lambda xy, \ 2y^2 = \lambda xy \]
+    Por transitividad: $2x^2 = 2y^2 \implies x^2 = y^2$. Dado que $xy = 1 > 0$, las variables deben poseer el mismo signo algebraico ($x=y$). \\
+    Sustituyendo en la restricción: $x^2 = 1 \implies x = \pm 1$.
+    Los puntos coordenados óptimos con distancia mínima al origen son $P_1(1,1)$ y $P_2(-1,-1)$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 9.10}
+    Ecuaciones vectoriales del multiplicador sobre $g(x,y,z) = x^2 + y^2 + z^2 - 3 = 0$:
+    \[ (yz, xz, xy) = \lambda (2x, 2y, 2z) \implies xyz = 2\lambda x^2 = 2\lambda y^2 = 2\lambda z^2 \]
+    Dado que estamos en el primer octante abierto, las variables son estrictamente positivas, lo que nos permite simplificar por división:
+    \[ x^2 = y^2 = z^2 \]
+    Sustituimos en el contorno de la restricción geométrica tridimensional:
+    \[ x^2 + x^2 + x^2 = 3 \implies 3x^2 = 3 \implies x^2 = 1 \implies x = 1, \ y = 1, \ z = 1 \]
+    Por lo tanto, el punto máximo es $(1,1,1)$ y el valor óptimo del producto triple es $f(1,1,1) = 1$.
+\end{solbox}
+
+\section*{Condiciones de Karush-Kuhn-Tucker (KKT)}
+
+\begin{solbox}{Solución Ejercicio 10.1}
+    Reescribimos la inecuación de capacidad en la forma estándar para KKT: $g(x,y) = x^2 + y^2 - 2 \le 0$. \\
+    Construimos la función Lagrangiana general del sistema: $\mathcal{L}(x,y,\mu) = xy - \mu(x^2 + y^2 - 2)$.
+    
+    Establecemos el conjunto de condiciones KKT:
+    \[ \begin{cases} \text{1. Gradiente:} & \mathcal{L}_x = y - 2\mu x = 0, \quad \mathcal{L}_y = x - 2\mu y = 0 \\ \text{2. Factibilidad:} & x^2 + y^2 \le 2 \\ \text{3. Holgura:} & \mu(x^2 + y^2 - 2) = 0 \\ \text{4. Signo:} & \mu \ge 0 \end{cases} \]
+    Procedemos a analizar el estado de activación de la restricción mediante las dos ramas posibles de holgura contable:
+    \begin{itemize}
+        \item \textbf{Caso 1: Restricción Inactiva ($\mu = 0$):} \\
+        De la condición de gradiente se deduce de inmediato que $y = 0$ y $x = 0$. El punto resultante es el origen $(0,0)$, el cual es factible porque cumple $0 \le 2$. El valor de la función objetivo aquí es $f(0,0) = 0$.
+        \item \textbf{Caso 2: Restricción Activa ($\mu > 0$):} \\
+        Si $\mu > 0$, la condición de holgura obliga a que la frontera se cumpla con igualdad estricta: $x^2 + y^2 = 2$. \\
+        Del gradiente: $y = 2\mu x$ y $x = 2\mu y \implies y = 2\mu(2\mu y) = 4\mu^2 y \implies y(1 - 4\mu^2) = 0$. \\
+        Como buscamos soluciones con valor no nulo, concluimos que $4\mu^2 = 1 \implies \mu = 1/2$ (descartamos el valor negativo debido a la condición de signo $\mu \ge 0$). \\
+        Si $\mu = 1/2 \implies x = y$. Sustituyendo en la frontera: $2x^2 = 2 \implies x^2 = 1$. Por lo tanto aparecen dos puntos, $(1,1)$ y $(-1,-1)$, y en ambos $f(x,y)=1$.
+    \end{itemize}
+    Comparando los resultados, el valor máximo global es $1$ y se alcanza en \textbf{dos puntos}: $(1,1)$ y $(-1,-1)$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 10.2}
+    Para problemas de minimización estándar, definimos la forma KKT como $g(x,y) = x + y - 4 \le 0$. \\
+    El gradiente de la función objetivo debe equilibrarse con el multiplicador: $\nabla f + \mu \nabla g = 0$.
+    \[ (2(x-3), \ 2(y-3)) + \mu (1, 1) = (0,0) \implies \begin{cases} 2(x-3) + \mu = 0 \\ 2(y-3) + \mu = 0 \end{cases} \]
+    Analizamos el comportamiento de la holgura complementaria $\mu(x+y-4) = 0$:
+    \begin{itemize}
+        \item \textbf{Caso Restricción Inactiva ($\mu = 0$):} \\
+        Si el multiplicador es nulo, el sistema se reduce a $2(x-3)=0$ y $2(y-3)=0 \implies x=3, y=3$. \\
+        Sin embargo, al verificar la condición de factibilidad en el dominio: $3 + 3 = 6 \not\le 4$. Este punto \textbf{no es factible}, por lo que se rechaza la solución interior.
+        \item \textbf{Caso Restricción Activa ($\mu > 0$):} \\
+        Si el multiplicador es positivo, la frontera opera con igualdad estricta: $x + y = 4$. \\
+        De las ecuaciones del gradiente deducimos que $2(x-3) = 2(y-3) \implies x = y$. \\
+        Sustituyendo esta igualdad en la frontera activa: $2x = 4 \implies x = 2 \implies y = 2$. \\
+        Calculamos el valor del multiplicador para validar el signo: $\mu = -2(2-3) = 2 > 0$. Al ser positivo, se cumplen de forma rigurosa todas las hipótesis de optimización.
+    \end{itemize}
+    El punto mínimo condicionado es $P(2,2)$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 10.3}
+    Reescribimos la inecuación para adaptarla al estándar de minimización invirtiendo el sentido del signo: $g(x,y) = 5 - x - 2y \le 0$.
+    Las condiciones de optimalidad del gradiente KKT se plantean como:
+    \[ 2x - \mu = 0, \quad 2y - 2\mu = 0 \implies x = \frac{\mu}{2}, \ y = \mu \]
+    Analizamos la condición de holgura para determinar el estado del multiplicador:
+     Si la restricción estuviera inactiva ($\mu = 0$), tendríamos como solución el origen $(0,0)$, pero este punto viola la condición ya que $0 + 0 = 0 \not\ge 5$. Por lo tanto, la restricción debe ser obligatoriamente activa ($\mu > 0$), lo que nos sitúa en la frontera del dominio:
+    \[ x + 2y = 5 \implies \left(\frac{\mu}{2}\right) + 2(\mu) = 5 \implies \frac{5\mu}{2} = 5 \implies \mu = 2 \]
+    Sustituyendo el valor del multiplicador $\mu = 2$ en las relaciones previas:
+    \[ x = \frac{2}{2} = 1, \quad y = 2 \]
+    El punto óptimo de diseño mínimo es $P(1,2)$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 10.4}
+    El conjunto de restricciones activas mapea geométricamente una región triangular compacta en el primer cuadrante.
+    Las condiciones de gradiente con multiplicadores independientes para cada una de las fronteras se formulan como:
+    \[ 3 = \mu_1 - \mu_2, \quad 1 = \mu_1 - \mu_3 \]
+    Analizando los vértices extremos del polígono mediante las condiciones de holgura, se demuestra que el valor máximo de la función lineal se alcanza en el extremo superior derecho del dominio factible, donde la restricción general corta al eje coordenado principal. Esto ocurre en el punto crítico $P(2,0)$, con un valor óptimo máximo de $f(2,0) = 6$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 10.5}
+    Adaptamos la restricción de protección ambiental al formato KKT estándar: $g(x,y) = 4 - x - 2y \le 0$. \\
+    Planteamos las ecuaciones de equilibrio del gradiente:
+    \[ -2x - \mu(-1) = 0 \implies -2x + \mu = 0 \implies \mu = 2x \]
+    \[ -2y - \mu(-2) = 0 \implies -2y + 2\mu = 0 \implies 2\mu = 2y \implies \mu = y \]
+    Igualando las expresiones para el multiplicador $\mu$: $y = 2x$. \\
+    Evaluamos el caso en la frontera activa para determinar los valores espaciales:
+    \[ x + 2(2x) = 4 \implies 5x = 4 \implies x = \frac{4}{5} = 0.8 \]
+    Calculamos el valor de la segunda variable operativa del proceso: $y = 2(0.8) = 1.6$. \\
+    Validamos el signo del multiplicador de control: $\mu = 2(0.8) = 1.6 > 0$, lo que confirma la validez de la solución. El punto óptimo es $(0.8, 1.6)$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 10.6}
+    Formulamos la condición KKT para el gradiente: $-2x - 2\mu x = 0 \implies -2x(1+\mu) = 0$, y por simetría $-2y(1+\mu) = 0$.
+    \begin{itemize}
+        \item \textbf{Rama de restricción inactiva ($\mu = 0$):} \\
+        De forma directa obtenemos que $x = 0$ e $y = 0$. Al evaluar la factibilidad en el dominio: $0^2 + 0^2 = 0 \le 1$, lo cual es perfectamente válido. El valor de la función en este punto central es $f(0,0) = 4$.
+        \item \textbf{Rama de restricción activa ($\mu > 0$):} \\
+        Obliga a situarse en la frontera del disco: $x^2 + y^2 = 1$. En este contorno exterior, el valor de la función objetivo decae a $f = 4 - 1 = 3$.
+    \end{itemize}
+    Dado que buscamos el valor máximo absoluto del dominio, la solución óptima es el punto interior $(0,0)$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 10.7}
+    Escribimos la restricción en la forma estándar: $g(x,y) = x^2 - y \le 0$.
+    Planteamos las condiciones de primer orden KKT:
+    \[ 2x + \mu(2x) = 0 \implies 2x(1 + \mu) = 0 \]
+    \[ 1 + \mu(-1) = 0 \implies \mu = 1 \]
+    Dado que el multiplicador toma el valor fijo $\mu = 1 > 0$, concluimos que la restricción es activa. \\
+    De la primera ecuación, sustituyendo $\mu=1$: $4x = 0 \implies x = 0$. \\
+    Sustituyendo en la frontera activa: $y = x^2 \implies y = 0^2 = 0$. \\
+    Por lo tanto, el punto mínimo condicionado corresponde al origen $(0,0)$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 10.8}
+    \textbf{Análisis Crítico Institucional:} Al evaluar la función objetivo lineal $f(x,y) = x+y$ sobre la región no acotada definida por la condición hiperbólica $xy \ge 1$ en el primer cuadrante, observamos que los valores de las variables pueden crecer indefinidamente hacia el infinito positivo (por ejemplo, haciendo $x \to \infty$ con $y=1$).
+    Por lo tanto, el problema de maximización \textbf{no posee una solución óptima finita}, ya que la función objetivo no está acotada superiormente en la región factible.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 10.9}
+    Escribimos la restricción en el formato canónico: $g(x,y) = 2 - x - y \le 0$. \\
+    Establecemos las relaciones de las derivadas parciales del gradiente KKT:
+    \[ 2x - \mu = 0, \quad 2y - \mu = 0 \implies x = \frac{\mu}{2}, \ y = \frac{\mu}{2} \implies x = y \]
+    Evaluando en la frontera activa del semiplano debido al desplazamiento:
+    \[ x + x = 2 \implies 2x = 2 \implies x = 1 \implies y = 1 \]
+    Validamos el signo del multiplicador asociado: $\mu = 2(1) = 2 > 0$. El punto mínimo es $P(1,1)$.
+\end{solbox}
+
+\begin{solbox}{Solución Ejercicio 10.10}
+    La región factible corresponde geométricamente a un cuadrado unitario cerrado en el plano.
+    Planteando formalmente las condiciones KKT para las cuatro fronteras de desigualdad, se deduce que los multiplicadores asociados a los límites superiores ($x \le 1$, $y \le 1$) se activan positivamente debido a la dirección de crecimiento del gradiente constante $\nabla f = (1,1)$.
+    La solución óptima del sistema se ubica en el vértice superior derecho del dominio cuadrado, correspondiente al punto $P(1,1)$, donde la función alcanza su valor máximo absoluto de $f(1,1) = 2$.
+\end{solbox}
+
+\end{soluciones}
+
+\end{document}

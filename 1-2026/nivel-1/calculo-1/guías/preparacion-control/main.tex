@@ -1,0 +1,594 @@
+% ============================================================
+% PREPARACION CONTROL -- CALCULO I
+% Contenidos: paginas 128 a 135 de Apuntes Calculo I MBI
+% ============================================================
+
+\documentclass[letterpaper,12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{eso-pic}
+\makeatletter
+\providecommand{\IfPDFManagementActiveF}[1]{#1}
+\makeatother
+\usepackage{transparent}
+\usepackage{tikz}
+\usepackage{needspace}
+\tcbuselibrary{skins,breakable}
+
+\geometry{letterpaper,margin=1.5cm,top=3cm,bottom=2.5cm,headheight=2cm}
+
+\definecolor{celesteSuave}{HTML}{F0F7FF}
+\definecolor{azulFuerte}{HTML}{1A5276}
+\definecolor{azulMedio}{HTML}{2980B9}
+\definecolor{verdeValidado}{HTML}{1E8449}
+\definecolor{enlace}{HTML}{1A5276}
+
+\newcommand{\logoup}{../../../../../template/images/logo_up.png}
+\newcommand{\logousach}{../../../../../template/images/logo_usach.png}
+\newcommand{\logofondo}{../../../../../template/images/logo_up.png}
+
+\newcommand{\institucion}{Usach Premium}
+\newcommand{\curso}{Cálculo I}
+\newcommand{\guiasnumero}{Preparación Control}
+\newcommand{\semestre}{1er. Semestre de 2026}
+\newcommand{\preparadopor}{Jaime Riquelme}
+\newcommand{\webinstitucion}{www.usachpremium.cl}
+\newcommand{\instagraminstitucion}{https://www.instagram.com/usach.premium}
+\newcommand{\transparencia}{0.045}
+\newcommand{\fraseportada}{``Por y para estudiantes''}
+\newcommand{\sen}{\operatorname{sen}}
+\newcommand{\R}{\mathbb{R}}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=enlace,
+    urlcolor=enlace,
+    pdfborder={0 0 0},
+    pdftitle={Preparación Control - Cálculo I},
+    pdfauthor={Usach Premium}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\includegraphics[height=1.2cm]{\logoup}}
+\fancyhead[R]{%
+    \begin{minipage}[b]{0.47\textwidth}
+        \raggedleft
+        \fontsize{9pt}{11pt}\selectfont
+        \textbf{\color{azulFuerte}\institucion}\\
+        \curso\ -- \guiasnumero\\
+        \textit{\color{gray}@usach.premium}
+    \end{minipage}\hspace{0.1cm}%
+    \includegraphics[height=1.2cm]{\logousach}%
+}
+\fancyfoot[L]{\fontsize{9pt}{11pt}\selectfont\textit{\fraseportada}}
+\fancyfoot[R]{\fontsize{9pt}{11pt}\selectfont Página \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\fancypagestyle{plain}{%
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+
+\newcommand{\MarcaAgua}{%
+    \AddToShipoutPicture{%
+        \AtPageCenter{%
+            \makebox(0,0){%
+                \transparent{\transparencia}%
+                \includegraphics[width=0.7\textwidth]{\logofondo}%
+            }%
+        }%
+    }%
+}
+
+\newtcolorbox{resumenbox}[1]{%
+    colback=celesteSuave,
+    colframe=azulFuerte,
+    colbacktitle=azulFuerte,
+    coltitle=white,
+    title=\textbf{#1},
+    fonttitle=\bfseries,
+    arc=7pt,
+    boxrule=1pt,
+    enhanced,
+    breakable
+}
+
+\newtcolorbox{controlbox}[1]{%
+    colback=white,
+    colframe=azulFuerte,
+    colbacktitle=azulFuerte,
+    coltitle=white,
+    title=\textbf{#1},
+    fonttitle=\bfseries,
+    arc=7pt,
+    boxrule=1pt,
+    enhanced,
+    drop shadow={black!6},
+    breakable
+}
+
+\newtcolorbox{respuestasbox}[1]{%
+    colback=celesteSuave,
+    colframe=azulFuerte,
+    title=\textbf{#1},
+    fonttitle=\bfseries,
+    arc=5pt,
+    boxrule=0.9pt,
+    breakable
+}
+
+\newtcolorbox{validacionbox}{%
+    colback=verdeValidado!6,
+    colframe=verdeValidado,
+    coltext=black,
+    arc=6pt,
+    boxrule=1pt
+}
+
+\newcommand{\tituloSeccion}[1]{%
+    \needspace{4\baselineskip}
+    \subsection*{\color{azulFuerte}#1}
+}
+
+\setlist[enumerate]{itemsep=0.5em,topsep=0.5em}
+
+\begin{document}
+\hypersetup{pageanchor=false}
+\thispagestyle{plain}
+
+\AddToShipoutPicture*{%
+    \put(54,700){\includegraphics[width=2cm]{\logoup}}
+    \put(420,706){\includegraphics[width=5cm]{\logousach}}
+}
+
+\vspace*{0.5cm}
+
+\begin{center}
+    \color{azulFuerte}
+    {\huge\textbf{GUÍA DE EJERCICIOS}}\\[0.5cm]
+    {\Huge\textbf{\curso}}\\[0.3cm]
+    {\Large\textbf{\guiasnumero}}\\[1.5cm]
+
+    \begin{tcolorbox}[
+        colback=celesteSuave,
+        colframe=azulFuerte,
+        arc=10pt,
+        width=0.85\textwidth,
+        center,
+        boxrule=1.5pt]
+        \centering
+        \vspace{0.2cm}
+        {\Large\textbf{Contenidos}}
+        \vspace{0.3cm}
+        \color{black}
+        \begin{itemize}[leftmargin=2.1cm,itemsep=0.28cm]
+            \item[\color{azulFuerte}$\Rightarrow$] Recta tangente y derivada por definición
+            \item[\color{azulFuerte}$\Rightarrow$] Diferenciabilidad y límites laterales
+            \item[\color{azulFuerte}$\Rightarrow$] Reglas de derivación
+            \item[\color{azulFuerte}$\Rightarrow$] Regla de la cadena
+            \item[\color{azulFuerte}$\Rightarrow$] 40 ejercicios con dificultad progresiva
+        \end{itemize}
+        \vspace{0.2cm}
+    \end{tcolorbox}
+\end{center}
+
+\vspace{1.1cm}
+
+\begin{center}
+    {\Large\textbf{\semestre}}\\[0.7cm]
+    {\large\textbf{\preparadopor}}
+\end{center}
+
+\vfill
+
+\begin{center}
+    {\color{azulFuerte}\hrule height 0.5pt}
+    \vspace{0.3cm}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \textbf{Instagram:}\\
+        \small\href{\instagraminstitucion}{@usach.premium}
+    \end{minipage}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \textbf{Web:}\\
+        \small\href{http://\webinstitucion}{\webinstitucion}
+    \end{minipage}
+\end{center}
+
+\clearpage
+\pagenumbering{arabic}
+\hypersetup{pageanchor=true}
+\MarcaAgua
+
+\section*{\color{azulFuerte}Antes de comenzar}
+
+\begin{resumenbox}{FÓRMULAS ESENCIALES}
+\begin{multicols}{2}
+\textbf{Definición y recta tangente}
+\[
+f'(x)=\lim_{h\to0}\frac{f(x+h)-f(x)}{h}.
+\]
+\[
+y-f(x_0)=f'(x_0)(x-x_0).
+\]
+
+\columnbreak
+
+\textbf{Reglas principales}
+\[
+(fg)'=f'g+fg',
+\]
+\[
+\left(\frac{f}{g}\right)'=\frac{f'g-fg'}{g^2},
+\]
+\[
+(f\circ g)'(x)=f'(g(x))g'(x).
+\]
+\end{multicols}
+\end{resumenbox}
+
+\begin{validacionbox}
+\textbf{Sugerencia:} trabaja sin mirar las respuestas. Escribe la regla utilizada y conserva la forma factorizada cuando permita reconocer mejor la estructura de la función.
+\end{validacionbox}
+
+\section*{\color{azulFuerte}Ejercicios}
+
+\tituloSeccion{I. Reglas básicas}
+\noindent Halle la derivada de cada función en su dominio natural.
+
+\begin{enumerate}[label=\color{azulFuerte}\textbf{\arabic*.},leftmargin=*]
+    \item \(f(x)=5x^4-3x^2+7x-9.\)
+
+    \item \(g(x)=\sqrt{x}+2\sen(x)-3\cos(x)+e^x+\ln(x).\)
+
+    \item \(h(x)=(x^2+1)(3x-2).\)
+
+    \item \(p(x)=\dfrac{2x+1}{x^2+4}.\)
+
+    \item \(q(x)=x^3-\dfrac{\pi}{3}-x^2\cos(x).\)
+\end{enumerate}
+
+\tituloSeccion{II. Definición, diferenciabilidad y recta tangente}
+
+\begin{controlbox}{6. DERIVADA POR DEFINICIÓN}
+Use exclusivamente la definición de derivada para determinar \(f'(x)\), donde
+\[
+f(x)=x^2-4x+1.
+\]
+\end{controlbox}
+
+\begin{controlbox}{7. DERIVADA POR DEFINICIÓN}
+Considere la función
+\[
+f(x)=\frac{x}{x+2},
+\]
+definida en su dominio natural. Determine \(f'(x)\) mediante la definición.
+\end{controlbox}
+
+\begin{controlbox}{8. DIFERENCIABILIDAD}
+Demuestre, mediante límites laterales del cociente incremental, que
+\[
+f(x)=|x-3|
+\]
+no es diferenciable en \(x=3\).
+\end{controlbox}
+
+\begin{controlbox}{9. RECTA TANGENTE}
+Encuentre la ecuación de la recta tangente al gráfico de
+\[
+f(x)=-x^2+2x+2
+\]
+en el punto \((3,f(3))\).
+\end{controlbox}
+
+\begin{controlbox}{10. RECTA TANGENTE HORIZONTAL}
+Considere
+\[
+f(x)=x+\frac{1}{x},
+\]
+definida en su dominio natural. Halle la ecuación de la recta tangente al gráfico de \(f\) en \(x=1\) e indique qué característica tiene dicha recta.
+\end{controlbox}
+
+\tituloSeccion{III. Producto, cociente y regla de la cadena}
+\noindent Calcule la derivada de las siguientes funciones y simplifique cuando sea conveniente.
+
+\begin{enumerate}[label=\color{azulFuerte}\textbf{\arabic*.},leftmargin=*,start=11,itemsep=1em]
+    \item \(f(x)=(x^2-1)e^x.\)
+
+    \item \(f(x)=\dfrac{\sen(x)}{x^2+1}.\)
+
+    \item \(f(x)=(3-2x)^5.\)
+
+    \item \(f(x)=\sen\!\left(\sqrt{2x+1}\right).\)
+
+    \item \(f(x)=e^{x^2-3x}.\)
+
+    \item \(f(x)=\ln\!\left((x^2+1)^3\right).\)
+\end{enumerate}
+
+\tituloSeccion{IV. Ejercicios tipo control}
+
+\begin{controlbox}{17. OPERACIONES CON FUNCIONES DERIVABLES}
+Sean \(f\) y \(g\) funciones derivables tales que
+\[
+f(2)=1,\qquad f'(2)=-2,\qquad g(2)=3,\qquad g'(2)=4.
+\]
+Determine:
+\begin{enumerate}[label=\alph*),leftmargin=*]
+    \item \((5f-2g)'(2)\).
+    \item \((fg)'(2)\).
+    \item \(\left(\dfrac{f}{g}\right)'(2)\).
+\end{enumerate}
+\end{controlbox}
+
+\begin{controlbox}{18. PARÁMETRO Y RECTA TANGENTE}
+Sea \(a\in\R\) y considere
+\[
+f_a(x)=\sqrt{ax+4}.
+\]
+Determine el valor de \(a\) para que la recta tangente al gráfico de \(f_a\) en \(x=0\) tenga pendiente \(3/4\). Luego, halle la ecuación de dicha recta.
+\end{controlbox}
+
+\begin{controlbox}{19. DIFERENCIABILIDAD CON PARÁMETROS}
+Sean \(a,b\in\R\) y sea
+\[
+f(x)=
+\begin{cases}
+x^2+a, & x\leq1,\\
+bx+1, & x>1.
+\end{cases}
+\]
+Determine los valores de \(a\) y \(b\) para que \(f\) sea diferenciable en \(x=1\). Argumente las condiciones utilizadas.
+\end{controlbox}
+
+\begin{controlbox}{20. EJERCICIO ADAPTADO DE CONTROL ANTERIOR}
+Considere la función
+\[
+f(x)=\frac{x^2-3}{x-2},
+\]
+definida en su dominio natural.
+\begin{enumerate}[label=\alph*),leftmargin=*]
+    \item Halle \(f'(x)\) y entregue el resultado simplificado.
+    \item Encuentre la ecuación de la recta tangente al gráfico de \(f\) en \(x=3\).
+\end{enumerate}
+\end{controlbox}
+
+\tituloSeccion{V. Segundo bloque: reglas de derivación}
+\noindent Halle la derivada de cada función en su dominio natural.
+
+\begin{enumerate}[label=\color{azulFuerte}\textbf{\arabic*.},leftmargin=*,start=21,itemsep=1em]
+    \item \(f(x)=x^5-\dfrac{2}{x}+3\sqrt{x}.\)
+
+    \item \(g(x)=(2x^2-3x+1)\sen(x).\)
+
+    \item \(h(x)=\dfrac{e^x+1}{x-1}.\)
+\end{enumerate}
+
+\tituloSeccion{VI. Segundo bloque: definición y rectas tangentes}
+
+\begin{controlbox}{24. DERIVADA POR DEFINICIÓN}
+Considere la función \(f(x)=1/x\), definida en su dominio natural. Use exclusivamente la definición para determinar \(f'(x)\).
+\end{controlbox}
+
+\begin{controlbox}{25. DERIVADA POR DEFINICIÓN}
+Sea \(f(x)=\sqrt{x}\). Mediante la definición y una racionalización adecuada, determine \(f'(x)\) para \(x>0\).
+\end{controlbox}
+
+\begin{controlbox}{26. DIFERENCIABILIDAD}
+Demuestre, mediante límites laterales del cociente incremental, que
+\[
+f(x)=|2x+1|
+\]
+no es diferenciable en \(x=-1/2\).
+\end{controlbox}
+
+\begin{controlbox}{27. RECTA TANGENTE A UNA FUNCIÓN COMPUESTA}
+Encuentre la ecuación de la recta tangente al gráfico de
+\[
+f(x)=\sqrt{4x+5}
+\]
+en el punto \((1,f(1))\).
+\end{controlbox}
+
+\begin{controlbox}{28. PENDIENTE PRESCRITA}
+Considere la función
+\[
+f(x)=x^2-2x+3.
+\]
+Determine el punto de su gráfico donde la recta tangente tiene pendiente igual a \(4\) y halle la ecuación de dicha recta.
+\end{controlbox}
+
+\tituloSeccion{VII. Segundo bloque: regla de la cadena}
+\noindent Calcule y simplifique la derivada de las siguientes funciones.
+
+\begin{enumerate}[label=\color{azulFuerte}\textbf{\arabic*.},leftmargin=*,start=29,itemsep=1em]
+    \item \(f(x)=(x^2-x+1)^{-7}.\)
+
+    \item \(f(x)=\cos^3(2x-1).\)
+
+    \item \(f(x)=\sqrt{3x^2+x+2}.\)
+
+    \item \(f(x)=\ln\!\left(\dfrac{2x-1}{x+3}\right).\)
+
+    \item \(f(x)=e^{\sqrt{x+1}}.\)
+
+    \item \(f(x)=\sen(x)e^{x^2+1}.\)
+\end{enumerate}
+
+\tituloSeccion{VIII. Segundo bloque: ejercicios tipo PEP y control}
+
+\begin{controlbox}{35. COMPOSICIÓN DE FUNCIONES DERIVABLES}
+Sean \(f\) y \(g\) funciones derivables tales que
+\[
+f'(3)=-4,\qquad g(-1)=3,\qquad g'(-1)=5.
+\]
+Determine \((f\circ g)'(-1)\).
+\end{controlbox}
+
+\begin{controlbox}{36. PARÁMETRO Y PENDIENTE}
+Sea \(a\in\R\) y considere
+\[
+f_a(x)=(ax-1)^4.
+\]
+Determine el valor de \(a\) para que la recta tangente al gráfico de \(f_a\) en \(x=0\) tenga pendiente \(8\). Luego, encuentre la ecuación de dicha recta.
+\end{controlbox}
+
+\begin{controlbox}{37. FUNCIÓN POR TRAMOS}
+Sean \(a,b\in\R\) y sea
+\[
+f(x)=
+\begin{cases}
+x^2+ax+b, & x\leq0,\\
+e^x, & x>0.
+\end{cases}
+\]
+Determine los valores de \(a\) y \(b\) para que \(f\) sea diferenciable en \(x=0\). Argumente las condiciones utilizadas.
+\end{controlbox}
+
+\begin{controlbox}{38. RECTAS TANGENTES CON PENDIENTE DADA}
+Considere
+\[
+f(x)=\frac{x}{x+1},
+\]
+definida en su dominio natural.
+\begin{enumerate}[label=\alph*),leftmargin=*]
+    \item Determine todos los puntos del gráfico donde la recta tangente tiene pendiente \(1/4\).
+    \item Halle las ecuaciones de las rectas tangentes correspondientes.
+\end{enumerate}
+\end{controlbox}
+
+\begin{controlbox}{39. REGLAS COMBINADAS}
+Considere la función
+\[
+f(x)=\left(\frac{x^2+1}{x-1}\right)^3,
+\]
+definida en su dominio natural. Halle \(f'(x)\) y entregue el resultado simplificado.
+\end{controlbox}
+
+\begin{controlbox}{40. PROBLEMA INTEGRADO}
+Considere la función
+\[
+f(x)=(2x-1)^4e^x.
+\]
+\begin{enumerate}[label=\alph*),leftmargin=*]
+    \item Halle \(f'(x)\) y factorice el resultado.
+    \item Encuentre la ecuación de la recta tangente al gráfico de \(f\) en \(x=0\).
+\end{enumerate}
+\end{controlbox}
+
+\clearpage
+\begin{center}
+    \begin{tcolorbox}[
+        colback=azulFuerte,
+        colframe=azulFuerte,
+        colupper=white,
+        width=0.8\textwidth,
+        center,
+        arc=10pt]
+        \centering\Large\textbf{RESPUESTAS FINALES}
+    \end{tcolorbox}
+\end{center}
+
+\begin{respuestasbox}{I. Reglas básicas}
+\begin{enumerate}[label=\color{azulFuerte}\textbf{\arabic*.},leftmargin=*,itemsep=0.8em]
+    \item \(\boxed{f'(x)=20x^3-6x+7}\).
+    \item \(\boxed{g'(x)=\dfrac{1}{2\sqrt{x}}+2\cos(x)+3\sen(x)+e^x+\dfrac1x}\), \(x>0\).
+    \item \(\boxed{h'(x)=9x^2-4x+3}\).
+    \item \(\boxed{p'(x)=\dfrac{-2x^2-2x+8}{(x^2+4)^2}}\).
+    \item \(\boxed{q'(x)=3x^2-2x\cos(x)+x^2\sen(x)}\).
+\end{enumerate}
+\end{respuestasbox}
+
+\begin{respuestasbox}{II. Definición, diferenciabilidad y recta tangente}
+\begin{enumerate}[label=\color{azulFuerte}\textbf{\arabic*.},leftmargin=*,start=6,itemsep=0.8em]
+    \item \(\boxed{f'(x)=2x-4}\).
+    \item \(\boxed{f'(x)=\dfrac{2}{(x+2)^2}}\), \(x\neq-2\).
+    \item Los límites laterales del cociente incremental son \(\boxed{-1}\) y \(\boxed{1}\); por tanto, \(f\) no es diferenciable en \(x=3\).
+    \item \(\boxed{y=-4x+11}\).
+    \item \(\boxed{y=2}\); la recta tangente es horizontal.
+\end{enumerate}
+\end{respuestasbox}
+
+\begin{respuestasbox}{III. Producto, cociente y regla de la cadena}
+\begin{enumerate}[label=\color{azulFuerte}\textbf{\arabic*.},leftmargin=*,start=11,itemsep=0.8em]
+    \item \(\boxed{f'(x)=e^x(x^2+2x-1)}\).
+    \item \(\boxed{f'(x)=\dfrac{(x^2+1)\cos(x)-2x\sen(x)}{(x^2+1)^2}}\).
+    \item \(\boxed{f'(x)=-10(3-2x)^4}\).
+    \item \(\boxed{f'(x)=\dfrac{\cos(\sqrt{2x+1})}{\sqrt{2x+1}}}\), \(x>-\tfrac12\).
+    \item \(\boxed{f'(x)=(2x-3)e^{x^2-3x}}\).
+    \item \(\boxed{f'(x)=\dfrac{6x}{x^2+1}}\).
+\end{enumerate}
+\end{respuestasbox}
+
+\begin{respuestasbox}{IV. Ejercicios tipo control}
+\begin{enumerate}[label=\color{azulFuerte}\textbf{\arabic*.},leftmargin=*,start=17,itemsep=0.9em]
+    \item \(\boxed{\text{a) }-18\qquad \text{b) }-2\qquad \text{c) }-\dfrac{10}{9}}\).
+    \item \(\boxed{a=3}\) y \(\boxed{y=\dfrac34x+2}\).
+    \item \(\boxed{a=2,\quad b=2}\).
+    \item \(\boxed{\text{a) }f'(x)=\dfrac{x^2-4x+3}{(x-2)^2},\ x\neq2\qquad \text{b) }y=6}\).
+\end{enumerate}
+\end{respuestasbox}
+
+\begin{respuestasbox}{V. Segundo bloque: reglas de derivación}
+\begin{enumerate}[label=\color{azulFuerte}\textbf{\arabic*.},leftmargin=*,start=21,itemsep=0.8em]
+    \item \(\boxed{f'(x)=5x^4+\dfrac{2}{x^2}+\dfrac{3}{2\sqrt{x}}}\), \(x>0\).
+    \item \(\boxed{g'(x)=(4x-3)\sen(x)+(2x^2-3x+1)\cos(x)}\).
+    \item \(\boxed{h'(x)=\dfrac{e^x(x-2)-1}{(x-1)^2}}\), \(x\neq1\).
+\end{enumerate}
+\end{respuestasbox}
+
+\begin{respuestasbox}{VI. Segundo bloque: definición y rectas tangentes}
+\begin{enumerate}[label=\color{azulFuerte}\textbf{\arabic*.},leftmargin=*,start=24,itemsep=0.8em]
+    \item \(\boxed{f'(x)=-\dfrac{1}{x^2}}\), \(x\neq0\).
+    \item \(\boxed{f'(x)=\dfrac{1}{2\sqrt{x}}}\), \(x>0\).
+    \item Los límites laterales son \(\boxed{-2}\) y \(\boxed{2}\); por tanto, \(f\) no es diferenciable en \(x=-1/2\).
+    \item \(\boxed{y=\dfrac23x+\dfrac73}\).
+    \item Punto: \(\boxed{(3,6)}\). Recta tangente: \(\boxed{y=4x-6}\).
+\end{enumerate}
+\end{respuestasbox}
+
+\begin{respuestasbox}{VII. Segundo bloque: regla de la cadena}
+\begin{enumerate}[label=\color{azulFuerte}\textbf{\arabic*.},leftmargin=*,start=29,itemsep=0.8em]
+    \item \(\boxed{f'(x)=-7(2x-1)(x^2-x+1)^{-8}}\).
+    \item \(\boxed{f'(x)=-6\cos^2(2x-1)\sen(2x-1)}\).
+    \item \(\boxed{f'(x)=\dfrac{6x+1}{2\sqrt{3x^2+x+2}}}\).
+    \item \(\boxed{f'(x)=\dfrac{7}{(2x-1)(x+3)}}\), \(x\in(-\infty,-3)\cup(1/2,+\infty)\).
+    \item \(\boxed{f'(x)=\dfrac{e^{\sqrt{x+1}}}{2\sqrt{x+1}}}\), \(x>-1\).
+    \item \(\boxed{f'(x)=e^{x^2+1}\bigl(\cos(x)+2x\sen(x)\bigr)}\).
+\end{enumerate}
+\end{respuestasbox}
+
+\begin{respuestasbox}{VIII. Segundo bloque: ejercicios tipo PEP y control}
+\begin{enumerate}[label=\color{azulFuerte}\textbf{\arabic*.},leftmargin=*,start=35,itemsep=0.9em]
+    \item \(\boxed{(f\circ g)'(-1)=-20}\).
+    \item \(\boxed{a=-2}\) y \(\boxed{y=8x+1}\).
+    \item \(\boxed{a=1,\quad b=1}\).
+    \item Puntos: \(\boxed{(1,1/2)}\) y \(\boxed{(-3,3/2)}\). Rectas: \(\boxed{y=\dfrac14x+\dfrac14}\) y \(\boxed{y=\dfrac14x+\dfrac94}\).
+    \item \(\boxed{f'(x)=\dfrac{3(x^2+1)^2(x^2-2x-1)}{(x-1)^4}}\), \(x\neq1\).
+    \item \(\boxed{\text{a) }f'(x)=e^x(2x-1)^3(2x+7)\qquad \text{b) }y=-7x+1}\).
+\end{enumerate}
+\end{respuestasbox}
+
+\vspace{0.6cm}
+\begin{center}
+    \small\textbf{Usach Premium} -- Nos vemos en la ayudantía.\\
+    \textit{``Por y para estudiantes.''}
+\end{center}
+
+\end{document}
